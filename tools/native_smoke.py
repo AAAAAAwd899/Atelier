@@ -16,14 +16,18 @@ anki.lang.set_lang('en_US')
 from aqt.profiles import ProfileManager
 pm=ProfileManager(str(BASE));pm.setupMeta();pm.create('Atelier QA');pm.load('Atelier QA')
 pm.meta.update(firstRun=False,defaultLang='en_US',updates=False,uiScale=2/3 if '--scale-100' in sys.argv else 1);pm.profile.update(autoSync=False);pm.save();pm.db.close()
+sys.path.insert(0,str(ROOT))
+from release_tools import runtime_digest, production_files
+fingerprint=runtime_digest(Path(os.environ.get('ATELIER_NATIVE_SRC',ROOT/'src')))
 target=BASE/'addons21/daedalus_atelier'
 shutil.copytree(Path(os.environ.get('ATELIER_NATIVE_SRC',ROOT/'src')),target,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+assert all((target/n).read_bytes()==p.read_bytes() for p,n in production_files()), 'Native copy differs from release payload'
 cfg=json.loads((target/'config.json').read_text(encoding='utf8'));cfg.update(visual_owner='atelier',mode='workspace',theme='midnight',motion=False)
 (target/'meta.json').write_text(json.dumps({'config':cfg}),encoding='utf8')
 import aqt
 from aqt.qt import QTimer
 aqt.AnkiApp.secondInstance=lambda self:False
-report={'category':f'actual Anki 25.09.5 / native Qt {"desktop" if DESKTOP else "offscreen"} on Windows; synthetic profile','version':anki.version,'owner_profile_accessed':False,'hardware_tested':False,'captures':[],'errors':[]}
+report={'runtime_sha256':fingerprint,'payload_bytes_equal':True,'input_method':'scripted native API and JavaScript calls; no physical input device', 'category':f'actual Anki 25.09.5 / native Qt {"desktop" if DESKTOP else "offscreen"} on Windows; synthetic profile','version':anki.version,'owner_profile_accessed':False,'hardware_tested':False,'captures':[],'errors':[]}
 app=aqt._run(['anki','-b',str(BASE),'-p','Atelier QA','-l','en_US'],exec=False)
 attempts=0;finished=False
 def done():
@@ -31,6 +35,9 @@ def done():
     if finished:return
     finished=True
     (OUT/'results.json').write_text(json.dumps(report,indent=2),encoding='utf8')
+    # Disposable QA profile: bound shutdown if the native backend blocks on close.
+    import threading
+    threading.Timer(10,lambda:os._exit(0)).start()
     if aqt.mw.col:aqt.mw.col.close()
     app.quit();os._exit(0)
 def capture(theme,destination,retries=0):

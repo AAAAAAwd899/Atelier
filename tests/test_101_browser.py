@@ -21,7 +21,7 @@ with sync_playwright() as pw:
   p.evaluate('''()=>{document.getElementById('qa').innerHTML='<p>Question</p><hr id="answer"><p>The answer is here.</p>';AtelierReview.painted({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});document.getElementById('answer').scrollIntoView();AtelierReview.settled({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});}''')
   p.wait_for_timeout(80);check(theme+' short reveal has no unnecessary scroll',p.evaluate('scrollY===0&&document.scrollingElement.scrollHeight<=innerHeight+1'))
   p.evaluate('''()=>{document.getElementById('qa').innerHTML='<p>Question</p><hr id="answer">'+('<p>Long answer, preserved reading content.</p>'.repeat(60));AtelierReview.painted({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});}''')
-  p.wait_for_timeout(40);p.evaluate('window.scrollTo(0,800);window.dispatchEvent(new WheelEvent("wheel"))');p.wait_for_timeout(40)
+  p.wait_for_function('document.documentElement.dataset.atelierFit==="scroll"');p.evaluate('window.scrollTo(0,800);window.dispatchEvent(new WheelEvent("wheel"))');p.wait_for_timeout(80)
   check(theme+' long answer stays scrollable',p.evaluate('scrollY>0&&document.documentElement.dataset.atelierFit==="scroll"'))
   p.evaluate('''()=>{document.getElementById('qa').innerHTML='<p>Next question.</p>';AtelierReview.painted({id:2,stage:'question',eligible:true,path:['Course','Lecture']});}''')
   p.wait_for_timeout(70);check(theme+' next card resets once',p.evaluate('scrollY===0'))

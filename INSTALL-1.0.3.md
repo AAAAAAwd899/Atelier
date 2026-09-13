@@ -16,3 +16,5 @@ The image view control supports only the exactly recognized stock native IO temp
 ## Eventual AnkiWeb installation
 
 There is no AnkiWeb code yet. A private `daedalus_atelier` installation does not automatically become a future numeric AnkiWeb installation. Before public rollout, back up and test migration of the local add-on preferences and stores in a disposable profile, then document the one-time switch. Do not run both identities together. Once the numeric listing exists, approved releases must update that same listing; a website or GitHub push alone does not update installed copies.
+
+Anki's [official packaging guide](https://addon-docs.ankiweb.net/sharing.html) distinguishes private package manifests from AnkiWeb downloads. This installer is flattened correctly and retains the private identity. Account eligibility, current upload limits and the real numeric listing must be checked when publishing becomes possible.

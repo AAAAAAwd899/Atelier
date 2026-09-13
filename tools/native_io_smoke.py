@@ -3,7 +3,7 @@ Run with the installed Anki Python, never the user's profile.
 """
 from pathlib import Path
 import os,sys,json,shutil,traceback,hashlib,time
-ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'native-io-test-profile';BASE.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'native-io-test-profile'/('run-'+str(time.time_ns()));BASE.mkdir(parents=True,exist_ok=True)
 OUT=ROOT/'output/native-io-25.09.5';OUT.mkdir(parents=True,exist_ok=True)
 os.environ.update(QT_QPA_PLATFORM='windows',QT_SCALE_FACTOR='0.666666667',QTWEBENGINE_CHROMIUM_FLAGS='--disable-gpu --no-sandbox',ANKI_SOFTWAREOPENGL='1',QTWEBENGINE_DISABLE_SANDBOX='1')
 import anki,anki.lang
@@ -11,21 +11,28 @@ anki.lang.set_lang('en_US')
 from aqt.profiles import ProfileManager
 pm=ProfileManager(str(BASE));pm.setupMeta();pm.create('Atelier IO QA');pm.load('Atelier IO QA')
 pm.meta.update(firstRun=False,defaultLang='en_US',updates=False,uiScale=2/3);pm.profile.update(autoSync=False);pm.save();pm.db.close()
+sys.path.insert(0,str(ROOT))
+from release_tools import runtime_digest, production_files
+fingerprint=runtime_digest(Path(os.environ.get('ATELIER_NATIVE_SRC',ROOT/'src')))
 target=BASE/'addons21/daedalus_atelier'
 shutil.copytree(Path(os.environ.get('ATELIER_NATIVE_SRC',ROOT/'src')),target,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+assert all((target/n).read_bytes()==p.read_bytes() for p,n in production_files()), 'Native copy differs from release payload'
 cfg=json.loads((target/'config.json').read_text(encoding='utf8'));cfg.update(visual_owner='atelier',mode='workspace',theme='midnight',motion=False)
 (target/'meta.json').write_text(json.dumps({'config':cfg}),encoding='utf8')
 import aqt
 from aqt.qt import QTimer,QImage,QPainter,QColor,QFont
 aqt.AnkiApp.secondInstance=lambda self:False
 app=aqt._run(['anki','-b',str(BASE),'-p','Atelier IO QA','-l','en_US'],exec=False)
-report={'category':'actual Anki native IO renderer and collection; synthetic Windows profile','anki':anki.version,'captures':[],'checks':{},'errors':[],'owner_profile_accessed':False}
+report={'runtime_sha256':fingerprint,'payload_bytes_equal':True,'input_method':'scripted native API and JavaScript calls; no physical input device', 'category':'actual Anki native IO renderer and collection; synthetic Windows profile','anki':anki.version,'captures':[],'checks':{},'errors':[],'owner_profile_accessed':False}
 attempts=0;card_id=0;before=None;original_note=None;media_file=None;finished=False
 def done():
     global finished
     if finished:return
     finished=True
     (OUT/'results.json').write_text(json.dumps(report,indent=2),encoding='utf8')
+    # Disposable QA profile: bound shutdown if the native backend blocks on close.
+    import threading
+    threading.Timer(10,lambda:os._exit(0)).start()
     if aqt.mw.col:aqt.mw.col.close()
     app.quit();os._exit(0)
 def fail():report['errors'].append(traceback.format_exc());done()

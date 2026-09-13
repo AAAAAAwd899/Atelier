@@ -1,6 +1,6 @@
 # Atelier 1.0.3
 
-Private review candidate. The visual upgrade introduces canonical web/native palette roles, local landscape scenery, more compact workspace layouts and whole-stage fitting for exactly recognized native image-occlusion templates. Read [installation and recovery](INSTALL-1.0.3.md), [current audit](AUDIT-1.0.3.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [owner release actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
+Private review candidate. The visual upgrade introduces canonical web/native palette roles, local landscape scenery, more compact workspace layouts and whole-stage fitting for exactly recognized native image-occlusion templates. Read the [changelog](CHANGELOG-1.0.3.md), [installation and recovery](INSTALL-1.0.3.md), [current audit](AUDIT-1.0.3.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [owner release actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, twelve visual worlds, and a quieter reviewer.
 
@@ -16,7 +16,7 @@ Use the paired `Atelier-1.0.3.ankiaddon` in **Tools → Add-ons → Install from
 
 ## Compatibility
 
-The preserved folder-order contract targets Anki 26.08.1. This candidate has actual Windows Anki 25.09.5 Home/Widgets and stock image-occlusion renderer tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
+The preserved folder-order contract targets Anki 26.08.1. This candidate has actual Windows Anki 25.09.5 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
 
 ## Development and verification
 
@@ -26,6 +26,7 @@ This source kit includes the exact runtime, original separately hardened assessm
 python verify_release.py
 python tools/generate_design.py --check
 python package_103.py
+python tools/bundle_evidence.py --proof-dir verification
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.

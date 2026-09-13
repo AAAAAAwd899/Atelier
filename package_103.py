@@ -12,6 +12,11 @@ def main():
     proof=json.loads(proofpath.read_text()) if proofpath.is_file() else {}
     verified=proof.get('runtime_sha256')==fingerprint and proof.get('python_failed')==0 and proof.get('python_skipped')==0 and proof.get('browser_errors')==0
     if not verified and not args.candidate:raise RuntimeError('Full current verification missing. Explicit --candidate retains incomplete status; it does not waive release gates.')
+    if verified:
+        for name,count in proof['browser_suites'].items():
+            receipt=json.loads((args.proof_dir/(name+'-results.json')).read_text())
+            assert not receipt.get('errors') and receipt.get('count',receipt.get('checks'))==count
+            assert (args.proof_dir/(name+'.exit')).read_text().strip()=='0'
     subprocess.run([__import__('sys').executable,str(ROOT/'tools/generate_design.py'),'--check'],check=True)
     for p in SRC.rglob('*.js'):subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
     assets=production_files();actual={n:sha(p) for p,n in assets}
