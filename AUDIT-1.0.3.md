@@ -6,7 +6,7 @@ Status: implemented and packaged for owner review, with the automated verificati
 
 The supplied 1.0.2 source archive was checked and extracted. Its 233 runtime entries matched the recorded baseline. The original installer itself was not supplied for independent rechecking; the kit records its earlier source/installer equality. No newer accepted build existed. Git main preserves the baseline.
 
-The final runtime fingerprint is `924fa9b208fc3bd6bd96a941a8e05b81314a5a911fbe11ae7d9ed5a79851ba30`. The explicit delta contains 25 changed files, 15 added files and zero removed files: 248 runtime files total. Original exam and authoring runtime trees, stores, scheduling/folder-order operation, remotes, mask publication and widget data logic remain byte-identical. The generated palette contract and scoped presentation adapters contain the upgrade; source images and stored mask coordinates are not converted.
+The final runtime fingerprint is `b8a7aa6cad09f771a110cd5eff2ab8be52fcdefcf3e48162a5683badc3981b38`. The explicit delta contains 26 changed files, 15 added files and 0 removed files: 248 runtime files total. Original exam and authoring runtime trees, stores, scheduling/folder-order operation, remotes, mask publication and widget data logic remain byte-identical. The generated palette contract and scoped presentation adapters contain the upgrade; source images and stored mask coordinates are not converted.
 
 - A: canonical roles, retired duplicate home layer, compact Home/Widgets hierarchy and twelve local landscapes. Midnight, Rose and Forest were rendered in actual Anki. The original Forest screenshot was superseded after inspection.
 - B: existing world IDs retained across Home, Library list/grid, Card Studio, Mask Studio, Exam setup, Practice builder, reviewer question/answer, Results, Pip, Widgets, Progress and Tools. Captures include all twelve worlds at 1440×900, 1280×720, 1024×768, 800×600 and browser-only 390×720. There are 900 default captures, including 60 additional generic-Library captures; these are repeated palette/viewport cases, not 900 independent integrations.
@@ -14,11 +14,11 @@ The final runtime fingerprint is `924fa9b208fc3bd6bd96a941a8e05b81314a5a911fbe11
 
 ## Current automated evidence
 
-Full verifier receipt: 1826 Python test cases, zero failures/skips; 27 browser suites with 2123 checks and zero reported page errors. Evidence uses the exact fingerprint above. Pure logic/model/storage tests and browser native-API doubles are identified in the individual receipts. Native tests are separate below. The full verification gate is `verify_release.py`; deterministic packaging additionally checks syntax, manifest, ZIP CRC, preserved engine hashes, forbidden/private files, exact source/installer bytes and repeat builds.
+Full verifier receipt: 1826 Python test cases, zero failures/skips; 27 browser suites with 2127 checks and zero reported page errors. Evidence uses the exact fingerprint above. Pure logic/model/storage tests and browser native-API doubles are identified in the individual receipts. Native tests are separate below. The full verification gate is `verify_release.py`; deterministic packaging additionally checks syntax, manifest, ZIP CRC, preserved engine hashes, forbidden/private files, exact source/installer bytes and repeat builds.
 
-The complete CI run is https://github.com/AAAAAAwd899/Atelier/actions/runs/34746698560, source commit `a571bdd621dce21b119fab8e6e4d7a31cf6229eb`. Subsequent changes are evidence tooling, documentation and an extracted-reviewer test readiness correction; the runtime fingerprint is unchanged. A supplemental combined Card Studio launcher test passed 42 checks, including repeated mount, narrow layouts and original-theme round trips. These 42 are separate from the full-verifier total.
+The complete CI run is https://github.com/AAAAAAwd899/Atelier/actions/runs/34750594169, runtime source commit `0bd95a6bf9d4751e79fcfaa04a7e7206d4dc5e78`. The combined Card Studio launcher checks, including repeated mount, narrow layouts, theme-specific materials and original-theme round trips, are included in the full-verifier total above.
 
-All 900 default captures reported no horizontal page overflow or uncaught page errors. Nine scoped axe scans (Midnight/Rose/Forest × Home/Widgets/Tools) found zero violations; incomplete axe checks are retained. The conservative 78%-canvas composited backdrop probe passes normal-text 4.5:1 for the twelve worlds, with a minimum measured 4.653:1. These probes are not a complete accessibility certification or a claim that every possible user template was checked.
+All 900 default captures reported no horizontal page overflow or uncaught page errors. Contact sheets for every captured screen were inspected at 1440×900 and 390×720 across all twelve worlds. The unpublished add-on information page was also rendered at desktop and phone widths with its real interface images loaded, no horizontal overflow and no page errors. Nine scoped axe scans (Midnight/Rose/Forest × Home/Widgets/Tools) found zero violations; incomplete axe checks are retained. The conservative 78%-canvas composited backdrop probe passes normal-text 4.5:1 for the twelve worlds, with a minimum measured 4.653:1. These probes are not a complete accessibility certification or a claim that every possible user template was checked.
 
 The extracted installer ran 16 unit checks and the designated 1.0.3 IO, 1.0.1 reviewer/remote-focus and 1.0.2 folder/browser checks. Their separate logs bind execution to the extracted files, whose runtime bytes equal the delivered source. Initial extracted 1.0.1 testing exposed a fixed 40 ms test race; the harness now waits for the measured long-content layout before testing user scrolling, retaining the scroll assertion.
 
@@ -28,7 +28,7 @@ The project development environment dependency scan initially reported vulnerabl
 
 ## Actual native evidence
 
-Windows, installed Anki 25.09.5 build 217701ba; disposable synthetic profiles only, no owner profile or sync. Payload bytes are checked against the installer source before loading. Rendering tests copy the extracted payload into the QA add-on folder. A separate real AddonManager installer test exercises the ZIP update path; the GUI file picker was not automated.
+Windows, installed Anki 26.05 build e64c6b1a; disposable synthetic profiles only, no owner profile or sync. Payload bytes are checked against the installer source before loading. Rendering tests copy the extracted payload into the QA add-on folder. A separate real AddonManager installer test exercises the ZIP update path; the GUI file picker was not automated.
 
 - Six real main-window captures: Home and fully loaded built-in Widgets in Midnight, Rose and Forest. Measured logical window 1283×700, screenshot 1925×1050, device pixel ratio 1.5. No fabricated title bars or substituted statistics.
 - Stock native IO: real question/answer canvases, fitted whole image/mask registration, Actual size, original note/media preservation, native rating/revlog and native Undo. Nine checks pass. A known landmark is visibly occluded on question and revealed on answer. Fit support is restricted to the documented exact stock-template fingerprint; unknown/custom templates fail closed.
@@ -45,15 +45,15 @@ Same local Windows host, baseline source and candidate fixtures. Baseline measur
 
 | Probe | Samples each | Baseline 1.0.2 | Candidate 1.0.3 |
 |---|---:|---:|---:|
-| open | 5 | 1139.5 / 3091.3 | 1254.2 / 2598.4 |
-| navigation | 30 | 198.1 / 356.9 | 190.3 / 268.7 |
-| search_5000 | 10 | 385.3 / 452.0 | 393.3 / 441.4 |
+| open | 5 | 1139.5 / 3091.3 | 955.3 / 1098.6 |
+| navigation | 30 | 198.1 / 356.9 | 149.6 / 181.2 |
+| search_5000 | 10 | 385.3 / 452.0 | 356.5 / 509.6 |
 
-Open means HTML through controls, fonts and two frames, not disk-cold scenery or native Anki startup. Navigation includes automation and two frames; 5,000-deck search includes production debounce and paint. The measured warm p95 did not regress, but this is not an isolated-host speed claim.
+Open means HTML through controls, fonts and two frames, not disk-cold scenery or native Anki startup. Navigation includes automation and two frames; 5,000-deck search includes production debounce and paint. The table records both median and p95 so the observed search-tail variance remains visible; this is not an isolated-host speed claim.
 
-The browser endurance probe completed 1806.4 seconds and 179 route/theme cycles with no page errors. After the first complete palette rotation, retained nodes stayed at 2671, listeners at 62 and documents at 2. Forced-GC JavaScript heap rose from 3.09 MiB at cycle 18 to 3.47 MiB at the last sample. This small rise remains an observation, not a no-leak guarantee. Decoded scenery/GPU memory, native 30–60-minute review endurance and isolated source/figure-load timing remain unmeasured.
+The browser endurance probe completed 1808.7 seconds and 180 route/theme cycles with no page errors. After the first complete palette rotation, retained nodes stayed at 2670, listeners at 62 and documents at 2. Forced-GC JavaScript heap rose from 2.98 MiB at cycle 18 to 3.36 MiB at the last sample. This small rise remains an observation, not a no-leak guarantee. Decoded scenery/GPU memory, native 30–60-minute review endurance and isolated source/figure-load timing remain unmeasured.
 
-An additional 288-cycle accelerated investigation captured actual V8 heap snapshots after warmup. DOM/listener/document counts remained unchanged. Between cycles 48 and 288, snapshot `code` entries grew by 315632 bytes, while closure self-size was unchanged and object self-size grew by only 128 bytes. The observed growth was dominated by V8 code entries rather than retained page nodes/handlers. Embedder heap use fell from 5484304 to 5260816 bytes across those samples. This investigation does not measure total decoded-image or GPU RAM.
+An additional 288-cycle accelerated investigation captured actual V8 heap snapshots after warmup. DOM/listener/document counts remained unchanged. Between cycles 48 and 288, snapshot `code` entries grew by 315920 bytes, while closure self-size was unchanged and object self-size grew by only 240 bytes. The observed growth was dominated by V8 code entries rather than retained page nodes/handlers. Embedder heap use fell from 6010600 to 5098872 bytes across those samples. This investigation does not measure total decoded-image or GPU RAM.
 
 ## Visual scorecard and open gates
 

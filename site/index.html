@@ -1,7 +1,110 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Atelier for Anki: organize decks, create reviewed cards and prepare for exams."><title>Atelier for Anki</title><link rel="stylesheet" href="style.css"></head>
-<body><main><p class="eyebrow">For Anki desktop</p><h1>Atelier</h1><p class="lead">Your space to organize, create, and study.</p><p class="status">Version 1.0.3 · Private review</p>
-<section><h2>One study workspace</h2><p>Browse nested lecture folders, return to saved work, create source-based drafts in Card Studio, and prepare with Exam Studio. Twelve visual worlds, built-in widgets and the original Anki tools remain available.</p><p>Cards are added only through the existing review and approval flow. Normal Anki review changes your schedule. Independent practice and optional new-card learning retain their explicit mode labels.</p></section>
-<section><h2>Installation and updates</h2><p>AnkiWeb distribution is being prepared. There is no public add-on code or download yet.</p><p>When the owner approves a release, the listing will include the exact add-on code, installation instructions, tested Anki versions and recovery guidance. Existing private installations will need a verified one-time transition to the numeric AnkiWeb identity.</p><p>Future approved versions will be uploaded to that same AnkiWeb listing. This page does not install updates or change your collection.</p></section>
-<section><h2>Your work stays under your control</h2><p>Atelier's local source, exam and widget stores are separate from your Anki collection. Back them up separately; Anki Sync does not include them. This visual upgrade adds no telemetry or remote fonts.</p><p>The private 1.0.3 candidate has limited native tests on Windows with Anki 25.09.5: Home and Widgets, stock image occlusion, folder scheduling, and the installer update path. Full host acceptance remains open. macOS and physical remotes are not advertised as verified.</p></section>
-<footer><p>Daedalus Works · Unpublished information draft</p><a href="https://docs.ankiweb.net/addons.html">Anki's official add-on guide</a></footer></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Atelier for Anki: organize decks, create reviewed cards and prepare for exams.">
+  <title>Atelier for Anki</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Atelier home"><span class="brand-mark" aria-hidden="true">A</span><span>Atelier</span></a>
+    <nav aria-label="Page sections">
+      <a href="#workspace">Workspace</a>
+      <a href="#worlds">Worlds</a>
+      <a href="#release">Release status</a>
+    </nav>
+    <span class="version">1.0.3 · Private review</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Atelier for Anki desktop</p>
+        <h1 id="hero-title">A calmer place to learn, create, and prepare.</h1>
+        <p class="lead">One carefully finished workspace for your real Anki collection, saved projects, card creation, practice exams, and daily review.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#workspace">See the real interface</a>
+          <a class="button secondary" href="#release">Check release status</a>
+        </div>
+        <p class="private-note"><span aria-hidden="true">●</span> No public download or AnkiWeb code is active yet.</p>
+      </div>
+      <figure class="product-frame">
+        <div class="frame-bar"><span></span><span></span><span></span><b>Atelier · Study desk</b></div>
+        <img src="assets/atelier-home.png" alt="The real Atelier 1.0.3 study desk rendered in the Midnight world" width="1440" height="900">
+        <figcaption>Actual 1.0.3 interface with synthetic review data</figcaption>
+      </figure>
+    </section>
+
+    <section class="proof-strip" aria-label="Product facts">
+      <div><strong>12</strong><span>distinct visual worlds</span></div>
+      <div><strong>Local</strong><span>saved work and settings</span></div>
+      <div><strong>Native</strong><span>Anki scheduling and review</span></div>
+      <div><strong>Private</strong><span>until the owner approves release</span></div>
+    </section>
+
+    <section class="workspace" id="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading">
+        <p class="eyebrow">One connected workspace</p>
+        <h2 id="workspace-title">The same material, with better paths through it.</h2>
+        <p>Atelier keeps Anki’s collection and scheduler at the center while giving longer projects, creation work, and exam preparation a coherent home.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card feature-wide">
+          <div><span class="feature-number">01</span><h3>Organize and return</h3><p>Browse nested lecture folders, pin active study groups, and return to saved drafts, masks, exam plans, and sessions.</p></div>
+          <img src="assets/atelier-home.png" alt="Atelier study desk showing current work and a nested lecture folder" width="1440" height="900">
+        </article>
+        <article class="feature-card">
+          <div><span class="feature-number">02</span><h3>Create with review built in</h3><p>Turn source material into drafts, refine the answer, preserve image-occlusion geometry, then approve cards through the existing flow.</p></div>
+          <img src="assets/atelier-card-studio.png" alt="Atelier Card Studio with the source area and draft editor" width="1440" height="900">
+        </article>
+        <article class="feature-card">
+          <div><span class="feature-number">03</span><h3>Practice on your terms</h3><p>Build exam sessions from real folders and subdecks. Practice remains separate from normal scheduling unless a clearly labelled option changes it.</p></div>
+          <img src="assets/atelier-exam-studio.png" alt="Atelier Exam Studio showing a saved exam setup" width="1440" height="900">
+        </article>
+      </div>
+    </section>
+
+    <section class="worlds" id="worlds" aria-labelledby="worlds-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">Make the workspace yours</p>
+        <h2 id="worlds-title">Twelve worlds, each with its own atmosphere.</h2>
+        <p>The visual system reaches Home, Library, Widgets, Tools, Card and Mask Studio, exam flows, Pip, review cards, results, and progress.</p>
+      </div>
+      <div class="world-grid" aria-label="Available Atelier worlds">
+        <span class="world obsidian">Obsidian</span><span class="world midnight">Midnight</span><span class="world celestial">Celestial</span><span class="world ember">Ember</span>
+        <span class="world rose">Rose Quartz</span><span class="world bloom">Bloom</span><span class="world peach">Peach</span><span class="world linen">Linen</span>
+        <span class="world matcha">Matcha</span><span class="world forest">Forest</span><span class="world tidal">Tidal</span><span class="world glacier">Glacier</span>
+      </div>
+    </section>
+
+    <section class="release" id="release" aria-labelledby="release-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">Release boundary</p>
+        <h2 id="release-title">Prepared for review, held for approval.</h2>
+      </div>
+      <div class="release-grid">
+        <article>
+          <span class="status-chip">Current status</span>
+          <h3>Private 1.0.3 candidate</h3>
+          <p>There is no public add-on code, website destination, or download yet. The future listing will show its exact AnkiWeb identity, tested versions, installation steps, and recovery guidance.</p>
+          <p>Future approved updates must use that same AnkiWeb listing. This page cannot install an update or change a collection.</p>
+        </article>
+        <article>
+          <span class="status-chip">Data and compatibility</span>
+          <h3>Your existing work stays in place</h3>
+          <p>The cumulative installer retains preferences and Atelier’s local stores. Anki Sync does not include Atelier’s separate source, exam, and widget stores, so those folders need their own backup.</p>
+          <p>Native Windows checks use Anki 26.05. macOS, every display scale, and physical remotes remain release gates rather than advertised passes.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><span class="brand-mark small" aria-hidden="true">A</span><strong>Atelier</strong><span>Daedalus Works · Unpublished information draft</span></div>
+    <a href="https://docs.ankiweb.net/addons.html">Anki’s official add-on guide</a>
+  </footer>
+</body>
+</html>

@@ -16,7 +16,7 @@ Use the paired `Atelier-1.0.3.ankiaddon` in **Tools → Add-ons → Install from
 
 ## Compatibility
 
-The preserved folder-order contract targets Anki 26.08.1. This candidate has actual Windows Anki 25.09.5 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
+The preserved folder-order contract targets Anki 26.08.1. This candidate has actual Windows Anki 26.05 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
 
 ## Development and verification
 

@@ -22,12 +22,32 @@ def main():
             file=folder/row['file'];assert sha(file)==row['sha256']
             rel=f'browser/{component}/'+row['file'];copy(file,rel)
             photos.append({**row,'file':rel,'category':'Browser fixture','viewport':'×'.join(map(str,row['viewport']))})
-    for name in ['native-desktop-25.09.5','native-io-25.09.5','native-folder']:
-        folder=ROOT/'output'/name;receipt=json.loads((folder/'results.json').read_text())
+    site=ROOT/'output/site-preview';site_receipt=json.loads((site/'results.json').read_text())
+    assert len(site_receipt['records'])==2 and not site_receipt['errors']
+    copy(site/'results.json','site-preview/results.json')
+    for row in site_receipt['records']:
+        assert not row['horizontal_overflow']
+        file=site/row['file'];assert sha(file)==row['sha256']
+        rel='site-preview/'+row['file'];copy(file,rel)
+        photos.append({**row,'file':rel,'category':'Unpublished site preview','world':'Midnight','screen':'add-on information','viewport':'×'.join(map(str,row['viewport']))})
+    def current_native(prefix):
+        matches=[]
+        for folder in (ROOT/'output').glob(prefix+'*'):
+            result=folder/'results.json'
+            if result.is_file():
+                receipt=json.loads(result.read_text())
+                if receipt.get('runtime_sha256')==fingerprint and not receipt.get('errors'):matches.append((folder,receipt))
+        assert len(matches)==1,(prefix,[folder.name for folder,_ in matches])
+        return matches[0]
+    desktop=current_native('native-desktop-');native_io=current_native('native-io-')
+    native_version=desktop[1]['version'];assert native_io[1]['anki']==native_version
+    native_cases=[(*desktop,6,0),(*native_io,3,9),(ROOT/'output/native-folder',json.loads((ROOT/'output/native-folder/results.json').read_text()),0,8)]
+    for folder,receipt,capture_count,check_count in native_cases:
+        name=folder.name
         assert receipt['runtime_sha256']==fingerprint and not receipt['errors'] and all(receipt.get('checks',{}).values())
-        assert len(receipt.get('captures',[]))=={'native-desktop-25.09.5':6,'native-io-25.09.5':3,'native-folder':0}[name]
-        assert len(receipt.get('checks',{}))=={'native-desktop-25.09.5':0,'native-io-25.09.5':9,'native-folder':8}[name]
-        if name=='native-io-25.09.5':
+        assert len(receipt.get('captures',[]))==capture_count
+        assert len(receipt.get('checks',{}))==check_count
+        if name.startswith('native-io-'):
             stages={row['stage']:row['dom'] for row in receipt['captures']}
             assert stages['question']['canvasInk'][3]==255 and stages['answer']['canvasInk'][3]==0
             assert stages['question']['canvasVisibility']=='visible' and stages['question']['canvasOpacity']=='1'
@@ -60,8 +80,8 @@ def main():
         copy(ROOT/name,'reports/'+name)
     for name in ['Atelier-1.0.3-Build.json','Atelier-1.0.3-Files.json']:copy(ROOT/'dist'/name,'reports/'+name)
     (out/'gallery-data.js').write_text('const captures='+json.dumps(photos,ensure_ascii=True)+';\n');included.add('gallery-data.js')
-    (out/'index.html').write_text(GALLERY,encoding='utf8');included.add('index.html')
-    record={'name':'Atelier','version':'1.0.3','runtime_sha256':fingerprint,'installer_sha256':sha(ROOT/'dist/Atelier-1.0.3.ankiaddon'),'source_sha256':sha(ROOT/'dist/Atelier-1.0.3-Source.zip'),'browser_default_captures':900,'native_captures':9,'owner_visual_acceptance':False,'limits':'See reports/AUDIT-1.0.3.md. Default palette captures are repeated cases, not independent integrations. Native evidence uses synthetic profiles. No generated UI images. Background asset provenance is separate.','files':{n:sha(out/n) for n in sorted(included)}}
+    (out/'index.html').write_text(GALLERY.replace('{native_version}',native_version),encoding='utf8');included.add('index.html')
+    record={'name':'Atelier','version':'1.0.3','runtime_sha256':fingerprint,'installer_sha256':sha(ROOT/'dist/Atelier-1.0.3.ankiaddon'),'source_sha256':sha(ROOT/'dist/Atelier-1.0.3-Source.zip'),'browser_default_captures':900,'site_preview_captures':2,'native_captures':9,'owner_visual_acceptance':False,'limits':'See reports/AUDIT-1.0.3.md. Default palette captures are repeated cases, not independent integrations. Native evidence uses synthetic profiles. No generated UI images. Background asset provenance is separate.','files':{n:sha(out/n) for n in sorted(included)}}
     (out/'manifest.json').write_text(json.dumps(record,indent=2)+'\n');included.add('manifest.json')
     assert not any((out/n).suffix in ('.anki2','.sqlite3','.key','.pem') for n in included)
     archive=ROOT/'dist/Atelier-1.0.3-Evidence.zip';write_archive(archive,[(out/n,'Atelier-1.0.3-Evidence/'+n) for n in included])
@@ -71,7 +91,7 @@ def main():
 
 GALLERY='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Atelier 1.0.3 — actual interface evidence</title><style>
 *{box-sizing:border-box}body{margin:0;background:#101923;color:#edf3f7;font:16px/1.55 system-ui}header,main{max-width:1500px;margin:auto;padding:24px}h1{font:38px Georgia;margin:0}p{max-width:1000px;color:#c3d2df}a{color:#a9d7ff}label{display:inline-grid;gap:5px;margin:0 16px 12px 0}select,button{font:inherit;color:inherit;background:#243748;border:1px solid #8eabc1;padding:10px;border-radius:7px}button{cursor:pointer}select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #f5da91;outline-offset:3px}#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px}figure{margin:0;border:1px solid #465f72;border-radius:10px;overflow:hidden;background:#1b2a36}figure img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:#0b1119}figcaption{padding:14px}small{display:block;color:#bdcdda}video{max-width:100%;width:900px}nav{margin:20px 0}#count{margin-right:20px}</style>
-<header><h1>Atelier 1.0.3</h1><p>Actual interfaces for review. Browser fixtures use synthetic records and native API doubles; the native captures come from Anki 25.09.5 on Windows with separate synthetic profiles. Open an image for full-size inspection. The landscape assets are generated artwork; the interface screenshots and recording are real rendered output.</p><p><a href="reports/AUDIT-1.0.3.md">Test scope and remaining gates</a> · <a href="manifest.json">Hashes and evidence manifest</a> · <a href="verification/verified.json">Automated verification</a></p><details><summary>Watch the actual browser walkthrough</summary><video controls preload="none" src="walkthrough/Atelier-1.0.3-Walkthrough.webm"></video><p>Sample data; no audio; native commands are fixture doubles.</p></details></header><main><div id="filters"></div><nav><span id="count" role="status"></span><button id="previous">Previous</button> <button id="next">Next</button></nav><div id="grid"></div></main><script src="gallery-data.js"></script><script>
+<header><h1>Atelier 1.0.3</h1><p>Actual interfaces for review. Browser fixtures use synthetic records and native API doubles; the native captures come from Anki {native_version} on Windows with separate synthetic profiles. Open an image for full-size inspection. The landscape assets are generated artwork; the interface screenshots and recording are real rendered output.</p><p><a href="reports/AUDIT-1.0.3.md">Test scope and remaining gates</a> · <a href="manifest.json">Hashes and evidence manifest</a> · <a href="verification/verified.json">Automated verification</a></p><details><summary>Watch the actual browser walkthrough</summary><video controls preload="none" src="walkthrough/Atelier-1.0.3-Walkthrough.webm"></video><p>Sample data; no audio; native commands are fixture doubles.</p></details></header><main><div id="filters"></div><nav><span id="count" role="status"></span><button id="previous">Previous</button> <button id="next">Next</button></nav><div id="grid"></div></main><script src="gallery-data.js"></script><script>
 let page=0;const fields=['category','world','screen','viewport'],filters={};
 for(const key of fields){const label=document.createElement('label');label.textContent=key[0].toUpperCase()+key.slice(1);const select=document.createElement('select');select.append(new Option('All',''));for(const value of [...new Set(captures.map(r=>r[key]))].sort())select.append(new Option(value,value));label.append(select);document.getElementById('filters').append(label);filters[key]=select;select.onchange=()=>{page=0;render()};}
 function render(){const rows=captures.filter(r=>fields.every(k=>!filters[k].value||r[k]===filters[k].value));const first=page*24;const grid=document.getElementById('grid');grid.replaceChildren();for(const r of rows.slice(first,first+24)){const f=document.createElement('figure'),a=document.createElement('a'),img=document.createElement('img'),c=document.createElement('figcaption'),s=document.createElement('small');a.href=r.file;a.target='_blank';a.rel='noopener';img.src=r.file;img.loading='lazy';img.alt=r.world+' · '+r.screen+' · '+r.viewport;a.append(img);c.textContent=img.alt;s.textContent=r.category;c.append(s);f.append(a,c);grid.append(f)}document.getElementById('count').textContent=rows.length?`${first+1}–${Math.min(first+24,rows.length)} of ${rows.length}`:'No matching captures';document.getElementById('previous').disabled=page===0;document.getElementById('next').disabled=first+24>=rows.length;}

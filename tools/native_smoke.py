@@ -8,11 +8,13 @@ import os,sys,shutil,json,traceback
 ROOT=Path(__file__).resolve().parents[1]
 DESKTOP='--desktop' in sys.argv
 if '--scale-100' in sys.argv:os.environ['QT_SCALE_FACTOR']='0.666666667'
-OUT=ROOT/('output/native-desktop-100-25.09.5' if '--scale-100' in sys.argv else 'output/native-desktop-25.09.5' if DESKTOP else 'output/native-25.09.5');OUT.mkdir(parents=True,exist_ok=True)
 BASE=ROOT/'native-test-profile';BASE.mkdir(exist_ok=True)
 os.environ.update(QT_QPA_PLATFORM='windows' if DESKTOP else 'offscreen',QTWEBENGINE_CHROMIUM_FLAGS='--disable-gpu --no-sandbox',ANKI_SOFTWAREOPENGL='1',QTWEBENGINE_DISABLE_SANDBOX='1')
 import anki,anki.lang
+from anki import buildinfo
 anki.lang.set_lang('en_US')
+ANKI_VERSION=''.join(c for c in buildinfo.version if c.isalnum() or c in '.-_')
+OUT=ROOT/('output/native-desktop-100-'+ANKI_VERSION if '--scale-100' in sys.argv else 'output/native-desktop-'+ANKI_VERSION if DESKTOP else 'output/native-'+ANKI_VERSION);OUT.mkdir(parents=True,exist_ok=True)
 from aqt.profiles import ProfileManager
 pm=ProfileManager(str(BASE));pm.setupMeta();pm.create('Atelier QA');pm.load('Atelier QA')
 pm.meta.update(firstRun=False,defaultLang='en_US',updates=False,uiScale=2/3 if '--scale-100' in sys.argv else 1);pm.profile.update(autoSync=False);pm.save();pm.db.close()
@@ -27,7 +29,7 @@ cfg=json.loads((target/'config.json').read_text(encoding='utf8'));cfg.update(vis
 import aqt
 from aqt.qt import QTimer
 aqt.AnkiApp.secondInstance=lambda self:False
-report={'runtime_sha256':fingerprint,'payload_bytes_equal':True,'input_method':'scripted native API and JavaScript calls; no physical input device', 'category':f'actual Anki 25.09.5 / native Qt {"desktop" if DESKTOP else "offscreen"} on Windows; synthetic profile','version':anki.version,'owner_profile_accessed':False,'hardware_tested':False,'captures':[],'errors':[]}
+report={'runtime_sha256':fingerprint,'payload_bytes_equal':True,'input_method':'scripted native API and JavaScript calls; no physical input device', 'category':f'actual Anki {buildinfo.version} / native Qt {"desktop" if DESKTOP else "offscreen"} on Windows; synthetic profile','version':buildinfo.version,'owner_profile_accessed':False,'hardware_tested':False,'captures':[],'errors':[]}
 app=aqt._run(['anki','-b',str(BASE),'-p','Atelier QA','-l','en_US'],exec=False)
 attempts=0;finished=False
 def done():

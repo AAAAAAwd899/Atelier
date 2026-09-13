@@ -11,6 +11,7 @@ basezip=OUT/'qa-baseline.ankiaddon';write_archive(basezip,[(baseline/n,n) for n 
 installer=ROOT/'dist/Atelier-1.0.3.ankiaddon'
 os.environ.update(QT_QPA_PLATFORM='windows',QTWEBENGINE_CHROMIUM_FLAGS='--disable-gpu --no-sandbox',ANKI_SOFTWAREOPENGL='1',QTWEBENGINE_DISABLE_SANDBOX='1')
 import anki,anki.lang
+from anki import buildinfo
 anki.lang.set_lang('en_US')
 from aqt.profiles import ProfileManager
 pm=ProfileManager(str(BASE));pm.setupMeta();pm.create('Install QA');pm.load('Install QA');pm.meta.update(firstRun=False,defaultLang='en_US',updates=False);pm.profile.update(autoSync=False);pm.save();pm.db.close()
@@ -18,7 +19,7 @@ import aqt
 from aqt.qt import QTimer
 from aqt.addons import InstallOk
 aqt.AnkiApp.secondInstance=lambda self:False
-report={'category':'actual Anki AddonManager installer API; synthetic application profile; GUI file picker not automated','runtime_sha256':runtime_digest(),'installer_sha256':hashlib.sha256(installer.read_bytes()).hexdigest(),'anki':anki.version,'checks':{},'errors':[],'owner_profile_accessed':False}
+report={'category':'actual Anki AddonManager installer API; synthetic application profile; GUI file picker not automated','runtime_sha256':runtime_digest(),'installer_sha256':hashlib.sha256(installer.read_bytes()).hexdigest(),'anki':buildinfo.version,'checks':{},'errors':[],'owner_profile_accessed':False}
 app=aqt._run(['anki','-b',str(BASE),'-p','Install QA','-l','en_US'],exec=False);attempts=0;finished=False
 def done():
  global finished
