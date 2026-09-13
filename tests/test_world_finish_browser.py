@@ -102,7 +102,7 @@ def main():
   # Planner world changes preserve original fields and return keyboard focus after save.
   import planner_suite_fixture as planner
   for w in worlds.CATALOG:
-   p=b.new_page(viewport={'width':1440,'height':960});p.on('pageerror',lambda e:ERRORS.append(str(e)));p.set_default_timeout(10000);planner.expose(p);p.set_content(planner.html(w['id']));p.locator('[data-action=new]').first.click();p.locator('[data-field=name]').fill('Protected draft · Électrolytes');p.locator('[data-field=topics]').fill('Original topic text')
+   p=b.new_page(viewport={'width':1440,'height':960});p.on('pageerror',lambda e:ERRORS.append(str(e)));p.set_default_timeout(10000);planner.expose(p);p.set_content(planner.html(w['id']));p.locator('.es-hero').wait_for();p.locator('[data-action=new]').first.click();p.locator('[data-field=name]').fill('Protected draft · Électrolytes');p.locator('[data-field=topics]').fill('Original topic text')
    p.evaluate('window.keptName=document.querySelector("[data-field=name]");window.keptTopics=document.querySelector("[data-field=topics]")')
    s=p.locator('[aria-label="Study world"]');s.focus();s.select_option('rose' if w['id']!='rose' else 'forest');p.wait_for_timeout(130)
    check(w['id']+' planner world select regains focus after host reply',s.is_enabled() and s.evaluate('e=>document.activeElement===e'))

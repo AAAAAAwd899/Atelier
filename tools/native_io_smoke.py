@@ -43,7 +43,7 @@ def shot(stage,then,retries=0):
             aqt.mw.grab().save(str(OUT/(stage+'.png')))
             QTimer.singleShot(600,then)
         QTimer.singleShot(600,painted)
-    aqt.mw.web.evalWithCallback('''(()=>{let s=document.querySelector('#image-occlusion-container'),i=s?.querySelector('img'),c=s?.querySelector('canvas');let r=e=>{if(!e)return null;let b=e.getBoundingClientRect();return {x:b.x,y:b.y,width:b.width,height:b.height,bottom:b.bottom}};return {viewport:[innerWidth,innerHeight],stage:r(s),image:r(i),canvas:r(c),stageHTML:s?.outerHTML,fit:!!document.querySelector('#atelier-image-fit'),info:window.__atelierReviewCard,diagnostics:window.AtelierReview?.diagnostics()}})()''',result)
+    aqt.mw.web.evalWithCallback('''(()=>{let s=document.querySelector('#image-occlusion-container'),i=s?.querySelector('img'),c=s?.querySelector('canvas');let r=e=>{if(!e)return null;let b=e.getBoundingClientRect();return {x:b.x,y:b.y,width:b.width,height:b.height,bottom:b.bottom}};let ink=null;try{ink=Array.from(c.getContext('2d').getImageData(Math.floor(c.width*.3),Math.floor(c.height*.28),1,1).data)}catch(e){ink=String(e)};return {viewport:[innerWidth,innerHeight],stage:r(s),image:r(i),canvas:r(c),canvasInk:ink,imageVisibility:i&&getComputedStyle(i).visibility,canvasVisibility:c&&getComputedStyle(c).visibility,canvasOpacity:c&&getComputedStyle(c).opacity,stageVisibility:s&&getComputedStyle(s).visibility,stageHTML:s?.outerHTML,fit:!!document.querySelector('#atelier-image-fit'),info:window.__atelierReviewCard,diagnostics:window.AtelierReview?.diagnostics()}})()''',result)
 def answer():
     try:
         aqt.mw.reviewer._showAnswer();QTimer.singleShot(1800,lambda:shot('answer',actual_size))
@@ -92,7 +92,7 @@ def start():
         did=col.decks.id('Atelier IO QA::'+str(time.time_ns()));col.add_note(n,did);card_id=n.cards()[0].id;original_note=list(n.fields)
         c=col.get_card(card_id);before={'card':{k:getattr(c,k) for k in ['type','queue','due','ivl','reps','lapses']},'revlogs':col.db.scalar('select count(*) from revlog where cid=?',card_id)}
         col.decks.select(did);mw.moveToState('review')
-        QTimer.singleShot(2200,lambda:shot('question',answer))
+        QTimer.singleShot(5000,lambda:shot('question',answer))
     except Exception:fail()
 QTimer.singleShot(1500,start)
 QTimer.singleShot(90000,lambda:(report['errors'].append('native IO test timeout'),done()))

@@ -36,15 +36,16 @@ def done():
 def capture(theme,destination,retries=0):
     mw=aqt.mw;name=f'{theme}-{destination}.png'
     def record(value):
-        if (not value or not value.get('loaded')) and retries<15:
+        if (not value or not value.get('loaded') or destination=='widgets' and not value.get('widgetsReady')) and retries<15:
             QTimer.singleShot(700,lambda:capture(theme,destination,retries+1));return
         def painted():
             shot=mw.grab();shot.save(str(OUT/name))
             report['captures'].append({'path':name,'diagnostics':value,'logical_window':[mw.width(),mw.height()],'pixel_size':[shot.width(),shot.height()],'device_pixel_ratio':shot.devicePixelRatio()})
             if not value or not value.get('loaded'):report['errors'].append(f'{theme}/{destination} did not finish loading')
+            if destination=='widgets' and not value.get('widgetsReady'):report['errors'].append(f'{theme}/widgets history did not settle')
             next_capture()
         QTimer.singleShot(1200,painted)
-    mw.web.evalWithCallback('window.AtelierMakeover ? AtelierMakeover.diagnostics() : {missing:true}',record)
+    mw.web.evalWithCallback('''(()=>{const r=document.getElementById('atelier-root')?.shadowRoot,n=r?.querySelector('#nw-today-content');return window.AtelierMakeover ? {...AtelierMakeover.diagnostics(),widgetsReady:!!n&&!n.textContent.includes('Reading study history')} : {missing:true}})()''',record)
 queue=[(theme,page) for theme in ['midnight','rose','forest'] for page in ['desk','widgets']]
 def next_capture():
     if not queue:done();return
