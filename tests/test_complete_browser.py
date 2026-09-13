@@ -9,7 +9,7 @@ OUT=ROOT/'verification/complete-browser';OUT.mkdir(parents=True,exist_ok=True)
 SHOTS=ROOT/'screenshots/complete';SHOTS.mkdir(parents=True,exist_ok=True)
 
 def main():
- results=[];errors=[]
+ results=[];errors=[];material_signatures=set()
  def check(name,value):
   if not value:raise AssertionError(name)
   results.append(name);print('PASS',name,flush=True)
@@ -32,9 +32,11 @@ def main():
     p=mod.PALETTES[w['id']]
     check(w['id']+' shared appearance saved through actual suite bridge',h.settings['theme']==w['id'])
     check(w['id']+' background agrees',page.locator('#workshop').evaluate('(e)=>getComputedStyle(e).getPropertyValue("--bg").trim()')==p['bg'])
+    material_signatures.add(page.locator('#workshop').evaluate("""e=>getComputedStyle(e).getPropertyValue('--studio-material').trim()"""))
     check(w['id']+' no page overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'))
     check(w['id']+' header contains live controls',page.locator('.topbar').evaluate('(e)=>[...e.querySelectorAll("button,select")].filter(x=>x.getClientRects().length).every(x=>x.getBoundingClientRect().bottom<=e.getBoundingClientRect().bottom+1)'))
     shot(w['id']+'-sources.png')
+   check('All worlds have distinct Card Studio materials',len(material_signatures)==len(mod.CATALOG))
    page.locator('#ws-suite-world').select_option('forest');page.wait_for_timeout(100)
    click(f'[data-action="open-project"][data-id="{h.primary_project}"]')
    shot('forest-project.png')
@@ -56,7 +58,10 @@ def main():
     page.set_viewport_size({'width':width,'height':760});page.wait_for_timeout(180)
     check(str(width)+' Card Studio no horizontal document overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'))
     check(str(width)+' header fit',page.locator('.topbar').evaluate('(e)=>[...e.querySelectorAll("button,select")].filter(x=>x.getClientRects().length).every(x=>x.getBoundingClientRect().bottom<=e.getBoundingClientRect().bottom+1)'))
-    if width==390:shot('card-studio-390.png')
+    if width==390:
+     check('390 approval explanation keeps readable measure',page.locator('.ws-authoring-workflow>div').first.evaluate('(e)=>e.getBoundingClientRect().width>=300'))
+     check('390 approval actions use full banner width',page.locator('.ws-authoring-workflow>.row').evaluate('(e)=>e.getBoundingClientRect().width>=300'))
+     shot('card-studio-390.png')
    page.set_viewport_size({'width':1440,'height':960})
    # Real local draft is still present; only publication creates notes.
    check('Saved source draft and text remain',any(d.get('front')=='Which exact features must stay unchanged?' for d in h.store.list('draft')))

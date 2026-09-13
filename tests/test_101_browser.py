@@ -3,7 +3,7 @@ from fixtures import *
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 OUT=ROOT/'verification'/'1.0.1';OUT.mkdir(parents=True,exist_ok=True)
-checks=[];errors=[]
+checks=[];errors=[];answer_materials=set()
 def check(name,value=True):
  assert value,name
  checks.append(name)
@@ -20,6 +20,7 @@ with sync_playwright() as pw:
   if theme=='forest':p.screenshot(path=str(OUT/'Atelier-Reviewer-Short.png'))
   p.evaluate('''()=>{document.getElementById('qa').innerHTML='<p>Question</p><hr id="answer"><p>The answer is here.</p>';AtelierReview.painted({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});document.getElementById('answer').scrollIntoView();AtelierReview.settled({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});}''')
   p.wait_for_timeout(80);check(theme+' short reveal has no unnecessary scroll',p.evaluate('scrollY===0&&document.scrollingElement.scrollHeight<=innerHeight+1'))
+  answer_materials.add(p.locator('#qa').evaluate("""e=>{const s=getComputedStyle(e);return [s.backgroundImage,s.borderColor,s.borderRadius,s.boxShadow].join('|')}"""))
   p.evaluate('''()=>{document.getElementById('qa').innerHTML='<p>Question</p><hr id="answer">'+('<p>Long answer, preserved reading content.</p>'.repeat(60));AtelierReview.painted({id:1,stage:'answer',eligible:true,path:['Course','Lecture']});}''')
   p.wait_for_function('document.documentElement.dataset.atelierFit==="scroll"');p.evaluate('window.scrollTo(0,800);window.dispatchEvent(new WheelEvent("wheel"))');p.wait_for_timeout(80)
   check(theme+' long answer stays scrollable',p.evaluate('scrollY>0&&document.documentElement.dataset.atelierFit==="scroll"'))
@@ -46,6 +47,7 @@ with sync_playwright() as pw:
  for i in range(12):p.evaluate(asset('remote-input.js'))
  check('reconfiguration retains written text',p.locator('#typeans').input_value()=='retain text' and p.locator('#notes').inner_text()=='keep notes')
  p.evaluate('AtelierRemoteInput.dispose()');check('disposed input permission false',not p.evaluate('AtelierRemoteInput.check().ready'));p.close()
+ check('Each world has a distinct answer material',len(answer_materials)==len(core.THEMES))
  check('no uncaught browser errors',not errors)
  b.close()
 (OUT/'browser-results.json').write_text(json.dumps({'version':core.VERSION,'count':len(checks),'checks':checks,'errors':errors},indent=2)+'\n')

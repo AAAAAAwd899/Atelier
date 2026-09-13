@@ -1,7 +1,37 @@
 /* Only static text-card framing changes. No illustrations, animation or masks in #qa. */
-html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{border-radius:var(--world-radius,20px)!important;background:var(--at-panel)!important;box-shadow:0 16px 48px #00000015!important;font-size:clamp(20px,2vw,26px)!important;line-height:1.65!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"]{
+ --review-angle:125deg;--review-glow:color-mix(in srgb,var(--at-accent) 9%,transparent);
+ --review-edge:color-mix(in srgb,var(--at-accent) 44%,var(--at-line));
+ --review-shadow:0 24px 72px #00000020,0 3px 12px #00000010;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{
+ border-radius:var(--world-radius,20px)!important;
+ background:
+  radial-gradient(circle at 92% 8%,var(--review-glow),transparent 34%),
+  linear-gradient(var(--review-angle),color-mix(in srgb,var(--at-raised) 28%,var(--at-panel)),var(--at-panel) 62%)!important;
+ border:1px solid var(--review-edge)!important;
+ box-shadow:var(--review-shadow),inset 0 1px 0 #ffffff0d!important;
+ font-size:clamp(20px,2vw,26px)!important;line-height:1.65!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #atelier-review-header{
+ color:var(--at-accent-strong)!important;
+}
 html[data-atelier-screen="review"] #atelier-review-header .atelier-review-lecture{font-family:"Segoe UI",system-ui,sans-serif!important;font-size:13px!important;font-weight:550!important;letter-spacing:0!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="obsidian"]{--review-angle:118deg;--review-glow:#c1aeff1c;--review-shadow:0 26px 80px #05030e70,0 0 36px #8d75d014;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="glacier"]{--review-angle:152deg;--review-glow:#99e0e425;--review-shadow:0 30px 76px #04182066,0 0 0 5px #99e0e408;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="rose"]{--review-angle:108deg;--review-glow:#b76c9122;--review-shadow:0 28px 68px #70405b25,0 4px 14px #70405b12;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="bloom"]{--review-angle:138deg;--review-glow:#9d73bd25;--review-shadow:0 28px 72px #4c356523,0 0 32px #8d67ac12;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="linen"]{--review-angle:92deg;--review-glow:#a78b5220;--review-shadow:0 16px 34px #53351917;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="matcha"]{--review-angle:158deg;--review-glow:#7a9a6324;--review-shadow:0 22px 56px #39492d20;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="midnight"]{--review-angle:105deg;--review-glow:#94caff2a;--review-shadow:0 30px 86px #030a166e,0 0 40px #448bc41a;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="peach"]{--review-angle:142deg;--review-glow:#c4775428;--review-shadow:0 26px 66px #713f2b24;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="forest"]{--review-angle:124deg;--review-glow:#a4d7bb20;--review-shadow:0 30px 82px #020c0a70,0 0 36px #68ac8612;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="tidal"]{--review-angle:151deg;--review-glow:#4fa3a72a;--review-shadow:0 24px 62px #24585d24;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="ember"]{--review-angle:116deg;--review-glow:#ecc09424;--review-shadow:0 30px 84px #10080675,0 0 34px #d87c3f16;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="celestial"]{--review-angle:132deg;--review-glow:#e0cfaa26;--review-shadow:0 30px 88px #07081770,0 0 42px #b6a6d918;}
 html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="forest"] #qa{border-left:2px solid var(--at-accent)!important;}
-html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="linen"] #qa{outline:1px solid var(--at-line);outline-offset:4px;box-shadow:0 8px 18px #53351910!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="linen"] #qa{outline:1px solid var(--at-line);outline-offset:4px;}
 html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="midnight"] #qa{border-top:2px solid var(--at-accent)!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="ember"] #qa{border-right:2px solid var(--at-accent)!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="celestial"] #qa{outline:1px solid color-mix(in srgb,var(--at-accent) 18%,transparent);outline-offset:5px;}
 html[data-atelier-screen="review-bottom"] #outer button{transform:none!important;transition:border-color .16s,background-color .16s!important;}

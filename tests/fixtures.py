@@ -64,7 +64,7 @@ SVG='''<svg xmlns="http://www.w3.org/2000/svg" width="600" height="280" viewBox=
 def card(theme='obsidian',kind='io',protected=False):
     import base64
     if kind=='io':html='<div id="io-wrapper"><img id="original-image" src="data:image/svg+xml;base64,'+base64.b64encode(SVG.encode()).decode()+'"><div id="io-overlay"><div class="mask"></div></div></div>'
-    elif kind=='basic':html='<p>What makes an effective study session?</p><p id="answer" hidden>One clear objective. A manageable set of questions.</p>'
+    elif kind=='basic':html='<p>What makes an effective study session?</p><hr id="answer" hidden><p id="answer-copy" hidden>One clear objective. A manageable set of questions.</p>'
     elif kind=='typed':html='<p>Type the missing word.</p><input id="typeans" value="retained input"><button onclick="pycmd(\'play\')">Replay audio</button>'
     else:html='<div id="custom-ui"><canvas width="200" height="100"></canvas><input value="keep my input"><button onclick="pycmd(\'custom\')">Custom control</button></div>'
     info={'eligible':kind in ('basic','typed'), 'imageOcclusion':kind=='io','protected':protected,'path':['Sample collection','Study skills','Lecture 1'],'stage':'question'}

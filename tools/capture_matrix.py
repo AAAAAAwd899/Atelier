@@ -23,11 +23,25 @@ with sync_playwright() as pw:
                 p=browser.new_page(viewport={'width':w,'height':h});p.set_default_timeout(10000);p.on('pageerror',lambda e:errors.append(str(e)))
                 for screen,page in [('home','desk'),('library','library'),('widgets','widgets'),('tools','tools')]:
                     p.set_content(home_suite(theme,page=page));p.locator('.main').wait_for();shot(p,theme,screen,w,h)
-                for screen in ['question','answer']:
-                    p.set_content(card(theme,'basic'))
-                    if screen=='answer':p.evaluate("document.getElementById('answer').hidden=false;AtelierReview.painted({...window.__atelierReviewCard,stage:'answer'})")
-                    shot(p,theme,screen,w,h)
+                # Follow Anki's actual question -> answer lifecycle in one
+                # document. page.set_content() preserves Window properties, so
+                # rebuilding the answer document would leave the frozen
+                # reviewer controller bound to the discarded question DOM.
+                p.set_content(card(theme,'basic'))
+                shot(p,theme,'question',w,h)
+                p.evaluate("""() => {
+                    document.getElementById('answer').hidden=false;
+                    document.getElementById('answer-copy').hidden=false;
+                    const info={...window.__atelierReviewCard,stage:'answer'};
+                    window.__atelierReviewCard=info;
+                    AtelierReview.painted(info);
+                    AtelierReview.settled(info);
+                }""")
+                shot(p,theme,'answer',w,h)
                 p.close();save()
             print('Captured',theme,flush=True)
         assert runtime_digest()==fingerprint,'Source changed during capture'
+        for width,height in [(1440,900),(1280,720),(1024,768),(800,600),(390,720)]:
+            answer_hashes={r['sha256'] for r in records if r['screen']=='answer' and r['viewport']==[width,height]}
+            assert len(answer_hashes)==len(core.THEMES),f'Answer evidence is not world-distinct at {width}x{height}'
     finally:save();browser.close()
