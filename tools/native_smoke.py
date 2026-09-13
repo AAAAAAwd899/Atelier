@@ -43,15 +43,17 @@ def done():
 def capture(theme,destination,retries=0):
     mw=aqt.mw;name=f'{theme}-{destination}.png'
     def record(value):
-        if (not value or not value.get('loaded') or destination=='widgets' and not value.get('widgetsReady')) and retries<15:
-            QTimer.singleShot(700,lambda:capture(theme,destination,retries+1));return
+        ready=bool(value and value.get('loaded') and value.get('theme')==theme and value.get('page')==destination and (destination!='widgets' or value.get('widgetsReady')))
+        if not ready and retries<15:
+            QTimer.singleShot(1500,lambda:capture(theme,destination,retries+1));return
         def painted():
             shot=mw.grab();shot.save(str(OUT/name))
             report['captures'].append({'path':name,'diagnostics':value,'logical_window':[mw.width(),mw.height()],'pixel_size':[shot.width(),shot.height()],'device_pixel_ratio':shot.devicePixelRatio()})
-            if not value or not value.get('loaded'):report['errors'].append(f'{theme}/{destination} did not finish loading')
+            if not ready:report['errors'].append(f'{theme}/{destination} did not settle to the requested screen')
             if destination=='widgets' and not value.get('widgetsReady'):report['errors'].append(f'{theme}/widgets history did not settle')
             next_capture()
-        QTimer.singleShot(1200,painted)
+        mw.web.repaint()
+        QTimer.singleShot(5000,painted)
     mw.web.evalWithCallback('''(()=>{const r=document.getElementById('atelier-root')?.shadowRoot,n=r?.querySelector('#nw-today-content');return window.AtelierMakeover ? {...AtelierMakeover.diagnostics(),widgetsReady:!!n&&!n.textContent.includes('Reading study history')} : {missing:true}})()''',record)
 queue=[(theme,page) for theme in ['midnight','rose','forest'] for page in ['desk','widgets']]
 def next_capture():
@@ -59,7 +61,7 @@ def next_capture():
     theme,page=queue.pop(0);owner=aqt.mw._daedalus_atelier_runtime
     owner.save_config({'theme':theme});owner._ui_state={'page':page,'location':'0','query':'','filter':'all'}
     owner.open_widgets() if page=='widgets' else owner.open()
-    QTimer.singleShot(1800,lambda:capture(theme,page))
+    QTimer.singleShot(5000,lambda:capture(theme,page))
 def start():
     global attempts
     attempts+=1

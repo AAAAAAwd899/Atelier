@@ -46,6 +46,9 @@ def main():
         if p.exists():copy(p,'probes/'+name)
     video=ROOT/'output/playwright/final-walkthrough';record=json.loads((video/'recording.json').read_text());assert record['runtime_sha256']==fingerprint
     for name in ['recording.json','Atelier-1.0.3-Walkthrough.webm']:copy(video/name,'walkthrough/'+name)
+    for name in ['midnight-widgets.png','rose-widgets.png','failure.json']:
+        p=ROOT/'output/native-home-capture-timing-failure'/name
+        if p.exists():copy(p,'failures/native-capture-timing/'+name)
     for p in args.proof_dir.rglob('*'):
         if p.is_file() and p.suffix in ('.json','.xml','.log','.exit','.png'):
             copy(p,'verification/'+p.relative_to(args.proof_dir).as_posix())

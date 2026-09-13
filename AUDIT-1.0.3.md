@@ -37,6 +37,8 @@ Windows, installed Anki 25.09.5 build 217701ba; disposable synthetic profiles on
 
 Input was scripted API/JavaScript, not a physical remote. Native GPU initialization warnings occurred and rendering used the software path; no live GPU claim. Requested 100% scaling was clamped by the host, so those attempts are not independent 100/125/200% tests. Initial offscreen/late-sizing/blank-canvas failures are retained separately; final screenshots wait for actual canvas painting. Native QA shutdown can block in collection close after completed receipts; the harness bounds shutdown for its disposable profile.
 
+Final gallery inspection also caught stale native compositor frames in two Home/Widgets captures despite ready browser diagnostics. The capture harness now checks the requested world and route, allows the native compositor to settle, and the six-screen set was retaken and inspected. The rejected frames remain explicitly labelled capture failures, not final passing screenshots.
+
 ## Performance evidence
 
 Same local Windows host, baseline source and candidate fixtures. Baseline measurements were run from the untouched Git baseline during final verification, not recorded before development began. Other task processes were active. Values are median / p95 milliseconds.
