@@ -50,9 +50,11 @@ with sync_playwright() as pw:
             for world in h.appearance_module.CATALOG:
                 theme=world['id'];h.settings['theme']=theme
                 p=b.new_page(viewport={'width':1440,'height':900});p.on('pageerror',lambda e:errors.append(str(e)));p.expose_function('nativeBridge',h.dispatch)
-                p.set_content(h.html());p.locator('.shelf-grid').wait_for();p.locator(f'[data-action="open-project"][data-id="{h.primary_project}"]').click();p.locator(f'[data-action="open-source"][data-id="{source["id"]}"]').click()
+                p.set_content(h.html());p.locator('.shelf-grid').wait_for();p.locator(f'[data-action="open-project"][data-id="{h.primary_project}"]').first.click();p.locator(f'[data-action="open-source"][data-id="{source["id"]}"]').first.click()
                 p.locator('[data-draft="front"]').wait_for();shots(p,theme,'card-studio')
-                p.locator('[data-action="mask-source"]:not([disabled])').click();p.locator('.mask-image-area img').wait_for();p.wait_for_function('document.querySelector(".mask-image-area img").naturalWidth>0');shots(p,theme,'mask-studio')
+                p.locator('[data-action="mask-source"]:not([disabled])').click();p.locator('.mask-image-area img').wait_for();p.wait_for_function('document.querySelector(".mask-image-area img").naturalWidth>0')
+                p.locator('[data-mask-action="same"]').click();area=p.locator('.mask-image-area').bounding_box()
+                p.mouse.move(area['x']+area['width']*.07,area['y']+area['height']*.27);p.mouse.down();p.mouse.move(area['x']+area['width']*.46,area['y']+area['height']*.35,steps=8);p.mouse.up();p.locator('.mask-rect:not([data-mask-id="temporary"])').first.wait_for();shots(p,theme,'mask-studio')
                 p.close();save();print(theme,flush=True)
         else:raise ValueError(component)
         assert runtime_digest()==fingerprint,'Runtime changed during captures'

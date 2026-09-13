@@ -89,7 +89,7 @@ def start():
         report['media_sha256']=hashlib.sha256(media_file.read_bytes()).hexdigest()
         n=col.new_note(model);n['Occlusion']='{{c1::image-occlusion:rect:left=0.25:top=0.25:width=0.225:height=0.0833333:oi=1}}'
         n['Image']='<img src="'+name+'">';n['Header']='Native IO · whole-stage fit';n['Back Extra']='The original image and native mask remain separate.'
-        did=col.decks.id('Atelier IO QA::'+str(time.time_ns()));col.add_note(n,did);card_id=n.cards()[0].id;original_note=list(n.fields)
+        did=col.decks.id('Atelier IO QA::'+str(time.time_ns())+'::Tall page landmarks');col.add_note(n,did);card_id=n.cards()[0].id;original_note=list(n.fields)
         c=col.get_card(card_id);before={'card':{k:getattr(c,k) for k in ['type','queue','due','ivl','reps','lapses']},'revlogs':col.db.scalar('select count(*) from revlog where cid=?',card_id)}
         col.decks.select(did);mw.moveToState('review')
         QTimer.singleShot(5000,lambda:shot('question',answer))

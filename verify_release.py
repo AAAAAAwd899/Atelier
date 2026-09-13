@@ -63,9 +63,14 @@ def main():
   result=json.loads(path.read_text());count=result.get('count',result.get('checks'))
   if not isinstance(count,int) or count<1 or result.get('errors'):raise RuntimeError('Browser evidence invalid '+name)
   (V/(name+'-results.json')).write_text(json.dumps(result,indent=2)+'\n');return name,count
- with ThreadPoolExecutor(max_workers=2) as pool:
+ failures=[]
+ with ThreadPoolExecutor(max_workers=1) as pool:
   for future in as_completed([pool.submit(browser_job,j) for j in suites]):
-   name,count=future.result();outcomes[name]=count;print('PASS',name,count,flush=True)
+   try:
+    name,count=future.result();outcomes[name]=count;print('PASS',name,count,flush=True)
+   except Exception as e:
+    failures.append(str(e));print('FAIL',str(e),flush=True)
+ if failures:raise RuntimeError('; '.join(failures))
  if runtime_digest()!=fingerprint:raise RuntimeError('Runtime changed during verification; rerun')
  if json.loads((V/'python-runtime.json').read_text())['runtime_sha256']!=fingerprint:raise RuntimeError('Python evidence is from different runtime bytes; rerun Python suites')
  report={'version':version(),'runtime_sha256':fingerprint,'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
