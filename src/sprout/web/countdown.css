@@ -1,0 +1,86 @@
+/* Every selector is scoped to our own component. Never style Anki's host. */
+#es-countdowns {
+  --es-accent: var(--link, #557c67); --es-tint: color-mix(in srgb, currentColor 3%, transparent);
+  --es-chip-line: color-mix(in srgb, currentColor 12%, transparent);
+  display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
+  max-width: 820px; margin: 22px auto 14px; padding: 0; font: inherit; color: inherit;
+}
+#es-countdowns[data-theme="sage"] { --es-accent: #456e55; --es-tint: #edf4ed; color: #293d31; --es-chip-line: #cfded0; }
+#es-countdowns[data-theme="lavender"] { --es-accent: #78539a; --es-tint: #f4effb; color: #41324f; --es-chip-line: #e1d5ed; }
+#es-countdowns[data-theme="peach"] { --es-accent: #965a3d; --es-tint: #fff1e8; color: #563c2d; --es-chip-line: #efdbc9; }
+#es-countdowns[data-theme="rose"] { --es-accent: #a04e73; --es-tint: #fff0f5; color: #543345; --es-chip-line: #efd6e2; }
+#es-countdowns[data-theme="sky"] { --es-accent: #386d96; --es-tint: #edf5fc; color: #304555; --es-chip-line: #d0e2ee; }
+#es-countdowns[data-dark="true"][data-theme="sage"] { --es-accent: #b8d7b9; --es-tint: #25382e; color: #e4eee5; --es-chip-line: #40594a; }
+#es-countdowns[data-dark="true"][data-theme="lavender"] { --es-accent: #d0b7ed; --es-tint: #332b40; color: #eee5f6; --es-chip-line: #554564; }
+#es-countdowns[data-dark="true"][data-theme="peach"] { --es-accent: #f3c7ac; --es-tint: #41332c; color: #faeade; --es-chip-line: #654e40; }
+#es-countdowns[data-dark="true"][data-theme="rose"] { --es-accent: #f2bfd5; --es-tint: #3d2934; color: #f7e4ec; --es-chip-line: #654452; }
+#es-countdowns[data-dark="true"][data-theme="sky"] { --es-accent: #acd3f1; --es-tint: #263746; color: #e2edf6; --es-chip-line: #425a6f; }
+#es-countdowns[data-theme="midnight"] { --es-accent: #c3c5f0; --es-tint: #26283b; color: #eeeff9; --es-chip-line: #43445d; }
+#es-countdowns .es-chip {
+  appearance: none; box-sizing: border-box; display: inline-flex; align-items: center; gap: 12px;
+  max-width: min(100%, 460px); min-width: 0; min-height: 68px; padding: 12px 14px 12px 12px;
+  border: 1px solid var(--es-chip-line); border-radius: 18px;
+  background: var(--es-tint); color: inherit; font: inherit; text-align: left; cursor: pointer;
+  box-shadow: 0 2px 3px #00000003, inset 0 1px 0 #ffffff09; line-height: 1.35;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease, background .18s ease;
+}
+#es-countdowns .es-chip:hover { border-color: var(--es-accent); background: color-mix(in srgb, var(--es-accent) 5%, var(--es-tint)); box-shadow: 0 5px 15px #00000009; transform: translateY(-2px); }
+#es-countdowns .es-chip:active { transform: translateY(0) scale(.99); }
+#es-countdowns .es-chip:focus-visible, #es-countdowns .es-more:focus-visible { outline: 2px solid var(--es-accent); outline-offset: 3px; }
+#es-countdowns .es-mark { box-sizing: border-box; display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border-radius: 12px; background: color-mix(in srgb, var(--es-accent) 10%, transparent); color: var(--es-accent); }
+#es-countdowns .es-mark svg { width: 27px; height: 27px; }
+#es-countdowns .es-chip-copy { display: flex; flex-direction: column; min-width: 0; }
+#es-countdowns .es-chip-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: .92em; letter-spacing: -.12px; }
+#es-countdowns .es-chip-sub { font-size: .73em; opacity: .7; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#es-countdowns .es-time { flex-shrink: 0; margin-left: 3px; border-radius: 9px; padding: 7px 9px; color: var(--es-accent); background: color-mix(in srgb, var(--es-accent) 8%, transparent); font-size: .94em; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.3px; white-space: nowrap; }
+#es-countdowns .es-time small { font-size: .72em; opacity: .85; font-weight: 500; margin-left: 1px; }
+#es-countdowns .es-time em { font-style: normal; margin-left: 4px; }
+#es-countdowns .es-chip-arrow { width: 16px; height: 20px; display: flex; align-items: center; color: var(--es-accent); opacity: .55; transition: transform .18s ease, opacity .18s ease; }
+#es-countdowns .es-chip-arrow svg { width: 16px; height: 16px; }
+#es-countdowns .es-chip:hover .es-chip-arrow { opacity: 1; transform: translateX(2px); }
+#es-countdowns[data-compact="true"] .es-chip { min-height: 48px; border-radius: 14px; padding: 7px 10px 7px 8px; gap: 9px; }
+#es-countdowns[data-compact="true"] .es-mark { width: 30px; height: 30px; border-radius: 9px; }
+#es-countdowns[data-compact="true"] .es-mark svg { width: 24px; height: 24px; }
+#es-countdowns[data-compact="true"] .es-chip-sub { display: none; }
+#es-countdowns[data-compact="true"] .es-time { padding: 5px 8px; font-size: .88em; }
+#es-countdowns .es-plus { margin-left: 14px; color: var(--es-accent); font-size: 20px; font-weight: 400; }
+#es-countdowns .es-more { appearance: none; background: transparent; border: 0; box-shadow: none; color: inherit; opacity: .7; font: inherit; font-size: .8em; cursor: pointer; padding: 8px; border-radius: 8px; }
+#es-countdowns[data-preview="true"] { margin: 14px auto 6px; }
+@media (prefers-reduced-motion: reduce) { #es-countdowns .es-chip, #es-countdowns .es-chip-arrow { transition: none; transform: none !important; } }
+@media (max-width: 480px) { #es-countdowns { flex-direction: column; } #es-countdowns .es-chip { width: 100%; } #es-countdowns .es-time { margin-left: auto; } }
+
+/* Atelier adapter: style only our light-DOM component, not its workspace.
+   Presets still win; only Match Anki consumes the host's published tokens. */
+#es-countdowns[data-host="atelier"] {
+  max-width: 100%; width: 100%; box-sizing: border-box;
+  justify-content: flex-start; margin: 0 0 18px; padding: 0;
+  font: 13px/1.4 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-align: left; text-transform: none; letter-spacing: normal;
+}
+#es-countdowns[data-host="atelier"][data-theme="inherit"] {
+  --es-accent: var(--es-host-accent, #af9ce8);
+  --es-tint: var(--es-host-panel, transparent);
+  --es-chip-line: var(--es-host-line, currentColor);
+  color: var(--es-host-text, inherit);
+}
+#es-countdowns[data-host="atelier"] .es-chip { flex: 0 1 auto; }
+#es-countdowns[data-host="atelier"] .es-chip-empty { min-width: min(280px, 100%); }
+#es-countdowns[data-host="atelier"][data-motion="off"] .es-chip,
+#es-countdowns[data-host="atelier"][data-motion="off"] .es-chip-arrow {
+  transition: none; transform: none !important;
+}
+@media (max-width: 480px) {
+  #es-countdowns[data-host="atelier"] { align-items: stretch; gap: 7px; margin-bottom: 14px; }
+}
+
+/* Home host sizing: do not require the separate planner stylesheet. */
+#es-countdowns[data-host="atelier"] { margin:0; }
+#es-countdowns[data-host="atelier"] .es-chip { min-width:0; max-width:100%; }
+#es-countdowns .es-mark img{display:block;width:33px;height:38px;object-fit:contain}
+#es-countdowns[data-host="atelier"]{justify-content:flex-end;margin:0}
+#es-countdowns[data-host="atelier"] .es-chip{min-width:0;max-width:100%}
+@media(max-width:620px){#es-countdowns[data-host="atelier"]{justify-content:stretch}#es-countdowns[data-host="atelier"] .es-chip{width:100%}}
+
+/* One coherent model, including the quiet home chip. */
+#es-countdowns .es-mark img { display:block; width:36px; height:36px; object-fit:contain; }
+#es-countdowns[data-compact="true"] .es-mark img { width:30px; height:30px; }

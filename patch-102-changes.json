@@ -1,0 +1,17 @@
+{
+  "baseline": "exact delivered Atelier 1.0.1",
+  "changed": {
+    "RELEASE-NOTES.md": "7d528c22ae4f78a90a1ac6e508ddfb3e60b28ea094db60754ac7b6d086f55fe1",
+    "USER-GUIDE.md": "42b482369374e5d37d88dd4f0e0dd2b05cde4a4269572393ab43e7e105d18b83",
+    "core.py": "ff61333cce503f34f997e495e3203c342ef4a77e40268654eec73d2cd0561902",
+    "integration.py": "881554d6faa89519889af4321b836396073c3ed26a7032e8821cf9dfba1d9dc7",
+    "manifest.json": "b0e7e20dfd14426a18c9802c60a60ef64b3fb01a1ece896ab77149b235232c81",
+    "review_theme.py": "38e6eb2731918041bc8209d44f87b43ad212b77feef2277ffed3f03238f15545",
+    "web/atelier.js": "aa13ac181bb55a7c62fd36c84658f2068e1e8186eb1bf5d311a5b085f2f11623",
+    "web/reviewer.js": "e3d13f48012dc6816b4d208d174aaebc6c932243e3c8e42bee549eb3d535d004"
+  },
+  "added": {
+    "folder_study.py": "d4eb16a3cdc0ccd30fb0b6000d0eb462e2001314c5ecffe4b4b10da22a73e2ec"
+  },
+  "removed": []
+}

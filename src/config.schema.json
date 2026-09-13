@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Atelier settings",
+  "type": "object",
+  "properties": {
+    "theme": {
+      "type": "string",
+      "enum": [
+        "obsidian",
+        "glacier",
+        "rose",
+        "bloom",
+        "linen",
+        "matcha",
+        "midnight",
+        "peach",
+        "forest",
+        "tidal",
+        "ember",
+        "celestial"
+      ]
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "workspace",
+        "hybrid",
+        "native"
+      ]
+    },
+    "density": {
+      "type": "string",
+      "enum": [
+        "comfortable",
+        "compact"
+      ]
+    },
+    "motion": {
+      "type": "boolean"
+    },
+    "chrome": {
+      "type": "boolean"
+    },
+    "view": {
+      "type": "string",
+      "enum": [
+        "grid",
+        "list"
+      ]
+    },
+    "sort": {
+      "type": "string",
+      "enum": [
+        "name",
+        "due",
+        "recent"
+      ]
+    },
+    "review_style": {
+      "type": "string",
+      "enum": [
+        "adaptive",
+        "controls",
+        "off"
+      ]
+    },
+    "review_width": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "wide"
+      ]
+    },
+    "surface_revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "shared_theme": {
+      "type": "boolean"
+    },
+    "match_sprout": {
+      "type": "boolean"
+    },
+    "visual_owner": {
+      "type": "string",
+      "enum": [
+        "ask",
+        "atelier",
+        "onigiri",
+        "external"
+      ]
+    },
+    "ambience": {
+      "type": "boolean"
+    },
+    "review_context": {
+      "type": "string",
+      "enum": [
+        "compact",
+        "full",
+        "hidden"
+      ]
+    },
+    "companion_shortcuts": {
+      "type": "boolean"
+    },
+    "acknowledged_makeovers": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+      },
+      "uniqueItems": true
+    },
+    "native_surfaces": {
+      "type": "boolean"
+    },
+    "remote": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "bindings": {
+          "type": "object",
+          "maxProperties": 8,
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

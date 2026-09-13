@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "release_base": "0.9.0-rc6",
+  "target_platform": "Windows desktop",
+  "target_anki": "26.08.1",
+  "target_editor": "standard, not experimental",
+  "user_reported": {
+    "visual_and_primary_testing": "passed",
+    "source": "User's final-release request in this conversation",
+    "individual_native_cases": "Not itemized; no broader matrix is inferred"
+  },
+  "independent_native_windows_test_performed": false,
+  "independent_native_qt_test_performed": false,
+  "external_publication_performed": false,
+  "distribution": "direct-install .ankiaddon",
+  "installation_identity": "daedalus_atelier",
+  "numeric_ankiweb_id": null,
+  "release_scope": "Accepted rc6 layout and workflows; reviewed consumer copy, version and release documentation only"
+}

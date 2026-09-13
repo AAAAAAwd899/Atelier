@@ -1,0 +1,10 @@
+{
+  "package": "daedalus_atelier",
+  "name": "Atelier",
+  "human_version": "1.0.2",
+  "author": "Daedalus Works",
+  "conflicts": [
+    "exam_sprout",
+    "daedalus_workshop"
+  ]
+}

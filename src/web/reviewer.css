@@ -1,0 +1,172 @@
+/* Scoped native-view styling. Never style image/canvas/SVG geometry or cloze masks.
+   The only #qa rules apply to positively identified stock text templates. */
+html[data-atelier-screen="review"][data-atelier-card="reading"]{background:var(--at-bg)!important;color-scheme:var(--at-scheme);}
+html[data-atelier-screen="review"][data-atelier-card="reading"] body.card{background:var(--at-bg)!important;background-image:none!important;color:var(--at-text)!important;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{box-sizing:border-box;max-width:1000px;margin:18px auto 35px;padding:clamp(24px,4vw,48px);background:var(--at-panel);border:1px solid var(--at-line);border-radius:18px;box-shadow:0 12px 38px rgba(0,0,0,.09);font-size:21px;line-height:1.7;min-height:210px;overflow:visible;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-width="wide"] #qa{max-width:1400px;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa .cloze{color:var(--at-accent-strong);}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa hr#answer{height:1px;border:0;background:var(--at-line);margin:30px 0;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] input#typeans{background:var(--at-bg);color:var(--at-text);border:1px solid var(--at-line);border-radius:10px;padding:12px;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] input#typeans:focus{outline:2px solid var(--at-accent);outline-offset:3px;}
+/* Native typeGood/typeBad/typeMissed, media and MathJax are intentionally untouched. */
+html[data-atelier-screen="review"] #atelier-review-header{box-sizing:border-box;max-width:1000px;margin:clamp(12px,3vh,30px) auto 0;display:grid;gap:7px;text-align:left;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;color:var(--at-text);padding:0 3px;}
+html[data-atelier-screen="review"][data-atelier-width="wide"] #atelier-review-header{max-width:1400px;}
+html[data-atelier-screen="review"] .atelier-review-stage{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--at-accent);}
+html[data-atelier-screen="review"] .atelier-review-lecture{font-size:16px;line-height:1.5;font-weight:600;overflow-wrap:anywhere;}
+html[data-atelier-screen="review"] .atelier-review-path{font-size:11px;line-height:1.5;color:var(--at-muted);overflow-wrap:anywhere;}
+/* Native footer only. Reset the *whole* height chain, not only buttons. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"], html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] body {box-sizing:border-box!important;position:static!important;inset:auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:0!important;padding:0!important;background:var(--at-side)!important;background-image:none!important;color:var(--at-text)!important;color-scheme:var(--at-scheme);font:14px/1.4 "Segoe UI",system-ui,sans-serif!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] body::before,html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] body::after{content:none!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer {box-sizing:border-box!important;display:block!important;position:relative!important;inset:auto!important;transform:none!important;float:none!important;width:100%!important;max-width:none!important;height:auto!important;min-height:100px!important;max-height:none!important;overflow:visible!important;margin:0!important;padding:12px 20px!important;border:0!important;border-top:1px solid var(--at-line)!important;background:var(--at-side)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable, html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody {display:block!important;box-sizing:border-box!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;position:static!important;inset:auto!important;overflow:visible!important;margin:0!important;padding:0!important;border:0!important;border-spacing:0!important;background:transparent!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr{display:grid!important;grid-template-columns:minmax(68px,1fr) minmax(0,max-content) minmax(68px,1fr)!important;gap:16px!important;align-items:center!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr>td{display:flex!important;box-sizing:border-box!important;position:static!important;inset:auto!important;flex:initial!important;align-items:center!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:0!important;border:0!important;background:transparent!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr>td:first-child{justify-content:flex-start!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr>td:last-child{justify-content:flex-end!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle#middle{display:block!important;justify-content:center!important;text-align:center!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle table, html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle tbody{display:table!important;table-layout:auto!important;width:auto!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;border-spacing:0!important;margin:0 auto!important;padding:0!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle tbody{display:table-row-group!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle tr{display:table-row!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle td{display:table-cell!important;box-sizing:border-box!important;position:static!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;vertical-align:middle!important;padding:0 4px!important;background:transparent!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle>center{height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button{box-sizing:border-box!important;position:relative!important;inset:auto!important;float:none!important;display:inline-flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;width:auto!important;min-width:66px!important;max-width:100%!important;height:auto!important;min-height:44px!important;max-height:none!important;padding:10px 17px!important;margin:0!important;border:1px solid var(--at-line)!important;border-radius:11px!important;background:var(--at-panel)!important;background-image:none!important;color:var(--at-text)!important;font:600 14px/1.35 "Segoe UI",system-ui,sans-serif!important;text-shadow:none!important;box-shadow:none!important;white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere!important;transform:none!important;animation:none!important;transition:background-color .12s,border-color .12s!important;cursor:pointer!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle button{min-height:68px!important;min-width:94px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #ansbut#ansbut{min-width:min(270px,100%)!important;background:var(--at-accent-soft)!important;border-color:var(--at-accent)!important;color:var(--at-accent-strong)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #defease{border-color:var(--at-accent)!important;background:var(--at-accent-soft)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button:hover, html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button:active{transform:none!important;animation:none!important;filter:none!important;border-color:var(--at-accent)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button:focus-visible{outline:2px solid var(--at-accent)!important;outline-offset:3px!important;}
+/* Counts and intervals remain in normal flow; they cannot protrude above #outer. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .stattxt:not(.onigiri-stattxt-source):not(.onigiri-native-number-source):not(.onigiri-native-number-host),
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .nobold:not(.onigiri-native-number-source):not(.onigiri-native-number-host),
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-answer-hover-number,
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-show-answer-label,
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-answer-label {box-sizing:border-box!important;display:block!important;position:static!important;inset:auto!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;transform:none!important;float:none!important;width:auto!important;min-width:0!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;opacity:1!important;visibility:visible!important;margin:0!important;padding:0!important;transition:none!important;animation:none!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .stattxt:not(.onigiri-stattxt-source):not(.onigiri-native-number-source),html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .nobold:not(.onigiri-native-number-source),html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-answer-hover-number{font:400 12px/1.5 "Segoe UI",system-ui,sans-serif!important;color:var(--at-muted)!important;white-space:nowrap!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .stattxt:empty{display:none!important;}
+/* Onigiri may render its own count panel and conceal its source nodes. Keep
+   the sources concealed; normalize only the visible panel. No HTML replacement. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-pre-answer-counts{box-sizing:border-box!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;position:static!important;inset:auto!important;gap:5px!important;width:auto!important;min-width:0!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-count-pill,html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .onigiri-timer-pill{box-sizing:border-box!important;display:inline-flex!important;position:static!important;inset:auto!important;flex:0 0 auto!important;min-width:0!important;width:auto!important;height:auto!important;min-height:0!important;padding:1px 6px!important;border-radius:5px!important;font:500 12px/1.5 "Segoe UI",system-ui,sans-serif!important;background:var(--at-raised)!important;color:var(--at-text)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .new-count{color:var(--at-blue)!important;}html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .learn-count{color:var(--at-pink)!important;}html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer .review-count{color:var(--at-green)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"][data-atelier-extra-cells="true"] #outer#outer #innertable>tbody>tr{display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;}
+@media(max-width:720px){
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer{padding:10px 12px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr{gap:8px!important;grid-template-columns:minmax(58px,1fr) minmax(0,max-content) minmax(58px,1fr)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button{font-size:12px!important;padding:8px 10px!important;min-width:56px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle button{min-width:64px!important;}
+}
+@media(max-width:540px){
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer{min-height:142px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle#middle{grid-column:1 / -1;grid-row:1;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr>.stat{grid-row:2;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle button{min-width:54px!important;min-height:62px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle td{padding:0 2px!important;}
+}
+html[data-atelier-screen="overview-bottom"] body{background:var(--at-side)!important;color:var(--at-text)!important;}
+
+/* Native study overview, same events, links and descriptions. */
+html[data-atelier-screen="overview"]{background:var(--at-bg)!important;color-scheme:var(--at-scheme);}
+html[data-atelier-screen="overview"] body{background:var(--at-bg)!important;color:var(--at-text)!important;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;}
+html[data-atelier-screen="overview"] body>center{box-sizing:border-box;margin:clamp(20px,6vh,70px) auto;padding:clamp(24px,4vw,44px);width:calc(100% - 40px);max-width:1000px;border:1px solid var(--at-line);border-radius:18px;background:var(--at-panel);line-height:1.7;}
+html[data-atelier-screen="overview"] h3{font-size:clamp(20px,3vw,30px);line-height:1.4;overflow-wrap:anywhere;}
+html[data-atelier-screen="overview"] button#study{background:var(--at-accent-soft)!important;color:var(--at-accent-strong)!important;border:1px solid var(--at-accent)!important;border-radius:11px;padding:12px 23px;font-size:15px;}
+html[data-atelier-screen="overview"] a{color:var(--at-accent-strong);}
+html[data-atelier-screen="overview"] .description{color:var(--at-muted);}
+@media(max-width:650px){html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{font-size:19px;padding:23px 20px;border-radius:13px;}html[data-atelier-screen="overview"] body>center{width:calc(100% - 12px);padding:24px 15px;}html[data-atelier-screen="overview"] table{max-width:100%;}}
+@media(prefers-reduced-motion:no-preference){html[data-atelier-screen][data-atelier-motion="on"] button{transition:background-color .12s ease,border-color .12s ease;}}
+
+html[data-atelier-screen="review"][data-atelier-card="media"],
+html[data-atelier-screen="review"][data-atelier-card="media"] body.card{background:var(--at-bg)!important;background-image:none!important;color:var(--at-text)!important;color-scheme:var(--at-scheme);}
+/* IO pseudo-elements may be part of a mask. Their content is owned by the card. */
+html[data-atelier-screen="review"][data-atelier-card="media"] #io-header,
+html[data-atelier-screen="review"][data-atelier-card="media"] #io-footer{color:var(--at-text)!important;}
+/* A readable primary action without changing its native command or hitbox on hover. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #ansbut#ansbut{width:clamp(180px,24vw,320px)!important;min-width:180px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #innertable>tbody>tr>.stat{gap:9px!important;}
+
+/* 0.7: naturally center a short card without reparenting #qa or its contents.
+   Auto margins collapse for long cards: normal document scrolling stays intact. */
+html[data-atelier-screen="review"][data-atelier-card="reading"] body.card {
+ box-sizing:border-box!important;display:flex!important;flex-direction:column!important;
+ min-height:100vh!important;height:auto!important;overflow-x:hidden!important;overflow-y:visible!important;
+ margin:0!important;padding:max(16px,calc(var(--atelier-header-clearance,0px) + 12px)) clamp(12px,3vw,30px) 22px!important;
+ background:var(--at-bg)!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-ambience="true"] body.card {
+ background:radial-gradient(ellipse at 90% 12%,color-mix(in srgb,var(--at-accent) 8%,transparent),transparent 62%),var(--at-bg)!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #atelier-review-header {
+ flex:none!important;align-self:center!important;width:100%!important;max-width:1000px!important;
+ margin: auto auto 14px!important;padding:0 4px!important;gap:5px!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] .atelier-review-lecture {font-size:16px!important;line-height:1.45!important;letter-spacing:-.2px;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] .atelier-review-path {font-size:11px!important;line-height:1.4!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa {
+ flex:none!important;align-self:center!important;display:block!important;box-sizing:border-box!important;
+ width:100%!important;max-width:1000px!important;min-height:0!important;height:auto!important;
+ margin:0 auto auto!important;padding:clamp(22px,3.5vw,44px)!important;border-radius:22px!important;
+ background:linear-gradient(125deg,var(--at-panel),var(--at-hero-end,var(--at-panel)))!important;
+ border:1px solid var(--at-line)!important;font-size:clamp(19px,1.5vw,24px)!important;
+ line-height:1.6!important;color:var(--at-text)!important;overflow:visible!important;
+ box-shadow:0 14px 40px #00000012!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa :is(h1,h2,h3,h4) {color:var(--at-text)!important;line-height:1.35;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa > :first-child {margin-top:0;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa > :last-child {margin-bottom:0;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-width="wide"] :is(#qa,#atelier-review-header) {max-width:1400px!important;}
+/* The native .stattxt source has top/left/translate offsets. All coordinates
+   must be reset together, not only bottom, when moving it into normal flow. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer :is(.stattxt,.nobold) {
+ position:static!important;inset:auto!important;top:auto!important;right:auto!important;
+ bottom:auto!important;left:auto!important;transform:none!important;float:none!important;
+}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer button:hover {transform:none!important;}
+@media(prefers-reduced-motion:reduce){html[data-atelier-screen="review-bottom"] #outer button,html[data-atelier-screen="review"] #atelier-review-header *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+
+/* 0.7.1: the question leads. Context is compact and optional; no card reparenting. */
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="compact"] #atelier-review-header {
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:4px 12px!important;
+ margin-bottom:10px!important;max-width:960px!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="compact"] .atelier-review-stage{display:none!important}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="compact"] .atelier-review-lecture{font-size:13px!important;line-height:1.5!important;font-weight:500!important;letter-spacing:0!important;color:var(--at-muted)!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="compact"] .atelier-review-path{display:none!important;grid-column:1/-1;white-space:normal!important;overflow-wrap:anywhere;font-size:11px!important;line-height:1.6!important}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="compact"] #atelier-review-header[data-expanded="true"] .atelier-review-path{display:block!important}
+html[data-atelier-screen="review"] .atelier-review-details{appearance:none;border:1px solid transparent;background:transparent;color:var(--at-muted);padding:5px 7px;border-radius:7px;font:11px/1.4 "Segoe UI",system-ui,sans-serif;cursor:pointer;min-width:48px;min-height:27px;margin:0;transform:none!important;box-shadow:none}
+html[data-atelier-screen="review"] .atelier-review-details:hover{background:var(--at-panel);border-color:var(--at-line);color:var(--at-text)}
+html[data-atelier-screen="review"] .atelier-review-details:focus-visible{outline:2px solid var(--at-accent);outline-offset:2px}
+html[data-atelier-screen="review"][data-atelier-context="full"] .atelier-review-details{display:none!important}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-context="hidden"] #qa{margin:auto!important}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{max-width:960px!important;padding:clamp(24px,3.5vw,44px)!important;border-radius:20px!important}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-width="wide"] :is(#qa,#atelier-review-header){max-width:1400px!important}
+/* Recognized Onigiri study overview: match surfaces while preserving every action. */
+html[data-atelier-screen="overview"] .overview-center-container,
+html[data-atelier-screen="overview"] .overview-container {
+ --overview-box-bg:var(--at-panel)!important;--overview-box-border:var(--at-line)!important;
+ --overview-action-button-bg:var(--at-raised)!important;--overview-action-button-fg:var(--at-text)!important;
+ --overview-action-button-border:var(--at-line)!important;--overview-reveal-button-bg:var(--at-raised)!important;--overview-reveal-button-fg:var(--at-text)!important;
+ color:var(--at-text)!important;font-family:"Segoe UI",system-ui,sans-serif!important;
+}
+html[data-atelier-screen="overview"] .stats-container{background:linear-gradient(130deg,var(--at-panel),var(--at-hero-end,var(--at-panel)))!important;color:var(--at-text)!important;border:1px solid var(--at-line)!important;border-radius:20px!important;box-shadow:0 14px 36px #00000010!important}
+html[data-atelier-screen="overview"] .stats-row{font:15px/1.5 "Segoe UI",system-ui,sans-serif!important;color:var(--at-text)!important}
+html[data-atelier-screen="overview"] .stats-row>span:first-child{color:var(--at-text)!important}
+html[data-atelier-screen="overview"] .overview-title{font:600 clamp(22px,2.2vw,34px)/1.3 "Segoe UI",system-ui,sans-serif!important;color:var(--at-text)!important;letter-spacing:-.5px!important}
+html[data-atelier-screen="overview"] :is(#study,.overview-button,#onigiri-reveal-btn){font-family:"Segoe UI",system-ui,sans-serif!important;color:var(--at-text)!important;background:var(--at-raised)!important;border:1px solid var(--at-line)!important;border-radius:11px!important;transform:none!important}
+html[data-atelier-screen="overview"] #study{background:var(--at-accent-soft)!important;color:var(--at-accent-strong)!important;border-color:var(--at-accent)!important}
+html[data-atelier-screen="overview"] :is(.new-count-bubble,.learn-count-bubble,.review-count-bubble){background:var(--at-raised)!important;border:1px solid var(--at-line)!important;font-family:inherit!important}
+html[data-atelier-screen="overview"] .new-count-bubble{color:var(--at-blue)!important}
+html[data-atelier-screen="overview"] .learn-count-bubble{color:var(--at-pink)!important}
+html[data-atelier-screen="overview"] .review-count-bubble{color:var(--at-green)!important}
+
+/* 1.0.1: viewport belongs to the card, not repeated decorative spacing. */
+html[data-atelier-screen="review"][data-atelier-card="reading"] body.card{padding-top:max(12px,calc(var(--atelier-header-clearance,0px) + 10px))!important;padding-bottom:12px!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{padding:clamp(18px,2.4vw,30px)!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa hr#answer{margin:20px 0!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #atelier-review-header{margin-bottom:10px!important;}
+html[data-atelier-screen="review"][data-atelier-context="compact"] .atelier-review-details{font-size:12px;min-height:28px;}
+@media(max-height:500px){html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{padding:16px 20px!important;}html[data-atelier-screen="review"][data-atelier-card="reading"] body.card{padding-bottom:10px!important;}}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer{min-height:0!important;padding:10px 16px!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer#outer #middle button{min-height:56px!important;}
+
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa > :nth-last-child(2):has(+ script[data-atelier-presentation]){margin-bottom:0;}

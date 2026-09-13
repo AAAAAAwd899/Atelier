@@ -1,0 +1,62 @@
+# Atelier 1.0.2
+
+## Mixed-lecture folder study
+
+Study whole folder now offers **Shuffle between lectures**, selected by default, or **Keep current Anki order**. Confirming Shuffle saves the selected parent’s native new-card gather order, new-card sort order, and review sort order. When its preset is shared, a copy is assigned only to that parent.
+
+Individual-lecture study, card destinations, due dates, learning-step timing, daily limits, sibling burying and new/review mixing settings are retained. The existing lecture label follows each card’s own deck. Shuffle does not guarantee alternating lectures, nor a new random seed on every reopening.
+
+This is a saved Anki setting, not a temporary mock. Random review order stops prioritizing the oldest due cards first. Use Undo before reviewing to reverse the change, or use Deck options to change order/reselect the original preset. Keep current makes no changes; it does not restore an earlier preset.
+
+No exam, source, card-publishing, masking, remote or widget engine was replaced. No provider request, data migration, public upload or GitHub repository creation is performed by this release.
+
+---
+
+## Earlier release notes (historical)
+
+# Atelier 1.0.1
+
+- Correct duplicate reviewer header spacing and fit short text cards after Anki renders them.
+- Preserve long-card scrolling and stronger image-occlusion/positioned-template boundaries.
+- Keep custom card animations and mask pseudo-elements under their original template.
+- Add optional keyboard-mode Remote controls with a safe button test, learning/assignment, duplicate checks, and foreground reviewer guards. No new reviewer overlay.
+- Preserve all bundled exam and authoring engines, templates, data formats, imagery and styles outside the specified reviewer patch.
+- Native hardware and Windows/macOS acceptance are separate from automated checks.
+
+## Earlier release
+
+# Atelier 1.0.0
+
+**A complete study space for Anki: organize, create, prepare, and review.**
+
+Atelier 1.0 brings the integrated study, organization, and card-building tools into one release. It keeps the layout and primary workflows accepted in 0.9.0-rc6. The final pass updates version information and user-facing explanations, not the assessment, card-building, or storage algorithms.
+
+## Included
+
+Twelve visual worlds; a complete home with Add cards, Browse, and Sync; a searchable library with natural sorting and active study groups; independent customizable widgets; study progress and active-first export selection; Card Studio with sources, drafts, image masks and approval; Exam Studio with planning, practice, written responses, saved sessions and results; and Pip with clearly labelled rehearsal or new-card learning.
+
+Original Anki tools remain available. Onigiri is optional and has its own explicit original-page route. Specialized card designs retain their appropriate rendering and editing paths.
+
+## What changed from 0.9.0-rc6
+
+- Atelier now identifies itself as **1.0.0** in its installation metadata, menus, and interface.
+- Appearance, widget, progress, export, and card-building explanations use clearer everyday language.
+- Exam Studio no longer calls the integrated release a preview or exposes development wording as product instructions.
+- Updated user guide, installation/recovery instructions, privacy details, and release documentation.
+- Accepted layouts, icons, world artwork, defaults, store locations, and primary action routes are unchanged.
+
+## Install or update
+
+Save and close work and wait for imports/card adding to finish. Back up the collection, Atelier's `user_files`, and the profile-local `exam_sprout` and complete `workshop` folders. Keep standalone Sprout and Workshop disabled.
+
+Use **Tools → Add-ons → Install from file**, select **Atelier-1.0.0.ankiaddon**, and restart Anki completely. Do not unzip the file or delete the existing Atelier installation. Confirm **Tools → Atelier · 1.0.0**. Existing records, preferences, and widget layouts are reused without a new migration.
+
+## Good to know
+
+**Windows desktop Anki 26.08.1** is the release target. The user reported visual and primary-workflow testing passed before this final text-only pass. Automated regression and packaging evidence are in the accompanying release report; this is not a claim that every third-party combination or native feature was independently tested.
+
+Ordinary review affects scheduling. Independent practice does not. Pip's **Introduce new cards** option can apply real Anki ratings after reveal. Timed practice deadlines continue while closed. **Save & close** is required to retain unfinished practice.
+
+Anki Sync and its collection backup do not include all local Atelier data. Optional AI assistance requires its own service configuration and explicit approval. Source images and note content are not automatically fact-checked. See **USER-GUIDE.md** and **PRIVACY.md**.
+
+Atelier has not been uploaded to AnkiWeb by this release process. The supplied installer updates the existing `daedalus_atelier` installation directly.

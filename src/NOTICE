@@ -1,0 +1,18 @@
+Atelier is an independent Anki desktop add-on by Daedalus Works.
+Root Atelier code uses its supplied MIT license. This combined distribution retains
+Exam Sprout 0.10.1 under sprout/LICENSE and embedded Card Studio / Workshop under
+workshop/LICENSE, with integration changes described by the current source kit.
+The bundled PDF text parser retains its license at workshop/vendor/pypdf/LICENSE.
+
+Anki, Qt, Chromium, Onigiri, IO Enhanced, HyperTTS, Contanki and shared-deck services
+remain separate software. Their binaries, fonts, configuration and user data are not
+bundled. No official endorsement or universal compatibility is claimed.
+
+Pip artwork/model/animation assets and the card-builder book artwork remain from the
+supplied packages. World scenery comes from the accepted cumulative Atelier build.
+No font files, runtime CDN or automatic tracking are included. Optional provider
+assistance requires explicit configuration and consent; see PRIVACY.md.
+
+Embedded upstream README/verification documents are preserved as provenance, not
+current installation instructions or fresh verification. Follow the top-level
+RELEASE-NOTES.md and the version-matched verification report for this combined build.

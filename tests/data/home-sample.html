@@ -1,0 +1,1148 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelier 0.5 · Shared home compatibility preview</title><style>html{background:#151920;color:#e3e8ef;color-scheme:dark;font-family:system-ui,sans-serif}body{margin:0;padding:0;background:#151920;color:#e3e8ef}.fixture-strip{padding:9px 25px;font-size:11px;color:#a8b4c3;background:#101419;border-bottom:1px solid #303844}.modern-main-menu{display:flex;height:calc(100vh - 36px);box-sizing:border-box;padding:20px;gap:25px;min-height:0}.sidebar-left{width:290px;min-width:230px;border:1px solid #344051;border-radius:18px;background:#1b222d;padding:22px;display:flex;flex-direction:column;min-height:0;box-sizing:border-box}.sample-brand{font-size:23px;letter-spacing:-.9px;font-weight:700;margin:3px 0 8px}.subtle{color:#aab6c6;font-size:12px;margin:4px 0 30px}.sidebar-left h2{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9dadc2}#deck-list-container{min-height:0;overflow:auto;flex:1}.deck-table{width:100%;border-spacing:0 5px;table-layout:fixed}.decktd{display:flex;align-items:center;gap:4px;min-width:0;padding:7px 0;color:#cad4e1;font-size:13px}.deck{min-width:0}.decktd a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:inherit;text-decoration:none;line-height:1.8}.collapse{background:transparent;color:inherit;border:0;width:14px;font-size:20px;flex:0 0 14px;padding:0}.folder-icon{color:#b9add9;font-size:23px}.count{font-size:10px;background:#2f3d50;padding:3px 5px;border-radius:5px}.main-content{min-width:0;flex:1;overflow:auto;padding:0 10px 30px}.main-content h1{font-size:26px;letter-spacing:-.7px;margin:7px 0 22px}.unified-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.onigiri-widget-container,.external-widget-container{background:#202935;border:1px solid #354153;border-radius:17px;padding:22px;min-width:0;box-sizing:border-box;min-height:210px}.onigiri-widget-container h3,.external-widget-container h3{color:#aebccf;font-size:12px;letter-spacing:1px;margin:0 0 24px}.big{font-size:40px;font-weight:600;letter-spacing:-1.3px}.big small{font-size:14px;font-weight:400;color:#aab6c6;letter-spacing:0}p{font-size:11px;line-height:1.7;color:#aab6c6}button{cursor:pointer;font:inherit}#timer-test,#canvas-test{background:#b8a2ef;color:#191323;border:none;border-radius:9px;padding:10px 15px;margin:15px 0 0;font-size:12px;font-weight:600}textarea{box-sizing:border-box;width:100%;min-height:100px;resize:vertical;border:1px solid #465468;border-radius:8px;background:#161e29;color:#e3e8ef;padding:10px;font:13px/1.6 system-ui}canvas{max-width:100%}.bars{height:35px;display:flex;align-items:flex-end;gap:8px;margin-top:16px}.bars i{width:16px;height:80%;border-radius:4px;background:#7dabb2}.bars i:nth-child(even){height:55%}.bars i:nth-child(3n){height:100%}#sample-notes{grid-column:span 2}#sample-canvas{grid-column:span 1}@media(max-width:900px){.modern-main-menu{padding:12px;gap:12px}.sidebar-left{width:240px;min-width:210px;padding:14px}.unified-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.external-widget-container,.onigiri-widget-container{padding:16px}#sample-notes{grid-column:span 1}}@media(max-width:620px){.modern-main-menu{height:auto;min-height:100vh;flex-direction:column}.sidebar-left{width:100%;max-height:250px}.main-content{overflow:visible}.unified-grid{grid-template-columns:minmax(0,1fr)}}</style></head><body><div class="fixture-strip">INTERACTIVE COMPATIBILITY PREVIEW · Shipped Atelier renderer + sample external widgets · Not the Onigiri application</div><div class="container modern-main-menu"><aside class="sidebar-left"><div class="sample-brand">Shared study home</div><div class="subtle">Your existing add-ons, still here.</div><h2>Your folders</h2><div id="deck-list-container"><table id="decktree" class="deck-table"><tbody><tr class="deck is-deck" data-did="10"><td class="decktd"><button class="collapse" aria-label="Expand Pharmacy School" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:10');return false;">Pharmacy School</a><span class="count">688</span></td></tr><tr class="deck is-deck" data-did="20"><td class="decktd"><button class="collapse" aria-label="Expand Section 5" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:20');return false;">Section 5</a><span class="count">143</span></td></tr><tr class="deck is-deck" data-did="21"><td class="decktd"><button class="collapse" aria-label="Expand Advanced Cardiology" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:21');return false;">Advanced Cardiology</a><span class="count">100</span></td></tr><tr class="deck is-deck" data-did="22"><td class="decktd"><button class="collapse" aria-label="Expand Exam 3" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:22');return false;">Exam 3</a><span class="count">100</span></td></tr><tr class="deck is-deck" data-did="23"><td class="decktd"><button class="collapse" aria-label="Expand Endocrine & GU" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:23');return false;">Endocrine & GU</a><span class="count">43</span></td></tr><tr class="deck is-deck" data-did="24"><td class="decktd"><button class="collapse" aria-label="Expand Exam 2" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:24');return false;">Exam 2</a><span class="count">43</span></td></tr><tr class="deck is-deck" data-did="30"><td class="decktd"><button class="collapse" aria-label="Expand Old exam folders" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:30');return false;">Old exam folders</a><span class="count">545</span></td></tr><tr class="deck is-deck" data-did="40"><td class="decktd"><button class="collapse" aria-label="Expand Language practice" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:40');return false;">Language practice</a><span class="count">18</span></td></tr><tr class="deck is-deck" data-did="60"><td class="decktd"><button class="collapse" aria-label="Expand New imports" onclick="window.originalExpands=(window.originalExpands||0)+1">›</button><span class="folder-icon">▱</span><a class="deck" href="#" onclick="window.nativeClicks.push('open:60');return false;">New imports</a><span class="count">0</span></td></tr></tbody></table></div><p>＋ Pin an exam<br>✓ Remove it<br>Right-click for more actions</p></aside><main class="main-content"><h1>Your widgets</h1><div class="unified-grid" data-atelier-widget-grid>
+<section class="onigiri-widget-container" id="sample-progress"><h3>Study rhythm</h3><div class="big">24 <small>cards today</small></div><div class="bars" aria-label="Fictional progress bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p>Sample progress · not live statistics</p></section>
+<section class="external-widget-container" data-onigiri-external-hook="sample-timer"><h3>Focus timer</h3><div class="big">25:00</div><button id="timer-test" onclick="window.timerClicks++;this.textContent='Running · click to pause'">Start focus</button><p>Live event-handler preservation test</p></section>
+<section class="external-widget-container" data-onigiri-external-hook="sample-exams"><h3>Exam countdown</h3><strong>Cardiology · Exam 3</strong><div class="big">10 <small>days</small></div><p>A sample external widget, not Exam Sprout.</p></section>
+<section class="external-widget-container" id="sample-notes"><h3>Quick notes</h3><textarea id="notes-test" aria-label="Sample notes" placeholder="Write a note; it survives layout changes."></textarea></section>
+<section class="external-widget-container" id="sample-canvas"><h3>Interactive canvas</h3><canvas width="380" height="90" id="widget-canvas" aria-label="Sample widget canvas"></canvas><button id="canvas-test" onclick="window.canvasClicks++">Widget action</button><p>Same canvas node · no cloning</p></section>
+</div></main></div><script>window.nativeClicks=[];window.timerClicks=0;window.canvasClicks=0;window.originalContext=0;document.getElementById("decktree").addEventListener("contextmenu",e=>{window.originalContext++;e.preventDefault()});const cv=document.getElementById("widget-canvas").getContext("2d");cv.strokeStyle="#a69ccf";cv.lineWidth=3;cv.beginPath();cv.moveTo(0,70);cv.bezierCurveTo(90,80,100,10,200,40);cv.bezierCurveTo(260,85,310,1,380,15);cv.stroke();</script><div id="atelier-root"></div><script id="atelier-bootstrap" type="application/json">{"version": "0.5.0", "token": "preview", "preview": true, "demoNow": "2026-09-11T12:00:00", "settings": {"theme": "obsidian", "mode": "native", "density": "comfortable", "motion": true, "chrome": false, "view": "grid", "sort": "name", "review_style": "adaptive", "review_width": "standard"}, "profile": {"favorites": ["22", "24"], "folders": ["10", "20", "21", "22", "23", "24", "30", "40", "60"], "colors": {"22": "violet", "24": "rose", "21": "violet", "23": "rose", "30": "amber", "40": "cyan"}, "last_location": "22", "last_studied": "221", "focus_enabled": true, "selected_study": "all", "recent_locations": ["221", "22", "24"], "recent_added": [{"id": "61", "observed": "2026-09-11T12:00:00+00:00"}], "studies": [{"id": "cardio", "name": "Cardiology \u00b7 Exam 3", "date": "2026-09-21", "deck_ids": ["22"], "active": true}, {"id": "endocrine", "name": "Endocrine \u00b7 Exam 2", "date": "2026-09-24", "deck_ids": ["24"], "active": true}]}, "demo": {"nodes": [{"id": "10", "parent": "0", "name": "Pharmacy School", "path": "Pharmacy School", "depth": 0, "children": ["20", "30"], "new": 1852, "learn": 58, "review": 688, "filtered": false}, {"id": "20", "parent": "10", "name": "Section 5", "path": "Pharmacy School::Section 5", "depth": 1, "children": ["21", "23"], "new": 248, "learn": 12, "review": 143, "filtered": false}, {"id": "21", "parent": "20", "name": "Advanced Cardiology", "path": "Pharmacy School::Section 5::Advanced Cardiology", "depth": 2, "children": ["22"], "new": 172, "learn": 9, "review": 100, "filtered": false}, {"id": "22", "parent": "21", "name": "Exam 3", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3", "depth": 3, "children": ["221", "222", "223", "224", "225", "226"], "new": 172, "learn": 9, "review": 100, "filtered": false}, {"id": "221", "parent": "22", "name": "01 \u00b7 Atrial fibrillation", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::01 \u00b7 Atrial fibrillation", "depth": 4, "children": [], "new": 42, "learn": 3, "review": 24, "filtered": false}, {"id": "222", "parent": "22", "name": "02 \u00b7 Bradycardia", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::02 \u00b7 Bradycardia", "depth": 4, "children": [], "new": 26, "learn": 1, "review": 16, "filtered": false}, {"id": "223", "parent": "22", "name": "03 \u00b7 Tachycardia", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::03 \u00b7 Tachycardia", "depth": 4, "children": [], "new": 31, "learn": 2, "review": 21, "filtered": false}, {"id": "224", "parent": "22", "name": "04 \u00b7 Hypertensive crisis", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::04 \u00b7 Hypertensive crisis", "depth": 4, "children": [], "new": 18, "learn": 1, "review": 12, "filtered": false}, {"id": "225", "parent": "22", "name": "05 \u00b7 BLS & ACLS", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::05 \u00b7 BLS & ACLS", "depth": 4, "children": [], "new": 35, "learn": 2, "review": 19, "filtered": false}, {"id": "226", "parent": "22", "name": "06 \u00b7 Practice cases", "path": "Pharmacy School::Section 5::Advanced Cardiology::Exam 3::06 \u00b7 Practice cases", "depth": 4, "children": [], "new": 20, "learn": 0, "review": 8, "filtered": false}, {"id": "23", "parent": "20", "name": "Endocrine & GU", "path": "Pharmacy School::Section 5::Endocrine & GU", "depth": 2, "children": ["24"], "new": 76, "learn": 3, "review": 43, "filtered": false}, {"id": "24", "parent": "23", "name": "Exam 2", "path": "Pharmacy School::Section 5::Endocrine & GU::Exam 2", "depth": 3, "children": ["241", "242", "243"], "new": 76, "learn": 3, "review": 43, "filtered": false}, {"id": "241", "parent": "24", "name": "01 \u00b7 Thyroid foundations", "path": "Pharmacy School::Section 5::Endocrine & GU::Exam 2::01 \u00b7 Thyroid foundations", "depth": 4, "children": [], "new": 32, "learn": 2, "review": 17, "filtered": false}, {"id": "242", "parent": "24", "name": "02 \u00b7 Patient cases", "path": "Pharmacy School::Section 5::Endocrine & GU::Exam 2::02 \u00b7 Patient cases", "depth": 4, "children": [], "new": 24, "learn": 1, "review": 14, "filtered": false}, {"id": "243", "parent": "24", "name": "03 \u00b7 Key medications", "path": "Pharmacy School::Section 5::Endocrine & GU::Exam 2::03 \u00b7 Key medications", "depth": 4, "children": [], "new": 20, "learn": 0, "review": 12, "filtered": false}, {"id": "30", "parent": "10", "name": "Old exam folders", "path": "Pharmacy School::Old exam folders", "depth": 1, "children": ["31", "32"], "new": 1604, "learn": 46, "review": 545, "filtered": false}, {"id": "31", "parent": "30", "name": "Spring semester", "path": "Pharmacy School::Old exam folders::Spring semester", "depth": 2, "children": [], "new": 860, "learn": 28, "review": 330, "filtered": false}, {"id": "32", "parent": "30", "name": "Summer semester", "path": "Pharmacy School::Old exam folders::Summer semester", "depth": 2, "children": [], "new": 744, "learn": 18, "review": 215, "filtered": false}, {"id": "40", "parent": "0", "name": "Language practice", "path": "Language practice", "depth": 0, "children": ["41"], "new": 34, "learn": 1, "review": 18, "filtered": false}, {"id": "41", "parent": "40", "name": "Everyday vocabulary", "path": "Language practice::Everyday vocabulary", "depth": 1, "children": [], "new": 34, "learn": 1, "review": 18, "filtered": false}, {"id": "50", "parent": "0", "name": "Reading & ideas", "path": "Reading & ideas", "depth": 0, "children": [], "new": 14, "learn": 0, "review": 9, "filtered": false}, {"id": "60", "parent": "0", "name": "New imports", "path": "New imports", "depth": 0, "children": ["61"], "new": 20, "learn": 0, "review": 0, "filtered": false}, {"id": "61", "parent": "60", "name": "Lecture handouts", "path": "New imports::Lecture handouts", "depth": 1, "children": [], "new": 20, "learn": 0, "review": 0, "filtered": false}], "settings": {"theme": "obsidian", "mode": "native", "density": "comfortable", "motion": true, "chrome": false, "view": "grid", "sort": "name", "review_style": "adaptive", "review_width": "standard"}, "profile": {"favorites": ["22", "24"], "folders": ["10", "20", "21", "22", "23", "24", "30", "40", "60"], "colors": {"22": "violet", "24": "rose", "21": "violet", "23": "rose", "30": "amber", "40": "cyan"}, "last_location": "22", "last_studied": "221", "focus_enabled": true, "selected_study": "all", "recent_locations": ["221", "22", "24"], "recent_added": [{"id": "61", "observed": "2026-09-11T12:00:00+00:00"}], "studies": [{"id": "cardio", "name": "Cardiology \u00b7 Exam 3", "date": "2026-09-21", "deck_ids": ["22"], "active": true}, {"id": "endocrine", "name": "Endocrine \u00b7 Exam 2", "date": "2026-09-24", "deck_ids": ["24"], "active": true}]}, "current": "221", "studied": "Sample collection \u00b7 no real study history", "totals": {"new": 1920, "learn": 59, "review": 715}}, "ui": {}}</script><template id="atelier-style"><style>/* All interface styles live in Atelier's ShadowRoot. No card-template selectors. */
+:host,[data-theme="obsidian"]{
+ --bg:#14131d;--side:#181620;--panel:#1c1928;--raised:#242030;--hover:#2b263b;
+ --text:#eeecf6;--muted:#b0a9bf;--quiet:#91889f;--line:#363044;--line-soft:#2b2637;
+ --accent:#b8a2f0;--accent-strong:#cfbfff;--accent-soft:#302641;--on-accent:#24183b;
+ --hero:#252034;--hero-end:#1a1726;--glow:#9566d9;--glow2:#e4aaf2;--shadow:rgba(3,2,9,.26);
+ --blue:#8cb9ff;--green:#8acfb8;--pink:#ec9ac5;--amber:#e0bc80;--scheme:dark;
+ color-scheme:dark;display:block;font-size:14px;direction:ltr;
+}
+:host([data-theme="glacier"]),[data-theme="glacier"]{
+ --bg:#0f1b27;--side:#12202d;--panel:#162636;--raised:#1c3143;--hover:#233e51;
+ --text:#e7f5ff;--muted:#a3bacb;--quiet:#88a3b6;--line:#2c4557;--line-soft:#23394a;
+ --accent:#81d3f4;--accent-strong:#b0e9ff;--accent-soft:#173e51;--on-accent:#103349;
+ --hero:#1a3549;--hero-end:#102333;--glow:#379dcc;--glow2:#c2f2ee;--blue:#98c5ff;--green:#8cd4bb;--pink:#deaff3;--amber:#ddc28a;
+}
+:host([data-theme="rose"]),[data-theme="rose"]{
+ --bg:#fff7fa;--side:#fceef4;--panel:#fffafd;--raised:#f9e6ef;--hover:#f5dfeb;
+ --text:#4b263b;--muted:#815a70;--quiet:#8c6379;--line:#e7c9d9;--line-soft:#f0dde6;
+ --accent:#a63c72;--accent-strong:#85295b;--accent-soft:#f7deea;--on-accent:#fff9fd;
+ --hero:#f7ddeb;--hero-end:#fff4f9;--glow:#d375a6;--glow2:#fcbbd1;--shadow:rgba(100,43,71,.06);
+ --blue:#426f9b;--green:#3c7960;--pink:#a03b72;--amber:#996530;--scheme:light;color-scheme:light;
+}
+:host([data-theme="bloom"]),[data-theme="bloom"]{
+ --bg:#f7f4ff;--side:#efebf8;--panel:#fcfaff;--raised:#eee7f7;--hover:#e8dff4;
+ --text:#342748;--muted:#756286;--quiet:#7b6a8c;--line:#dbcee9;--line-soft:#e8e0f0;
+ --accent:#7656a6;--accent-strong:#62418e;--accent-soft:#e9def6;--on-accent:#fffaff;
+ --hero:#e6ddf5;--hero-end:#f9f4fe;--glow:#a887cc;--glow2:#e0bbee;--shadow:rgba(65,33,98,.06);
+ --blue:#466eb5;--green:#387963;--pink:#a1437b;--amber:#8d692c;--scheme:light;color-scheme:light;
+}
+:host([data-theme="linen"]),[data-theme="linen"]{
+ --bg:#f8f6f0;--side:#efede5;--panel:#fffdf8;--raised:#eeebe1;--hover:#e8e2d4;
+ --text:#38352d;--muted:#756e60;--quiet:#7c7262;--line:#dcd5c7;--line-soft:#e8e2d7;
+ --accent:#74613d;--accent-strong:#5a482c;--accent-soft:#eee4d1;--on-accent:#fffcf4;
+ --hero:#eae3d5;--hero-end:#faf7ee;--glow:#b29d73;--glow2:#eddbb8;--shadow:rgba(62,45,20,.05);
+ --blue:#4b7499;--green:#517952;--pink:#986279;--amber:#8e681c;--scheme:light;color-scheme:light;
+}
+:host([data-theme="matcha"]),[data-theme="matcha"]{
+ --bg:#f1f5ed;--side:#e9efe2;--panel:#fafff6;--raised:#e6eddc;--hover:#dce6d1;
+ --text:#2d3a2a;--muted:#66765d;--quiet:#6c7a64;--line:#cedbc4;--line-soft:#dfe8d7;
+ --accent:#50733e;--accent-strong:#3e5c2e;--accent-soft:#e0ebd6;--on-accent:#fbfff7;
+ --hero:#dfe9d3;--hero-end:#f3f8ed;--glow:#98b272;--glow2:#d4e5b7;--shadow:rgba(39,58,22,.05);
+ --blue:#447491;--green:#457444;--pink:#946178;--amber:#8a672b;--scheme:light;color-scheme:light;
+}
+:host([data-theme="midnight"]),[data-theme="midnight"]{
+ --bg:#0b0e11;--side:#111619;--panel:#141c20;--raised:#1c282d;--hover:#24363b;
+ --text:#e9f1f4;--muted:#a0b5bb;--quiet:#859ca4;--line:#2d4046;--line-soft:#203139;
+ --accent:#6ddbc6;--accent-strong:#acffee;--accent-soft:#173b35;--on-accent:#08382e;
+ --hero:#183130;--hero-end:#101c21;--glow:#359d87;--glow2:#87ded5;--blue:#86b9fb;--green:#76cdb3;--pink:#eaa3cf;--amber:#d8be83;
+}
+:host([data-theme="peach"]),[data-theme="peach"]{
+ --bg:#fff4ed;--side:#f9e9df;--panel:#fffaf5;--raised:#f5e3d8;--hover:#efd9c9;
+ --text:#4d3028;--muted:#836352;--quiet:#8b6855;--line:#e5cdbd;--line-soft:#f0dfd2;
+ --accent:#a85035;--accent-strong:#873a26;--accent-soft:#f4ddcb;--on-accent:#fffaf5;
+ --hero:#f6ddcb;--hero-end:#fff7ed;--glow:#d89162;--glow2:#f5c598;--shadow:rgba(90,47,22,.05);
+ --blue:#4a739b;--green:#4a7a52;--pink:#a65d80;--amber:#97632c;--scheme:light;color-scheme:light;
+}
+
+/* Each area owns its scrolling. No body/global page rules are needed. */
+:host{--radius:18px;--sheen:rgba(255,255,255,.06);--glass-line:rgba(255,255,255,.10);--material:rgba(153,125,210,.055);--surface-shadow:0 12px 35px rgba(0,0,0,.12);}
+:host([data-theme="obsidian"]){--bg:#101019;--side:#171520;--panel:#1c1a29;--hero:#252137;--hero-end:#181523;--text:#f1eefb;--muted:#b7aec9;--quiet:#91899f;--line:#393249;--material:rgba(185,161,240,.05);}
+:host([data-theme="glacier"]){--material:rgba(130,211,244,.08);--sheen:rgba(186,239,255,.09);--radius:16px;}
+:host([data-theme="rose"]){--bg:#fff6f8;--panel:#fffcfd;--hero:#f8e4ed;--hero-end:#fff4f8;--sheen:rgba(255,255,255,.85);--glass-line:rgba(255,255,255,.90);--material:rgba(193,86,135,.045);--surface-shadow:0 12px 30px rgba(123,61,88,.07);--radius:21px;}
+:host([data-theme="bloom"]){--sheen:rgba(255,255,255,.8);--glass-line:rgba(255,255,255,.9);--material:rgba(128,102,169,.06);--surface-shadow:0 12px 30px rgba(83,58,120,.065);--radius:22px;}
+:host([data-theme="linen"]){--sheen:rgba(255,255,255,.8);--glass-line:rgba(255,255,255,.95);--material:rgba(104,83,55,.05);--surface-shadow:0 9px 24px rgba(75,53,27,.065);--radius:13px;}
+:host([data-theme="matcha"]){--sheen:rgba(255,255,255,.65);--glass-line:rgba(255,255,255,.85);--material:rgba(87,114,53,.055);--surface-shadow:0 12px 30px rgba(52,76,38,.06);--radius:20px;}
+:host([data-theme="midnight"]){--radius:14px;--sheen:rgba(177,255,237,.05);--material:rgba(80,177,146,.055);}
+:host([data-theme="peach"]){--sheen:rgba(255,255,255,.85);--glass-line:rgba(255,255,255,.9);--material:rgba(177,111,56,.05);--surface-shadow:0 12px 30px rgba(128,65,34,.075);--radius:21px;}
+*{box-sizing:border-box}button,input,select,textarea{font:inherit;color:inherit;letter-spacing:normal;text-transform:none;line-height:1.4;min-height:0;max-width:100%;}button{appearance:none;border:0;background:transparent;cursor:pointer;padding:0;margin:0;text-align:left;white-space:normal;border-radius:0;min-width:0;}button:disabled{opacity:.32;cursor:default;pointer-events:none;}input,select{border:1px solid var(--line);border-radius:9px;background:var(--panel);padding:10px 12px;outline:0;}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}select{color-scheme:var(--scheme);cursor:pointer;}input[type="checkbox"]{accent-color:var(--accent);width:17px;height:17px;flex:0 0 17px;}input[type="date"]{color-scheme:var(--scheme);}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}button:focus:not(:focus-visible){outline:0;}p,h1,h2,h3{margin:0}strong,b{font-weight:650}svg{display:block;flex-shrink:0}button svg{pointer-events:none;}small{font-size:12px}.icon{flex-shrink:0;}::selection{background:var(--accent);color:var(--on-accent);}::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--line);border:1px solid var(--side);border-radius:9px}
+.app{font-family:Inter,"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:14px;line-height:1.5;font-weight:400;text-align:left;color:var(--text);direction:ltr;letter-spacing:normal;white-space:normal;text-transform:none;height:100%;position:relative;isolation:isolate;color-scheme:var(--scheme);}
+.frame{height:100%;min-height:0}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);height:100%;width:100%;overflow:hidden;min-width:0;min-height:0;background:var(--bg);}
+.sidebar{height:100%;min-height:0;min-width:0;display:flex;flex-direction:column;padding:30px 16px 16px;background:linear-gradient(160deg,var(--side),var(--bg));border-right:1px solid var(--line-soft);position:relative;overflow:hidden;}
+.brand-row{display:flex;align-items:center;justify-content:space-between;padding:0 10px 27px;flex-shrink:0;}.brand{display:flex;align-items:center;gap:12px;}.brand-mark{width:28px;height:34px;color:var(--accent);}.brand strong{display:block;font-size:29px;letter-spacing:-1.45px;font-weight:730;line-height:1;}.brand-dot{color:var(--accent);}.brand small{display:block;letter-spacing:1.45px;font-size:8px;color:var(--quiet);margin-top:9px;}
+.nav-group{display:flex;flex-direction:column;gap:3px;flex-shrink:0;padding-bottom:22px;}.nav-row{display:flex;align-items:center;gap:12px;min-height:42px;width:100%;padding:10px 13px;border-radius:10px;color:var(--muted);font-size:13px;position:relative;}.nav-row>span{display:flex;align-items:center;gap:8px;width:100%;min-width:0;}.nav-row>.icon{width:17px;color:var(--quiet);}.nav-row:hover{background:var(--raised);color:var(--text);}.nav-row.active{background:linear-gradient(110deg,var(--accent-soft),var(--raised));color:var(--accent-strong);box-shadow:inset 0 1px 0 var(--sheen);font-weight:600;}.nav-row.active .icon{color:var(--accent);}.nav-badge{font-size:11px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-left:auto;min-width:25px;text-align:center;color:var(--accent);}
+.side-scroll{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding-bottom:15px;}.side-label{display:flex;align-items:center;justify-content:space-between;padding:0 8px 9px;min-height:32px;font-size:9px;letter-spacing:1.5px;color:var(--quiet);font-weight:650;}.side-label>span:last-child{display:flex;gap:0;}.side-label .icon-button{height:26px;width:26px;}.tree{display:block;min-height:0;}.tree-row{display:flex;flex:0 0 auto;align-items:center;gap:0;min-height:44px;max-height:68px;padding:3px 5px 3px calc(3px + var(--depth)*13px);border-radius:9px;position:relative;margin-bottom:2px;}.tree-row:hover{background:var(--raised);}.tree-row.selected{background:var(--accent-soft);box-shadow:inset 2px 0 0 var(--accent);}.tree-toggle,.tree-spacer{width:18px;height:26px;display:grid;place-items:center;flex:0 0 18px;color:var(--quiet);}.tree-toggle:hover{color:var(--accent);background:var(--hover);border-radius:6px;}.tree-open{display:flex;align-items:center;gap:7px;flex:1 1 auto;min-width:0;width:auto;padding:4px 0;min-height:30px;height:auto;color:var(--muted);font-size:12px;line-height:1.42;}.tree-name{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere;flex:1 1 auto;min-width:0;}.tree-art{color:var(--tone);width:23px;flex:0 0 23px;}.tree-art svg{width:23px;height:23px;filter:drop-shadow(0 2px 2px var(--shadow));}.tree-open small{font-size:10px;color:var(--quiet);padding:1px 4px;flex-shrink:0;}.tree-row.selected .tree-open{color:var(--text);}.side-note{padding:10px;color:var(--muted);font-size:12px;}.recent-label{margin-top:24px;font-size:8px;letter-spacing:1.05px;}.recent-links{display:flex;flex-direction:column;gap:1px;}.recent-link{display:flex;align-items:center;gap:9px;min-height:33px;padding:7px 10px;border-radius:7px;font-size:11px;color:var(--muted);}.recent-link>span{min-width:0;}.recent-link:hover{background:var(--raised);}.truncate{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.side-bottom{flex-shrink:0;padding-top:14px;border-top:1px solid var(--line-soft);}.appearance-link{display:flex;align-items:center;gap:10px;width:100%;background:linear-gradient(135deg,var(--raised),var(--side));border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:inset 0 1px 0 var(--sheen);}.appearance-link>.icon{color:var(--accent);width:19px;height:19px;}.appearance-link strong{font-size:11px;display:block;}.appearance-link small{font-size:10px;color:var(--muted);display:block;margin-top:3px;}.native-link{display:flex;align-items:center;gap:9px;padding:11px 8px 6px;width:100%;font-size:11px;color:var(--muted);}.native-link:hover{color:var(--accent);}.credit{display:block;margin:12px auto 0;text-align:center;color:var(--quiet);font-size:8px;letter-spacing:1.6px;}.credit small{display:block;margin-top:2px;font-size:9px;letter-spacing:.05px;}
+.main{height:100%;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;background:radial-gradient(ellipse at 80% 0%,var(--material),transparent 65%),var(--bg);}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:21px 36px 18px;border-bottom:1px solid var(--line-soft);min-height:78px;}.topbar-left{display:flex;align-items:center;gap:14px;min-width:0;font-size:13px;font-weight:600;}.sample-label{border:1px solid var(--line);color:var(--quiet);padding:3px 6px;border-radius:4px;font-size:8px;letter-spacing:.8px;font-weight:500;}.top-actions{display:flex;align-items:center;gap:7px;}.search{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);width:268px;padding:0 12px;min-height:38px;color:var(--quiet);}.search input{font-size:12px;min-width:0;width:100%;border:0;background:none;box-shadow:none!important;padding:8px 0;}.search:focus-within{border-color:var(--accent);}.search input::placeholder{color:var(--quiet);opacity:1;}kbd{font:inherit;font-size:10px;border:1px solid var(--line);border-radius:4px;padding:0 5px;color:var(--quiet);}.icon-button{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;color:var(--muted);border-radius:8px;}.icon-button:hover{color:var(--accent);background:var(--raised);}.main-inner{max-width:1530px;margin:0 auto;padding:27px 36px 28px;}.desk-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px;margin-bottom:17px;}.desk-status{display:flex;align-items:center;gap:6px;color:var(--quiet);font-size:10px;}
+.primary,.secondary,.quiet{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:9px;font-size:12px;line-height:1.4;min-height:36px;padding:9px 13px;font-weight:550;}.primary{background:linear-gradient(145deg,var(--accent-strong),var(--accent));color:var(--on-accent);border:1px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 3px 8px var(--shadow);}.primary:hover{filter:brightness(1.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 17px var(--shadow);}.secondary{background:linear-gradient(140deg,var(--raised),var(--panel));border:1px solid var(--line);box-shadow:inset 0 1px 0 var(--sheen);color:var(--text);}.secondary:hover{background:var(--hover);border-color:var(--quiet);}.quiet{font-weight:450;color:var(--muted);padding:7px 9px;}.quiet:hover{color:var(--accent);background:var(--raised);}.icon-button:active,.primary:active,.secondary:active,.quiet:active,.nav-row:active{transform:translateY(1px);}
+.focus-panel{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(250px,.78fr);border-radius:var(--radius);border:1px solid var(--line);position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(130deg,var(--hero),var(--hero-end));box-shadow:inset 0 1px 0 var(--glass-line),var(--surface-shadow);}.focus-panel:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(125deg,transparent 24%,var(--sheen) 25%,transparent 26%,transparent 55%,var(--sheen) 100%);opacity:.55;}.focus-intro{padding:30px 30px 28px;min-width:0;}.eyebrow{font-size:9px;font-weight:650;letter-spacing:1.6px;color:var(--accent);display:flex;align-items:center;gap:7px;margin-bottom:16px;}.status-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 3px var(--accent-soft);}.focus-panel h1{font-size:clamp(24px,2.6vw,37px);font-weight:680;line-height:1.16;letter-spacing:-1.05px;text-wrap:balance;margin-bottom:13px;overflow-wrap:anywhere;}.focus-intro p{max-width:410px;line-height:1.75;font-size:12px;color:var(--muted);}.focus-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:23px;}.focus-actions .primary{max-width:100%;}.focus-actions .primary>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.focus-agenda{padding:22px 24px 22px 8px;align-self:center;min-width:0;}.agenda-label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:9px;letter-spacing:1.25px;color:var(--quiet);margin-bottom:7px;}.agenda-label .quiet{font-size:10px;letter-spacing:0;min-height:26px;}.agenda-item{display:flex;align-items:center;gap:12px;width:100%;min-width:0;min-height:67px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(140deg,var(--sheen),transparent),var(--panel);margin-top:8px;box-shadow:inset 0 1px 0 var(--sheen),0 4px 10px var(--shadow);}.agenda-item:hover{border-color:var(--accent);transform:translateY(-2px);}.agenda-copy{flex:1;min-width:0;}.agenda-copy strong{font-size:12px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}.agenda-item>.icon{color:var(--quiet);}.date-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 42px;width:42px;min-height:45px;border:1px solid var(--line);border-radius:8px;color:var(--accent);background:linear-gradient(160deg,var(--raised),var(--panel));box-shadow:inset 0 1px 0 var(--sheen);}.date-tile small{font-size:8px;letter-spacing:1px;text-transform:uppercase;line-height:1.2;}.date-tile strong{font-size:21px;letter-spacing:-.4px;line-height:1.2;margin-top:2px;}.date-label{display:flex;align-items:center;gap:5px;color:var(--muted);font-size:10px;margin-top:5px;}.date-label.past{color:var(--amber);}.setup-steps{border-left:1px solid var(--line);padding:15px 0 15px 26px;}.setup-steps>div{display:flex;align-items:center;gap:12px;padding:9px 0;}.setup-steps>div>span{color:var(--accent);font-size:9px;border:1px solid var(--line);border-radius:7px;width:28px;height:28px;display:grid;place-items:center;background:var(--panel);}.setup-steps strong{font-size:11px;}.setup-steps>small{display:block;margin-top:16px;color:var(--quiet);font-size:10px;}.focus-footer{grid-column:1/-1;display:flex;align-items:center;gap:24px;padding:19px 30px;border-top:1px solid var(--line);background:var(--material);box-shadow:inset 0 1px 0 var(--sheen);}.focus-metric{display:flex;align-items:baseline;gap:10px;min-width:0;padding-right:24px;border-right:1px solid var(--line);}.focus-metric strong{font-size:26px;letter-spacing:-1px;line-height:1;font-weight:620;font-variant-numeric:tabular-nums;}.focus-metric span{font-size:10px;color:var(--muted);}.focus-metric.new{border:0;padding-right:0;}.review{color:var(--green);}.learn{color:var(--pink);}.new{color:var(--blue);}.scope-note{display:flex;align-items:center;gap:8px;font-size:9px;line-height:1.6;margin-left:auto;color:var(--quiet);}.scope-note>.icon{color:var(--accent);}.focus-reassurance{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);}.focus-reassurance .icon{color:var(--accent);}.missing-note{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--amber);margin-top:13px;text-decoration:underline;text-underline-offset:3px;}
+.scope-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;padding:8px 10px 8px 14px;background:var(--side);border:1px solid var(--line-soft);border-radius:10px;}.scope-bar>span:first-child{display:flex;align-items:center;gap:7px;color:var(--accent);font-size:10px;font-weight:600;}.scope-bar select{font-size:11px;padding:5px 8px;max-width:290px;border:0;background:var(--raised);border-radius:6px;}.scope-bar .quiet{font-size:10px;min-height:27px;padding:5px 6px;}.scope-spacer{flex:1;}
+.library{margin-top:29px;}.main-inner>.library:first-child{margin-top:0;}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}.section-heading h2{font-size:19px;letter-spacing:-.45px;font-weight:650;overflow-wrap:anywhere;}.section-heading p{font-size:11px;color:var(--muted);margin-top:5px;}.library-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;}.library-actions .quiet,.library-actions .secondary{font-size:11px;min-height:33px;padding:7px 10px;}.library-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}.tabs{display:flex;align-items:center;gap:3px;background:var(--side);border:1px solid var(--line-soft);border-radius:8px;padding:3px;}.tab{padding:6px 11px;font-size:11px;border-radius:6px;color:var(--muted);min-height:29px;}.tab:hover{color:var(--text);}.tab.active{background:var(--raised);box-shadow:0 1px 4px var(--shadow),inset 0 1px 0 var(--sheen);color:var(--text);}.view-tools{display:flex;align-items:center;gap:12px;}.view-tools select{background:transparent;border:0;padding:5px 3px;font-size:10px;color:var(--muted);max-width:155px;}.view-switch{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:8px;}.view-switch .icon-button{height:26px;width:28px;flex-basis:28px;}.view-switch .active{background:var(--raised);color:var(--text);box-shadow:inset 0 1px 0 var(--sheen);}
+.location-bar{display:flex;align-items:center;gap:15px;padding:0 0 18px;margin-bottom:21px;border-bottom:1px solid var(--line-soft);}.history-buttons{display:flex;gap:2px;flex-shrink:0;}.history-buttons .icon-button{width:27px;flex-basis:27px;height:28px;}.breadcrumbs{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-width:0;flex:1;}.breadcrumbs>.icon{color:var(--quiet);}.crumb{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:1.5;color:var(--muted);border-radius:5px;padding:4px 5px;max-width:220px;overflow-wrap:anywhere;}.crumb:hover{background:var(--raised);color:var(--accent);}.crumb.current{color:var(--text);font-weight:600;}.parent-link{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--accent);flex-shrink:0;padding:6px 7px;border:1px solid var(--line);border-radius:7px;}
+.tone-violet{--tone:var(--accent)}.tone-blue{--tone:var(--blue)}.tone-rose{--tone:var(--pink)}.tone-green{--tone:var(--green)}.tone-amber{--tone:var(--amber)}.tone-cyan{--tone:#66bfb8}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:16px;align-items:stretch;}.deck-card{display:flex;flex-direction:column;position:relative;padding:21px 20px 0;min-width:0;min-height:250px;isolation:isolate;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,var(--sheen),transparent 42%),var(--panel);box-shadow:inset 0 1px 0 var(--glass-line),0 5px 15px var(--shadow);overflow:hidden;}.deck-card:before{content:"";position:absolute;left:0;right:0;top:0;height:80px;background:linear-gradient(165deg,var(--tone),transparent 85%);opacity:.045;z-index:-1;pointer-events:none;}.deck-card:hover{transform:translateY(-3px);border-color:var(--tone);box-shadow:inset 0 1px 0 var(--glass-line),0 13px 26px var(--shadow);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px;}.card-art{color:var(--tone);width:56px;height:46px;display:flex;align-items:center;justify-content:center;transform:rotate(-3deg);filter:drop-shadow(0 6px 5px var(--shadow));}.card-art svg{width:55px;height:47px;}.folder-card:hover .card-art{transform:translateY(-2px) rotate(0deg);}.card-controls{display:flex;gap:1px;margin-right:-6px;margin-top:-7px;}.card-controls .icon-button{width:27px;height:29px;flex-basis:27px;color:var(--quiet);}.card-controls .starred{color:var(--tone);}.starred svg{fill:var(--tone);fill-opacity:.2;}.card-type{display:flex;align-items:center;gap:6px;font-size:8px;letter-spacing:1.6px;font-weight:600;color:var(--quiet);margin-bottom:6px;}.card-title{font-size:16px;line-height:1.42;font-weight:590;letter-spacing:-.3px;color:var(--text);display:block;overflow-wrap:anywhere;}.card-title:hover{color:var(--accent-strong);}.card-description{font-size:11px;color:var(--muted);margin-top:7px;}.card-path{font-size:10px;color:var(--quiet);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:7px;max-width:100%;}.countline{display:flex;flex-wrap:wrap;gap:9px;font-size:10px;padding:21px 0 15px;margin-top:auto;font-variant-numeric:tabular-nums;}.countline span{display:inline-flex;align-items:center;gap:5px;}.countline span:before{content:"";width:3px;height:3px;display:block;border-radius:50%;background:currentColor;}.card-bottom{display:flex;align-items:stretch;border-top:1px solid var(--line-soft);margin:0 -20px;background:var(--material);min-height:43px;}.open-card{display:flex;align-items:center;justify-content:space-between;flex-direction:row-reverse;flex:1;gap:10px;font-size:11px;color:var(--muted);padding:12px 18px;}.open-card:hover{color:var(--accent);background:var(--raised);}.quick-study{border-left:1px solid var(--line-soft);border-radius:0;width:43px;flex-basis:43px;height:auto;min-height:43px;color:var(--tone);}.library-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:10px;color:var(--quiet);margin-top:16px;}.library-foot .quiet{font-size:10px;min-height:26px;}.show-more{display:flex;margin:18px auto 0;}.help-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--line-soft);margin-top:27px;padding-top:17px;font-size:10px;color:var(--quiet);}.help-strip>span{display:flex;align-items:center;gap:8px;}.help-strip>div{display:flex;gap:2px;flex-shrink:0;}.help-strip .quiet{font-size:10px;min-height:25px;}.extension-slot:empty{display:none;}.empty{grid-column:1/-1;padding:35px 26px;text-align:center;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);}.empty>.icon{margin:0 auto 12px;color:var(--accent);}.empty h3{color:var(--text);font-size:18px;letter-spacing:-.3px;}.empty p{font-size:12px;line-height:1.75;max-width:500px;margin:10px auto 18px;}.empty>div{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}.empty.small{padding:20px 15px;}.dragging{opacity:.5;}.drop-target{outline:2px dashed var(--accent);outline-offset:-4px;}
+.cards.list{grid-template-columns:1fr;gap:8px;}.list .deck-card{display:grid;grid-template-columns:46px minmax(140px,1fr) auto 43px;align-items:center;gap:5px 15px;min-height:90px;padding:16px 18px;overflow:visible;}.list .card-head{display:contents;}.list .card-art{grid-column:1;grid-row:1/4;width:44px;height:43px;}.list .card-art svg{width:43px;height:40px;}.list .card-controls{grid-column:3;grid-row:1;margin:0;justify-content:flex-end;}.list .card-type{grid-column:2;grid-row:1;margin:0;font-size:7px;}.list .card-title{grid-column:2;grid-row:2;font-size:14px;}.list .card-description{display:none;}.list .card-path{grid-column:2;grid-row:3;margin:0;}.list .countline{grid-column:3;grid-row:2/4;margin:0;padding:0;justify-content:flex-end;max-width:205px;}.list .card-bottom{display:contents;}.list .open-card{display:none;}.list .quick-study{grid-column:4;grid-row:1/4;height:37px;min-height:37px;border:1px solid var(--line);border-radius:8px;width:37px;}.list .deck-card:hover{transform:translateY(-1px);}
+/* Dialog shell never rebuilds on palette clicks. Header and footer remain reachable. */
+.overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(6,5,13,.62);backdrop-filter:blur(6px);}.dialog{display:flex;flex-direction:column;width:510px;max-width:100%;max-height:calc(100vh - 48px);min-height:0;border-radius:21px;border:1px solid var(--line);background:linear-gradient(135deg,var(--sheen),transparent 35%),var(--bg);box-shadow:0 35px 110px rgba(0,0,0,.35),inset 0 1px 0 var(--glass-line);color:var(--text);overflow:hidden;}.dialog.wide{width:760px;}.dialog-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:25px 27px 18px;flex-shrink:0;border-bottom:1px solid var(--line-soft);}.dialog-header h2{font-size:23px;line-height:1.3;letter-spacing:-.65px;font-weight:650;overflow-wrap:anywhere;}.dialog-header p{font-size:12px;line-height:1.7;color:var(--muted);margin-top:8px;}.dialog-header>.icon-button{margin-top:-2px;margin-right:-7px;}.dialog-body{min-height:0;flex:1 1 auto;overflow:auto;overscroll-behavior:contain;padding:22px 27px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;}.dialog-footer{display:flex;align-items:center;justify-content:flex-end;gap:9px;padding:17px 27px;border-top:1px solid var(--line);flex-shrink:0;background:var(--side);}.dialog-footer .primary{min-height:38px;}.save-state{font-size:11px;color:var(--muted);margin-right:auto;}.themes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;}.theme-tile{min-width:0;border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:6px;text-align:left;}.theme-tile.selected{outline:2px solid var(--accent);outline-offset:2px;}.theme-tile:hover{border-color:var(--accent);}.mini-screen{display:flex;gap:7px;height:76px;background:var(--bg);border-radius:7px;border:1px solid var(--line);overflow:hidden;}.mini-side{width:24%;height:100%;background:var(--side);border-right:1px solid var(--line);padding:12px 6px;}.mini-side i{display:block;height:3px;background:var(--accent);opacity:.5;margin-bottom:6px;border-radius:2px;}.mini-content{flex:1;padding:10px 8px 8px 0;min-width:0;}.mini-focus{display:flex;align-items:center;justify-content:space-between;height:30px;border:1px solid var(--line);border-radius:5px;padding:6px;background:linear-gradient(135deg,var(--hero),var(--hero-end));}.mini-focus i:first-child{height:3px;width:35%;background:var(--accent);}.mini-focus i:last-child{height:14px;width:26%;background:var(--panel);border-radius:3px;border:1px solid var(--line);}.mini-folders{display:flex;gap:4px;margin-top:6px;}.mini-folders i{height:16px;flex:1;background:var(--panel);border:1px solid var(--line);border-radius:3px;}.tile-label{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:8px 3px 0;}.tile-label strong{font-size:11px;}.theme-check{font-size:11px;color:var(--accent);min-width:12px;}.theme-tile>small{font-size:8px;display:block;color:var(--muted);padding:4px 3px 3px;white-space:normal;line-height:1.45;}.settings-label{font-size:9px;letter-spacing:1.7px;font-weight:600;color:var(--quiet);margin:26px 0 11px;}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line-soft);padding:13px 0;}.setting-row strong{font-size:12px;display:block;}.setting-row small{display:block;font-size:11px;line-height:1.65;color:var(--muted);margin-top:3px;max-width:490px;}.setting-row select{font-size:11px;flex-shrink:0;padding:7px 9px;}.switch{width:36px;height:21px;flex:0 0 36px;border-radius:20px;background:var(--line);border:1px solid var(--quiet);position:relative;}.switch:after{content:"";position:absolute;top:3px;left:3px;width:13px;height:13px;border-radius:50%;background:var(--muted);}.switch[aria-checked="true"]{background:var(--accent);border-color:var(--accent);}.switch[aria-checked="true"]:after{left:18px;background:var(--on-accent);}.note{font-size:12px;line-height:1.8;color:var(--muted);margin:12px 0 0;}.focus-setting{padding-top:0;margin-bottom:18px;}.study-rows{display:flex;flex-direction:column;gap:10px;}.study-row{display:flex;align-items:center;gap:12px;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:12px;}.study-row.finished{opacity:.7;}.study-row-text{flex:1;min-width:0;}.study-row-text>strong{font-size:13px;display:block;overflow-wrap:anywhere;}.study-row-text>small{font-size:10px;display:block;margin-top:4px;color:var(--muted);}.study-row-actions{display:flex;gap:4px;align-items:center;}.study-row-actions .secondary{min-height:30px;font-size:10px;padding:6px 9px;}.study-row-actions .icon-button{width:26px;flex-basis:26px;}.field{display:block;font-size:12px;font-weight:600;margin-bottom:17px;}.field input,.field select{display:block;width:100%;margin-top:8px;font-size:13px;font-weight:400;min-height:39px;}.optional{color:var(--quiet);font-size:10px;font-weight:400;}.study-fields{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px;}.picker-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:3px 0 10px;}.picker-heading strong{font-size:12px;}.picker-heading>span{font-size:10px;color:var(--quiet);}.picker-search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:0 12px;background:var(--panel);color:var(--quiet);margin-bottom:10px;}.picker-search input{background:none;border:0;box-shadow:none!important;width:100%;min-width:0;padding:9px 0;font-size:12px;}.deck-picker{max-height:255px;min-height:60px;overflow:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:10px;background:var(--side);padding:5px;}.picker-row{display:flex;align-items:center;gap:10px;padding:9px;border-radius:7px;cursor:pointer;min-height:51px;}.picker-row:hover{background:var(--raised);}.picker-row.checked{background:var(--accent-soft);}.picker-row>span:not(.picker-art){flex:1;min-width:0;}.picker-row strong{font-size:12px;font-weight:500;display:block;overflow-wrap:anywhere;}.picker-row small{font-size:10px;color:var(--muted);display:block;margin-top:2px;overflow-wrap:anywhere;}.picker-row>small{flex-shrink:0;}.picker-art{width:25px;flex:0 0 25px;color:var(--tone);}.picker-art svg{width:25px;height:25px;}.picker-summary{font-size:11px;color:var(--accent);margin-top:11px;line-height:1.7;}.selected-chips{display:flex;flex-wrap:wrap;gap:5px;max-height:90px;overflow:auto;margin-top:8px;}.selected-chip{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;background:var(--panel);padding:4px 7px;font-size:10px;color:var(--muted);}.selected-chip:hover{color:var(--accent);border-color:var(--accent);}.form-error{font-size:12px;color:var(--pink);margin-top:10px;line-height:1.7;}.form-error:empty{display:none;}.path-preview{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:12px;font-size:12px;overflow-wrap:anywhere;}.menu-actions{display:flex;flex-direction:column;gap:6px;}.menu-action{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line-soft);border-radius:8px;padding:11px 12px;font-size:12px;}.menu-action:hover{background:var(--raised);border-color:var(--line);}.menu-action>.icon{color:var(--accent);}.color-options{display:flex;gap:10px;}.color-option{width:28px;height:28px;flex-shrink:0;border-radius:8px;background:var(--tone);border:3px solid var(--bg);outline:1px solid var(--line);}.color-option.selected{outline:2px solid var(--accent);}.help-items{display:flex;flex-direction:column;gap:22px;}.help-items>div{display:flex;gap:14px;}.help-items .icon{color:var(--accent);margin-top:2px;}.help-items strong{font-size:13px;}.help-items p{font-size:12px;line-height:1.8;margin-top:5px;color:var(--muted);}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:10px;background:var(--raised);color:var(--text);border:1px solid var(--line);border-radius:11px;box-shadow:0 8px 40px rgba(0,0,0,.3);padding:12px 16px;max-width:min(530px,calc(100vw - 30px));font-size:12px;line-height:1.65;}.toast>.icon{color:var(--accent);}.native-launcher{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:13px;box-shadow:0 8px 35px rgba(0,0,0,.28);}.launcher-icon{color:var(--accent);}.native-launcher>span:nth-child(2){flex:1;min-width:0;}.native-launcher strong{display:block;font-size:12px;}.native-launcher small{display:block;font-size:10px;color:var(--muted);margin-top:3px;}.native-launcher .primary{font-size:11px;padding:7px 10px;min-height:32px;}.side-scrim,.drawer-close,.mobile-button{display:none;}
+@media(min-width:1700px){.layout{grid-template-columns:284px minmax(0,1fr);}.main-inner{padding:30px 48px;}.topbar{padding-left:48px;padding-right:48px;}.cards{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}.focus-intro{padding:35px 36px;}.focus-panel h1{font-size:39px;}.focus-agenda{padding-right:30px;}.deck-card{min-height:264px;}.tree-open{font-size:13px;}}
+@media(max-width:1200px){.layout{grid-template-columns:232px minmax(0,1fr);}.sidebar{padding:24px 12px 13px;}.main-inner{padding:22px 25px;}.topbar{padding:18px 25px;}.topbar-left{gap:8px;}.sample-label{display:none;}.search{width:230px;}.focus-intro{padding:27px 25px;}.focus-panel{grid-template-columns:minmax(0,1fr) 280px;}.focus-agenda{padding:19px 20px 19px 0;}.focus-footer{padding:18px 24px;gap:20px;}.focus-metric{padding-right:20px;gap:8px;}.focus-metric strong{font-size:25px;}.scope-note{display:none;}.card-title{font-size:15px;}.cards{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}.brand-row{padding-bottom:23px;}.side-label{font-size:8px;}.tree-row{min-height:43px;}.tree-open{font-size:11px;}.section-heading{align-items:flex-start;}.library-actions{gap:4px;}.library-actions .secondary,.library-actions .quiet{font-size:10px;}.help-strip{flex-wrap:wrap;gap:7px;}.scope-bar select{max-width:240px;}.scope-spacer{display:none;}.scope-bar .quiet:last-child{margin-left:auto;}}
+@media(max-width:1030px){.focus-panel{grid-template-columns:1fr;}.focus-intro{padding-bottom:23px;}.focus-agenda{padding:0 24px 22px;}.agenda-label{margin-bottom:6px;}.agenda-item{display:inline-flex;width:calc(50% - 5px);vertical-align:top;margin-top:0;min-height:76px;}.agenda-item:nth-child(3){margin-left:6px;}.agenda-item:nth-child(n+4){display:none;}.agenda-copy strong{font-size:11px;}.setup-steps{border-left:0;border-top:1px solid var(--line);padding:14px 0 0;}.setup-steps>div{display:inline-flex;padding:5px 10px 5px 0;gap:7px;}.setup-steps strong{font-size:10px;}.setup-steps>small{margin-top:9px;}.scope-bar>span:first-child{display:none;}.section-heading{flex-wrap:wrap;gap:12px;}.library-actions{margin-left:auto;}.cards{grid-template-columns:repeat(2,minmax(0,1fr));}.desk-status{display:none;}.location-bar{flex-wrap:wrap;gap:9px;}.breadcrumbs{order:2;flex-basis:100%;}.parent-link{margin-left:auto;}.topbar-left>span{display:none;}.top-actions{width:100%;}.search{flex:1;width:auto;}.list .deck-card{grid-template-columns:36px minmax(100px,1fr) 65px 35px;gap:4px 10px;padding:13px;}.list .card-controls{grid-column:3/5;}.list .quick-study{grid-row:2/4;}.list .countline{max-width:80px;gap:4px;font-size:9px;}.list .card-art,.list .card-art svg{width:36px;}.list .card-title{font-size:13px;}}
+@media(max-width:820px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.sidebar.mobile-open{display:flex;position:absolute;inset:0 auto 0 0;width:285px;max-width:calc(100vw - 30px);z-index:60;height:100%;box-shadow:15px 0 60px rgba(0,0,0,.35);background:var(--side);}.side-scrim.open{display:block;position:absolute;inset:0;z-index:59;background:rgba(0,0,0,.6);}.drawer-close,.mobile-button{display:inline-flex;}.brand-row .drawer-close{margin-right:-6px;}.topbar-left{flex:0 0 auto;}.topbar{gap:10px;padding:15px 23px;min-height:67px;}.main-inner{padding:20px 25px;}.top-actions{width:auto;flex:1;}.search{width:auto;}.focus-panel{grid-template-columns:minmax(0,1fr) 275px;}.focus-agenda{padding:22px 20px 22px 0;}.agenda-item{display:flex;width:100%;margin-top:8px;min-height:67px;}.agenda-item:nth-child(3){margin-left:0;}.agenda-item:nth-child(n+4){display:flex;}.focus-intro{padding:27px 25px;}.focus-panel h1{font-size:29px;}.setup-steps{padding:10px 0 10px 18px;border-top:0;border-left:1px solid var(--line);}.setup-steps>div{display:flex;}.cards{grid-template-columns:repeat(auto-fill,minmax(215px,1fr));}.tree-open{font-size:12px;}.tree-row{min-height:43px;}.list .deck-card{grid-template-columns:42px minmax(120px,1fr) auto 38px;}.list .card-controls{grid-column:3;}.list .quick-study{grid-row:1/4;}.list .countline{max-width:220px;gap:8px;font-size:10px;}.sidebar .side-label{font-size:9px;}}
+@media(max-width:620px){.topbar{padding:12px 15px;gap:4px;min-height:62px;}.top-actions{gap:2px;}.search{padding:0 9px;margin:0 4px;min-height:35px;}.search input{font-size:11px;}.search kbd{display:none;}.topbar-left .icon-button{width:30px;flex-basis:30px;}.top-actions>.icon-button{width:29px;flex-basis:29px;}.main-inner{padding:18px 17px 24px;}.desk-heading{font-size:10px;margin-bottom:14px;}.focus-panel{grid-template-columns:1fr;}.focus-intro{padding:24px 23px 20px;}.focus-panel h1{font-size:29px;}.focus-intro p{font-size:11px;}.focus-actions{margin-top:19px;}.focus-agenda{padding:0 21px 20px;}.agenda-label{font-size:8px;}.agenda-item{min-height:60px;padding:9px 11px;border-radius:10px;}.agenda-copy strong{font-size:12px;}.date-tile{flex-basis:37px;width:37px;min-height:40px;}.date-tile strong{font-size:20px;}.focus-footer{gap:14px;padding:18px 21px;justify-content:space-between;}.focus-metric{display:block;padding-right:15px;flex:1;}.focus-metric strong{display:block;font-size:26px;}.focus-metric span{display:block;font-size:9px;margin-top:7px;}.scope-bar{gap:7px;}.scope-bar select{max-width:210px;flex:1;min-width:80px;}.scope-bar .quiet:last-child{display:none;}.setup-steps{padding:14px 0 0;border-top:1px solid var(--line);border-left:0;}.setup-steps>div{display:flex;}.section-heading{margin-bottom:15px;gap:12px;}.section-heading h2{font-size:18px;}.section-heading p{font-size:10px;}.library-actions{gap:2px;}.library-controls{gap:6px;flex-wrap:wrap;}.tab{font-size:10px;padding:5px 8px;}.view-tools{gap:4px;}.view-tools select{max-width:102px;font-size:9px;}.view-switch{padding:2px;}.view-switch .icon-button{width:25px;flex-basis:25px;height:25px;}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;}.deck-card{padding:17px 14px 0;min-height:236px;border-radius:14px;}.card-title{font-size:14px;line-height:1.45;}.card-art,.card-art svg{width:45px;height:40px;}.card-head{margin-bottom:13px;gap:4px;}.card-controls{margin-top:-6px;margin-right:-5px;}.card-controls .icon-button{width:24px;flex-basis:24px;height:26px;}.card-controls .icon{width:15px;}.card-type{font-size:7px;letter-spacing:1.3px;}.card-description{font-size:10px;}.card-path{font-size:9px;}.countline{font-size:9px;gap:5px;padding-top:18px;}.card-bottom{margin:0 -14px;}.open-card{padding:11px 13px;font-size:10px;}.quick-study{width:35px;flex-basis:35px;}.library-foot{font-size:9px;align-items:flex-start;}.library-foot .quiet{font-size:9px;}.help-strip{font-size:9px;gap:10px;}.location-bar{padding-bottom:13px;margin-bottom:17px;}.crumb{font-size:10px;max-width:180px;}.parent-link{font-size:9px;}.list .deck-card{grid-template-columns:32px minmax(90px,1fr) 58px 33px;padding:13px 11px;gap:4px 8px;}.list .card-controls{grid-column:3/5;}.list .quick-study{grid-row:2/4;width:30px;height:33px;min-height:33px;}.list .countline{max-width:65px;gap:2px;font-size:8px;}.list .card-art,.list .card-art svg{width:32px;}.list .card-title{font-size:12px;}.overlay{padding:12px;}.dialog{max-height:calc(100vh - 24px);border-radius:15px;}.dialog-header{padding:19px 19px 15px;}.dialog-header h2{font-size:21px;}.dialog-header p{font-size:11px;}.dialog-body{padding:20px 19px;}.dialog-footer{padding:13px 19px;}.dialog-footer .primary,.dialog-footer .secondary{font-size:11px;}.themes{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;}.mini-screen{height:82px;}.theme-tile>small{font-size:9px;}.setting-row{gap:12px;}.setting-row small{font-size:10px;}.setting-row select{font-size:10px;}.note{font-size:11px;}.study-fields{grid-template-columns:1fr;gap:0;}.date-field{max-width:210px;}.picker-heading{align-items:flex-start;}.picker-heading>span{font-size:9px;max-width:135px;}.picker-row{gap:8px;padding:8px 6px;}.picker-row strong{font-size:11px;}.picker-row small{font-size:9px;}.picker-row>small{display:none;}.study-row{padding:12px;gap:9px;flex-wrap:wrap;}.study-row-text{min-width:150px;}.study-row-actions{margin-left:auto;}.study-row-text>strong{font-size:12px;}.toast{font-size:11px;bottom:15px;}.native-launcher{gap:9px;padding:11px;}.native-launcher small{font-size:9px;}}
+@media(max-width:365px){.cards{grid-template-columns:1fr;}.focus-panel h1{font-size:25px;}.view-tools select{display:none;}.scope-bar select{max-width:178px;}.focus-footer{padding:16px 17px;gap:10px;}.focus-metric{padding-right:10px;}.focus-intro{padding:22px 19px;}.focus-agenda{padding:0 18px 18px;}.library-actions{flex-wrap:wrap;}.themes{gap:10px;}.dialog-header h2{font-size:19px;}}
+@media(max-height:670px) and (min-width:821px){.sidebar{padding-top:19px;}.brand-row{padding-bottom:18px;}.nav-group{padding-bottom:14px;}.nav-row{min-height:36px;padding:8px 12px;}.side-bottom{padding-top:9px;}.appearance-link{padding:9px 11px;}.credit{margin-top:8px;}.native-link{padding-top:8px;}.brand strong{font-size:26px;}}
+:host([data-density="compact"]) .deck-card{min-height:211px;padding-top:15px;}:host([data-density="compact"]) .card-art,:host([data-density="compact"]) .card-art svg{height:33px;width:39px;}:host([data-density="compact"]) .card-head{margin-bottom:11px;}:host([data-density="compact"]) .cards{gap:10px;}:host([data-density="compact"]) .tree-row{min-height:36px;}:host([data-density="compact"]) .tree-open{padding:2px 0;}:host([data-density="compact"]) .list .deck-card{min-height:77px;}:host([data-density="compact"]) .focus-intro{padding-top:22px;padding-bottom:21px;}
+/* Short interaction transitions, never infinite decorations or full-page fades. */
+button,.deck-card,.card-art,.switch:after{transition:transform .16s ease,background-color .16s ease,border-color .16s ease,box-shadow .16s ease,color .16s ease;} .focus-panel,.sidebar,.main,.dialog{transition:background-color .18s ease,color .18s ease,border-color .18s ease;}
+:host([data-motion="off"]) *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}:host([data-motion="off"]) .deck-card:hover,:host([data-motion="off"]) .agenda-item:hover{transform:none!important;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important;}.deck-card:hover,.agenda-item:hover{transform:none!important;}}
+
+/* Useful texture and shortcuts, not ornamental hero art. */
+.active-label{margin-top:0;margin-bottom:9px;}.side-studies{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}.side-study{display:flex;align-items:center;gap:10px;text-align:left;padding:10px 9px;border-radius:9px;color:var(--text);border:1px solid var(--line-soft);background:linear-gradient(120deg,var(--sheen),transparent 70%);min-height:44px;}.side-study>span:nth-child(2){flex:1;min-width:0;line-height:1.5;font-size:11px;overflow-wrap:anywhere;}.side-study:hover{background:var(--raised);border-color:var(--line);}.side-study>.icon{flex-shrink:0;color:var(--quiet);}.study-indicator{height:6px;width:6px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--accent-soft);flex-shrink:0;}.side-study:nth-child(2n) .study-indicator{background:var(--pink);}.cards.focus-cards:not(.list){grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}.focus-cards .card-head{margin-bottom:12px;}.focus-cards .card-path{white-space:normal;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}.focus-cards .card-title{font-size:19px;}.card-shortcuts{margin-top:15px;display:flex;flex-direction:column;border-top:1px solid var(--line-soft);padding-top:8px;gap:1px;}.card-shortcuts button{display:flex;align-items:center;gap:9px;min-height:29px;font-size:11px;text-align:left;color:var(--muted);border-radius:5px;padding:4px 5px;}.card-shortcuts button>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.card-shortcuts button>.icon{flex-shrink:0;color:var(--tone);opacity:.8;}.card-shortcuts button>.icon:last-child{color:var(--quiet);}.card-shortcuts button:hover{background:var(--raised);color:var(--text);}.more-inside{font-size:10px;color:var(--quiet);padding:6px 5px;}.list .card-shortcuts{display:none;}.list.focus-cards .card-title{font-size:14px;}
+@media(min-width:1500px){.cards.focus-cards:not(.list){grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}}
+@media(max-width:620px){.cards.focus-cards:not(.list){grid-template-columns:1fr;}.focus-cards .card-shortcuts{margin-top:12px;}.focus-cards .card-path{font-size:10px;}.focus-cards .card-title{font-size:18px;}.side-study>span:nth-child(2){font-size:12px;}}
+:host([data-motion="off"]) button:active,:host([data-motion="off"]) .folder-card:hover .card-art{transform:none!important;}
+@media(prefers-reduced-motion:reduce){button:active,.folder-card:hover .card-art{transform:none!important;}}
+
+/* 0.4: low-glare surfaces. Shared semantic palette with reviewer chrome. */
+:host([data-theme="obsidian"]),[data-theme="obsidian"]{--bg:#171720;--side:#1d1c27;--panel:#23222f;--raised:#2c2a3b;--hover:#343247;--text:#e4e0ee;--muted:#b9b2c8;--quiet:#a59db5;--line:#464051;--line-soft:#363140;--accent:#b6a1db;--accent-strong:#d0bceb;--accent-soft:#3a304c;--on-accent:#241b31;--hero:#2b2639;--hero-end:#23222f;--blue:#a2bfe5;--green:#94cbb7;--pink:#d8a1be;--amber:#cfb68d;--scheme:dark;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="glacier"]),[data-theme="glacier"]{--bg:#192630;--side:#1e2d37;--panel:#263844;--raised:#304550;--hover:#3a515e;--text:#dfebef;--muted:#acc2cc;--quiet:#a1b6c1;--line:#465d69;--line-soft:#374c58;--accent:#97cbd5;--accent-strong:#bbdfe6;--accent-soft:#2b4c59;--on-accent:#182f38;--hero:#30444f;--hero-end:#263844;--blue:#9cbce2;--green:#96c8b6;--pink:#c1add5;--amber:#cbbb95;--scheme:dark;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="rose"]),[data-theme="rose"]{--bg:#d9ced0;--side:#d4c7cb;--panel:#e7ddde;--raised:#cfc0c6;--hover:#c6b4bd;--text:#402e38;--muted:#58434e;--quiet:#604955;--line:#b5a0ab;--line-soft:#c2adb7;--accent:#854b6b;--accent-strong:#673750;--accent-soft:#cdb2c0;--on-accent:#fbf0f3;--hero:#d9c6cf;--hero-end:#e1d4d9;--blue:#305271;--green:#2e574a;--pink:#773d5d;--amber:#6b491f;--scheme:light;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="bloom"]),[data-theme="bloom"]{--bg:#d2cedc;--side:#cac5d6;--panel:#e3dfeb;--raised:#c9c1d7;--hover:#beb4ce;--text:#342c43;--muted:#4e4560;--quiet:#564b67;--line:#aea2c1;--line-soft:#bcb1cc;--accent:#685085;--accent-strong:#50386e;--accent-soft:#beb0d0;--on-accent:#f7f0fc;--hero:#cfc6db;--hero-end:#dcd5e5;--blue:#325276;--green:#2e584d;--pink:#6d4165;--amber:#694a25;--scheme:light;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="linen"]),[data-theme="linen"]{--bg:#d8d3c8;--side:#d0c9bc;--panel:#e6e0d4;--raised:#c9c1b2;--hover:#c0b6a4;--text:#3a352d;--muted:#4f473a;--quiet:#564d3e;--line:#afa38f;--line-soft:#c1b6a3;--accent:#725c3d;--accent-strong:#554326;--accent-soft:#cabb9e;--on-accent:#faf3e5;--hero:#d5cbb8;--hero-end:#e0d8c9;--blue:#30516d;--green:#325543;--pink:#6d4250;--amber:#69481c;--scheme:light;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="matcha"]),[data-theme="matcha"]{--bg:#cfd5c8;--side:#c5cebd;--panel:#dfe5d9;--raised:#c2cdb9;--hover:#b7c4ad;--text:#2e3b2c;--muted:#41523b;--quiet:#475840;--line:#9fac94;--line-soft:#b2bfa8;--accent:#4b6742;--accent-strong:#36552f;--accent-soft:#b4c5a8;--on-accent:#f2f7eb;--hero:#c5d2ba;--hero-end:#d6dfce;--blue:#385675;--green:#375c3c;--pink:#70465e;--amber:#694f2a;--scheme:light;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="midnight"]),[data-theme="midnight"]{--bg:#161d20;--side:#1c2528;--panel:#222e31;--raised:#2b3a3e;--hover:#33464a;--text:#dce9e7;--muted:#aac1bf;--quiet:#9eb4b2;--line:#415655;--line-soft:#324441;--accent:#8dcebd;--accent-strong:#b1e0d2;--accent-soft:#294b42;--on-accent:#172f29;--hero:#293d38;--hero-end:#222e31;--blue:#a0bfdf;--green:#8dcebd;--pink:#caa4bd;--amber:#cbbc93;--scheme:dark;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+:host([data-theme="peach"]),[data-theme="peach"]{--bg:#dbcec3;--side:#d3c3b6;--panel:#e8ddd2;--raised:#cfbcac;--hover:#c6ae9c;--text:#443329;--muted:#574134;--quiet:#604839;--line:#b89d88;--line-soft:#c6b09e;--accent:#8c583d;--accent-strong:#6e402a;--accent-soft:#d3b499;--on-accent:#fff4e9;--hero:#dcc5b1;--hero-end:#e3d3c4;--blue:#304f6e;--green:#31543d;--pink:#713b54;--amber:#6a451b;--scheme:light;--sheen:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.10);--material:transparent;--surface-shadow:0 8px 24px rgba(25,20,27,.06);color-scheme:var(--scheme);}
+/* 0.4: fast exam pins, visible folder contents, individual lecture navigation. */
+.main,.sidebar,.deck-card,.appearance-link{background-image:none;}
+.focus-panel:before,.focus-panel:after{display:none;}
+.focus-panel.quiet-focus{background:linear-gradient(115deg,var(--hero),var(--panel));box-shadow:0 6px 22px var(--shadow);}
+.quiet-focus .focus-intro{padding:29px 32px 25px;}.quiet-focus h1{font-size:clamp(26px,2.8vw,38px);line-height:1.2;max-width:650px;letter-spacing:-1.1px;}.quiet-focus .focus-intro p{max-width:560px;font-size:13px;line-height:1.75;}.quiet-focus .focus-actions{margin-top:22px;}.quiet-focus .focus-agenda{padding:25px 28px 24px 0;}.quiet-focus .focus-footer{padding:17px 30px;background:var(--panel);}.quiet-focus .focus-metric strong{font-size:27px;}.quick-guide{height:100%;border-left:1px solid var(--line);padding:9px 0 8px 28px;display:flex;flex-direction:column;justify-content:center;gap:9px;}.guide-symbol{color:var(--accent);margin-bottom:4px;}.quick-guide strong{font-size:15px;}.quick-guide p{font-size:12px;color:var(--muted);line-height:1.7;}.quick-guide small{font-size:10px;color:var(--quiet);margin-top:6px;}
+.agenda-wrap{display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:12px;margin-top:9px;background:var(--panel);}.agenda-wrap .agenda-item{flex:1;min-width:0;margin:0;border:0;background:none;box-shadow:none;width:auto;padding:11px;}.agenda-controls{display:flex;gap:0;align-items:center;padding-right:7px;}.agenda-controls .icon-button{width:27px;height:31px;flex-basis:27px;}.agenda-wrap .date-tile{background:var(--raised);border-color:var(--line);}.agenda-wrap .agenda-copy strong{font-size:12px;}.agenda-wrap .date-label{font-size:10px;}.agenda-controls .icon-button:last-child:hover,.side-remove:hover{color:var(--pink);background:var(--raised);}
+.side-exam{display:flex;align-items:center;border:1px solid var(--line-soft);background:var(--panel);border-radius:10px;}.side-exam .side-study{border:0;background:none;flex:1;min-width:0;}.side-remove{width:28px;flex-basis:28px;height:31px;margin-right:4px;color:var(--quiet);}.side-scroll{overflow-x:hidden;}.tree-row{max-width:100%;min-width:0;}.tree-active{width:22px;flex-basis:22px;height:27px;color:var(--accent);}.tree-name{word-break:normal;overflow-wrap:anywhere;}.tree-toggle{width:22px;flex-basis:22px;height:32px;}.tree-open{font-size:12px;}
+.exam-pin{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;gap:7px;min-height:32px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;line-height:1.3;margin-top:14px;background:var(--panel);}.exam-pin:hover{background:var(--raised);color:var(--accent-strong);border-color:var(--accent);}.exam-pin.is-active{color:var(--accent-strong);background:var(--accent-soft);border-color:var(--accent);}.exam-pin.is-active:hover{color:var(--pink);}.library-actions .exam-pin{margin-top:0;min-height:36px;}.card-peek{border-color:var(--line-soft);margin-top:17px;gap:4px;}.peek-label{font-size:8px;letter-spacing:1.35px;font-weight:650;color:var(--quiet);padding:1px 5px 6px;}.peek-row{display:flex;align-items:center;gap:3px;min-width:0;}.peek-row>button:first-child{flex:1;min-width:0;min-height:33px;font-size:11px;}.peek-row>button:first-child>span{white-space:normal;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}.card-shortcuts .peek-study{width:28px;flex:0 0 28px;min-height:30px;justify-content:center;color:var(--accent);padding:0;}.card-shortcuts .peek-grandchild{margin-left:23px;min-height:23px;font-size:10px;color:var(--quiet);}.card-shortcuts .peek-more{color:var(--accent);font-size:10px;justify-content:flex-start;padding:7px 5px;}.peek-more>span{flex:0 1 auto!important;}.deck-card{box-shadow:0 5px 20px rgba(0,0,0,.055);border-radius:16px;}.deck-card:hover{box-shadow:0 9px 27px rgba(0,0,0,.08);}.countline{padding-top:18px;}.cards:not(.list){align-items:stretch;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));}
+.list .exam-pin{grid-column:2;grid-row:4;margin-top:6px;min-height:27px;padding:4px 9px;font-size:10px;}.list .card-art{grid-row:1/5;}.list .card-shortcuts{display:flex;grid-column:2/-1;grid-row:5;margin:9px 0 0;padding-top:9px;max-width:none;}.list .card-shortcuts .peek-row{max-width:650px;}.list .deck-card{min-height:116px;}.list .card-path{grid-column:2;grid-row:3;}.list .quick-study{grid-row:1/5;}
+.board-controls{display:none;}.exam-board{display:flex;flex-direction:column;gap:22px;scroll-margin-top:20px;}.exam-section{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;box-shadow:0 7px 25px rgba(0,0,0,.055);}.exam-section-head{display:flex;gap:13px;align-items:center;padding:18px 21px;border-bottom:1px solid var(--line);background:var(--panel);}.exam-section-symbol{width:38px;height:38px;display:grid;place-items:center;flex:0 0 38px;color:var(--accent);border:1px solid var(--line);border-radius:10px;background:var(--raised);}.exam-section-head>div:nth-child(2){flex:1;min-width:0;}.exam-section-head h3{font-size:15px;font-weight:650;line-height:1.5;}.exam-section-head p{font-size:10px;color:var(--quiet);overflow-wrap:anywhere;margin-top:2px;}.exam-section-actions{display:flex;align-items:center;gap:4px;}.exam-section-actions .quiet{font-size:11px;}.exam-section-actions .icon-button{width:29px;flex-basis:29px;}.lecture-table{padding:5px 0;}.lecture-row{display:flex;align-items:center;gap:20px;min-height:75px;padding:13px 20px 13px calc(20px + var(--level)*19px);border-bottom:1px solid var(--line-soft);}.lecture-row:last-child{border-bottom:0;}.lecture-row:hover{background:var(--raised);}.lecture-ident{display:flex;align-items:center;gap:12px;flex:1;min-width:0;}.lecture-leaf-icon{width:25px;flex:0 0 25px;color:var(--tone);display:grid;place-items:center;}.lecture-toggle{width:25px;flex:0 0 25px;height:30px;}.lecture-name{flex:1;min-width:0;}.lecture-name strong{display:block;font-size:13px;font-weight:550;color:var(--text);line-height:1.5;overflow-wrap:anywhere;}.lecture-name:hover strong{color:var(--accent-strong);}.lecture-name small{display:block;color:var(--quiet);font-size:10px;line-height:1.5;max-width:510px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px;}.lecture-counts{display:flex;gap:16px;flex:0 0 150px;text-align:right;font-variant-numeric:tabular-nums;justify-content:flex-end;}.lecture-counts>span{font-size:13px;min-width:30px;}.lecture-counts small{font-size:9px;display:block;color:var(--quiet);margin-top:1px;}.lecture-actions{display:flex;align-items:center;gap:9px;flex:0 0 125px;justify-content:flex-end;}.lecture-study{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--line);border-radius:8px;padding:8px 13px;font-size:11px;min-height:35px;}.lecture-study:hover{color:var(--on-accent);background:var(--accent);border-color:var(--accent);transform:translateY(-1px);}.lecture-actions .icon-button{width:25px;flex-basis:25px;height:30px;}.lecture-branch{background:var(--material);min-height:66px;}.lecture-branch .lecture-name strong{font-weight:650;}.lecture-branch .lecture-counts{opacity:.8;}.lecture-branch .lecture-actions .quiet{font-size:11px;}.exam-section-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 20px;border-top:1px solid var(--line);background:var(--side);color:var(--quiet);font-size:10px;}.exam-section-foot .quiet{font-size:10px;}.board-more{display:flex;margin:10px auto;}
+.context-menu{position:absolute;z-index:160;width:260px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow:auto;padding:7px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.3);}.context-label{font-size:10px;letter-spacing:.3px;color:var(--quiet);padding:7px 9px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.context-action{display:flex;align-items:center;gap:11px;width:100%;min-height:37px;padding:8px 10px;font-size:12px;border-radius:7px;color:var(--text);}.context-action:first-of-type{color:var(--accent-strong);}.context-action:hover,.context-action:focus-visible{background:var(--raised);}.context-divider{border-top:1px solid var(--line);margin:6px 0;}.toast-undo{font-weight:650;font-size:12px;padding:6px 8px;color:var(--accent-strong);border:1px solid var(--line);border-radius:7px;flex-shrink:0;margin-left:10px;}.toast-undo:hover{background:var(--hover);}
+@media(min-width:1500px){.layout{grid-template-columns:285px minmax(0,1fr);}.quiet-focus .focus-intro{padding:32px 35px;}.cards:not(.list){grid-template-columns:repeat(auto-fill,minmax(270px,1fr));}}
+@media(max-width:1150px){.lecture-row{gap:11px;padding-right:13px;padding-left:calc(13px + var(--level)*13px);}.lecture-actions{flex-basis:107px;gap:4px;}.lecture-counts{gap:10px;flex-basis:120px;}.quiet-focus h1{font-size:30px;}.quiet-focus .focus-agenda{padding-left:25px;}.agenda-wrap .agenda-item{display:flex;margin-left:0;width:auto;}.agenda-label{margin-bottom:3px;}}
+@media(max-width:820px){.layout{grid-template-columns:minmax(0,1fr);}.exam-section-head{padding:15px;}.quiet-focus .focus-intro{padding:25px;}.quiet-focus .focus-agenda{padding:0 25px 23px;}.quiet-focus .focus-agenda .quick-guide{border:0;padding:0;}.quiet-focus{grid-template-columns:1fr!important;}.lecture-counts{flex-basis:135px;}.cards:not(.list){grid-template-columns:repeat(auto-fill,minmax(235px,1fr));}.side-scroll{padding-right:4px;}}
+@media(max-width:620px){.quiet-focus h1{font-size:27px;}.quiet-focus .focus-intro{padding:23px 22px;}.quiet-focus .focus-intro p{font-size:12px;}.quiet-focus .focus-agenda{padding:0 21px 19px;}.quick-guide small{font-size:9px;}.quiet-focus .focus-footer{padding:15px 20px;}.exam-section-head{gap:9px;flex-wrap:wrap;}.exam-section-symbol{height:33px;width:33px;flex-basis:33px;}.exam-section-head h3{font-size:13px;}.exam-section-actions .quiet{display:none;}.exam-section-actions{gap:0;}.lecture-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:13px 12px 13px calc(12px + var(--level)*10px);}.lecture-ident{grid-column:1/-1;gap:8px;}.lecture-name strong{font-size:12px;}.lecture-name small{font-size:9px;max-width:270px;}.lecture-counts{grid-column:1;justify-content:flex-start;text-align:left;padding-left:33px;gap:16px;}.lecture-counts small{display:inline;margin-left:4px;font-size:8px;}.lecture-counts>span{font-size:11px;min-width:0;}.lecture-actions{grid-column:2;}.lecture-actions>.icon-button{display:none;}.lecture-study{min-height:32px;padding:6px 10px;}.exam-section-foot{align-items:flex-start;padding:10px 13px;}.exam-section-foot>span{max-width:55%;font-size:9px;}.exam-section-foot .quiet{font-size:9px;min-height:25px;padding:3px;}.cards:not(.list){grid-template-columns:1fr;}.deck-card{padding:22px 22px 0;}.card-title{font-size:17px;}.card-description{font-size:11px;}.card-art,.card-art svg{width:51px;height:44px;}.exam-pin{font-size:11px;min-height:32px;}.card-peek .peek-row>button:first-child{font-size:12px;}.card-bottom{margin:0 -22px;}.countline{font-size:10px;}.list .deck-card{padding:15px 12px;}.list .exam-pin{font-size:9px;}.list .card-shortcuts{grid-column:1/-1;}.list .card-title{font-size:13px;}.list .card-bottom{margin:0;}.list .quick-study{grid-row:2/5;}.library-actions{flex-wrap:wrap;justify-content:flex-end;}.library-actions .exam-pin{min-height:31px;font-size:10px;}.board-controls{display:none;}}
+@media(prefers-reduced-motion:reduce){.lecture-study:hover{transform:none;}}
+:host([data-motion="off"]) .lecture-study:hover{transform:none;}
+
+/* Shared-home controls. No selectors escape this shadow root. */
+.build-label{display:inline-flex;font:11px/1.3 ui-monospace,monospace;letter-spacing:.08em;color:var(--accent);border:1px solid var(--line);padding:5px 8px;border-radius:6px}
+.home-editor-intro p{color:var(--muted);line-height:1.7;margin:12px 0 22px}
+.home-widget-list{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.home-widget-row{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;min-width:0}
+.home-widget-row.is-hidden{opacity:.65}.home-widget-name{display:flex;align-items:center;gap:12px;flex:1;min-width:0;cursor:pointer}.home-widget-name input{width:18px;height:18px;flex-shrink:0;accent-color:var(--accent)}.home-widget-name strong{display:block;overflow-wrap:anywhere;font-weight:600;font-size:14px}.home-widget-name small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.home-widget-tools{display:flex;align-items:center;gap:8px;flex-shrink:0}.home-widget-tools label{display:flex;flex-direction:column;gap:5px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.home-widget-tools select{font-size:12px;max-width:145px;min-height:34px}
+.widget-order{display:flex;flex-direction:column;gap:0}.widget-order .icon-button{width:28px;height:28px}.home-editor-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:10px}.context-tip{font-size:11px;line-height:1.6;color:var(--muted);margin:8px 12px;max-width:240px}
+@media(max-width:740px){.home-widget-row{align-items:stretch;flex-direction:column}.home-widget-tools{flex-wrap:wrap;justify-content:space-between}.widget-order{flex-direction:row}.home-widget-name strong{font-size:13px}}
+/* Shared-home links wrap in the smallest organizer window; never widen the page. */
+.help-strip>div{display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-width:0;max-width:100%;}
+/* Menus use viewport coordinates in BOTH the full workspace and shared home. */
+.context-menu{position:fixed;}
+</style></template><script>/* Framework-independent display model. No Anki writes or scheduling logic. */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.AtelierModel = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  function roots(nodes, ids) {
+    const map = new Map(nodes.map(n => [n.id, n]));
+    const selected = new Set(ids.filter(id => map.has(id)));
+    return [...selected].filter(id => {
+      let p = map.get(id).parent; const seen = new Set([id]);
+      while (map.has(p) && !seen.has(p)) {
+        if (selected.has(p)) return false;
+        seen.add(p); p = map.get(p).parent;
+      }
+      return true;
+    }).map(id => map.get(id));
+  }
+  function totals(nodes) {
+    return nodes.reduce((out, n) => {
+      for (const k of ['new', 'learn', 'review']) out[k] += Math.max(0, Number(n[k]) || 0);
+      return out;
+    }, {new: 0, learn: 0, review: 0});
+  }
+  function scope(nodes, profile) {
+    const active = (profile.studies || []).filter(s => s.active);
+    const selected = profile.selected_study === 'all' || !active.some(s => s.id === profile.selected_study)
+      ? active : active.filter(s => s.id === profile.selected_study);
+    const enabled = !!profile.focus_enabled;
+    const ids = [...new Set(selected.flatMap(s => s.deck_ids || []))];
+    const known = new Set(nodes.map(n => n.id));
+    const top = enabled ? roots(nodes, ids) : nodes.filter(n => n.parent === '0');
+    return {enabled, active, selected, roots: top, totals: totals(top),
+      missing: enabled ? ids.filter(id => !known.has(id)) : []};
+  }
+  function dayState(value, now = new Date()) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return null;
+    const [y, m, d] = value.split('-').map(Number);
+    const epoch = Date.UTC(y, m - 1, d);
+    const check = new Date(epoch);
+    if (check.getUTCFullYear() !== y || check.getUTCMonth() !== m - 1 || check.getUTCDate() !== d) return null;
+    return Math.round((epoch - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+  }
+  function belongs(nodes, roots, id) {
+    const selected = new Set(roots.map(n => n.id)), map = new Map(nodes.map(n => [n.id, n]));
+    let n = map.get(id); const seen = new Set();
+    while (n && !seen.has(n.id)) {
+      if (selected.has(n.id)) return true;
+      seen.add(n.id); n = map.get(n.parent);
+    }
+    return false;
+  }
+  return Object.freeze({roots, totals, scope, dayState, belongs});
+});
+</script><script>/* Atelier Shared Home 0.5.0.
+ * Interoperability layer, not a replacement for another add-on's renderer.
+ * Widgets remain in their original DOM ancestry. Only explicit, reversible
+ * grid presentation changes are applied. No HTML copying, script execution,
+ * pycmd interception, Onigiri monkey patches, or collection writes.
+ */
+(() => {
+  'use strict';
+  const own = el => el?.closest?.('#atelier-root,[data-atelier-native-rail],[data-atelier-row-control]');
+  const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const hash = text => {let h=2166136261;for(const c of text){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return (h>>>0).toString(36);};
+  const blank = () => ({enabled:false,columns:3,items:[]});
+  const railCSS = `
+    :host{all:initial;display:block;box-sizing:border-box;width:100%;min-width:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--at-text,#eeecf6);text-align:left;color-scheme:var(--at-scheme,dark)}
+    :host([hidden]){display:none!important}*{box-sizing:border-box}button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--at-accent,#b8a2f0);outline-offset:3px}button:disabled{opacity:.5;cursor:wait}
+    .rail{padding:18px 20px;border:1px solid var(--at-line,#363044);border-radius:18px;background:var(--at-panel,#1c1928);box-shadow:0 6px 24px #00000012;margin:0 0 24px;min-width:0}
+    .heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.label{display:flex;gap:12px;align-items:center}.wordmark{font-size:19px;font-weight:750;letter-spacing:-.7px}.build{font:11px/1.2 ui-monospace,monospace;border:1px solid var(--at-line);padding:5px 7px;border-radius:6px;color:var(--at-muted,#b0a9bf)}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}.action{border:1px solid var(--at-line);border-radius:9px;background:var(--at-raised,#242030);color:inherit;padding:8px 12px;min-height:36px}.action:hover{border-color:var(--at-accent)}
+    .exams{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.exam{display:flex;align-items:stretch;border:1px solid var(--at-line);border-radius:10px;min-width:0;max-width:100%;background:var(--at-raised,#242030)}
+    .exam-open{border:0;background:none;color:inherit;padding:9px 12px;text-align:left;min-width:0;max-width:360px}.exam-open strong{display:block;overflow-wrap:anywhere;font-weight:600;font-size:13px}.exam-open small{display:block;color:var(--at-muted);font-size:11px;margin-top:3px}
+    .exam-remove{flex:0 0 auto;border:0;border-left:1px solid var(--at-line);background:none;color:var(--at-muted);min-width:44px;padding:8px;border-radius:0 10px 10px 0;font-size:12px}.exam-remove:hover{background:var(--at-hover,#2b263b);color:var(--at-text)}
+    .hint{font-size:12px;color:var(--at-muted);margin:12px 0 0;max-width:100%}.empty{color:var(--at-muted);font-size:13px;margin:13px 0 0}.dot{color:var(--at-accent);margin-right:4px}
+    @media(max-width:580px){.rail{padding:14px}.heading{gap:10px}.exams{display:grid;grid-template-columns:minmax(0,1fr)}.exam-open{flex:1}.action{padding:8px;font-size:12px}.hint{line-height:1.7}}
+  `;
+  function create(api) {
+    let rail=null, railShadow=null, scheduled=false, restoring=false, lastFingerprint='', records=[];
+    const pins=new Map(), styling=new Map(), resized=new Set();
+    const native = () => {const s=api.state();return s.loaded && s.config.mode==='native';};
+    const state = () => api.state();
+    const layout = () => state().profile.home_layout || blank();
+    const exact = id => state().profile.studies.filter(s=>s.active&&s.deck_ids.length===1&&s.deck_ids[0]===id);
+    function setStyle(el,name,value) {
+      if(!styling.has(el))styling.set(el,new Map());
+      const entries=styling.get(el), current=el.style.getPropertyValue(name), priority=el.style.getPropertyPriority(name);
+      let old=entries.get(name);
+      if(old && current===old.applied && priority===old.appliedPriority){
+        if(old.requested===value)return;
+      }else{
+        // A real external change becomes the new restoration baseline. Browser
+        // serialization (e.g. 0 -> 0px) is not an external change.
+        old={value:current,priority};entries.set(name,old);
+      }
+      el.style.setProperty(name,value,'important');
+      old.requested=value;old.applied=el.style.getPropertyValue(name);old.appliedPriority=el.style.getPropertyPriority(name);
+    }
+    function restoreStyles() {
+      restoring=true;
+      for(const [el,entries] of styling){for(const [key,v] of entries){if(el.style.getPropertyValue(key)===v.applied&&el.style.getPropertyPriority(key)===v.appliedPriority){if(v.value)el.style.setProperty(key,v.value,v.priority);else el.style.removeProperty(key);}}}
+      styling.clear();restoring=false;
+    }
+    function rowFrom(target) {
+      if(!(target instanceof Element) || own(target))return null;
+      const row=target.closest('#decktree tr,table.deck-table tr,#deck-list-container [data-did]');
+      if(!row)return null;
+      let id=row.getAttribute('data-did')||row.getAttribute('data-deck-id')||row.id;
+      if(!/^\d{1,19}$/.test(id||'')){
+        const link=row.querySelector('a.deck[onclick]');
+        id=link?.getAttribute('onclick')?.match(/(?:open|study):([0-9]{1,19})\b/)?.[1];
+      }
+      return id&&state().map.has(id)?{row,id,node:state().map.get(id)}:null;
+    }
+    function makeRail() {
+      const parent=document.querySelector('.modern-main-menu .main-content') || document.body;
+      if(!rail){
+        rail=document.createElement('section');rail.dataset.atelierNativeRail='';
+        rail.setAttribute('aria-label','Atelier active exams and shared home controls');
+        rail.style.cssText='display:block!important;width:100%!important;max-width:none!important;min-width:0!important;grid-column:1 / -1!important;box-sizing:border-box!important;flex-shrink:0!important;';
+        railShadow=rail.attachShadow({mode:'open'});railShadow.innerHTML='<style>'+railCSS+'</style><div class="mount"></div>';
+        railShadow.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;e.preventDefault();e.stopPropagation();b.disabled=true;Promise.resolve(api.action(b.dataset.action,b.dataset.id)).finally(()=>{if(b.isConnected)b.disabled=false;});});
+      }
+      if(!rail.isConnected || rail.parentNode!==parent)parent.prepend(rail);
+      rail.hidden=!native();rail.style.setProperty('display',native()?'block':'none','important');
+      // Only OUR component receives theme variables. No global body/html tint.
+      const tokens=api.tokens();
+      for(const key of ['text','muted','accent','panel','line','raised','hover','scheme'])rail.style.setProperty('--at-'+key,tokens[key]||'');
+      const active=state().profile.studies.filter(s=>s.active);
+      const fingerprint=JSON.stringify([active,api.version,native()]);
+      if(fingerprint!==lastFingerprint){
+        lastFingerprint=fingerprint;
+        railShadow.querySelector('.mount').innerHTML=`<div class="rail"><div class="heading"><div class="label"><span class="wordmark">atelier<span class="dot">.</span></span><span class="build">${escape(api.version)}</span><span>Active exams</span></div><div class="actions"><button class="action" data-action="shared-organizer">Open folders</button><button class="action" data-action="home-edit">Edit home</button><button class="action" data-action="appearance">Appearance</button></div></div>${active.length?`<div class="exams">${active.map(s=>`<div class="exam"><button class="exam-open" data-action="shared-study" data-id="${escape(s.id)}" title="Choose individual lectures in ${escape(s.name)}"><strong><span class="dot">●</span>${escape(s.name)}</strong><small>${s.date?escape(s.date)+' · ':''}Choose lectures →</small></button><button class="exam-remove" data-action="finish-study" data-id="${escape(s.id)}" aria-label="Remove ${escape(s.name)} from active exams" title="Remove from active exams; keep all decks">× Remove</button></div>`).join('')}</div>`:'<p class="empty">No active exams. Pin an exam folder from the left-hand deck list.</p>'}<p class="hint">Click a folder’s ＋ to activate it; click its ✓ to remove it. Right-click for exam actions. Shift + right-click keeps the original menu.</p></div>`;
+      }
+    }
+    function updateRows() {
+      for(const [row,pin] of pins)if(!row.isConnected||!pin.isConnected)pins.delete(row);
+      const rows=document.querySelectorAll('#decktree tr,table.deck-table tr,#deck-list-container [data-did]');
+      let count=0;
+      for(const row of rows){
+        if(++count>5000)break;
+        const ref=rowFrom(row);if(!ref)continue;
+        let pin=pins.get(row);
+        if(!pin){
+          const cell=row.querySelector('.decktd')||row.querySelector('td');if(!cell)continue;
+          pin=document.createElement('span');pin.dataset.atelierRowControl=ref.id;
+          pin.style.cssText='display:inline-flex!important;width:28px!important;height:28px!important;min-width:28px!important;flex:0 0 28px!important;vertical-align:middle!important;margin:0 3px!important;position:relative!important;';
+          const sr=pin.attachShadow({mode:'open'});
+          sr.innerHTML='<style>:host{all:initial;display:inline-flex}button{all:initial;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid var(--at-pin-line,#7f7e8380);border-radius:7px;background:transparent;color:var(--at-pin-fg,#cac7d1);font:600 17px/1 system-ui;cursor:pointer}button:hover{background:var(--at-pin-hover,#7f7e8325)}button:focus-visible{outline:2px solid currentColor;outline-offset:2px}button[aria-pressed="true"]{background:var(--at-pin-hover,#7f7e8325)}button:disabled{opacity:.5;cursor:wait}</style><button type="button"></button>';
+          sr.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const b=sr.querySelector('button');if(b.disabled)return;b.disabled=true;Promise.resolve(api.action('quick-exam',rowFrom(row)?.id)).finally(()=>{if(b.isConnected)b.disabled=false;});});
+          // Avoid native delegated row-navigation/drag handlers without replacing them.
+          for(const name of ['pointerdown','mousedown','dblclick','contextmenu'])sr.addEventListener(name,e=>e.stopPropagation());
+          const link=cell.querySelector('a.deck');if(link&&link.parentNode===cell)cell.insertBefore(pin,link);else cell.append(pin);pins.set(row,pin);
+        }
+        const active=exact(ref.id).length>0, b=pin.shadowRoot.querySelector('button');
+        b.textContent=active?'✓':'+';b.setAttribute('aria-pressed',String(active));
+        const text=active?'Remove '+ref.node.name+' from active exams':'Set '+ref.node.name+' as upcoming exam';b.title=text;b.setAttribute('aria-label',text);
+        const color=getComputedStyle(row.querySelector('a.deck')||row).color;
+        pin.style.setProperty('--at-pin-fg',color);pin.hidden=!native();
+        pin.style.setProperty('display',native()?'inline-flex':'none','important');
+      }
+    }
+    function identify(el) {
+      const source=el.matches('.onigiri-widget-container')?'Onigiri':el.matches('.external-widget-container')?'External add-on':'Home add-on';
+      const explicit=el.getAttribute('data-atelier-widget')||el.getAttribute('data-onigiri-external-hook')||el.id;
+      const inner=el.querySelector('[id]')?.id;
+      const titleNode=el.querySelector('[data-widget-title],h1,h2,h3,h4,.stat-label,.stat-title,.widget-title,.title');
+      let title=el.getAttribute('data-widget-title')||titleNode?.textContent.trim().replace(/\s+/g,' ').slice(0,90)||'';
+      const stable=explicit||inner||title;
+      if(!stable)return null; // Never persist positions using a fragile list index.
+      if(!title)title=stable.replace(/[_-]/g,' ').replace(/\b\w/g,c=>c.toUpperCase()).slice(0,90);
+      return {id:'widget.'+hash(source+':'+stable),title,source};
+    }
+    function discover() {
+      const candidates=[...document.querySelectorAll('.onigiri-widget-container,.external-widget-container,[data-atelier-widget],#review-heatmap,#reviewHeatmap,#cal-heatmap')].filter(el=>!own(el));
+      const top=candidates.filter(el=>!candidates.some(other=>other!==el&&other.contains(el)));
+      const found=[], keys=new Set(),duplicates=new Set();
+      for(const el of top.slice(0,100)){
+        const label=identify(el);if(!label)continue;
+        if(keys.has(label.id)){duplicates.add(label.id);continue;}keys.add(label.id);
+        const old=records.find(r=>r.el===el);
+        found.push({...label,el,parent:el.parentElement,naturalHeight:old?.naturalHeight||Math.max(96,Math.min(900,Math.ceil(el.getBoundingClientRect().height)||200))});
+      }
+      records=found.filter(r=>!duplicates.has(r.id));
+      return records;
+    }
+    function applyLayout() {
+      const prefs=layout();
+      if(!prefs.enabled){restoreStyles();return;}
+      const configured=new Map(prefs.items.map((x,i)=>[x.id,{...x,order:i}]));
+      const groups=new Map();
+      for(const rec of records){if(!groups.has(rec.parent))groups.set(rec.parent,[]);groups.get(rec.parent).push(rec);}
+      for(const [parent,items] of groups){
+        // Only recognized widget grids, never the page or deck tree, are reflowed.
+        const groupSafe=parent.matches('.unified-grid,[data-atelier-widget-grid]');
+        const cols=Math.max(1,Math.min(prefs.columns,Math.floor((parent.clientWidth||800)/235)||1));
+        if(groupSafe){setStyle(parent,'display','grid');setStyle(parent,'grid-template-columns',`repeat(${cols}, minmax(0, 1fr))`);setStyle(parent,'grid-template-rows','none');setStyle(parent,'grid-auto-rows','minmax(0, auto)');setStyle(parent,'gap','16px');setStyle(parent,'align-items','start');setStyle(parent,'max-width','100%');setStyle(parent,'min-width','0');}
+        for(const rec of items){
+          const p=configured.get(rec.id);if(!p)continue;
+          if(!p.visible){setStyle(rec.el,'display','none');continue;}
+          // Restore a previously hidden widget when its checkbox is switched on.
+          const display=styling.get(rec.el)?.get('display');if(display){if(display.value)rec.el.style.setProperty('display',display.value,display.priority);else rec.el.style.removeProperty('display');styling.get(rec.el).delete('display');}
+          if(groupSafe){
+            const span=p.size==='full'?cols:p.size==='wide'?Math.min(2,cols):1;
+            setStyle(rec.el,'grid-row-start','auto');setStyle(rec.el,'grid-row-end','auto');setStyle(rec.el,'grid-column-start',`span ${span}`);setStyle(rec.el,'grid-column-end','auto');setStyle(rec.el,'order',String(p.order));setStyle(rec.el,'min-width','0');setStyle(rec.el,'max-width','100%');
+          }
+          const h=p.height==='short'?160:p.height==='tall'?420:rec.naturalHeight;
+          setStyle(rec.el,'height',h+'px');setStyle(rec.el,'min-height',h+'px');setStyle(rec.el,'overflow','auto');
+          // Deliberately no descendant image/canvas/input/style overrides.
+        }
+      }
+    }
+    function sync() {
+      if(!state().loaded)return;
+      makeRail();updateRows();discover();applyLayout();
+    }
+    function queue() {
+      if(scheduled||restoring)return;scheduled=true;
+      setTimeout(()=>{scheduled=false;sync();},80);
+    }
+    const observer=new MutationObserver(changes=>{
+      if(changes.some(c=>!own(c.target)&&(c.type==='attributes'||[...c.addedNodes,...c.removedNodes].some(n=>n.nodeType===1&&!own(n)))))queue();
+    });
+    observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['data-did','data-deck-id']});
+    function context(e) {
+      if(!native()||e.shiftKey||e.__atelierOriginal)return;
+      const ref=rowFrom(e.target);if(!ref)return;
+      e.preventDefault();e.stopImmediatePropagation();
+      api.context(ref.node,e.clientX,e.clientY,ref.row.querySelector('a.deck'),e.target);
+    }
+    window.addEventListener('contextmenu',context,true);
+    window.addEventListener('keydown',e=>{
+      if(!native()||!(e.key==='ContextMenu'||e.shiftKey&&e.key==='F10'))return;
+      const ref=rowFrom(e.target);if(!ref)return;
+      const r=ref.row.getBoundingClientRect();e.preventDefault();e.stopImmediatePropagation();api.context(ref.node,Math.max(8,r.left+20),r.top+20,ref.row.querySelector('a.deck'),e.target);
+    },true);
+    document.addEventListener('pointerdown',e=>{if(native()&&!own(e.target))api.closeMenu();},true);
+    window.addEventListener('resize',queue);
+    if(window.ResizeObserver){const ro=new ResizeObserver(queue);for(const el of document.querySelectorAll('.unified-grid,[data-atelier-widget-grid]')){ro.observe(el);resized.add(el);}}
+    return Object.freeze({
+      sync, hasRail:()=>!!rail?.isConnected,
+      list(){discover();const saved=layout().items||[], order=new Map(saved.map((x,i)=>[x.id,i]));return records.map(r=>({id:r.id,title:r.title,source:r.source,reflow:r.parent.matches('.unified-grid,[data-atelier-widget-grid]'),...(saved.find(x=>x.id===r.id)||{visible:true,size:'small',height:'auto'})})).sort((a,b)=>(order.get(a.id)??999)-(order.get(b.id)??999));},
+      originalMenu(target,x,y){if(!target?.isConnected)return;const e=new MouseEvent('contextmenu',{bubbles:true,cancelable:true,view:window,clientX:x,clientY:y,button:2});Object.defineProperty(e,'__atelierOriginal',{value:true});target.dispatchEvent(e);},
+      refresh(){sync();window.dispatchEvent(new Event('resize'));},
+      diagnostics:()=>({rail:!!rail?.isConnected,rowControls:pins.size,widgets:records.map(r=>({id:r.id,title:r.title})),layoutEnabled:layout().enabled,widgetNodesMoved:0}),
+      dispose(){observer.disconnect();window.removeEventListener('contextmenu',context,true);restoreStyles();rail?.remove();for(const pin of pins.values())pin.remove();}
+    });
+  }
+  window.AtelierSharedHome=Object.freeze({create});
+})();
+</script><script>/* Atelier 0.5.0 — isolated study desk. No framework or external requests. */
+(() => {
+  'use strict';
+  const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
+  ready(() => {
+    const host = document.getElementById('atelier-root'), bootstrap = document.getElementById('atelier-bootstrap');
+    if (!host || !bootstrap || host.shadowRoot) return;
+    let boot;
+    try { boot = JSON.parse(bootstrap.textContent); } catch (_) { return; }
+    const template = document.getElementById('atelier-style');
+    if (!template || !window.AtelierModel) return;
+    const Model = window.AtelierModel;
+    // Place only OUR host outside the body. This avoids third-party body
+    // transforms, flex/grid, overflow locks, zoom inheritance and positioning.
+    // No native or Onigiri nodes are moved, cloned or deleted.
+    document.documentElement.appendChild(host);
+    const shadow = host.attachShadow({mode:'open'});
+    shadow.append(template.content.cloneNode(true));
+    const app = document.createElement('div'); app.className = 'app'; shadow.append(app);
+    const frame = document.createElement('div'); frame.className = 'frame'; app.append(frame);
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const icons = {
+      grid:'<rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/>',
+      folder:'<path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+      layers:'<path d="m12 3 9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+      star:'<path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3L3 9.6l6.2-.9z"/>',
+      clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      plus:'<path d="M12 5v14M5 12h14"/>',
+      search:'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/>',
+      arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+      chevron:'<path d="m9 5 7 7-7 7"/>',
+      down:'<path d="m5 9 7 7 7-7"/>',
+      more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+      check:'<path d="m5 12 4 4L19 6"/>',
+      close:'<path d="m6 6 12 12M6 18 18 6"/>',
+      list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.1M3 12h.1M3 18h.1"/>',
+      palette:'<path d="M12 3a9 9 0 1 0 0 18h1.5a2 2 0 0 0 1-3.7 1.5 1.5 0 0 1 .8-2.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7" cy="10" r=".6"/><circle cx="10" cy="6.5" r=".6"/><circle cx="15" cy="7" r=".6"/>',
+      move:'<path d="M12 3v18M3 12h18m-12-6 3-3 3 3m-6 12 3 3 3-3M6 9l-3 3 3 3m12-6 3 3-3 3"/>',
+      edit:'<path d="m15 4 5 5M4 20l5-1L21 7a2.1 2.1 0 0 0-5-4L4 15z"/>',
+      info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',
+      play:'<path d="m8 5 11 7-11 7z"/>',
+      import:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
+      menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+      chart:'<path d="M4 20h17M7 16V9M12 16V4M17 16v-5"/>',
+      shield:'<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/><path d="m8 12 3 3 5-6"/>',
+      refresh:'<path d="M20 8a8 8 0 0 0-14-3L3 8m0-5v5h5M4 16a8 8 0 0 0 14 3l3-3m0 5v-5h-5"/>',
+      home:'<path d="m3 11 9-8 9 8M5 10v11h5v-7h4v7h5V10"/>',
+      external:'<path d="M14 3h7v7m0-7L10 14M10 5H4v15h15v-6"/>',
+      book:'<path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1zm0 0v14"/>'
+    };
+    const icon = (name, size=16, fill=false) => `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill?'currentColor':'none'}" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.layers}</svg>`;
+    const brand = `<svg class="brand-mark" viewBox="0 0 36 42" fill="none" aria-hidden="true"><path d="M18 2 34 12v18L18 40 2 30V12z" stroke="currentColor" stroke-width="1.25" opacity=".45"/><path d="m18 8 10 6v14l-10 6-10-6V14zM18 8v26M8 14l20 14M28 14 8 28" stroke="currentColor" stroke-width="1.3"/><path d="m18 15 6 6-6 6-6-6z" fill="currentColor" opacity=".6"/></svg>`;
+    const folderArt = isFolder => isFolder ? `<svg viewBox="0 0 54 46" fill="none" aria-hidden="true"><path d="M5 8a4 4 0 0 1 4-4h12l5 5h20a4 4 0 0 1 4 4v23a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z" fill="currentColor" opacity=".32"/><path d="M10 12h35v21H10z" fill="currentColor" opacity=".32"/><path d="M4 18a4 4 0 0 1 4-4h39a4 4 0 0 1 4 4l-3 20a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4Z" fill="currentColor" opacity=".84"/><path d="M9 14h37a4 4 0 0 1 4 3" stroke="white" opacity=".45"/><path d="M17 29h20" stroke="var(--panel)" stroke-width="1.4" opacity=".5"/></svg>` : `<svg viewBox="0 0 54 46" fill="none" aria-hidden="true"><rect x="11" y="3" width="30" height="36" rx="4" transform="rotate(12 26 21)" fill="currentColor" opacity=".28"/><rect x="10" y="6" width="31" height="36" rx="4" transform="rotate(-7 25 24)" fill="currentColor" opacity=".8"/><path d="m17 18 17-2m-16 8 13-2m-12 8 8-1" stroke="var(--panel)" stroke-width="1.5" opacity=".7"/><path d="m12 9 24-3" stroke="white" opacity=".4"/></svg>`;
+    icons.back = '<path d="M20 12H4m6-6-6 6 6 6"/>';
+    icons.up = '<path d="M12 20V4m-6 6 6-6 6 6"/>';
+    icons.calendar = '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4M17 3v4M3 10h18M7 14h3M14 14h3M7 17h3"/>';
+    icons.focus = '<path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/><path d="m8 12 3 3 5-6"/>';
+    const THEMES = [['obsidian','Obsidian','Smoked glass · amethyst'],['glacier','Glacier','Frosted blue · silver'],['rose','Rose Quartz','Blush paper · rose gold'],['bloom','Bloom','Soft lilac · pearl'],['linen','Linen','Warm paper · brass'],['matcha','Matcha','Sage ceramic · olive'],['midnight','Midnight','Black glass · sea green'],['peach','Peach','Apricot satin · copper']];
+    const defaults = {theme:'obsidian',mode:'workspace',density:'comfortable',motion:true,chrome:false,view:'grid',sort:'name',review_style:'adaptive',review_width:'standard'};
+    const normalizeProfile = p => ({favorites:[],folders:[],colors:{},last_location:'0',last_studied:'0',studies:[],focus_enabled:false,selected_study:'all',recent_locations:[],recent_added:[],home_layout:{enabled:false,columns:3,items:[]},...p});
+    const state = {config:{...defaults,...boot.settings},profile:normalizeProfile(boot.profile),nodes:[],map:new Map(),childMap:new Map(),
+      page:boot.ui?.page || 'desk',location:boot.ui?.location || '0',filter:'all',query:'',limit:60,treeLimit:240,
+      expanded:new Set(),mobile:false,loaded:false,dialog:null,dialogData:{},busy:false,current:'0',studied:'',
+      history:[],forward:[],recentTab:'viewed',saveStatus:'Saved',failure:'',peek:new Set(),collapsedLectures:new Set(),boardLimit:100,menu:null};
+    if (state.config.mode === 'hybrid') state.config.mode = 'workspace';
+    const pending = new Map(); let sequence = 0, toastTimer, uiTimer, lastKeyCapture = false;
+    let configQueue = Promise.resolve(), configRevision = 0, configSaved = {...state.config}, configPending = 0;
+    let prefQueue = Promise.resolve(), prefRevision = 0, loadRevision = 0, focusBeforeDialog = null;
+    const now = () => boot.preview && boot.demoNow ? new Date(boot.demoNow) : new Date();
+    const request = (action, data = {}) => {
+      if (boot.preview) return demoRequest(action, data);
+      return new Promise((resolve,reject) => {
+        const id = `r${++sequence}`;
+        const timeout = setTimeout(() => {pending.delete(id); reject(new Error('Anki has not responded yet. Try Refresh after its current operation finishes.'));},20000);
+        pending.set(id,{resolve,reject,timeout});
+        const send = retries => {
+          if (!pending.has(id)) return;
+          if (typeof window.pycmd === 'function') window.pycmd(`atelier:v1:${boot.token}:`+JSON.stringify({id,action,data}));
+          else if (retries < 60) setTimeout(() => send(retries+1),50);
+          else {clearTimeout(timeout);pending.delete(id);reject(new Error('The Anki bridge is unavailable. Your original home is still available.'));}
+        }; send(0);
+      });
+    };
+    function receive(payload) {
+      if (payload.token !== boot.token) return;
+      const p = pending.get(payload.id); if (!p) return;
+      pending.delete(payload.id); clearTimeout(p.timeout);
+      payload.error ? p.reject(new Error(payload.error)) : p.resolve(payload.result);
+    }
+    const due = n => n ? n.review + n.learn : 0;
+    const fmt = n => Number(n || 0).toLocaleString();
+    const favorite = n => state.profile.favorites.includes(n.id);
+    const isFolder = n => !!(n?.children?.length || state.profile.folders.includes(n?.id));
+    const nicePath = p => String(p || '').split('::').join(' › ');
+    const byName = (a,b) => a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'});
+    const children = id => state.childMap.get(id) || [];
+    const hash = str => {let h=0;for(const c of str) h=((h<<5)-h+c.charCodeAt(0))|0;return h;};
+    const tone = n => ['violet','blue','rose','green','amber','cyan'].includes(state.profile.colors[n.id]) ? state.profile.colors[n.id] : ['violet','blue','green','amber','rose','cyan'][Math.abs(hash(n.path))%6];
+    const scope = () => Model.scope(state.nodes,state.profile);
+    const btn = (a,label,ico,cls='secondary',extra='') => `<button type="button" class="${cls}" data-action="${a}" ${extra}>${ico?icon(ico,16):''}<span>${label}</span></button>`;
+    const ib = (a,label,ico,extra='',cls='') => `<button type="button" class="icon-button ${cls}" data-action="${a}" title="${esc(label)}" aria-label="${esc(label)}" ${extra}>${icon(ico,17)}</button>`;
+    const getScroll = () => ({main:shadow.querySelector('.main')?.scrollTop||0,side:shadow.querySelector('.side-scroll')?.scrollTop||0});
+    let home=null; let bodyState = null, undoStudy = null; const quickPending=new Set();
+    const exactExams=n=>state.profile.studies.filter(s=>s.active&&s.deck_ids.length===1&&s.deck_ids[0]===n.id);
+    const inExam=n=>Model.belongs(state.nodes,Model.roots(state.nodes,state.profile.studies.filter(s=>s.active).flatMap(s=>s.deck_ids)),n.id);
+    const examButton=n=>btn('quick-exam',exactExams(n).length?'Exam active':inExam(n)?'Pin as own exam':'Set as exam',exactExams(n).length?'check':'focus',`exam-pin ${exactExams(n).length?'is-active':''}`,`data-id="${n.id}" aria-pressed="${!!exactExams(n).length}" title="${exactExams(n).length?'Remove this exam from active studies':'Add this folder as an upcoming exam in one click'}"`);
+    function setHost() {
+      host.dataset.theme=state.config.theme;host.dataset.density=state.config.density;host.dataset.motion=state.config.motion?'on':'off';
+      const workspace = state.loaded && state.config.mode !== 'native';
+      host.dataset.workspace = workspace ? 'true' : 'false';
+      let sheet = document.getElementById('atelier-host-style');
+      if (!sheet) {sheet=document.createElement('style');sheet.id='atelier-host-style';document.head.append(sheet);}
+      // This sheet targets only our host. Never tint body/html or game typography.
+      const css = '#atelier-root{all:initial!important;display:block!important;position:fixed!important;z-index:2147483000!important;box-sizing:border-box!important;isolation:isolate!important;transform:none!important;zoom:1!important;direction:ltr!important;}' +
+        (workspace ? '#atelier-root{inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;}' : '#atelier-root{inset:auto 20px 20px auto!important;width:min(430px,calc(100vw - 32px))!important;height:auto!important;}');
+      if (sheet.textContent !== css) sheet.textContent=css;
+      if (workspace && !bodyState) {
+        bodyState = {inert:document.body.hasAttribute('inert'),hidden:document.body.getAttribute('aria-hidden')};
+        document.body.setAttribute('inert','');document.body.setAttribute('aria-hidden','true');
+      } else if (!workspace && bodyState) {
+        if (!bodyState.inert) document.body.removeAttribute('inert');
+        bodyState.hidden === null ? document.body.removeAttribute('aria-hidden') : document.body.setAttribute('aria-hidden',bodyState.hidden);
+        bodyState=null;
+      }
+      home?.sync();
+      frame.inert=!!(state.dialog || state.mobile);
+      if (state.mobile) frame.inert=false; // Drawer focus is trapped below; main is inert separately.
+      const computed=getComputedStyle(host);
+      window.dispatchEvent(new CustomEvent('atelier:theme-change',{detail:{theme:state.config.theme,active:workspace,tokens:Object.fromEntries(['bg','text','accent','panel','muted','line'].map(k=>[k,computed.getPropertyValue('--'+k).trim()]))}}));
+    }
+    function updateThemeControls() {
+      for (const tile of shadow.querySelectorAll('[data-theme-choice]')) {
+        const selected=tile.dataset.themeChoice===state.config.theme;tile.classList.toggle('selected',selected);tile.setAttribute('aria-pressed',String(selected));
+        tile.querySelector('.theme-check').textContent=selected?'✓':'';
+      }
+      for (const toggle of shadow.querySelectorAll('[data-setting]')) toggle.setAttribute('aria-checked',String(!!state.config[toggle.dataset.setting]));
+      const status=shadow.getElementById('save-state');if(status)status.textContent=state.saveStatus;
+      const label=shadow.querySelector('.appearance-link small');if(label)label.textContent=(THEMES.find(t=>t[0]===state.config.theme)?.[1]||'Appearance')+' · 8 themes';
+    }
+    function updateConfig(patch, redraw=false) {
+      const revision=++configRevision;configPending++;
+      state.config={...state.config,...patch};state.saveStatus='Saving…';setHost();updateThemeControls();
+      if(redraw)render();
+      const operation=configQueue.then(()=>request('settings',patch)).then(saved=>{
+        configSaved={...defaults,...saved};
+        if(revision===configRevision){state.config={...configSaved};state.saveStatus='Saved';setHost();updateThemeControls();}
+        return true;
+      }).catch(e=>{
+        if(revision===configRevision){state.config={...configSaved};state.saveStatus='Not saved — try again';setHost();updateThemeControls();if(redraw)render();}
+        announce(e.message,true);return false;
+      }).finally(()=>{configPending--;});
+      configQueue=operation.then(()=>{});return operation;
+    }
+    function updatePref(data, redraw=true) {
+      prefRevision++;
+      const op=prefQueue.then(()=>request('preference',data)).then(p=>{
+        state.profile=normalizeProfile(p);if(redraw)render();return true;
+      }).catch(e=>{announce(e.message,true);return false;});
+      prefQueue=op.then(()=>{});return op;
+    }
+    function remember() {
+      clearTimeout(uiTimer);uiTimer=setTimeout(()=>request('ui',{page:state.page,location:state.location,filter:state.filter,query:state.query}).catch(()=>{}),150);
+    }
+    function stateLocation(){return {page:state.page,location:state.location,query:state.query,filter:state.filter};}
+    function go(page,location='0',history=true) {
+      closeMenu(false);
+      if(location!=='0'&&!state.map.has(location))return;
+      if(history && (state.page!==page || state.location!==location || state.query)){state.history.push(stateLocation());state.history=state.history.slice(-80);state.forward=[];}
+      state.page=page;state.location=location;state.query='';state.filter='all';state.limit=60;state.mobile=false;
+      let n=state.map.get(location);const seen=new Set();while(n&&!seen.has(n.id)){seen.add(n.id);state.expanded.add(n.id);n=state.map.get(n.parent);}
+      render({resetMain:true});remember();
+      if(location!=='0')updatePref({key:'last_location',value:location},false);
+    }
+    function travel(back) {
+      const source=back?state.history:state.forward,target=back?state.forward:state.history;
+      if(!source.length)return;
+      const item=source.pop();target.push(stateLocation());Object.assign(state,item);state.mobile=false;render({resetMain:true});remember();
+    }
+    function sidebarTree() {
+      const stack=[...children('0')].reverse().map(n=>({n,depth:0})),output=[];let count=0;
+      while(stack.length && count<state.treeLimit){
+        const {n,depth}=stack.pop();count++;
+        const nested=children(n.id),expanded=state.expanded.has(n.id),selected=state.page==='library'&&state.location===n.id;
+        output.push(`<div class="tree-row ${selected?'selected':''}" style="--depth:${Math.min(depth,8)}" data-node="${n.id}" data-drop="${n.filtered?'':n.id}">
+          ${nested.length?`<button type="button" class="tree-toggle" data-action="expand" data-id="${n.id}" aria-label="${expanded?'Collapse':'Expand'} ${esc(n.name)}" aria-expanded="${expanded}">${icon(expanded?'down':'chevron',12)}</button>`:'<span class="tree-spacer"></span>'}
+          <button type="button" class="tree-open" data-action="navigate" data-id="${n.id}" title="${esc(nicePath(n.path))}" ${selected?'aria-current="page"':''}><span class="tree-art tone-${tone(n)}">${folderArt(isFolder(n))}</span><span class="tree-name">${esc(n.name)}</span>${nested.length?`<small>${nested.length}</small>`:''}</button>${exactExams(n).length?ib('quick-exam','Remove '+n.name+' from active exams','check',`data-id="${n.id}"`,'tree-active'):''}</div>`);
+        if(expanded)for(const child of [...nested].reverse())stack.push({n:child,depth:depth+1});
+      }
+      return output.join('')+(stack.length?btn('tree-more','Show more folders','down','quiet'):'' );
+    }
+    function sidebar() {
+      const f=scope(),recent=state.profile.recent_locations.map(id=>state.map.get(id)).filter(Boolean).slice(0,3);
+      const badge=f.enabled?fmt(due(f.totals)):'';
+      return `<aside class="sidebar ${state.mobile?'mobile-open':''}" aria-label="Folder navigation">
+        <div class="brand-row"><button type="button" class="brand" data-action="home" aria-label="Atelier study desk">${brand}<span><strong>atelier<span class="brand-dot">.</span></strong><small>YOUR SPACE TO LEARN · ${esc(boot.version)}</small></span></button>${ib('close-nav','Close navigation','close','','drawer-close')}</div>
+        <nav class="nav-group" aria-label="Main navigation">
+          ${btn('home','Study desk','focus',`nav-row ${state.page==='desk'?'active':''}`)}
+          ${btn('page','All folders','folder',`nav-row ${state.page==='library'?'active':''}`,'data-page="library"')}
+          ${btn('page','Ready to review'+(badge?`<b class="nav-badge">${badge}</b>`:''),'clock',`nav-row ${state.page==='due'?'active':''}`,'data-page="due"')}
+          ${btn('page','Recent','refresh',`nav-row ${state.page==='recent'?'active':''}`,'data-page="recent"')}
+          ${btn('page','Favorites','star',`nav-row ${state.page==='favorites'?'active':''}`,'data-page="favorites"')}
+        </nav>
+        <div class="side-scroll" tabindex="0" aria-label="Scrollable folders and shortcuts">
+          ${f.enabled&&f.active.length?`<div class="side-label active-label">ACTIVE STUDIES</div><div class="side-studies">${f.active.map(s=>`<div class="side-exam"><button type="button" class="side-study" data-action="select-study" data-id="${s.id}" title="Choose lectures in ${esc(s.name)}"><span class="study-indicator"></span><span>${esc(s.name)}</span>${icon('chevron',12)}</button>${ib('finish-study','Remove '+s.name+' from active exams','close',`data-id="${s.id}"`,'side-remove')}</div>`).join('')}</div>`:''}
+          <div class="side-label"><span>FOLDERS</span><span>${ib('collapse-all','Collapse all folders','layers')}${ib('create','New folder','plus','data-kind="folder" data-parent="0"')}</span></div>
+          <div class="tree">${sidebarTree()||'<p class="side-note">Your existing folders will appear here.</p>'}</div>
+          ${recent.length?`<div class="side-label recent-label">PICK UP WHERE YOU LEFT OFF</div><div class="recent-links">${recent.map(n=>btn('navigate',`<span class="truncate">${esc(n.name)}</span>`,'clock','recent-link',`data-id="${n.id}" title="${esc(nicePath(n.path))}"`)).join('')}</div>`:''}
+        </div>
+        <div class="side-bottom">${btn('appearance',`<strong>Change the atmosphere</strong><small>${THEMES.find(t=>t[0]===state.config.theme)?.[1]||'Appearance'} · 8 themes</small>`,'palette','appearance-link')}
+          ${btn('native','Shared home & widgets','external','native-link')}
+          <button type="button" class="credit" data-action="website">DAEDALUS WORKS<small>daedalusworks.net</small></button>
+        </div>
+      </aside>`;
+    }
+    function topbar(){
+      const labels={desk:'Study desk',library:'Folder library',due:'Ready to review',recent:'Recent',favorites:'Favorites'};
+      return `<header class="topbar"><div class="topbar-left">${ib('mobile','Open navigation','menu','','mobile-button')}<span>${labels[state.page]||'Study desk'}</span>${boot.preview?'<b class="sample-label">SAMPLE COLLECTION</b>':''}</div><div class="top-actions"><label class="search">${icon('search',16)}<input id="atelier-search" type="search" placeholder="Search all folders…" aria-label="Search all folders" maxlength="200" value="${esc(state.query)}" autocomplete="off"><kbd>/</kbd></label>${ib('refresh','Refresh library','refresh')}${ib('appearance','Appearance and compatibility','palette')}</div></header>`;
+    }
+    function dateBadge(study){
+      const days=Model.dayState(study.date,now());
+      if(days===null)return '<span class="date-label">No exam date</span>';
+      return `<span class="date-label ${days<0?'past':''}">${icon('calendar',13)}${days===0?'Today':days===1?'Tomorrow':days<0?'Date passed · still active':`${days} days to go`}</span>`;
+    }
+    function dateTile(study){
+      if(!study.date)return `<span class="date-tile">${icon('book',22)}</span>`;
+      const d=new Date(study.date+'T12:00:00');
+      return `<span class="date-tile"><small>${esc(d.toLocaleDateString(undefined,{month:'short'}))}</small><strong>${d.getDate()}</strong></span>`;
+    }
+    function focusPanel(){
+      const f=scope(),count=f.selected.length,tot=f.totals;
+      const title=f.enabled?(count===1?f.selected[0].name:count?'A clear focus. Your own pace.':'Room for what’s next.'):'Your next exam, one click away.';
+      const desc=f.enabled?(count?'Choose a lecture below. Your folders stay separate, exactly as you organized them.':'Pin an exam folder to bring its lectures here. Finished exams stay in All folders.'):'Use “Set as exam” on any folder, or right-click it in the sidebar. Add a date later.';
+      return `<section class="focus-panel quiet-focus ${!f.enabled?'onboarding':''}" aria-label="Active study overview">
+        <div class="focus-intro"><div class="eyebrow"><span class="status-dot"></span>${count&&f.enabled?'YOUR ACTIVE EXAMS':'YOUR STUDY DESK'}</div><h1>${esc(title)}</h1><p>${desc}</p>
+          <div class="focus-actions">${count&&f.enabled?btn('choose-lectures','Choose a lecture','layers','primary'):btn('page','Find an exam folder','folder','primary','data-page="library"')}${btn('studies','Manage exams','focus','quiet')}</div>
+          ${f.enabled&&f.missing.length?`<button type="button" class="missing-note" data-action="studies">${icon('info',14)}${f.missing.length} selected decks are missing. Check the setup.</button>`:''}
+        </div>
+        <div class="focus-agenda">${f.enabled&&count?`<div class="agenda-label">UPCOMING ${btn('new-study','Custom setup','plus','quiet')}</div>${f.selected.slice(0,3).map(x=>`<div class="agenda-wrap"><button type="button" class="agenda-item" data-action="select-study" data-id="${x.id}">${dateTile(x)}<span class="agenda-copy"><strong>${esc(x.name)}</strong>${dateBadge(x)}</span></button><div class="agenda-controls">${ib('edit-study',x.date?'Edit exam date':'Add an optional exam date','calendar',`data-id="${x.id}"`)}${ib('finish-study','Remove '+x.name+' from active exams','close',`data-id="${x.id}"`)}</div></div>`).join('')}`:`<div class="quick-guide"><span class="guide-symbol">${icon('focus',25)}</span><strong>Pin the exam. Keep the lectures.</strong><p>No forms to get started.<br>No decks moved or combined.</p><small>Right-click a folder → Set as upcoming exam</small></div>`}</div>
+        ${f.enabled&&count?`<div class="focus-footer"><div class="focus-metric review"><strong>${fmt(tot.review)}</strong><span>Review available</span></div><div class="focus-metric learn"><strong>${fmt(tot.learn)}</strong><span>Learning</span></div><div class="focus-metric new"><strong>${fmt(tot.new)}</strong><span>New available</span></div><span class="scope-note">${icon('shield',15)}Selected exams only<br>Anki’s limits still apply</span></div>`:''}</section>`;
+    }
+    function scopeBar(){
+      const f=scope();
+      if(!f.enabled)return '';
+      return `<div class="scope-bar"><span>${icon('focus',14)}Active focus</span><select id="active-study-selector" aria-label="Active study"><option value="all">All active studies${f.active.length?' ('+f.active.length+')':''}</option>${f.active.map(s=>`<option value="${s.id}" ${state.profile.selected_study===s.id?'selected':''}>${esc(s.name)}</option>`).join('')}</select>${btn('new-study','Add study','plus','quiet')}<span class="scope-spacer"></span>${btn('page','See all folders','arrow','quiet','data-page="library"')}</div>`;
+    }
+    function breadcrumb(){
+      const path=[];let n=state.map.get(state.location);const seen=new Set();
+      while(n&&!seen.has(n.id)){seen.add(n.id);path.unshift(n);n=state.map.get(n.parent);}
+      const parent=state.map.get(state.location)?.parent||'0';
+      return `<div class="location-bar"><div class="history-buttons">${ib('back','Back to previous location','back',!state.history.length?'disabled':'')}${ib('forward','Forward','arrow',!state.forward.length?'disabled':'')}${ib('up','Up to parent folder','up',state.location==='0'?'disabled':'')}</div><nav class="breadcrumbs" aria-label="Current folder path">${btn('page','All folders','home','crumb','data-page="library" data-drop="0"')}${path.map((n,i)=>`${icon('chevron',12)}<button type="button" class="crumb ${i===path.length-1?'current':''}" data-action="navigate" data-id="${n.id}" ${i===path.length-1?'aria-current="page"':''} title="${esc(n.name)}">${esc(n.name)}</button>`).join('')}</nav>${state.location!=='0'?btn('navigate','Parent folder','up','parent-link',`data-id="${parent}"`):''}</div>`;
+    }
+    function peekRows(n){
+      const nested=children(n.id),shown=state.peek.has(n.id),limit=shown?32:3;
+      if(!nested.length)return '';
+      return `<div class="card-shortcuts card-peek"><div class="peek-label">INSIDE THIS FOLDER</div>${nested.slice(0,limit).map(c=>`<div class="peek-row"><button type="button" data-action="navigate" data-id="${c.id}" title="Open ${esc(nicePath(c.path))}">${icon(isFolder(c)?'folder':'layers',14)}<span>${esc(c.name)}</span>${icon('chevron',11)}</button>${!children(c.id).length?ib('study','Study only '+c.name,'play',`data-id="${c.id}"`,'peek-study'):''}</div>${children(c.id).length===1?`<button type="button" class="peek-grandchild" data-action="navigate" data-id="${children(c.id)[0].id}">${icon('chevron',10)}<span>${esc(children(c.id)[0].name)}</span></button>`:''}`).join('')}${nested.length>3?btn('peek',shown?'Show less':`Show ${Math.min(nested.length,32)-3} more`,shown?'up':'down','peek-more',`data-id="${n.id}" aria-expanded="${shown}"`):''}${shown&&nested.length>32?btn('navigate',`Open all ${nested.length} items`,'arrow','peek-more',`data-id="${n.id}"`):''}</div>`;
+    }
+    function deckCard(n){
+      const folder=isFolder(n),nested=children(n.id),path=nicePath(n.path);
+      return `<article class="deck-card tone-${tone(n)} ${folder?'folder-card':'stack-card'}" data-node="${n.id}" data-drop="${n.filtered?'':n.id}" draggable="${!n.filtered}" aria-label="${esc(n.name)} ${folder?'folder':'deck'}">
+        <div class="card-head"><button type="button" class="card-art" data-action="navigate" data-id="${n.id}" aria-label="Open ${esc(n.name)}">${folderArt(folder)}</button><div class="card-controls">${ib('favorite',`${favorite(n)?'Unpin':'Pin'} ${n.name}`,'star',`data-id="${n.id}" aria-pressed="${favorite(n)}"`,favorite(n)?'starred':'')}${ib('organize','Organize '+n.name,'more',`data-id="${n.id}"`)}</div></div>
+        <div class="card-type">${n.filtered?'FILTERED DECK':folder?'FOLDER':'DECK'}</div><button type="button" class="card-title" data-action="navigate" data-id="${n.id}" title="${esc(path)}">${esc(n.name)}</button>
+        <p class="card-description">${folder?nested.length+(nested.length===1?' item':' items')+' · nothing combined':n.filtered?'Managed by Anki':'Individual lecture deck'}</p>
+        ${examButton(n)}
+        ${state.query||state.page==='recent'||state.page==='favorites'?`<p class="card-path" title="${esc(path)}">${esc(n.parent==='0'?'All folders':nicePath(state.map.get(n.parent)?.path||''))}</p>`:''}
+        ${peekRows(n)}
+        <div class="countline"><span class="review">${fmt(n.review)} review</span><span class="learn">${fmt(n.learn)} learn</span><span class="new">${fmt(n.new)} new</span></div>
+        <div class="card-bottom">${btn('navigate',folder?'Browse contents':'Open deck','arrow','open-card',`data-id="${n.id}"`)}${ib('study',folder?'Study whole folder':'Study only '+n.name,'play',`data-id="${n.id}"`,'quick-study')}</div></article>`;
+    }
+    function lectureRows(study){
+      const roots=Model.roots(state.nodes,study.deck_ids),start=roots.length===1&&children(roots[0].id).length?children(roots[0].id):roots;
+      const stack=[...start].reverse().map(n=>({n,depth:0})),rows=[];const seen=new Set();let total=0;
+      while(stack.length&&rows.length<state.boardLimit){
+        const {n,depth}=stack.pop();if(seen.has(n.id))continue;seen.add(n.id);total++;
+        const nested=children(n.id),key=study.id+':'+n.id,closed=state.collapsedLectures.has(key);
+        if(state.page!=='due'||due(n)>0||nested.length){
+          rows.push(`<div class="lecture-row ${nested.length?'lecture-branch':''} tone-${tone(n)}" data-node="${n.id}" style="--level:${Math.min(depth,8)}"><div class="lecture-ident">${nested.length?ib('lecture-expand',closed?'Expand lectures':'Collapse lectures',closed?'chevron':'down',`data-id="${key}" aria-expanded="${!closed}"`,'lecture-toggle'):`<span class="lecture-leaf-icon">${icon('layers',16)}</span>`}<button type="button" class="lecture-name" data-action="navigate" data-id="${n.id}" title="${esc(nicePath(n.path))}"><strong>${esc(n.name)}</strong><small>${nested.length?nested.length+(nested.length===1?' item':' items')+' · expand or open':esc(nicePath(state.map.get(n.parent)?.path||'Individual deck'))}</small></button></div><div class="lecture-counts"><span class="review">${fmt(n.review)}<small>review</small></span><span class="learn">${fmt(n.learn)}<small>learn</small></span><span class="new">${fmt(n.new)}<small>new</small></span></div><div class="lecture-actions">${nested.length?btn('navigate','Open','folder','quiet',`data-id="${n.id}"`):btn('study','Study','play','lecture-study',`data-id="${n.id}" title="Study only ${esc(n.name)}"`)}${ib('organize','Options for '+n.name,'more',`data-id="${n.id}"`)}</div></div>`);
+        }
+        if(!closed)for(const child of [...nested].reverse())stack.push({n:child,depth:depth+1});
+      }
+      return rows.join('')+(stack.length?btn('board-more','Show more lectures','down','quiet board-more'):'') || `<div class="empty small"><p>No available reviews in these lectures right now.</p></div>`;
+    }
+    function studyBoard(){
+      const f=scope();
+      if(!f.selected.length)return emptyState();
+      return `<div class="exam-board" id="lecture-board" tabindex="-1">${f.selected.map(study=>{
+        const roots=Model.roots(state.nodes,study.deck_ids);
+        return `<section class="exam-section" aria-label="Lectures in ${esc(study.name)}"><header class="exam-section-head"><span class="exam-section-symbol">${icon('folder',20)}</span><div><h3>${esc(study.name)}</h3><p>${roots.length===1?esc(nicePath(roots[0].path)):roots.length+' selected folders and decks'}</p></div><div class="exam-section-actions">${roots.length===1?btn('navigate','Browse folder','arrow','quiet',`data-id="${roots[0].id}"`):''}${ib('edit-study','Edit '+study.name,'edit',`data-id="${study.id}"`)}${ib('finish-study','Remove '+study.name+' from active exams','close',`data-id="${study.id}"`)}</div></header><div class="lecture-table">${lectureRows(study)}</div>${roots.length===1&&children(roots[0].id).length?`<footer class="exam-section-foot"><span>Study buttons open individual decks. Nothing is merged.</span>${btn('study','Study entire folder','play','quiet',`data-id="${roots[0].id}"`)}</footer>`:''}</section>`;
+      }).join('')}</div>`;
+    }
+    function visibleNodes(){
+      let items;
+      if(state.query){const q=state.query.toLocaleLowerCase();items=state.nodes.filter(n=>nicePath(n.path).toLocaleLowerCase().includes(q));}
+      else if(state.page==='favorites')items=state.nodes.filter(favorite);
+      else if(state.page==='recent')items=(state.recentTab==='added'?state.profile.recent_added.map(x=>x.id):state.profile.recent_locations).map(id=>state.map.get(id)).filter(Boolean);
+      else if(state.page==='desk'||state.page==='due')items=scope().roots;
+      else items=children(state.location);
+      if(state.page==='due'&&!state.query||state.filter==='due')items=items.filter(n=>due(n)>0);
+      if(state.filter==='folders')items=items.filter(isFolder);
+      if(state.filter==='decks')items=items.filter(n=>!isFolder(n));
+      if(state.page==='recent'&&!state.query)return [...items];
+      const recently=new Map(state.profile.recent_locations.map((id,i)=>[id,i]));
+      return [...items].sort(state.config.sort==='due'?(a,b)=>due(b)-due(a)||byName(a,b):state.config.sort==='recent'?(a,b)=>(recently.get(a.id)??1e9)-(recently.get(b.id)??1e9)||byName(a,b):(a,b)=>Number(isFolder(b))-Number(isFolder(a))||byName(a,b));
+    }
+    function emptyState(){
+      let title='A clear place to start.',body='Create a folder for a subject, then add a deck inside it.',action=btn('create','New folder','plus','primary','data-kind="folder"');
+      if(state.query){title='No matching folders or decks.';body='Search looks through the whole library, including old exams and nested folders.';action=btn('clear-search','Clear search','search');}
+      else if(state.page==='desk'&&scope().enabled){title='Nothing selected for today.';body='Choose the folders that belong to your next exam. Existing cards stay exactly where they are.';action=btn('studies','Choose active studies','focus','primary');}
+      else if(state.page==='due'){title='No available reviews in this view.';body=scope().enabled?'This only reflects your selected studies. Anki’s daily limits still apply; this is not a measure of exam readiness.':'Anki is not listing review or learning cards for these decks right now.';action=btn('home','Back to study desk','back');}
+      else if(state.page==='recent'){title=state.recentTab==='added'?'New decks will appear here.':'Your next visit is one click away.';body=state.recentTab==='added'?'Atelier tracks decks first seen after this version starts. Your entire existing collection is not mislabeled as new.':'Open a folder or deck and it will appear here. These are shortcuts, not copies.';action=btn('page','Browse your folders','folder','primary','data-page="library"');}
+      else if(state.page==='favorites'){title='Keep your go-to decks close.';body='Star any folder or deck to pin a shortcut here, without moving it.';action=btn('page','Browse folders','folder','primary','data-page="library"');}
+      else if(state.location!=='0'){title='You’re inside '+state.map.get(state.location)?.name+'.';body='This deck has no subfolders. Study its cards, or create something inside it.';action=btn('study','Study this deck','play','primary',`data-id="${state.location}"`)+btn('create','New deck inside','plus','secondary','data-kind="deck"');}
+      return `<div class="empty">${icon('folder',30)}<h3>${esc(title)}</h3><p>${esc(body)}</p><div>${action}</div></div>`;
+    }
+    function results(){if(!state.query&&['desk','due'].includes(state.page)&&scope().enabled)return studyBoard();const items=visibleNodes();return `<div class="cards ${state.page==='desk'?'focus-cards':''} ${state.config.view==='list'?'list':''}" id="card-list">${items.length?items.slice(0,state.limit).map(deckCard).join(''):emptyState()}</div>${items.length>state.limit?btn('more-results',`Show ${Math.min(60,items.length-state.limit)} more`,'down','secondary show-more'):''}<div class="library-foot"><span>${items.length} ${items.length===1?'item':'items'}${state.query?' · Search across all folders':''}${state.page==='recent'&&state.recentTab==='added'?' · First observed by Atelier; not original card creation dates':''}</span>${btn('help','Navigation tips','info','quiet')}</div>`;}
+    function librarySection(){
+      const here=state.map.get(state.location),f=scope();
+      const heading=state.query?'Search results':state.page==='desk'?(f.enabled?'Choose a lecture':'Your folders'):state.page==='recent'?'Pick up where you left off':state.page==='favorites'?'Within reach':state.page==='due'?(f.enabled?'Reviews in your active studies':'Available reviews'):here?here.name:'All folders';
+      return `<section class="library" aria-label="Folders and decks">${state.page==='library'&&!state.query?breadcrumb():''}
+        <div class="section-heading"><div><h2>${esc(heading)}</h2>${state.page==='library'?'<p>Preview the contents below. Pin the exam folder to keep its lectures close.</p>':state.page==='desk'&&f.enabled?'<p>Open a branch, or study one lecture at a time.</p>':''}</div><div class="library-actions">${here?examButton(here):''}${here?btn('study',children(here.id).length?'Study entire folder':'Study deck','play','secondary',`data-id="${here.id}"`):''}${btn('create','New deck','plus','quiet','data-kind="deck"')}${btn('create','New folder','folder','secondary','data-kind="folder"')}</div></div>
+        <div class="library-controls ${!state.query&&['desk','due'].includes(state.page)&&f.enabled?'board-controls':''}"><div class="tabs" role="group" aria-label="Filter folders">${(state.page==='recent'?[['viewed','Recently opened'],['added','Recently added']]:[['all','All items'],['folders','Folders'],['decks','Decks']]).map(([id,label])=>`<button type="button" class="tab ${(state.page==='recent'?state.recentTab:state.filter)===id?'active':''}" data-action="filter" data-filter="${id}" aria-pressed="${(state.page==='recent'?state.recentTab:state.filter)===id}">${label}</button>`).join('')}</div><div class="view-tools"><select id="atelier-sort" aria-label="Sort folders"><option value="name" ${state.config.sort==='name'?'selected':''}>Name A–Z</option><option value="due" ${state.config.sort==='due'?'selected':''}>Available reviews</option><option value="recent" ${state.config.sort==='recent'?'selected':''}>Recently opened</option></select><div class="view-switch">${ib('view','Grid view','grid',`data-view="grid" aria-pressed="${state.config.view==='grid'}"`,state.config.view==='grid'?'active':'')}${ib('view','List view','list',`data-view="list" aria-pressed="${state.config.view==='list'}"`,state.config.view==='list'?'active':'')}</div></div></div><div id="library-results" aria-live="polite">${results()}</div></section>`;
+    }
+    function render(options={}) {
+      const pos=getScroll(),active=shadow.activeElement;
+      const focus=active&&frame.contains(active)?{action:active.dataset.action,id:active.dataset.id,field:active.id}:null;
+      setHost();
+      if(state.config.mode==='native'||!state.loaded){
+        frame.innerHTML=`<div class="native-launcher"><span class="launcher-icon">${icon('focus',20)}</span><span><strong>atelier · ${state.failure?'Recovery':state.loaded?'Study desk':'Loading'}</strong><small>${state.failure?'The original home is available.':state.loaded?'Your folders and active studies, one click away.':'Reading your deck library…'}</small></span>${btn(state.failure?'refresh':'workspace',state.failure?'Retry':'Open','arrow','primary')}</div>`;
+        frame.style.display=state.loaded&&home?.hasRail()?'none':'';
+      }else{
+        frame.style.display='';
+        frame.innerHTML=`<div class="layout">${sidebar()}<button type="button" class="side-scrim ${state.mobile?'open':''}" data-action="close-nav" aria-label="Dismiss navigation"></button><main class="main" tabindex="-1" ${state.mobile?'inert':''}>${topbar()}<div class="main-inner">${state.page==='desk'&&!state.query?`<div class="desk-heading"><span>${esc(now().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}))}</span><span class="desk-status">${icon('check',13)}Your library, preserved</span></div>${focusPanel()}${scopeBar()}`:state.page==='due'?scopeBar():''}${librarySection()}<div class="extension-slot"><slot name="atelier-widgets"></slot></div><footer class="help-strip"><span>${icon('shield',14)}${scope().enabled?'Focus changes what you see, not when cards are due.':esc(state.studied||'Your decks stay in Anki’s native structure.')}</span><div>${btn('import','Import',null,'quiet')}${btn('stats','Statistics',null,'quiet')}${btn('native','Shared home & widgets','external','quiet')}${btn('home-edit','Edit home','edit','quiet')}</div></footer></div></main></div>`;
+        const main=shadow.querySelector('.main'),side=shadow.querySelector('.side-scroll');
+        main.scrollTop=options.resetMain?0:pos.main;side.scrollTop=pos.side;
+        if(focus&&!options.resetMain&&!state.dialog){const target=focus.field?shadow.getElementById(focus.field):[...frame.querySelectorAll('[data-action]')].find(el=>el.dataset.action===focus.action&&el.dataset.id===focus.id);target?.focus({preventScroll:true});}
+      }
+      setHost();syncCapture();
+    }
+    async function load(){
+      const rev=++loadRevision;
+      try{
+        await prefQueue;
+        const loadedPrefRevision=prefRevision,loadedConfigRevision=configRevision;
+        const data=await request('load');if(rev!==loadRevision)return;
+        state.nodes=Array.isArray(data.nodes)?data.nodes:[];state.map=new Map(state.nodes.map(n=>[n.id,n]));state.childMap=new Map();
+        for(const n of state.nodes){if(!state.childMap.has(n.parent))state.childMap.set(n.parent,[]);state.childMap.get(n.parent).push(n);}
+        for(const kids of state.childMap.values())kids.sort(byName);
+        if(loadedPrefRevision===prefRevision)state.profile=normalizeProfile(data.profile);state.current=data.current;state.studied=data.studied;
+        if(!configPending&&loadedConfigRevision===configRevision){state.config={...defaults,...data.settings};if(state.config.mode==='hybrid')state.config.mode='workspace';configSaved={...state.config};}
+        if(state.location!=='0'&&!state.map.has(state.location))state.location='0';
+        state.loaded=true;state.failure='';render();
+        if(data.notice)announce(data.notice,true);
+        if(boot.openSettings){boot.openSettings=false;openDialog('appearance');}
+      }catch(e){if(rev!==loadRevision)return;state.loaded=false;state.failure=e.message;closeDialog(true);render();announce(e.message,true);}
+    }
+    function announce(text,error=false){
+      shadow.querySelector('.toast')?.remove();clearTimeout(toastTimer);
+      const el=document.createElement('div');el.className='toast';el.setAttribute('role',error?'alert':'status');el.innerHTML=icon(error?'info':'check',17)+`<span>${esc(text)}</span>`;app.append(el);toastTimer=setTimeout(()=>el.remove(),6500);
+    }
+    function themeTiles(){
+      return THEMES.map(([id,name,desc])=>`<button type="button" class="theme-tile ${state.config.theme===id?'selected':''}" data-action="theme" data-theme-choice="${id}" aria-label="${name}: ${desc}" aria-pressed="${state.config.theme===id}"><span class="mini-screen" data-theme="${id}"><span class="mini-side"><i></i><i></i><i></i></span><span class="mini-content"><span class="mini-focus"><i></i><i></i></span><span class="mini-folders"><i></i><i></i><i></i></span></span></span><span class="tile-label"><strong>${name}</strong><b class="theme-check">${state.config.theme===id?'✓':''}</b></span><small>${desc}</small></button>`).join('');
+    }
+    function parentOptions(selected,exclude=''){
+      const source=state.map.get(exclude);
+      return `<option value="0" ${selected==='0'?'selected':''}>All folders (top level)</option>`+state.nodes.filter(n=>!n.filtered&&n.id!==exclude&&(!source||!n.path.startsWith(source.path+'::'))).sort((a,b)=>a.path.localeCompare(b.path)).map(n=>`<option value="${n.id}" ${selected===n.id?'selected':''}>${esc(nicePath(n.path))}</option>`).join('');
+    }
+    function studyPicker(){
+      const q=String(state.dialogData.search||'').toLocaleLowerCase(),selected=new Set(state.dialogData.draft.deck_ids);
+      const rows=state.nodes.filter(n=>!q||nicePath(n.path).toLocaleLowerCase().includes(q));
+      const shown=rows.slice(0,state.dialogData.limit||80);
+      return `${shown.map(n=>`<label class="picker-row ${selected.has(n.id)?'checked':''}"><input type="checkbox" data-pick-deck="${n.id}" ${selected.has(n.id)?'checked':''}><span class="picker-art tone-${tone(n)}">${folderArt(isFolder(n))}</span><span><strong>${esc(n.name)}</strong><small>${esc(n.parent==='0'?'All folders':nicePath(state.map.get(n.parent)?.path||''))}</small></span>${n.children.length?`<small>${n.children.length} inside</small>`:''}</label>`).join('')||'<p class="note">No matching folders.</p>'}${rows.length>shown.length?btn('picker-more','Show more matches','down','quiet'):''}`;
+    }
+    function pickerSummary(){
+      const draft=state.dialogData.draft,roots=Model.roots(state.nodes,draft.deck_ids),missing=draft.deck_ids.filter(id=>!state.map.has(id));
+      return `${roots.length} ${roots.length===1?'folder / deck':'folders / decks'} selected. Subfolders are included automatically.${missing.length?` ${missing.length} selection(s) are no longer in the library.`:''}`;
+    }
+    function studyRows(){
+      const studies=[...state.profile.studies].sort((a,b)=>Number(b.active)-Number(a.active)||(a.date||'9999').localeCompare(b.date||'9999'));
+      return studies.length?studies.map(s=>{
+        const roots=Model.roots(state.nodes,s.deck_ids),tot=Model.totals(roots),missing=s.deck_ids.filter(id=>!state.map.has(id)).length;
+        return `<article class="study-row ${s.active?'':'finished'}">${dateTile(s)}<div class="study-row-text"><strong>${esc(s.name)}</strong><small>${s.active?'Active':'Finished'} · ${roots.length} folders / decks${s.active?' · '+fmt(due(tot))+' available reviews':''}${missing?' · '+missing+' missing':''}</small>${s.active?dateBadge(s):''}</div><div class="study-row-actions">${ib('edit-study','Edit '+s.name,'edit',`data-id="${s.id}"`)}${btn('toggle-study',s.active?'Finish':'Reactivate',s.active?'check':'refresh','secondary',`data-id="${s.id}"`)}${ib('remove-study','Remove study shortcut '+s.name,'close',`data-id="${s.id}"`)}</div></article>`;
+      }).join(''):'<div class="empty small"><h3>Your next exam starts here.</h3><p>Choose decks you already have. Nothing gets copied, moved, suspended or rescheduled.</p></div>';
+    }
+    function openDialog(type,data={}){
+      if(state.busy)return;
+      if(!state.dialog)focusBeforeDialog=shadow.activeElement;
+      state.mobile=false;state.dialog=type;state.dialogData={...data};
+      if(type==='study-edit'){
+        const saved=state.profile.studies.find(s=>s.id===data.id);
+        state.dialogData.draft=saved?JSON.parse(JSON.stringify(saved)):{id:'study_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),name:'',date:'',deck_ids:data.deck?[data.deck]:[],active:true};
+        state.dialogData.limit=80;state.dialogData.search='';
+      }
+      if(type==='home-edit'){
+        const prefs=state.profile.home_layout||{enabled:false,columns:3,items:[]};
+        const widgets=home?.list()||[], live=new Map(widgets.map(w=>[w.id,w]));
+        const ordered=[...prefs.items.map(x=>({...x,...(live.get(x.id)||{}),title:live.get(x.id)?.title||'Widget not currently loaded',available:live.has(x.id)})),...widgets.filter(w=>!prefs.items.some(x=>x.id===w.id)).map(w=>({...w,available:true}))];
+        state.dialogData.widgets=ordered;state.dialogData.layout={enabled:prefs.enabled,columns:prefs.columns,items:ordered.map(w=>({id:w.id,visible:w.visible,size:w.size,height:w.height}))};
+      }
+      renderDialog();setHost();
+    }
+    function closeDialog(force=false){
+      if(state.busy&&!force)return;
+      state.dialog=null;state.dialogData={};shadow.querySelector('.overlay')?.remove();frame.inert=false;
+      if(focusBeforeDialog?.isConnected)focusBeforeDialog.focus({preventScroll:true});else shadow.querySelector('[data-action="appearance"]')?.focus({preventScroll:true});
+      syncCapture();
+    }
+    function renderDialog(preserve=false){
+      const scroll=shadow.querySelector('.dialog-body')?.scrollTop||0;
+      shadow.querySelector('.overlay')?.remove();frame.inert=true;
+      const type=state.dialog,data=state.dialogData,n=state.map.get(data.id);
+      let title='',desc='',body='',footer='',wide=false;
+      if(type==='home-edit'){
+        title='Make your home work for you.';desc='Arrange the live widgets on your shared / original home. No copies, no replacement game logic.';wide=true;
+        const prefs=data.layout, metadata=new Map(data.widgets.map(w=>[w.id,w]));
+        body=`<div class="home-editor-intro"><span class="build-label">ATELIER ${esc(boot.version)}</span><p>Show, hide, reorder and resize widgets already loaded by Onigiri or another home-screen add-on. Their controls and original DOM stay together.</p></div><div class="setting-row"><div><strong>Columns</strong><small>Automatically reduces to fit a narrow window.</small></div><select id="home-columns" aria-label="Widget columns">${[1,2,3,4].map(n=>`<option value="${n}" ${prefs.columns===n?'selected':''}>${n}</option>`).join('')}</select></div><div class="home-widget-list">${prefs.items.map((w,i)=>{const m=metadata.get(w.id);return `<div class="home-widget-row ${w.visible?'':'is-hidden'}" data-widget-row="${esc(w.id)}"><label class="home-widget-name"><input type="checkbox" data-home-visible="${esc(w.id)}" ${w.visible?'checked':''} ${m.available?'':'disabled'}><span><strong>${esc(m.title)}</strong><small>${m.available?esc(m.source)+(m.reflow?' · Live grid widget':' · Original position retained'):'Not loaded on this page; saved choice is retained'}</small></span></label><div class="home-widget-tools"><label>Width<select data-home-size="${esc(w.id)}" aria-label="Width of ${esc(m.title)}">${[['small','One column'],['wide','Two columns'],['full','Full width']].map(([v,l])=>`<option value="${v}" ${w.size===v?'selected':''}>${l}</option>`).join('')}</select></label><label>Height<select data-home-height="${esc(w.id)}" aria-label="Height of ${esc(m.title)}">${[['auto','Original height'],['short','Compact'],['tall','Tall']].map(([v,l])=>`<option value="${v}" ${w.height===v?'selected':''}>${l}</option>`).join('')}</select></label><div class="widget-order">${ib('home-up','Move '+m.title+' earlier','up',`data-id="${esc(w.id)}" ${i===0?'disabled':''}`)}${ib('home-down','Move '+m.title+' later','down',`data-id="${esc(w.id)}" ${i===prefs.items.length-1?'disabled':''}`)}</div></div></div>`;}).join('')||'<p class="note">No supported widgets are currently loaded. Enable them in the add-on that provides them, then return and rescan.</p>'}</div><div class="home-editor-actions">${btn('external-layout','Open Onigiri settings','external','secondary')}${btn('home-rescan','Rescan widgets','refresh','quiet')}${btn('home-reset','Restore original layout','back','quiet')}</div><p class="note">Atelier can arrange existing DOM widgets, not install other add-ons or fabricate an unavailable widget. Custom widgets outside recognized grids keep their original position. Hidden widgets stay loaded; this is not a disable switch.</p><p class="note">This changes only the shared home. The full Atelier folder organizer is still one click away. Your exam selections and card scheduling are unchanged.</p>`;
+        footer=btn('close-dialog','Cancel',null)+btn('home-apply','Save layout','check','primary');
+      }else if(type==='appearance'){
+        title='Change the atmosphere.';desc='Muted surfaces. Clear contrast. The same palette from folders to review.';wide=true;
+        body=`<div class="themes">${themeTiles()}</div><div class="settings-label">COMFORT & MOVEMENT</div><div class="setting-row"><div><strong>Layout spacing</strong><small>Comfortable cards, or a closer view for a larger library.</small></div><select id="setting-density" aria-label="Layout spacing"><option value="comfortable" ${state.config.density==='comfortable'?'selected':''}>Comfortable</option><option value="compact" ${state.config.density==='compact'?'selected':''}>Compact</option></select></div><div class="setting-row"><div><strong>Gentle motion</strong><small>Short hover and press responses. Reduced-motion settings take priority.</small></div><button type="button" class="switch" data-action="toggle-setting" data-setting="motion" role="switch" aria-label="Gentle motion" aria-checked="${state.config.motion}"></button></div><div class="settings-label">REVIEW EXPERIENCE</div><div class="setting-row"><div><strong>Reviewer theme</strong><small>Adaptive gives stock text cards a reading surface. Custom layouts and occlusion keep their own card design.</small></div><select id="setting-review-style" aria-label="Reviewer theme"><option value="adaptive" ${state.config.review_style==='adaptive'?'selected':''}>Adaptive</option><option value="controls" ${state.config.review_style==='controls'?'selected':''}>Controls only</option><option value="off" ${state.config.review_style==='off'?'selected':''}>Original Anki</option></select></div><div class="setting-row"><div><strong>Reading width</strong><small>For stock text cards only. Images and masks in custom layouts are not resized.</small></div><select id="setting-review-width" aria-label="Reading width"><option value="standard" ${state.config.review_width==='standard'?'selected':''}>Focused</option><option value="wide" ${state.config.review_width==='wide'?'selected':''}>Wide</option></select></div><div class="settings-label">OTHER ADD-ONS</div><p class="note">Atelier and your original home now use separate views, not two stacked dashboards. Onigiri’s own interface and game logic are not rewritten. Use “Shared home & widgets” in the sidebar to return to it.</p><div class="setting-row"><div><strong>Color the native home toolbar</strong><small>Optional. Leave this off when another makeover controls Anki’s toolbar.</small></div><button type="button" class="switch" data-action="toggle-setting" data-setting="chrome" role="switch" aria-label="Color the native home toolbar" aria-checked="${state.config.chrome}"></button></div><p class="note">Onigiri’s game and native editor/browser dialogs are not repainted. Reviewer controls and the study overview follow your palette; custom card layouts remain protected.</p>`;
+        footer=`<span id="save-state" class="save-state" role="status">${state.saveStatus}</span>`+btn('close-dialog','Done','check','primary');
+      }else if(type==='studies'){
+        title='Make room for what’s next.';desc='Keep one or several exams active. Finished studies leave the desk, not your collection.';wide=true;
+        body=`<div class="setting-row focus-setting"><div><strong>Focus on active studies</strong><small>Dashboard totals and study shortcuts use only the studies selected below.</small></div><button type="button" class="switch" role="switch" aria-label="Focus on active studies" aria-checked="${state.profile.focus_enabled}" data-action="focus-toggle"></button></div><div class="study-rows">${studyRows()}</div><p class="note">Selecting a parent and its child does not count the branch twice. Exam dates are reminders, not readiness scores. Finishing a study does not suspend cards; outside Atelier, their due dates are unchanged.</p>`;
+        footer=btn('new-study','Add active study','plus','primary')+btn('close-dialog','Done','check');
+      }else if(type==='study-edit'){
+        const draft=data.draft;title=data.id?'Edit your study.':'Set an active study.';desc='An exam, a course, or anything you want to keep in focus.';wide=true;
+        body=`<form id="study-form"><div class="study-fields"><label class="field">Study name<input id="study-name" required maxlength="100" placeholder="e.g. Cardiology · Exam 3" value="${esc(draft.name)}" autocomplete="off"></label><label class="field date-field">Exam date <span class="optional">optional</span><input id="study-date" type="date" value="${esc(draft.date)}"></label></div><div class="picker-heading"><strong>Choose folders or decks</strong><span>Parent folders include their subdecks.</span></div><label class="picker-search">${icon('search',16)}<input id="picker-search" type="search" placeholder="Find a course, exam or deck…" value="${esc(data.search)}" autocomplete="off"></label><div class="deck-picker" id="deck-picker">${studyPicker()}</div><div id="picker-summary" class="picker-summary">${pickerSummary()}</div><div class="selected-chips" id="selected-chips">${selectedChips()}</div><p class="note">These are shortcuts to your existing decks. Choose the exam’s own folder rather than an entire old semester to keep the scope narrow.</p><div class="form-error" id="form-error" role="alert"></div></form>`;
+        footer=btn('close-dialog','Cancel',null)+`<button type="submit" form="study-form" class="primary">${icon('focus',16)}Save active study</button>`;
+      }else if(type==='study-branch'&&n){
+        title='Study this whole folder?';desc=n.name;
+        body=`<p class="note">This starts Anki’s normal study flow for this parent and its subdecks. To keep this session to one lecture, choose that lecture’s own Study button instead. Nothing is moved or merged.</p>`;
+        footer=btn('close-dialog','Choose a lecture','back')+btn('study','Study whole folder','play','primary',`data-id="${n.id}" data-confirmed="true"`);
+      }else if(type==='remove-study'){
+        const study=state.profile.studies.find(s=>s.id===data.id);title='Remove this study shortcut?';desc=study?.name||'';body='<p class="note">This removes only the local Atelier study setup. It does not delete folders, decks, notes or cards.</p>';footer=btn('close-dialog','Cancel',null)+btn('confirm-remove','Remove shortcut','close','primary',`data-id="${data.id}"`);
+      }else if(type==='create'||type==='rename'||type==='move'){
+        const moving=type==='move',renaming=type==='rename',kind=data.kind||'deck',parent=data.parent||(moving?n?.parent:state.location)||'0';
+        title=moving?'Move to a folder.':renaming?'A clearer name.':kind==='folder'?'Create a folder.':'Create a deck.';
+        desc=moving?`Move “${n?.name||''}” and its subfolders together.`:renaming?'Keep the contents. Change the name.':'Choose where it belongs. No special naming syntax needed.';
+        body=`<form id="organize-form">${!moving?`<label class="field">${kind==='folder'?'Folder':'Deck'} name<input id="entry-name" required maxlength="120" value="${esc(renaming?n?.name:'')}" placeholder="${kind==='folder'?'e.g. Exam 3':'e.g. Bradycardia'}" autocomplete="off"></label>`:''}${!renaming?`<label class="field">${moving?'Move into':'Create inside'}<select id="entry-parent">${parentOptions(parent,moving?data.id:'')}</select></label>`:''}<div class="path-preview">${icon('folder',18)}<span id="path-preview"></span></div><p class="note">${moving?'This changes the real Anki hierarchy. Parent deck limits may apply differently. Cards are not rescheduled by Atelier; Undo is available through Anki.':renaming?'Subfolder names update with the parent. Notes, cards and review history keep their existing IDs.':'A folder is a normal Anki parent deck. It can hold cards and other decks, so your structure still works without Atelier.'}</p><div id="form-error" class="form-error" role="alert"></div></form>`;
+        footer=btn('close-dialog','Cancel',null)+`<button type="submit" form="organize-form" class="primary">${moving?'Move here':renaming?'Save name':'Create '+kind}${icon('arrow',16)}</button>`;
+      }else if(type==='organize'&&n){
+        title=n.name;desc=nicePath(n.path);
+        body=`<div class="menu-actions">${btn('study','Study in Anki','play','menu-action',`data-id="${n.id}"`)}${btn('quick-exam',exactExams(n).length?'Remove from active exams':'Set as upcoming exam','focus','menu-action',`data-id="${n.id}"`)}${btn('focus-deck','Custom exam setup…','edit','menu-action',`data-id="${n.id}"`)}${btn('rename','Rename','edit','menu-action',`data-id="${n.id}"`)}${!n.filtered?btn('move','Move to another folder','move','menu-action',`data-id="${n.id}"`):''}${!n.filtered?btn('create','New subfolder here','plus','menu-action',`data-kind="folder" data-parent="${n.id}"`):''}${btn('browse','Browse cards','layers','menu-action',`data-id="${n.id}"`)}${btn('options','Anki deck options','palette','menu-action',`data-id="${n.id}"`)}${btn('folder-label',state.profile.folders.includes(n.id)?'Remove folder label':'Show as a folder','folder','menu-action',`data-id="${n.id}"`)}</div><div class="settings-label">FOLDER COLOR</div><div class="color-options">${['violet','blue','rose','green','amber','cyan'].map(c=>`<button type="button" class="color-option tone-${c} ${tone(n)===c?'selected':''}" data-action="color" data-id="${n.id}" data-color="${c}" aria-label="${c} folder color" aria-pressed="${tone(n)===c}"></button>`).join('')}</div><p class="note">Use the original home for deletion, export and other add-ons’ deck-menu actions. Atelier never deletes decks.</p>`;footer=btn('close-dialog','Done','check','primary');
+      }else if(type==='help'){
+        title='Find your way, without the guesswork.';desc='Your existing structure, made easier to navigate.';
+        body=`<div class="help-items"><div>${icon('folder',23)}<span><strong>Click a folder to look inside.</strong><p>The arrow beside its name expands the sidebar. It never moves your cards.</p></span></div><div>${icon('up',23)}<span><strong>Parent takes you up one level.</strong><p>Back returns to the place you last visited. Every name in the breadcrumb path is clickable.</p></span></div><div>${icon('refresh',23)}<span><strong>Recent is your shortcut shelf.</strong><p>Recently opened remembers visits. Recently added tracks decks first seen after Atelier starts tracking—not the creation date of imported cards.</p></span></div><div>${icon('focus',23)}<span><strong>Active studies are not new decks.</strong><p>Choose the existing exam folders. Old exams stay in All folders but leave your focus totals.</p></span></div></div>`;footer=btn('close-dialog','Got it','check','primary');
+      }else if(type==='preview-action'){
+        title='Anki takes it from here.';desc='This file is an interface preview with sample data.';body=`<p class="note">${esc(data.message||'The installed add-on opens Anki’s native tools. This preview does not contain a live collection.')}</p>`;footer=btn('close-dialog','Back to the preview','back','primary');
+      }else{closeDialog(true);return;}
+      const overlay=document.createElement('div');overlay.className='overlay';
+      overlay.innerHTML=`<section class="dialog ${wide?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="atelier-dialog-title" tabindex="-1"><header class="dialog-header"><div><h2 id="atelier-dialog-title">${esc(title)}</h2><p>${esc(desc)}</p></div>${ib('close-dialog','Close dialog','close')}</header><div class="dialog-body">${body}</div><footer class="dialog-footer">${footer}</footer></section>`;
+      app.append(overlay);updatePath();syncCapture();
+      if(preserve)overlay.querySelector('.dialog-body').scrollTop=scroll;
+      requestAnimationFrame(()=>{const target=shadow.getElementById('entry-name')||shadow.getElementById('study-name')||overlay.querySelector('.dialog');target?.focus({preventScroll:true});});
+    }
+    function selectedChips(){
+      return state.dialogData.draft.deck_ids.map(id=>`<button type="button" class="selected-chip" data-action="unpick" data-id="${id}" title="Remove this selection">${esc(state.map.get(id)?.name||'Missing deck '+id)}${icon('close',12)}</button>`).join('');
+    }
+    function refreshPickerSummary(){
+      const summary=shadow.getElementById('picker-summary');if(summary)summary.textContent=pickerSummary();
+      const chips=shadow.getElementById('selected-chips');if(chips)chips.innerHTML=selectedChips();
+    }
+    function updatePath(){
+      const target=shadow.getElementById('path-preview');if(!target)return;
+      const n=state.map.get(state.dialogData.id),name=shadow.getElementById('entry-name')?.value||n?.name||'New '+(state.dialogData.kind||'deck');
+      const parent=shadow.getElementById('entry-parent')?.value||n?.parent||state.location;
+      target.textContent='All folders › '+(state.map.has(parent)?nicePath(state.map.get(parent).path)+' › ':'')+name;
+    }
+    function busyDialog(value){state.busy=value;shadow.querySelectorAll('.dialog button,.dialog input,.dialog select').forEach(el=>el.disabled=value);}
+    async function submitStudy(){
+      if(state.busy)return;
+      const draft={...state.dialogData.draft,name:shadow.getElementById('study-name').value.trim(),date:shadow.getElementById('study-date').value},error=shadow.getElementById('form-error');
+      if(!draft.name||draft.name.length>100){error.textContent='Give the study a name of 1–100 characters.';return;}
+      if(!draft.deck_ids.length){error.textContent='Choose at least one folder or deck.';return;}
+      if(draft.deck_ids.length>500){error.textContent='Choose up to 500 folders or decks. Selecting a parent already includes its children.';return;}
+      if(draft.date&&Model.dayState(draft.date,now())===null){error.textContent='Choose a valid exam date, or leave it blank.';return;}
+      busyDialog(true);
+      const ok=await updatePref({key:'study',value:draft},false);busyDialog(false);
+      if(ok){closeDialog();go('desk');announce('Study saved. Your cards and their due dates are unchanged.');}
+    }
+    async function submitOrganization(){
+      if(state.busy)return;
+      const type=state.dialog,data=state.dialogData,n=state.map.get(data.id),error=shadow.getElementById('form-error');
+      const name=shadow.getElementById('entry-name')?.value.trim(),parent=shadow.getElementById('entry-parent')?.value||'0';
+      if(type!=='move'&&(!name||name.includes('::')||/[<>\x00-\x1f]/.test(name)||name.startsWith(':')||name.endsWith(':'))){error.textContent='Enter a plain name. Choose the location below instead of typing ::.';return;}
+      const payload=type==='create'?{kind:data.kind||'deck',name,parent}:{id:data.id,expected:n?.path,...(type==='move'?{parent}:{name})};
+      busyDialog(true);
+      try{const out=await request(type,payload);busyDialog(false);closeDialog();await load();if(type==='create'&&out.id)go('library',parent);announce(out.warning|| (type==='create'?'Created. Open it to add decks or cards.':'Updated. Undo is available in Anki’s Edit menu.'));}
+      catch(e){busyDialog(false);error.textContent=e.message;}
+    }
+    function closeMenu(restore=true){
+      const previous=state.menu?.anchor;shadow.querySelector('.context-menu')?.remove();state.menu=null;
+      if(restore&&previous?.isConnected)previous.focus({preventScroll:true});syncCapture();
+    }
+    function openMenu(n,x,y,anchor,originalTarget=null){
+      closeMenu(false);state.menu={id:n.id,anchor,originalTarget,x,y};
+      const menu=document.createElement('div');menu.className='context-menu';menu.setAttribute('role','menu');menu.setAttribute('aria-label','Folder actions');
+      menu.innerHTML=`<div class="context-label">${esc(n.name)}</div>${btn('quick-exam',exactExams(n).length?'Remove from active exams':'Set as upcoming exam',exactExams(n).length?'close':'focus','context-action',`data-id="${n.id}" role="menuitem"`)}${btn(originalTarget?'shared-navigate':'navigate','Browse contents','folder','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('study',children(n.id).length?'Study entire folder…':'Study this lecture','play','context-action',`data-id="${n.id}" role="menuitem"`)}<div class="context-divider"></div>${btn('create','New subfolder','plus','context-action',`data-kind="folder" data-parent="${n.id}" role="menuitem"`)}${btn('rename','Rename','edit','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('organize','More options…','more','context-action',`data-id="${n.id}" role="menuitem"`)}`;
+      if(originalTarget)menu.insertAdjacentHTML('beforeend',`<div class="context-divider"></div>${btn('original-menu','Original folder menu…','external','context-action','role="menuitem"')}<p class="context-tip">Shift + right-click also keeps the original menu.</p>`);
+      app.append(menu);const r=menu.getBoundingClientRect();menu.style.left=Math.max(8,Math.min(x,innerWidth-r.width-8))+'px';menu.style.top=Math.max(8,Math.min(y,innerHeight-r.height-8))+'px';menu.querySelector('button')?.focus({preventScroll:true});syncCapture();
+    }
+    function undoNotice(text,studies){
+      undoStudy=studies;announce(text);
+      const toast=shadow.querySelector('.toast');if(toast){const b=document.createElement('button');b.type='button';b.dataset.action='undo-exam';b.textContent='Undo';b.className='toast-undo';toast.append(b);clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.remove(),11000);}
+    }
+    async function finishStudy(id){
+      if(quickPending.has(id))return;quickPending.add(id);
+      const before=state.profile.studies.find(x=>x.id===id);
+      try{if(before&&await updatePref({key:'study_active',id,value:false})){closeDialog(true);undoNotice('Removed from active exams. Your decks are untouched.',[{...before}]);}}finally{quickPending.delete(id);}
+    }
+    async function quickExam(n){
+      if(!n||quickPending.has(n.id))return;quickPending.add(n.id);
+      const before=exactExams(n).map(x=>({...x})),active=!before.length;
+      try{if(await updatePref({key:'quick_study',id:n.id,value:active})){closeDialog(true);if(active)announce(n.name+' is now active. Choose its lectures in Study desk.');else undoNotice('Exam removed from focus. All lectures stay in your library.',before);}}finally{quickPending.delete(n.id);}
+    }
+    async function handle(el){
+      const a=el.dataset.action,id=el.dataset.id,n=state.map.get(id);
+      if(state.busy)return;
+      const originalMenu=state.menu;
+      if(state.menu)closeMenu(false);
+      switch(a){
+        case 'shared-organizer':await updateConfig({mode:'workspace'},true);go('library');break;
+        case 'shared-navigate':await updateConfig({mode:'workspace'},true);go('library',id);break;
+        case 'shared-study':await updatePref({key:'selected_study',value:id},false);await updateConfig({mode:'workspace'},true);go('desk');break;
+        case 'original-menu':home?.originalMenu(originalMenu?.originalTarget,originalMenu?.x,originalMenu?.y);break;
+        case 'home-edit':await updateConfig({mode:'native'},true);openDialog('home-edit');break;
+        case 'home-rescan':home?.refresh();openDialog('home-edit');break;
+        case 'home-up':case 'home-down':{const items=state.dialogData.layout.items,i=items.findIndex(x=>x.id===id),j=i+(a==='home-up'?-1:1);if(i>=0&&j>=0&&j<items.length){[items[i],items[j]]=[items[j],items[i]];renderDialog(true);}break;}
+        case 'home-apply':{const draft=state.dialogData.layout;draft.enabled=true;state.busy=true;const ok=await updatePref({key:'home_layout',value:draft},false);state.busy=false;if(ok){closeDialog();render();home?.refresh();announce('Shared-home layout saved. Widgets remain in their original add-ons.');}break;}
+        case 'home-reset':if(await updatePref({key:'home_layout',value:{...state.profile.home_layout,enabled:false}})){home?.refresh();openDialog('home-edit');announce('Original widget layout restored.');}break;
+        case 'external-layout':try{await request('external_layout');}catch(e){announce(e.message,true);}break;
+        case 'quick-exam':await quickExam(n);break;
+        case 'finish-study':await finishStudy(id);break;
+        case 'undo-exam':{const saved=undoStudy;undoStudy=null;if(saved){for(const x of saved)await updatePref({key:'study',value:x},false);render();announce('Exam restored to active studies.');}break;}
+        case 'peek':state.peek.has(id)?state.peek.delete(id):state.peek.add(id);render();break;
+        case 'lecture-expand':state.collapsedLectures.has(id)?state.collapsedLectures.delete(id):state.collapsedLectures.add(id);render();break;
+        case 'board-more':state.boardLimit+=100;render();break;
+        case 'choose-lectures':{const target=shadow.getElementById('lecture-board')||shadow.querySelector('.library');target?.scrollIntoView({block:'start',behavior:state.config.motion&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'smooth':'auto'});target?.focus({preventScroll:true});break;}
+        case 'home':go('desk');break;
+        case 'page':go(el.dataset.page);break;
+        case 'navigate':go('library',id);break;
+        case 'back':travel(true);break;
+        case 'forward':travel(false);break;
+        case 'up':go('library',state.map.get(state.location)?.parent||'0');break;
+        case 'expand':state.expanded.has(id)?state.expanded.delete(id):state.expanded.add(id);render();break;
+        case 'collapse-all':state.expanded.clear();render();break;
+        case 'tree-more':state.treeLimit+=240;render();break;
+        case 'mobile':state.mobile=true;render();shadow.querySelector('.drawer-close')?.focus();break;
+        case 'close-nav':state.mobile=false;render();shadow.querySelector('[data-action="mobile"]')?.focus();break;
+        case 'filter':if(state.page==='recent')state.recentTab=el.dataset.filter;else state.filter=el.dataset.filter;state.limit=60;render();break;
+        case 'clear-search':state.query='';render({resetMain:true});remember();break;
+        case 'more-results':state.limit+=60;shadow.getElementById('library-results').innerHTML=results();break;
+        case 'view':await updateConfig({view:el.dataset.view},true);break;
+        case 'favorite':if(n)await updatePref({key:'favorites',id,value:!favorite(n)});break;
+        case 'folder-label':if(n){const ok=await updatePref({key:'folders',id,value:!state.profile.folders.includes(id)});if(ok)closeDialog();}break;
+        case 'color':if(await updatePref({key:'color',id,value:el.dataset.color})){shadow.querySelectorAll('.color-option').forEach(x=>{const selected=x.dataset.color===el.dataset.color;x.classList.toggle('selected',selected);x.setAttribute('aria-pressed',String(selected));});}break;
+        case 'theme':await updateConfig({theme:el.dataset.themeChoice});break;
+        case 'toggle-setting':await updateConfig({[el.dataset.setting]:!state.config[el.dataset.setting]});break;
+        case 'appearance':openDialog('appearance');break;
+        case 'studies':openDialog('studies');break;
+        case 'new-study':openDialog('study-edit');break;
+        case 'edit-study':openDialog('study-edit',{id});break;
+        case 'focus-deck':openDialog('study-edit',{deck:id});break;
+        case 'focus-toggle':if(await updatePref({key:'focus_enabled',value:!state.profile.focus_enabled})){renderDialog(true);}break;
+        case 'select-study':await updatePref({key:'selected_study',value:id});go('desk');break;
+        case 'toggle-study':{
+          const s=state.profile.studies.find(x=>x.id===id);if(s&&await updatePref({key:'study',value:{...s,active:!s.active}})){renderDialog(true);}break;
+        }
+        case 'remove-study':openDialog('remove-study',{id});break;
+        case 'confirm-remove':if(await updatePref({key:'remove_study',value:id})){openDialog('studies');}break;
+        case 'unpick':state.dialogData.draft.deck_ids=state.dialogData.draft.deck_ids.filter(x=>x!==id);shadow.getElementById('deck-picker').innerHTML=studyPicker();refreshPickerSummary();break;
+        case 'picker-more':state.dialogData.limit+=80;{const list=shadow.getElementById('deck-picker'),pos=list.scrollTop;list.innerHTML=studyPicker();list.scrollTop=pos;}break;
+        case 'help':openDialog('help');break;
+        case 'create':openDialog('create',{kind:el.dataset.kind||'deck',parent:el.dataset.parent||state.location});break;
+        case 'organize':if(n)openDialog('organize',{id});break;
+        case 'rename':if(n)openDialog('rename',{id,kind:isFolder(n)?'folder':'deck'});break;
+        case 'move':if(n)openDialog('move',{id});break;
+        case 'close-dialog':closeDialog();break;
+        case 'refresh':await load();break;
+        case 'native':closeDialog();state.mobile=false;await updateConfig({mode:'native'},true);break;
+        case 'workspace':await updateConfig({mode:'workspace'},true);if(!state.loaded)await load();break;
+        case 'study':if(n&&children(n.id).length&&el.dataset.confirmed!=='true'){openDialog('study-branch',{id});break;}
+        case 'browse':case 'options':case 'add':case 'import':case 'stats':case 'website':
+          if(state.dialog)closeDialog();
+          try{await request(a,id?{id}:{});}catch(e){announce(e.message,true);}break;
+      }
+    }
+    shadow.addEventListener('click',event=>{const el=event.target.closest?.('[data-action]');if(el&&!el.disabled){event.preventDefault();handle(el).catch(e=>announce(e.message,true));}});
+    shadow.addEventListener('submit',event=>{event.preventDefault();event.stopPropagation();(event.target.id==='study-form'?submitStudy():submitOrganization()).catch(e=>{busyDialog(false);announce(e.message,true);});});
+    shadow.addEventListener('input',event=>{
+      const id=event.target.id;
+      if(id==='atelier-search'){
+        const value=event.target.value,start=event.target.selectionStart;
+        state.query=value;state.limit=60;render();const input=shadow.getElementById(id);input?.focus({preventScroll:true});try{input.setSelectionRange(start,start);}catch(_){}remember();
+      }else if(id==='entry-name')updatePath();
+      else if(id==='picker-search'){state.dialogData.search=event.target.value;state.dialogData.limit=80;shadow.getElementById('deck-picker').innerHTML=studyPicker();}
+      else if(id==='study-name')state.dialogData.draft.name=event.target.value;
+      else if(id==='study-date')state.dialogData.draft.date=event.target.value;
+    });
+    shadow.addEventListener('change',event=>{
+      const el=event.target;
+      if(state.dialog==='home-edit'){
+        if(el.id==='home-columns'){state.dialogData.layout.columns=Number(el.value);return;}
+        const id=el.dataset.homeVisible||el.dataset.homeSize||el.dataset.homeHeight;
+        const item=state.dialogData.layout.items.find(x=>x.id===id);
+        if(item){if(el.dataset.homeVisible){item.visible=el.checked;el.closest('.home-widget-row')?.classList.toggle('is-hidden',!el.checked);}else if(el.dataset.homeSize)item.size=el.value;else item.height=el.value;return;}
+      }
+      if(el.id==='setting-review-style'){updateConfig({review_style:el.value});return;}
+      if(el.id==='setting-review-width'){updateConfig({review_width:el.value});return;}
+      if(el.id==='atelier-sort')updateConfig({sort:el.value},true);
+      else if(el.id==='setting-density')updateConfig({density:el.value},true);
+      else if(el.id==='entry-parent')updatePath();
+      else if(el.id==='active-study-selector'){updatePref({key:'selected_study',value:el.value});}
+      else if(el.dataset.pickDeck){const id=el.dataset.pickDeck;state.dialogData.draft.deck_ids=state.dialogData.draft.deck_ids.filter(x=>x!==id);if(el.checked)state.dialogData.draft.deck_ids.push(id);el.closest('.picker-row').classList.toggle('checked',el.checked);refreshPickerSummary();}
+    });
+    function syncCapture(){
+      const el=shadow.activeElement;
+      const capture=!!(state.config.mode!=='native'&&(state.dialog||state.mobile||state.menu||el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)));
+      if(capture===lastKeyCapture)return;lastKeyCapture=capture;
+      request('focus',{active:capture}).catch(()=>{lastKeyCapture=!capture;});
+    }
+    shadow.addEventListener('focusin',syncCapture);shadow.addEventListener('focusout',()=>queueMicrotask(syncCapture));
+    shadow.addEventListener('keydown',event=>{
+      const editable=/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)||event.target.isContentEditable;
+      if(state.menu){
+        if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeMenu();return;}
+        if(['ArrowDown','ArrowUp','Home','End'].includes(event.key)){event.preventDefault();event.stopPropagation();const items=[...shadow.querySelectorAll('.context-menu button')],at=items.indexOf(shadow.activeElement);items[event.key==='Home'?0:event.key==='End'?items.length-1:(at+(event.key==='ArrowDown'?1:-1)+items.length)%items.length]?.focus();return;}
+        if(event.key==='Tab')closeMenu(false);
+      }
+      if(!editable&&(event.key==='ContextMenu'||event.shiftKey&&event.key==='F10')){const node=event.target.closest?.('[data-node]'),n=state.map.get(node?.dataset.node);if(n){event.preventDefault();const r=event.target.getBoundingClientRect();openMenu(n,r.left,r.bottom,event.target);return;}}
+      if(state.dialog||state.mobile){
+        event.stopPropagation();
+        if(event.key==='Escape'){event.preventDefault();if(state.dialog)closeDialog();else{state.mobile=false;render();shadow.querySelector('[data-action="mobile"]')?.focus();}return;}
+        if(event.key==='Tab'){
+          const container=shadow.querySelector(state.dialog?'.dialog':'.sidebar'),items=[...container.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),a[href],[tabindex="0"]')].filter(el=>el.getClientRects().length&&el.tabIndex>=0);
+          const first=items[0],last=items[items.length-1],active=shadow.activeElement;
+          if(event.shiftKey&&(active===first||active===container)){event.preventDefault();last?.focus();}
+          else if(!event.shiftKey&&(active===last||active===container)){event.preventDefault();first?.focus();}
+        }return;
+      }
+      if(editable){event.stopPropagation();if(event.key==='Escape'&&event.target.id==='atelier-search'){event.preventDefault();state.query='';render();shadow.getElementById('atelier-search')?.focus();}return;}
+      if(event.key==='/'&&!event.ctrlKey&&!event.metaKey){event.preventDefault();event.stopPropagation();shadow.getElementById('atelier-search')?.focus();}
+      if(event.altKey&&event.key==='ArrowLeft'){event.preventDefault();travel(true);}
+      if(event.altKey&&event.key==='ArrowUp'){event.preventDefault();go('library',state.map.get(state.location)?.parent||'0');}
+    });
+    document.addEventListener('keydown',e=>{if(state.config.mode==='native'||state.dialog||e.defaultPrevented)return;if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&(document.activeElement===document.body||document.activeElement===host)){e.preventDefault();shadow.getElementById('atelier-search')?.focus();}});
+    shadow.addEventListener('contextmenu',e=>{const card=e.target.closest?.('[data-node]'),n=state.map.get(card?.dataset.node);if(n){e.preventDefault();e.stopPropagation();openMenu(n,e.clientX,e.clientY,card.querySelector('button'));}});
+    shadow.addEventListener('pointerdown',e=>{if(state.menu&&!e.target.closest?.('.context-menu'))closeMenu(false);});
+    shadow.addEventListener('scroll',()=>{if(state.menu)closeMenu(false);},true);
+    let dragging='';
+    shadow.addEventListener('dragstart',e=>{const card=e.target.closest?.('[data-node]');if(card?.draggable){dragging=card.dataset.node;e.dataTransfer.setData('application/x-atelier-deck',dragging);e.dataTransfer.effectAllowed='move';card.classList.add('dragging');e.stopPropagation();}});
+    shadow.addEventListener('dragover',e=>{const target=e.target.closest?.('[data-drop]');if(dragging&&target?.dataset.drop&&target.dataset.drop!==dragging){e.preventDefault();e.stopPropagation();target.classList.add('drop-target');}});
+    shadow.addEventListener('dragleave',e=>e.target.closest?.('[data-drop]')?.classList.remove('drop-target'));
+    shadow.addEventListener('drop',e=>{
+      const target=e.target.closest?.('[data-drop]');shadow.querySelectorAll('.drop-target').forEach(el=>el.classList.remove('drop-target'));
+      if(!dragging||!target?.dataset.drop)return;
+      e.preventDefault();e.stopPropagation();const source=state.map.get(dragging),parent=state.map.get(target.dataset.drop);dragging='';
+      if(!source)return;
+      if(source.id===target.dataset.drop||parent?.path.startsWith(source.path+'::')){announce('A folder cannot be placed inside itself or its subfolders.',true);return;}
+      if(source.parent===target.dataset.drop){announce('It is already in that folder.');return;}
+      openDialog('move',{id:source.id,parent:target.dataset.drop});
+    });
+    shadow.addEventListener('dragend',()=>{dragging='';shadow.querySelectorAll('.dragging,.drop-target').forEach(el=>el.classList.remove('dragging','drop-target'));});
+    window.addEventListener('resize',()=>{closeMenu(false);if(innerWidth>820&&state.mobile){state.mobile=false;render();}});
+    // Reopen/focus never resets scroll. Appearance mutates tokens only; it does
+    // not rebuild either the dialog, the library or the sidebar.
+    window.AtelierMakeover=Object.freeze({receive,reload:load,version:boot.version,sharedDiagnostics:()=>home?.diagnostics(),openAppearance:()=>openDialog('appearance'),theme:()=>({name:state.config.theme,active:state.config.mode!=='native'}),
+      diagnostics:()=>({version:boot.version,mode:state.config.mode,theme:state.config.theme,page:state.page,location:state.location,loaded:state.loaded,pendingSettings:configPending,focusEnabled:state.profile.focus_enabled,focusRoots:scope().roots.map(n=>n.id),activeStudies:state.profile.studies.filter(s=>s.active).map(s=>s.id),lastStudied:state.profile.last_studied})});
+    // Standalone preview uses the exact shipped renderer and clearly labeled
+    // sample data. Only this adapter simulates collection changes.
+    let demo;
+    function demoData(){
+      if(demo)return demo;
+      try{const saved=JSON.parse(localStorage.getItem('atelier-preview-v4')||'null');demo=saved?.nodes&&Array.isArray(saved.nodes)?saved:JSON.parse(JSON.stringify(boot.demo));}
+      catch(_){demo=JSON.parse(JSON.stringify(boot.demo));}
+      demo.profile=normalizeProfile(demo.profile);return demo;
+    }
+    function demoSave(){try{localStorage.setItem('atelier-preview-v4',JSON.stringify(demo));}catch(_){} }
+    async function demoRequest(action,data){
+      const d=demoData();
+      if(boot.demoDelay&&action==='settings')await new Promise(r=>setTimeout(r,boot.demoDelay));
+      if(action==='load')return JSON.parse(JSON.stringify(d));
+      if(action==='focus'||action==='ui')return true;
+      if(action==='external_layout'){openDialog('preview-action',{message:'The installed add-on opens Onigiri’s settings when its public API is available. Enable additional widgets there; this standalone preview cannot change another add-on’s settings.'});return true;}
+      if(action==='settings'){d.settings={...d.settings,...data};demoSave();return {...d.settings};}
+      if(action==='preference'){
+        const p=d.profile;
+        if(data.key==='home_layout'){p.home_layout=JSON.parse(JSON.stringify(data.value));}
+        else if(data.key==='study'){
+          const s=data.value;
+          if(!s.name?.trim()||!s.deck_ids?.length)throw new Error('Name the study and choose its decks.');
+          p.studies=p.studies.filter(x=>x.id!==s.id).concat([JSON.parse(JSON.stringify(s))]);p.focus_enabled=true;
+          if(!p.studies.some(x=>x.id===p.selected_study&&x.active))p.selected_study='all';
+        }else if(data.key==='quick_study'){
+          let found=p.studies.find(x=>x.deck_ids.length===1&&x.deck_ids[0]===data.id&&x.active)||p.studies.find(x=>x.deck_ids.length===1&&x.deck_ids[0]===data.id);
+          if(found){for(const x of p.studies.filter(x=>x.deck_ids.length===1&&x.deck_ids[0]===data.id))x.active=data.value&&x===found;}
+          else if(data.value){if(p.studies.length>=24)throw new Error('Remove an old study setup first.');p.studies.push({id:'deck-'+data.id,name:(()=>{const n=d.nodes.find(x=>x.id===data.id),parts=n.path.split('::');return (parts.length>1&&/^(exam|test|quiz|assessment|midterm|final)\b/i.test(n.name)?parts.at(-2)+' · '+n.name:n.name).slice(0,100);})(),date:'',deck_ids:[data.id],active:true});}
+          if(data.value)p.focus_enabled=true;
+          if(!p.studies.some(x=>x.id===p.selected_study&&x.active))p.selected_study='all';
+        }else if(data.key==='study_active'){const study=p.studies.find(x=>x.id===data.id);if(!study)throw new Error('That exam setup no longer exists.');study.active=data.value;if(data.value)p.focus_enabled=true;if(!data.value&&p.selected_study===data.id)p.selected_study='all';
+        }else if(data.key==='remove_study'){p.studies=p.studies.filter(s=>s.id!==data.value);if(p.selected_study===data.value)p.selected_study='all';}
+        else if(data.key==='color')p.colors[data.id]=data.value;
+        else if(data.key==='last_location'){p.last_location=data.value;if(data.value!=='0')p.recent_locations=[data.value,...p.recent_locations.filter(id=>id!==data.value)].slice(0,32);}
+        else if(['focus_enabled','selected_study'].includes(data.key))p[data.key]=data.value;
+        else{p[data.key]=p[data.key].filter(id=>id!==data.id);if(data.value)p[data.key].push(data.id);}
+        demoSave();return JSON.parse(JSON.stringify(p));
+      }
+      if(['create','rename','move'].includes(action)){
+        const n=d.nodes.find(n=>n.id===data.id),p=d.nodes.find(n=>n.id===data.parent);
+        if(action!=='create'&&!n)throw new Error('This deck is no longer in the library.');
+        if(action!=='create'&&n.path!==data.expected)throw new Error('This deck changed while the dialog was open. Refresh first.');
+        if(p?.filtered)throw new Error('A filtered deck cannot be used as a folder.');
+        let newPath,oldPath=n?.path,created='';
+        if(action==='move'){
+          if(n.filtered)throw new Error('Manage filtered decks in Anki’s original view.');
+          if(p&&(p.id===n.id||p.path.toLowerCase().startsWith(n.path.toLowerCase()+'::')))throw new Error('A folder cannot go inside itself.');
+          newPath=(p?p.path+'::':'')+n.name;
+        }else if(action==='rename')newPath=(n.path.includes('::')?n.path.slice(0,n.path.lastIndexOf('::')+2):'')+data.name;
+        else newPath=(p?p.path+'::':'')+data.name;
+        if(d.nodes.some(x=>x.id!==n?.id&&x.path.toLowerCase()===newPath.toLowerCase()))throw new Error('That name already exists in this location. Atelier never merges decks automatically.');
+        if(action==='create'){
+          created=String(Date.now());d.nodes.push({id:created,parent:data.parent,name:data.name,path:newPath,depth:newPath.split('::').length-1,children:[],new:0,learn:0,review:0,filtered:false});
+          if(data.kind==='folder')d.profile.folders.push(created);
+          d.profile.recent_added=[{id:created,observed:new Date().toISOString()},...d.profile.recent_added].slice(0,32);
+        }else{
+          n.path=newPath;n.name=newPath.split('::').pop();if(action==='move')n.parent=data.parent;
+          for(const x of d.nodes)if(x.id!==n.id&&x.path.startsWith(oldPath+'::'))x.path=newPath+x.path.slice(oldPath.length);
+        }
+        for(const x of d.nodes){x.children=d.nodes.filter(v=>v.parent===x.id).map(v=>v.id);x.depth=x.path.split('::').length-1;}
+        for(const x of [...d.nodes].sort((a,b)=>b.depth-a.depth))if(x.children.length){for(const key of ['new','learn','review'])x[key]=d.nodes.filter(v=>v.parent===x.id).reduce((s,v)=>s+v[key],0);}
+        demoSave();return {ok:true,id:created};
+      }
+      if(action==='study'){d.profile.last_studied=data.id;demoSave();state.profile.last_studied=data.id;}
+      const messages={study:'The installed add-on opens only this selected deck in Anki’s native study overview. The reviewer controls follow your palette. Anki retains its card rendering, media, scheduling and gamification hooks.',browse:'The installed add-on opens Anki’s card browser. This preview contains no actual flashcards.',options:'The installed add-on opens Anki’s own deck options.',import:'The installed add-on opens Anki’s normal Import dialog. New decks observed afterward appear under Recently added.',add:'The installed add-on opens Anki’s native Add Cards window.',stats:'The installed add-on opens your real Anki statistics. The preview does not fabricate study history.',website:'Made by Daedalus Works · daedalusworks.net. In Anki, this opens the website in your browser.'};
+      openDialog('preview-action',{message:messages[action]});return true;
+    }
+    home=window.AtelierSharedHome?.create({
+      version:boot.version,state:()=>state,
+      tokens:()=>Object.fromEntries(['text','muted','accent','panel','line','raised','hover','scheme'].map(k=>[k,getComputedStyle(host).getPropertyValue('--'+k).trim()])),
+      action:(action,id)=>handle({dataset:{action,id}}).catch(e=>announce(e.message,true)),
+      context:(n,x,y,anchor,target)=>openMenu(n,x,y,anchor,target),closeMenu:()=>closeMenu(false)
+    });
+    render();load();
+  });
+})();
+</script></body></html>

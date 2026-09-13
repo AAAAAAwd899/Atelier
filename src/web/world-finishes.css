@@ -1,0 +1,98 @@
+/* Final world finishes. Presentation only; no card geometry or external assets. */
+:host([data-owner="atelier"][data-theme="obsidian"]),.mini-screen[data-theme="obsidian"],html[data-atelier-world-enabled="true"][data-atelier-world="obsidian"]{
+ --finish-aperture:18px 5px 18px 5px;--finish-angle:120deg;--finish-alpha:0.035;--finish-pattern:linear-gradient(123deg,transparent 30%,var(--finish-line) 30.1%,transparent 30.4%,transparent 77%,var(--finish-line) 77.1%,transparent 77.4%);
+}
+:host([data-owner="atelier"][data-theme="glacier"]),.mini-screen[data-theme="glacier"],html[data-atelier-world-enabled="true"][data-atelier-world="glacier"]{
+ --finish-aperture:6px 22px 6px 22px;--finish-angle:145deg;--finish-alpha:0.04;--finish-pattern:linear-gradient(155deg,transparent 55%,var(--finish-line) 55.1%,transparent 55.4%),linear-gradient(25deg,transparent 75%,var(--finish-line) 75.1%,transparent 75.4%);
+}
+:host([data-owner="atelier"][data-theme="rose"]),.mini-screen[data-theme="rose"],html[data-atelier-world-enabled="true"][data-atelier-world="rose"]{
+ --finish-aperture:70px 70px 14px 14px;--finish-angle:110deg;--finish-alpha:0.025;--finish-pattern:radial-gradient(ellipse at 90% 130%,transparent 52%,var(--finish-line) 52.2%,transparent 52.5%,transparent 64%,var(--finish-line) 64.2%,transparent 64.5%);
+}
+:host([data-owner="atelier"][data-theme="bloom"]),.mini-screen[data-theme="bloom"],html[data-atelier-world-enabled="true"][data-atelier-world="bloom"]{
+ --finish-aperture:32px 10px 32px 10px;--finish-angle:135deg;--finish-alpha:0.025;--finish-pattern:linear-gradient(90deg,transparent 49.8%,var(--finish-line) 50%,transparent 50.2%),linear-gradient(0deg,transparent 49.8%,var(--finish-line) 50%,transparent 50.2%);
+}
+:host([data-owner="atelier"][data-theme="linen"]),.mini-screen[data-theme="linen"],html[data-atelier-world-enabled="true"][data-atelier-world="linen"]{
+ --finish-aperture:5px;--finish-angle:90deg;--finish-alpha:0.023;--finish-pattern:repeating-linear-gradient(90deg,transparent 0 3px,var(--finish-line) 3px 4px),repeating-linear-gradient(0deg,transparent 0 3px,var(--finish-line) 3px 4px);
+}
+:host([data-owner="atelier"][data-theme="matcha"]),.mini-screen[data-theme="matcha"],html[data-atelier-world-enabled="true"][data-atelier-world="matcha"]{
+ --finish-aperture:8px 24px 8px 24px;--finish-angle:160deg;--finish-alpha:0.025;--finish-pattern:repeating-linear-gradient(90deg,transparent 0 79px,var(--finish-line) 79px 80px),repeating-linear-gradient(0deg,transparent 0 79px,var(--finish-line) 79px 80px);
+}
+:host([data-owner="atelier"][data-theme="midnight"]),.mini-screen[data-theme="midnight"],html[data-atelier-world-enabled="true"][data-atelier-world="midnight"]{
+ --finish-aperture:7px;--finish-angle:100deg;--finish-alpha:0.04;--finish-pattern:linear-gradient(90deg,var(--finish-line) 1px,transparent 1px),linear-gradient(0deg,var(--finish-line) 1px,transparent 1px);
+}
+:host([data-owner="atelier"][data-theme="peach"]),.mini-screen[data-theme="peach"],html[data-atelier-world-enabled="true"][data-atelier-world="peach"]{
+ --finish-aperture:36px 9px 36px 9px;--finish-angle:140deg;--finish-alpha:0.025;--finish-pattern:radial-gradient(ellipse at 85% 110%,transparent 55%,var(--finish-line) 55.2%,transparent 55.5%,transparent 71%,var(--finish-line) 71.2%,transparent 71.5%);
+}
+:host([data-owner="atelier"][data-theme="forest"]),.mini-screen[data-theme="forest"],html[data-atelier-world-enabled="true"][data-atelier-world="forest"]{
+ --finish-aperture:46px 46px 12px 12px;--finish-angle:125deg;--finish-alpha:0.04;--finish-pattern:linear-gradient(118deg,transparent 42%,var(--finish-line) 42.2%,transparent 43.5%,transparent 70%,var(--finish-line) 70.2%,transparent 71.5%);
+}
+:host([data-owner="atelier"][data-theme="tidal"]),.mini-screen[data-theme="tidal"],html[data-atelier-world-enabled="true"][data-atelier-world="tidal"]{
+ --finish-aperture:32px 12px 44px 12px;--finish-angle:150deg;--finish-alpha:0.023;--finish-pattern:repeating-radial-gradient(ellipse at 100% 130%,transparent 0 45px,var(--finish-line) 46px 47px,transparent 48px 83px);
+}
+:host([data-owner="atelier"][data-theme="ember"]),.mini-screen[data-theme="ember"],html[data-atelier-world-enabled="true"][data-atelier-world="ember"]{
+ --finish-aperture:8px 28px 8px 28px;--finish-angle:115deg;--finish-alpha:0.04;--finish-pattern:repeating-linear-gradient(168deg,transparent 0 46px,var(--finish-line) 47px 48px,transparent 49px 108px);
+}
+:host([data-owner="atelier"][data-theme="celestial"]),.mini-screen[data-theme="celestial"],html[data-atelier-world-enabled="true"][data-atelier-world="celestial"]{
+ --finish-aperture:54px 54px 12px 12px;--finish-angle:130deg;--finish-alpha:0.035;--finish-pattern:radial-gradient(ellipse at 110% -10%,transparent 52%,var(--finish-line) 52.2%,transparent 52.5%,transparent 67%,var(--finish-line) 67.2%,transparent 67.5%);
+}
+
+:host([data-owner="atelier"]){--finish-line:color-mix(in srgb,var(--accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
+html[data-atelier-world-enabled="true"]{--finish-line:color-mix(in srgb,var(--ats-accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
+/* Materials occupy chapter panels, not the interactive fields or reading surface. */
+:host([data-owner="atelier"][data-ambience="true"]) .task-focus.quiet-focus {background-image:var(--finish-pattern),linear-gradient(var(--finish-angle),var(--hero),var(--hero-end));}
+:host([data-owner="atelier"]) .world-window {border-radius:var(--finish-aperture);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
+:host([data-owner="atelier"]) :is(.revisit-column,.suite-plan,.deck-detail,.tools-spotlight){background-image:var(--finish-sheen);}
+:host([data-owner="atelier"]) .lecture-row:hover {background-color:var(--raised);}
+:host([data-owner="atelier"]) .tool-symbol {border-radius:calc(var(--world-radius) * .5);background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--line-soft);}
+:host([data-owner="atelier"]) :is(.tool-tile,.library-row,.revisit-row){transform:none!important;}
+:host([data-owner="atelier"]) .tool-tile:hover {border-color:var(--accent);background-color:var(--raised);}
+html[data-atelier-world-enabled="true"][data-atelier-scenery="true"] #es-app :is(.es-hero,.suite-result-hero){background-image:var(--finish-pattern),linear-gradient(var(--finish-angle),var(--es-soft),var(--es-surface));}
+html[data-atelier-world-enabled="true"] #es-app :is(.suite-setup-summary,.es-practice-card,.suite-session-safety){background-image:var(--finish-sheen);}
+html[data-atelier-world-enabled="true"] #es-app .suite-summary-scenery {border-radius:var(--finish-aperture);}
+/* Typography has character in headings, consistency in labels and editable text. */
+:host([data-owner="atelier"]) :is(.revisit-column h2,.tools-group-heading h2){font-family:var(--world-font);font-size:19px;font-weight:500;line-height:1.35;}
+:host([data-owner="atelier"]) :is(.card-title,.library-row strong,.lecture-name strong){font-family:"Segoe UI",system-ui,sans-serif;font-weight:600;letter-spacing:0;}
+:host([data-owner="atelier"]) :is(.focus-metric span,.deck-card .countline,.library-foot,.scope-note,.study-block-subtitle){font-size:11px;line-height:1.6;}
+html[data-atelier-world-enabled="true"] #es-app :is(.suite-session-kicker,.suite-form-kicker){letter-spacing:1.1px;}
+/* Illustrated, labelled world chooser. No screenshots masquerade as live controls. */
+.world-browser-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0 14px;}
+.world-browser-head p{font:12px/1.6 system-ui;color:var(--muted);}
+.world-lighting{display:flex;gap:3px;border:1px solid var(--line);background:var(--side);border-radius:10px;padding:3px;}
+.world-lighting button{font:12px/1.4 system-ui;padding:7px 12px;border-radius:7px;min-height:32px;color:var(--muted);}
+.world-lighting button[aria-pressed="true"]{background:var(--raised);color:var(--text);box-shadow:inset 0 0 0 1px var(--line);}
+.world-count{font:12px/1.5 system-ui;color:var(--muted);margin:0 0 12px;}
+.themes{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.theme-tile{padding:7px 7px 12px;border-radius:14px;display:flex;flex-direction:column;align-items:stretch;background:var(--panel);min-width:0;transform:none!important;box-shadow:none!important;}
+.theme-tile[hidden]{display:none!important;}
+.theme-tile.selected{outline:2px solid var(--accent-strong);outline-offset:2px;}
+.theme-tile .mini-screen{display:block;position:relative;isolation:isolate;height:118px;border-radius:var(--finish-aperture);background:var(--world-art) center/cover,var(--hero);padding:0;}
+.theme-tile .mini-screen::after{content:none!important;}
+.theme-material-sample{display:flex;gap:4px;position:absolute;left:10px;bottom:9px;right:10px;border-radius:7px;padding:6px;background:var(--panel);border:1px solid var(--line);}
+.theme-material-sample i{height:6px;display:block;border:0;border-radius:2px;width:20%;background:var(--accent);}
+.theme-material-sample i:nth-child(2){background:var(--text);width:35%;opacity:.55;}
+.theme-material-sample i:nth-child(3){background:var(--muted);width:18%;margin-left:auto;}
+.theme-light{font:10px/1.4 system-ui;color:var(--text);background:var(--panel);padding:3px 7px;border-radius:5px;border:1px solid var(--line);position:absolute;right:10px;top:auto;bottom:36px;}
+.theme-tile .tile-label{padding:11px 5px 0;align-items:center;min-height:29px;}
+.theme-tile .tile-label strong{font-size:13px;line-height:1.35;color:var(--text);}
+.theme-tile>small{font:11px/1.6 system-ui;padding:5px 5px 0;color:var(--muted);}
+.theme-title{font:13px/1.5 var(--world-font,system-ui);color:var(--text);padding:5px 5px 0;}
+.theme-tile .theme-check{width:20px;height:20px;color:var(--accent-strong);}
+.theme-filter-empty{padding:18px;font:13px/1.6 system-ui;color:var(--muted);}
+:host([data-ambience="false"]) .mini-screen {background-image:none!important;}
+:host([data-ambience="false"]) .mini-screen .theme-material-sample {bottom:18px;}
+@media(max-width:600px){.themes{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}.theme-tile .mini-screen{height:100px;}.theme-tile .tile-label strong{font-size:12px;}.theme-title{font-size:12px;}}
+@media(max-width:350px){.themes{gap:9px;}.theme-tile{padding:5px 5px 9px;}.theme-tile .mini-screen{height:86px;}.theme-light{font-size:9px;right:8px;bottom:34px;}.world-lighting button{padding-inline:9px;}}
+
+/* A candidate world demonstrates its own heading family without loading fonts. */
+.theme-tile[data-theme-choice="obsidian"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
+.theme-tile[data-theme-choice="glacier"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
+.theme-tile[data-theme-choice="rose"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="bloom"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="linen"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="matcha"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="midnight"] .theme-title{font-family:ui-monospace, Consolas, monospace;}
+.theme-tile[data-theme-choice="peach"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="forest"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="tidal"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
+.theme-tile[data-theme-choice="ember"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
+.theme-tile[data-theme-choice="celestial"] .theme-title{font-family:Georgia, "Times New Roman", serif;}

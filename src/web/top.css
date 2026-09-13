@@ -1,0 +1,6 @@
+/* Top webview only. All add-on links, XP displays and event handlers stay put. */
+html:root:root, html:root:root body {background:var(--at-bg)!important;background-image:none!important;color:var(--at-text)!important;}
+html:root:root body::before,html:root:root body::after {content:none!important;}
+html:root:root .header,html:root:root .toolbar {background:transparent!important;background-image:none!important;}
+html:root:root a.hitem {color:var(--at-muted)!important;border-color:var(--at-line)!important;background:var(--at-panel)!important;border-radius:9px!important;text-shadow:none!important;}
+html:root:root a.hitem:hover {color:var(--at-text)!important;transform:none!important;}

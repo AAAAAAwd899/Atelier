@@ -1,0 +1,126 @@
+/* Scoped native-view styling. Never style image/canvas/SVG geometry or cloze masks.
+   The only #qa rules apply to positively identified stock text templates. */
+html[data-atelier-screen="review"][data-atelier-card="reading"]{background:var(--at-bg)!important;color-scheme:var(--at-scheme);}
+html[data-atelier-screen="review"][data-atelier-card="reading"] body.card{background:var(--at-bg)!important;background-image:none!important;color:var(--at-text)!important;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{box-sizing:border-box;max-width:1000px;margin:18px auto 35px;padding:clamp(24px,4vw,48px);background:var(--at-panel);border:1px solid var(--at-line);border-radius:18px;box-shadow:0 12px 38px rgba(0,0,0,.09);font-size:21px;line-height:1.7;min-height:210px;overflow:visible;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-width="wide"] #qa{max-width:1400px;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa .cloze{color:var(--at-accent-strong);}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa hr#answer{height:1px;border:0;background:var(--at-line);margin:30px 0;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] input#typeans{background:var(--at-bg);color:var(--at-text);border:1px solid var(--at-line);border-radius:10px;padding:12px;}
+html[data-atelier-screen="review"][data-atelier-card="reading"] input#typeans:focus{outline:2px solid var(--at-accent);outline-offset:3px;}
+/* Native typeGood/typeBad/typeMissed, media and MathJax are intentionally untouched. */
+html[data-atelier-screen="review"] #atelier-review-header{box-sizing:border-box;max-width:1000px;margin:clamp(12px,3vh,30px) auto 0;display:grid;gap:7px;text-align:left;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;color:var(--at-text);padding:0 3px;}
+html[data-atelier-screen="review"][data-atelier-width="wide"] #atelier-review-header{max-width:1400px;}
+html[data-atelier-screen="review"] .atelier-review-stage{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--at-accent);}
+html[data-atelier-screen="review"] .atelier-review-lecture{font-size:16px;line-height:1.5;font-weight:600;overflow-wrap:anywhere;}
+html[data-atelier-screen="review"] .atelier-review-path{font-size:11px;line-height:1.5;color:var(--at-muted);overflow-wrap:anywhere;}
+/* Reviewer footer: native nodes/commands, measured intrinsic height.
+   Only the stock outer/table/middle structure is laid out. Custom bottom-bar
+   replacements are detected in JS and left alone. No card-media selectors. */
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] {
+  background:var(--at-side)!important;color-scheme:var(--at-scheme);
+  height:auto!important;min-height:0!important;overflow-x:hidden;
+}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] body {
+  box-sizing:border-box!important;background:var(--at-side)!important;
+  background-image:none!important;color:var(--at-text)!important;
+  font:14px/1.35 "Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;
+  height:auto!important;min-height:0!important;margin:0!important;
+  padding:0!important;overflow-x:hidden!important;
+}
+html[data-atelier-toolbar="stock"] #outer {
+  box-sizing:border-box!important;position:relative!important;
+  width:100%!important;max-width:none!important;height:auto!important;
+  min-height:0!important;margin:0!important;padding:10px 18px 12px!important;
+  border-top:1px solid var(--at-line);background:var(--at-side)!important;
+}
+html[data-atelier-toolbar="stock"] #innertable {
+  box-sizing:border-box!important;display:table!important;width:100%!important;
+  table-layout:fixed!important;border-spacing:0!important;margin:0!important;
+}
+html[data-atelier-toolbar="stock"] #innertable > tbody > tr > .stat {
+  width:96px!important;vertical-align:middle!important;padding:0!important;
+}
+html[data-atelier-toolbar="stock"] #middle {
+  padding:0 12px!important;vertical-align:middle!important;
+  text-align:center!important;min-width:0!important;
+}
+html[data-atelier-toolbar="stock"] #middle > center,
+html[data-atelier-toolbar="stock"] #middle > table,
+html[data-atelier-toolbar="stock"] #middle > center > table {
+  height:auto!important;min-height:0!important;margin:0 auto!important;
+  max-width:100%!important;border-spacing:0!important;
+}
+html[data-atelier-toolbar="stock"] #middle td {
+  vertical-align:middle!important;padding:0 4px!important;
+}
+html[data-atelier-toolbar="stock"] #outer button {
+  box-sizing:border-box!important;position:static!important;float:none!important;
+  display:inline-flex!important;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;background:var(--at-panel)!important;color:var(--at-text)!important;
+  border:1px solid var(--at-line)!important;border-radius:11px!important;
+  padding:8px 14px!important;margin:0!important;width:auto!important;
+  max-width:100%!important;height:auto!important;min-height:44px!important;
+  font-family:inherit!important;font-size:14px!important;font-weight:600!important;line-height:1.35!important;
+  box-shadow:0 2px 5px #0000000a!important;text-shadow:none!important;
+  white-space:normal!important;overflow-wrap:anywhere;
+  transform:none!important;animation:none!important;
+}
+html[data-atelier-toolbar="stock"] #middle button {min-height:56px!important;}
+html[data-atelier-toolbar="stock"] #middle button[data-ease] {min-width:82px!important;}
+html[data-atelier-toolbar="stock"] #ansbut {
+  min-width:min(240px,100%)!important;
+  background:var(--at-accent-soft)!important;color:var(--at-accent-strong)!important;
+  border-color:var(--at-accent)!important;
+}
+html[data-atelier-toolbar="stock"] #defease {
+  background:var(--at-accent-soft)!important;border-color:var(--at-accent)!important;
+}
+html[data-atelier-toolbar="stock"] #outer .nobold,
+html[data-atelier-toolbar="stock"] #outer .stattxt {
+  display:block!important;font-size:11px!important;font-weight:400!important;
+  line-height:1.4!important;color:var(--at-muted);margin:0!important;
+}
+html[data-atelier-toolbar="stock"] #outer .stattxt:empty {display:none!important;}
+html[data-atelier-toolbar="stock"] #outer button:hover {
+  background:var(--at-raised)!important;border-color:var(--at-accent)!important;
+  transform:none!important;
+}
+html[data-atelier-toolbar="stock"] #outer button:focus-visible {
+  outline:2px solid var(--at-accent)!important;outline-offset:2px;
+}
+html[data-atelier-toolbar="stock"] .new-count,html[data-atelier-screen="overview"] .new-count{color:var(--at-blue);}
+html[data-atelier-toolbar="stock"] .learn-count,html[data-atelier-screen="overview"] .learn-count{color:var(--at-pink);}
+html[data-atelier-toolbar="stock"] .review-count,html[data-atelier-screen="overview"] .review-count{color:var(--at-green);}
+html[data-atelier-screen="overview-bottom"] {background:var(--at-side)!important;color-scheme:var(--at-scheme);}
+html[data-atelier-screen="overview-bottom"] body{background:var(--at-side)!important;color:var(--at-text)!important;}
+html[data-atelier-screen="overview-bottom"] button{background:var(--at-panel)!important;color:var(--at-text)!important;border:1px solid var(--at-line)!important;border-radius:8px!important;padding:7px 12px!important;}
+@media(max-width:720px){
+  html[data-atelier-toolbar="stock"] #outer{padding:8px 10px 10px!important;}
+  html[data-atelier-toolbar="stock"] #innertable > tbody > tr > .stat{width:68px!important;}
+  html[data-atelier-toolbar="stock"] #middle{padding:0 6px!important;}
+  html[data-atelier-toolbar="stock"] #middle button[data-ease]{min-width:58px!important;}
+  html[data-atelier-toolbar="stock"] #outer button{font-size:12px!important;padding:7px 9px!important;}
+  html[data-atelier-toolbar="stock"] #middle td{padding:0 3px!important;}
+}
+@media(max-width:500px){
+  html[data-atelier-toolbar="stock"] #innertable,
+  html[data-atelier-toolbar="stock"] #innertable > tbody{display:block!important;}
+  html[data-atelier-toolbar="stock"] #innertable > tbody > tr{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px!important;}
+  html[data-atelier-toolbar="stock"] #middle{display:block!important;grid-row:1;grid-column:1 / -1;padding:0!important;}
+  html[data-atelier-toolbar="stock"] #innertable > tbody > tr > .stat{display:block!important;width:auto!important;grid-row:2;}
+  html[data-atelier-toolbar="stock"] #innertable > tbody > tr > .stat:first-child{text-align:left!important;}
+  html[data-atelier-toolbar="stock"] #innertable > tbody > tr > .stat:last-child{text-align:right!important;}
+  html[data-atelier-toolbar="stock"] #middle button[data-ease]{min-width:48px!important;}
+  html[data-atelier-toolbar="stock"] #middle td{padding:0 2px!important;}
+}
+/* Native study overview, same events, links and descriptions. */
+html[data-atelier-screen="overview"]{background:var(--at-bg)!important;color-scheme:var(--at-scheme);}
+html[data-atelier-screen="overview"] body{background:var(--at-bg)!important;color:var(--at-text)!important;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;}
+html[data-atelier-screen="overview"] body>center{box-sizing:border-box;margin:clamp(20px,6vh,70px) auto;padding:clamp(24px,4vw,44px);width:calc(100% - 40px);max-width:1000px;border:1px solid var(--at-line);border-radius:18px;background:var(--at-panel);line-height:1.7;}
+html[data-atelier-screen="overview"] h3{font-size:clamp(20px,3vw,30px);line-height:1.4;overflow-wrap:anywhere;}
+html[data-atelier-screen="overview"] button#study{background:var(--at-accent-soft)!important;color:var(--at-accent-strong)!important;border:1px solid var(--at-accent)!important;border-radius:11px;padding:12px 23px;font-size:15px;}
+html[data-atelier-screen="overview"] a{color:var(--at-accent-strong);}
+html[data-atelier-screen="overview"] .description{color:var(--at-muted);}
+@media(max-width:650px){html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{font-size:19px;padding:23px 20px;border-radius:13px;}html[data-atelier-screen="overview"] body>center{width:calc(100% - 12px);padding:24px 15px;}html[data-atelier-screen="overview"] table{max-width:100%;}}
+@media(prefers-reduced-motion:no-preference){html[data-atelier-screen][data-atelier-motion="on"] button{transition:background-color .12s ease,border-color .12s ease;}}

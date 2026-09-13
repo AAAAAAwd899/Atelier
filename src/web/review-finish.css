@@ -1,0 +1,7 @@
+/* Reader-first finish. No sizing, wrapping, transforms or card selectors added. */
+html[data-atelier-screen="review"] #atelier-review-header button:focus-visible,
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer button:focus-visible{outline:2px solid var(--at-accent-strong)!important;outline-offset:3px!important;box-shadow:0 0 0 2px var(--at-side)!important;}
+html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer button{transition:background-color .14s ease,border-color .14s ease!important;transform:none!important;}
+html[data-atelier-motion="off"][data-atelier-screen="review-bottom"] #outer button{transition:none!important;}
+@media(prefers-reduced-motion:reduce){html[data-atelier-screen="review-bottom"] #outer button{transition:none!important;}}
+@media(forced-colors:active){html[data-atelier-screen="review-bottom"] #outer button:focus-visible{outline:2px solid Highlight!important;box-shadow:none!important;}}

@@ -1,0 +1,141 @@
+/* Study Worlds · composition, materials and scenery. No fixed overlay on controls. */
+:host{--world-font:"Segoe UI",system-ui,sans-serif;--world-radius:20px;--world-art:none}
+:host([data-owner="atelier"]) .main{background:radial-gradient(ellipse at 92% 0%,var(--hero-end),transparent 65%),var(--bg);}
+:host([data-owner="atelier"]) .sidebar{background:linear-gradient(170deg,var(--side),var(--bg));border-right:1px solid var(--line-soft);}
+:host([data-owner="atelier"]) .topbar{background:var(--bg);border-bottom:1px solid var(--line-soft);box-shadow:none;}
+:host([data-owner="atelier"]) .quiet-focus{grid-template-columns:minmax(0,1fr) minmax(240px,32%);border-radius:var(--world-radius);background:linear-gradient(125deg,var(--hero),var(--hero-end));border:1px solid var(--line);box-shadow:0 18px 55px var(--shadow);overflow:hidden;}
+:host([data-owner="atelier"]) .quiet-focus .focus-intro{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;}
+:host([data-owner="atelier"]) .quiet-focus h1{font-family:var(--world-font);font-size:clamp(30px,3.1vw,49px);font-weight:500;line-height:1.1;letter-spacing:-1.1px;max-width:20ch;}
+:host([data-owner="atelier"]) .quiet-focus p{font-size:13px;line-height:1.75;max-width:54ch;color:var(--muted);margin-top:16px;}
+:host([data-owner="atelier"]) .focus-actions{gap:9px;margin-top:26px;}
+:host([data-owner="atelier"]) .focus-actions .secondary{background:transparent;border-color:var(--line);}
+:host([data-owner="atelier"]) .focus-agenda{padding:16px 16px 18px 0;background:transparent;border:0;display:flex;flex-direction:column;gap:9px;min-width:0;}
+.world-window{display:block;position:relative;width:100%;min-height:155px;aspect-ratio:2.25;background:var(--world-art) center 48%/cover no-repeat,var(--hero);border:1px solid var(--line);border-radius:calc(var(--world-radius) * .65);overflow:hidden;margin:0 0 2px;color:#fff7e5;}
+.world-window::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(5,13,17,.86));pointer-events:none;}
+.world-window .world-window-label{position:absolute;inset:auto 16px 13px;z-index:1;display:flex;flex-direction:column;gap:4px;text-shadow:0 1px 8px #000;}
+.world-window .world-window-label small{font:9px/1.2 "Segoe UI",sans-serif;letter-spacing:1.7px;text-transform:uppercase;color:#eee8d7;}
+.world-window .world-window-label strong{font:22px/1.1 var(--world-font);letter-spacing:-.3px;color:#fff7e5;}
+.world-window .world-window-label strong::after{content:" ↗";font:13px system-ui;color:#e4d9c8;}
+.world-window:hover{border-color:var(--accent);filter:none;}
+:host([data-companion="true"]) .world-window{display:none}
+:host([data-ambience="false"]) .world-window{min-height:82px;aspect-ratio:auto;background:var(--panel);color:var(--text);}
+:host([data-ambience="false"]) .world-window::after{content:none}
+:host([data-ambience="false"]) .world-window-label *{color:var(--text)!important;text-shadow:none}
+:host([data-owner="atelier"]) .agenda-label{margin:4px 1px 0;font-size:9px;letter-spacing:1.1px}
+:host([data-owner="atelier"]) .agenda-item{margin:0;min-height:63px;padding:10px;border-radius:10px;background:var(--panel);box-shadow:none;}
+:host([data-owner="atelier"]) .agenda-copy strong{font-weight:600;font-size:12px}
+:host([data-owner="atelier"]) .focus-footer{padding:17px 30px;border-top:1px solid var(--line);background:var(--panel);box-shadow:none;}
+:host([data-owner="atelier"]) .focus-metric strong{font-size:25px;font-weight:500;letter-spacing:-.8px}
+:host([data-owner="atelier"]) .focus-metric span{font-size:10px}
+:host([data-owner="atelier"]) :is(.deck-card,.study-board,.study-section,.study-panel,.lecture-group){border-radius:var(--world-radius);background:var(--panel);box-shadow:0 8px 22px var(--shadow);}
+:host([data-owner="atelier"]) :is(.section-heading h2,.suite-section-title){font:500 23px/1.25 var(--world-font);letter-spacing:-.5px}
+:host([data-owner="atelier"]) .card-title{font-family:var(--world-font);font-size:19px;line-height:1.25;}
+:host([data-owner="atelier"]) .nav-row.active{border-radius:calc(var(--world-radius)*.5);background:var(--accent-soft);box-shadow:inset 2px 0 var(--accent);}
+.suite-sidebar-separator{border-top:1px solid var(--line-soft);margin:8px 12px 6px}
+.suite-caption{font:9px/1.6 "Segoe UI",sans-serif;letter-spacing:1.6px;color:var(--quiet);padding:4px 13px;text-transform:uppercase}
+.suite-exams{margin:24px 0 0;}
+.suite-exams-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.suite-exams-head p{font-size:11px;color:var(--muted);margin-top:4px}
+.suite-plan-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px;}
+.suite-plan{border:1px solid var(--line-soft);background:var(--panel);border-radius:calc(var(--world-radius)*.7);padding:18px;min-width:0;position:relative;}
+.suite-plan-top{display:flex;gap:12px;align-items:flex-start;}
+.suite-plan-index{font:24px/1 var(--world-font);color:var(--accent);opacity:.85;min-width:25px;}
+.suite-plan h3{font-size:14px;line-height:1.45;font-weight:600;overflow-wrap:anywhere}
+.suite-plan small{font-size:10px;line-height:1.6;color:var(--muted);display:block;margin-top:4px}
+.suite-plan-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:15px}
+.suite-plan-actions button{padding:8px 9px;min-height:31px;font-size:11px;border:1px solid var(--line);border-radius:8px;color:var(--text);background:var(--raised);}
+.suite-plan-actions button:first-child{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-strong);}
+.suite-plan-actions button:hover{background:var(--hover);}
+.suite-hub-empty{display:flex;gap:20px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:var(--panel);border-radius:var(--world-radius);padding:20px;}
+.suite-hub-empty strong{font:24px/1.2 var(--world-font)}.suite-hub-empty p{margin-top:7px;font-size:12px;color:var(--muted);line-height:1.6;max-width:600px;}
+.suite-draft{margin-bottom:12px;padding:12px 16px;border:1px solid var(--accent);border-radius:10px;font-size:12px;background:var(--accent-soft);display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.suite-draft button{font-weight:600;text-decoration:underline;}
+.themes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.theme-tile{padding:0 0 12px;border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line);box-shadow:none;}
+.theme-tile .mini-screen{background:var(--world-art) center/cover, var(--bg);height:100px;display:block;border:0;border-radius:0;position:relative;}
+.theme-tile .mini-side,.theme-tile .mini-content{display:none;}
+.theme-tile .mini-screen::after{content:var(--world-title);position:absolute;left:11px;bottom:10px;font:15px/1.1 var(--world-font);color:#fff;max-width:90%;text-shadow:0 1px 7px #000;}
+.theme-tile .tile-label{padding:0 12px;margin-top:11px;}.theme-tile>small{padding:0 12px;font-size:10px;line-height:1.6;display:block;color:var(--muted)}
+.theme-tile.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
+/* Material-specific treatments, not just palette swaps. */
+:host([data-theme="linen"][data-owner="atelier"]) .main{background:repeating-linear-gradient(0deg,transparent 0 31px,#927d5910 32px),var(--bg);}
+:host([data-theme="linen"]) .quiet-focus{border:1px solid var(--line);outline:1px solid var(--line);outline-offset:5px;box-shadow:0 8px 20px var(--shadow);margin:5px;}
+:host([data-theme="linen"]) .focus-actions .primary{border-radius:4px;box-shadow:none}
+:host([data-theme="midnight"]) .main{background:linear-gradient(90deg,#78c9b509 1px,transparent 1px),linear-gradient(#78c9b509 1px,transparent 1px),var(--bg);background-size:32px 32px;}
+:host([data-theme="midnight"]) .focus-panel{border-left:3px solid var(--accent);box-shadow:none;}
+:host([data-theme="midnight"]) .eyebrow{font-family:ui-monospace,monospace;letter-spacing:2px}
+:host([data-theme="glacier"]) .quiet-focus{border-top:2px solid var(--accent);box-shadow:0 14px 38px #02121940;}
+:host([data-theme="glacier"]) .world-window{border-radius:3px 24px 3px 3px}
+:host([data-theme="forest"]) .sidebar{background:radial-gradient(ellipse at 0% 0%,#68815524,transparent 45%),var(--side);}
+:host([data-theme="forest"]) .quiet-focus{border:1px solid #68875b80;box-shadow:0 18px 55px #02140d50;}
+:host([data-theme="forest"]) .world-window{border-radius:70px 70px 10px 10px;}
+:host([data-theme="rose"]) .world-window{border-radius:80px 80px 12px 12px;}
+:host([data-theme="rose"]) .quiet-focus{background:linear-gradient(115deg,#ead3db,#f1e3d5);}
+:host([data-theme="bloom"]) .quiet-focus{background:linear-gradient(135deg,var(--hero),var(--panel));border-radius:28px 28px 9px 9px;}
+:host([data-theme="matcha"]) .sidebar{background:repeating-linear-gradient(90deg,transparent 0 35px,#7f936212 36px),var(--side);}
+:host([data-theme="matcha"]) .quiet-focus{border-top:4px solid var(--line);box-shadow:0 9px 25px var(--shadow);}
+:host([data-theme="peach"]) .world-window{border-radius:55px 12px 55px 12px;}
+:host([data-theme="tidal"]) .quiet-focus{border-bottom:3px solid var(--line);border-radius:28px 28px 40px 12px;}
+:host([data-theme="ember"]) .quiet-focus{border:1px solid var(--line);border-left:4px solid var(--accent);}
+:host([data-theme="celestial"]) .world-window{border-radius:90px 90px 10px 10px;}
+:host([data-theme="celestial"]) .focus-intro .eyebrow{letter-spacing:2.5px;}
+/* Passive owner is always a genuine boundary. */
+:host([data-companion="true"]) :is(.quiet-focus,.sidebar,.main){background-image:none!important;outline:none;border-radius:18px;}
+:host([data-companion="true"]) :is(.quiet-focus h1,.card-title,.section-heading h2){font-family:"Segoe UI",sans-serif!important;}
+:host([data-ambience="false"]) :is(.main,.sidebar){background-image:none!important;}
+@media(max-width:1100px){:host([data-owner="atelier"]) .quiet-focus{grid-template-columns:minmax(0,1fr) 260px;} .world-window{min-height:133px}.focus-intro{padding:26px!important}.quiet-focus h1{font-size:34px!important}}
+@media(max-width:880px){:host([data-owner="atelier"]) .quiet-focus{grid-template-columns:1fr;} :host([data-owner="atelier"]) .focus-agenda{padding:0 22px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.world-window{grid-column:1/-1;min-height:150px;aspect-ratio:4.2}.agenda-label{grid-column:1/-1}.themes{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:520px){.suite-exams-head,.suite-hub-empty{align-items:flex-start;flex-direction:column}.focus-agenda{display:flex!important}.world-window{min-height:125px}.theme-tile .mini-screen{height:82px}.suite-plan-actions{gap:7px}}
+/* Navigation is a first-class part of the home, not hidden in the footer. */
+.unified-topbar{position:sticky;top:0;z-index:12;height:auto;min-height:76px;gap:18px;padding:16px 30px;flex-wrap:wrap;}
+.unified-topbar .topbar-left{flex:0 1 auto;min-width:100px}.unified-topbar .top-actions{flex:1;justify-content:flex-end;gap:8px;min-width:0}
+.unified-topbar .search{flex:1 1 190px;max-width:320px;min-width:150px}.unified-topbar .search input{width:100%;min-width:0;}
+.unified-topbar .secondary,.unified-topbar .primary{font-size:12px;padding:9px 12px;min-height:38px;white-space:nowrap;flex:0 0 auto;box-shadow:none;}
+.unified-topbar .icon-button{width:32px;height:36px;flex:0 0 32px;}
+.unified-topbar .owner-badge{font:9px/1.4 "Segoe UI",system-ui;letter-spacing:1px;white-space:nowrap;}
+.sidebar .nav-group{padding-bottom:9px;gap:2px;}.sidebar .nav-row{min-height:37px;padding:8px 12px;font-size:12px;}
+.side-utility-links{display:flex;gap:6px;flex-wrap:wrap;padding:0 6px 16px;}.side-utility-links .recent-link{font-size:10px;padding:6px;gap:5px;min-height:28px;}.side-utility-links .icon{width:12px;height:12px}
+.desk-tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;border:1px solid var(--line-soft);border-radius:12px;margin-top:18px;overflow:hidden;background:var(--line-soft);}
+.desk-tool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:var(--panel);min-height:76px;padding:12px 6px;font-size:11px;line-height:1.4;text-align:center;color:var(--muted);}
+.desk-tool svg{color:var(--accent)}.desk-tool:hover{background:var(--raised);color:var(--text)}.desk-tool:focus-visible{outline-offset:-3px}
+.suite-warning{padding:13px;border:1px solid var(--amber);font-size:12px;color:var(--text);margin-bottom:12px;}
+.tools-heading{padding:24px 0 20px}.tools-heading h1{font:500 clamp(28px,3vw,44px)/1.1 var(--world-font);letter-spacing:-.8px;}
+.tools-heading p{font-size:13px;color:var(--muted);margin-top:13px;line-height:1.7}
+.tools-spotlight{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:30px;}.tools-spotlight button{font-size:12px;}
+.tools-group{margin:25px 0;}.tools-group h2{font:600 10px/1.6 "Segoe UI",system-ui;letter-spacing:1.8px;color:var(--muted);margin-bottom:12px;}
+.tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tool-tile{border:1px solid var(--line);border-radius:var(--world-radius);background:var(--panel);color:var(--text);padding:22px 18px;display:flex;gap:14px;align-items:flex-start;min-width:0;}
+.tool-tile>span:nth-child(2){flex:1;min-width:0}.tool-tile strong{font-size:14px;font-weight:600;line-height:1.5;display:block;}
+.tool-tile small{display:block;font-size:11px;line-height:1.75;margin-top:7px;color:var(--muted);overflow-wrap:anywhere}
+.tool-symbol{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;background:var(--accent-soft);color:var(--accent);border-radius:10px;}
+.tool-tile>svg{margin-top:12px;width:13px;color:var(--quiet)}.tool-tile:hover{border-color:var(--accent);background:var(--raised);}.tool-tile:disabled{opacity:.45;}
+.tools-footnote{font-size:12px;line-height:1.8;color:var(--muted);padding:20px 0 8px;border-top:1px solid var(--line-soft)}
+@media(max-width:1240px){.unified-topbar .topbar-left{display:none}.unified-topbar .top-actions{justify-content:flex-start}.unified-topbar .search{max-width:none;}.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:950px){.unified-topbar{padding:12px 20px}.unified-topbar .top-actions{flex-wrap:wrap}.unified-topbar .search{flex-basis:100%;height:36px}.unified-topbar .refresh-library{display:none}.desk-tools{grid-template-columns:repeat(3,minmax(0,1fr));}.desk-tool{min-height:66px}.suite-plan-list{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr}.tool-tile{padding:17px}.tools-spotlight .secondary{font-size:11px}}
+@media(max-width:860px){.unified-topbar .topbar-left{display:flex;}.unified-topbar .owner-badge{display:none}.unified-topbar .top-actions{flex-basis:calc(100% - 70px)}.unified-topbar .search{flex-basis:100%}.unified-topbar .top-actions .primary,.unified-topbar .top-actions .secondary{padding:8px;font-size:11px;}}
+@media(max-width:480px){.unified-topbar{padding:10px 14px}.unified-topbar .top-actions{gap:5px}.unified-topbar .icon-button{width:26px;flex-basis:26px}.unified-topbar .top-actions .secondary .icon{display:none}.desk-tool{font-size:10px}.tools-spotlight{display:grid;grid-template-columns:1fr 1fr}.tools-heading h1{font-size:28px}.tools-heading{padding-top:12px}}
+:host([data-motion="off"]) *, :host([data-motion="off"]) *::before, :host([data-motion="off"]) *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+
+/* RC2 audit: readable identity, visible sorting, unambiguous selected worlds. */
+.unified-topbar .owner-badge{font:500 11px/1.5 "Segoe UI",system-ui,sans-serif;letter-spacing:0;text-transform:none;min-height:32px;}
+.brand small{font-size:10px;line-height:1.6;letter-spacing:.25px;text-transform:none;}
+.brand strong{letter-spacing:-1.1px;}
+.world-window .world-window-label small{font-size:10px;letter-spacing:1px;}
+.world-window .world-window-label strong{overflow-wrap:anywhere;}
+.theme-tile .mini-screen::before{content:"";position:absolute;inset:20% 0 0;background:linear-gradient(transparent,rgba(5,13,17,.86));pointer-events:none;}
+.theme-tile .mini-screen::after{z-index:1;color:#fff;}
+.theme-check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--accent-strong);}
+.theme-check[hidden]{display:none;}
+.library-controls.board-controls{display:flex;justify-content:flex-end;}
+.board-controls>.tabs,.board-controls .view-switch{display:none;}
+.board-controls::before{content:"Lectures stay in their folders";font-size:11px;color:var(--muted);margin-right:auto;}
+.recent-order{font-size:11px;color:var(--muted);padding:6px 2px;}
+.library-controls select{max-width:220px;}
+@media(max-width:620px){.library-controls.board-controls{display:flex;gap:10px;flex-wrap:wrap}.board-controls::before{flex:1;min-width:130px}.library-controls select{font-size:11px;max-width:185px}}
+/* Search and sorting remain available in compact windows; they are not optional decoration. */
+.unified-topbar .search{display:flex;}
+@media(max-width:365px){.view-tools select{display:block;max-width:170px}.view-tools{gap:8px}.library-controls{flex-wrap:wrap}.library-controls>.tabs{flex-wrap:wrap}}
+@media(max-height:620px){.sidebar{overflow-y:auto;overscroll-behavior:contain}.sidebar .side-scroll{flex:0 0 auto;max-height:220px;min-height:130px}.sidebar .brand-row{padding-bottom:14px}}
+/* Keep compact navigation in two rows instead of isolating the menu above search. */
+@media(max-width:820px){.unified-topbar .topbar-left{min-width:0;flex:0 0 30px;align-self:flex-start;padding-top:1px}.unified-topbar .top-actions{flex:1 1 calc(100% - 52px);width:auto;min-width:0}.unified-topbar .mobile-button{width:30px;flex-basis:30px;justify-content:center}}

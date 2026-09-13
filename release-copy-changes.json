@@ -1,0 +1,319 @@
+{
+  "version": "1.0.0",
+  "baseline": "0.9.0-rc6",
+  "files": {
+    "core.py": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 1
+      }
+    ],
+    "manifest.json": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 1
+      }
+    ],
+    "review_theme.py": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 2
+      }
+    ],
+    "web/atelier.js": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 1
+      },
+      {
+        "old": "Choose one visual owner.",
+        "new": "Choose your appearance",
+        "count": 1
+      },
+      {
+        "old": "Change presentation without removing either add-on. The homepage reloads after saving.",
+        "new": "Choose which add-on styles Anki. Your cards and other features stay available. The home page reloads after saving.",
+        "count": 1
+      },
+      {
+        "old": "All decks / native options",
+        "new": "All decks & export options",
+        "count": 1
+      },
+      {
+        "old": "Your recorded Anki review activity, scoped to the material you are studying. No invented readiness score.",
+        "new": "See your Anki review activity for the classes you choose. Practice results stay separate.",
+        "count": 1
+      },
+      {
+        "old": "Pick a lecture. Begin.",
+        "new": "Choose a lecture",
+        "count": 1
+      },
+      {
+        "old": "Normal Anki review, one lecture at a time. Your scheduler still applies.",
+        "new": "Study one lecture with your usual Anki schedule.",
+        "count": 1
+      },
+      {
+        "old": "Counts are Anki’s available counts. If a lecture has nothing available now, Anki may show its completion screen.",
+        "new": "Counts show what Anki can offer now. When nothing is available, Anki shows when you can study again.",
+        "count": 1
+      },
+      {
+        "old": "Balanced fits the building and statistics together. Original uses the provider’s saved positions.",
+        "new": "Balanced fits the reward and statistics together. Original keeps the other add-on’s saved positions.",
+        "count": 1
+      },
+      {
+        "old": "Atelier can arrange existing DOM widgets, not install other add-ons or fabricate an unavailable widget. Custom widgets outside recognized grids keep their original position. Hidden widgets stay loaded; this is not a disable switch.",
+        "new": "Arrange widgets already provided by your installed add-ons. Some widgets keep their own layout. Hiding a widget here does not disable its add-on.",
+        "count": 1
+      },
+      {
+        "old": "Your original homepage, fonts, layout and reviewer stay untouched. The optional organizer and compact launcher use readable colors derived from the original panels. Atelier does not recreate older Onigiri settings or recolor the native page.",
+        "new": "Your chosen add-on keeps control of the home page and reviewer. Atelier adds an optional organizer without changing that add-on’s saved theme.",
+        "count": 1
+      },
+      {
+        "old": "Adaptive styles static text cards. Custom interactive layouts retain their design.",
+        "new": "Match ordinary text cards to your world. Custom interactive cards keep their own design.",
+        "count": 1
+      },
+      {
+        "old": "For eligible text cards only. Image-occlusion geometry is preserved.",
+        "new": "Adjust text-card width. Images and occlusion masks keep their alignment.",
+        "count": 1
+      },
+      {
+        "old": "Full · stage and path",
+        "new": "Full · title and folder path",
+        "count": 1
+      },
+      {
+        "old": "Themes supported tool-window controls. All original editor/browser features remain.",
+        "new": "Match supported Anki tool windows without removing their controls.",
+        "count": 1
+      },
+      {
+        "old": "Exam Studio is bundled, with the original Sprout engine and existing profile-local data. Pinning plan folders adds shortcuts only; it never rewrites exam definitions. Native tools retain their original functionality.",
+        "new": "Exam Studio is included. Plans and results stay in this Anki profile. Focus folders are shortcuts to your decks, not copies of your exam plans.",
+        "count": 1
+      },
+      {
+        "old": "This changes the real Anki hierarchy. Parent deck limits may apply differently. Cards are not rescheduled by Atelier; Undo is available through Anki.",
+        "new": "This moves the folder in Anki. Its new parent’s daily limits may affect which cards are offered. You can undo the move in Anki.",
+        "count": 1
+      },
+      {
+        "old": "Subfolder names update with the parent. Notes, cards and review history keep their existing IDs.",
+        "new": "Subfolders follow the new parent name. Your cards and review history stay intact.",
+        "count": 1
+      },
+      {
+        "old": "Choose the exam’s own folder rather than an entire old semester to keep the scope narrow.",
+        "new": "Choose the exam’s own folder rather than an entire old semester to focus on the right material.",
+        "count": 1
+      },
+      {
+        "old": "Show, hide, reorder and resize widgets already loaded by Onigiri or another home-screen add-on. Their controls and original DOM stay together.",
+        "new": "Show, hide, reorder, and resize widgets from your installed add-ons. Their original controls stay available.",
+        "count": 1
+      },
+      {
+        "old": "title='Anki takes it from here.';desc='This file is an interface preview with sample data.';",
+        "new": "title=boot.preview?'Anki takes it from here.':'This tool is not available yet';desc=boot.preview?'This file is an interface preview with sample data.':'Your work has not been changed.';",
+        "count": 1
+      },
+      {
+        "old": "footer=btn('close-dialog','Back to the preview','back','primary');",
+        "new": "footer=btn('close-dialog',boot.preview?'Back to the preview':'Close','back','primary');",
+        "count": 1
+      }
+    ],
+    "web/home.js": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 1
+      }
+    ],
+    "web/cohesion.js": [
+      {
+        "old": "0.9.0-rc6",
+        "new": "1.0.0",
+        "count": 3
+      }
+    ],
+    "web/native-widgets.js": [
+      {
+        "old": "Built-in widgets work on their own. Other installed add-ons can register widgets through Atelier’s widget API; they appear in this list when available. Existing Onigiri games remain available through More tools. This is not an importer for arbitrary web embeds.",
+        "new": "Built-in widgets work without extra add-ons. Compatible installed add-ons can offer more widgets here. For Onigiri’s own games, open More tools. Website embeds are not supported.",
+        "count": 1
+      },
+      {
+        "old": "These are the same tools used throughout Atelier. Sync follows Anki’s native controls; local widget notes and layout are not included.",
+        "new": "These tools are also available on your Study desk. Sync updates your Anki collection, not local widget notes or layouts.",
+        "count": 1
+      },
+      {
+        "old": "Everything is still here, without crowding the page.",
+        "new": "Study, create, and manage your collection.",
+        "count": 1
+      },
+      {
+        "old": "Save explicitly before closing. Removing the widget keeps its note.",
+        "new": "Choose Save note before closing. Removing the widget does not erase your note.",
+        "count": 1
+      },
+      {
+        "old": "Add, remove or reorder widgets in Arrange widgets. Study data stays in its original stores.",
+        "new": "Add, remove, or reorder widgets in Arrange widgets. Removing a widget does not remove your study data.",
+        "count": 1
+      }
+    ],
+    "sprout/web/app.js": [
+      {
+        "old": "The Anki bridge is not available. Open this screen from the installed add-on.",
+        "new": "This window is not connected to Anki. Open Exam Studio from Atelier and try again.",
+        "count": 1
+      },
+      {
+        "old": "Subdecks included; overlaps deduplicated.",
+        "new": "Includes subdecks without counting cards twice.",
+        "count": 1
+      },
+      {
+        "old": "These original Sprout presets are retained for Original Onigiri / other-theme mode, or when Match Exam Studio is turned off in Atelier. They do not override the active Atelier world.",
+        "new": "These colors apply when you keep another add-on’s theme or turn off Match Exam Studio. Otherwise, the World selector controls Atelier’s appearance.",
+        "count": 1
+      },
+      {
+        "old": "Your study tools and their preferences, together. When an Atelier world is active, the World selector above controls the appearance across the suite.",
+        "new": "Choose how your planner and companion work. Use World above to change the appearance throughout Atelier.",
+        "count": 1
+      },
+      {
+        "old": "46 px in free footer space; no sidebar and no card overlap. Click to pet; right-click to water, pause or hide.",
+        "new": "A small companion beside your review controls. Click to pet; right-click to water, pause, or hide.",
+        "count": 1
+      },
+      {
+        "old": "<p>Exam Sprout ${E(S.data.version)} · Preview release</p>",
+        "new": "<p>${S.data.suite?'Exam Studio · included with Atelier':'Exam Sprout '+E(S.data.version)}</p>",
+        "count": 1
+      },
+      {
+        "old": "Desktop add-on for Anki’s Qt 6 interface. Custom card scripts and other add-ons need a live compatibility check. Native card rendering stays in Anki’s separate previewer.",
+        "new": "Your original Anki cards, formatting, and media are used in practice. Specialized card templates and other add-ons may need their own settings.",
+        "count": 1
+      },
+      {
+        "old": "Local, per-profile storage. No AnkiWeb syncing, account, telemetry, or API key.",
+        "new": "Plans and results stay in this Anki profile. No account is needed. Anki Sync does not include this data; keep a separate backup.",
+        "count": 1
+      },
+      {
+        "old": "'Tools → Exam Sprout stays available either way.'",
+        "new": "S.data.suite?'Exam Studio stays available from Tools → Atelier.':'Exam Sprout stays available from Anki’s Tools menu.'",
+        "count": 1
+      },
+      {
+        "old": "Close this window and reopen it from Tools → Exam Sprout.",
+        "new": "Close this window and reopen the planner from Anki’s Tools menu.",
+        "count": 1
+      },
+      {
+        "old": "A small clickable reminder under the deck list.",
+        "new": "A clickable reminder on your Anki home.",
+        "count": 1
+      }
+    ],
+    "workshop/web/app.js": [
+      {
+        "old": "Anki has not responded yet. The native Close and Diagnostics controls remain available.",
+        "new": "Anki has not responded yet. You can close this window or use Diagnostics to check what happened.",
+        "count": 1
+      },
+      {
+        "old": "Open Workshop from the installed Anki add-on. The native bridge is unavailable.",
+        "new": "This window is not connected to Anki. Open Card Studio from Atelier and try again.",
+        "count": 1
+      },
+      {
+        "old": "aria-label=\"Workshop navigation\"",
+        "new": "aria-label=\"Card Studio navigation\"",
+        "count": 1
+      },
+      {
+        "old": "World for the complete Atelier suite",
+        "new": "World for Atelier",
+        "count": 1
+      },
+      {
+        "old": "Your scheduler stays yours.",
+        "new": "Review before adding cards.",
+        "count": 1
+      },
+      {
+        "old": "Appearance, careful integrations, and a clear view of what stays local.",
+        "new": "Choose your appearance, connected tools, and privacy settings.",
+        "count": 1
+      },
+      {
+        "old": "Finished materials and restrained motion. Reading and editing always take priority.",
+        "new": "Choose a comfortable reading space and optional motion.",
+        "count": 1
+      },
+      {
+        "old": "The home, native Add route, editor, repair queue and source links use this one built-in Card Studio. No second authoring controller is needed.",
+        "new": "Add cards, drafts, source documents, and repairs share this Card Studio. You do not need a separate card-building add-on.",
+        "count": 1
+      },
+      {
+        "old": "The exact note scope is retained; you confirm and save the new plan.",
+        "new": "Only those linked notes are selected. You review and save the new plan.",
+        "count": 1
+      },
+      {
+        "old": "Use the native editor or upstream suggestion process.",
+        "new": "Use Anki’s editor or that service’s suggested-edit tools.",
+        "count": 1
+      },
+      {
+        "old": "Source-aware studio",
+        "new": "Create cards with source references",
+        "count": 1
+      },
+      {
+        "old": "<p>Workshop ${E(S.data.version)}<br>Desktop add-on · engineering candidate</p>",
+        "new": "<p>${S.data.integrated?'Card Studio · included with Atelier':'Workshop '+E(S.data.version)}<br>Create, review, and add cards.</p>",
+        "count": 1
+      },
+      {
+        "old": "Native Windows and add-on combinations still require acceptance testing. The preview of a card does not execute its scripts here; native Preview does.",
+        "new": "Use Anki’s card preview to check scripts and media. The draft preview shows content without running custom card scripts.",
+        "count": 1
+      },
+      {
+        "old": "Approved cards use normal Anki notes and media, so they remain useful without Workshop.",
+        "new": "Approved cards use normal Anki notes and media, so they remain useful without Atelier.",
+        "count": 1
+      },
+      {
+        "old": "Workshop does not bypass its presets or consent.",
+        "new": "Your existing presets and permission choices stay in control.",
+        "count": 1
+      },
+      {
+        "old": "Workshop uses full modifier shortcuts, not single-letter review keys.",
+        "new": "Card Studio uses key combinations, not single-letter review shortcuts.",
+        "count": 1
+      }
+    ]
+  }
+}

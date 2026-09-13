@@ -1,0 +1,7 @@
+/* Only static text-card framing changes. No illustrations, animation or masks in #qa. */
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{border-radius:var(--world-radius,20px)!important;background:var(--at-panel)!important;box-shadow:0 16px 48px #00000015!important;font-size:clamp(20px,2vw,26px)!important;line-height:1.65!important;}
+html[data-atelier-screen="review"] #atelier-review-header .atelier-review-lecture{font-family:"Segoe UI",system-ui,sans-serif!important;font-size:13px!important;font-weight:550!important;letter-spacing:0!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="forest"] #qa{border-left:2px solid var(--at-accent)!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="linen"] #qa{outline:1px solid var(--at-line);outline-offset:4px;box-shadow:0 8px 18px #53351910!important;}
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="midnight"] #qa{border-top:2px solid var(--at-accent)!important;}
+html[data-atelier-screen="review-bottom"] #outer button{transform:none!important;transition:border-color .16s,background-color .16s!important;}

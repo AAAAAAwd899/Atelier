@@ -1,0 +1,25 @@
+{
+  "theme": "obsidian",
+  "mode": "workspace",
+  "density": "comfortable",
+  "motion": true,
+  "chrome": false,
+  "view": "grid",
+  "sort": "name",
+  "review_style": "adaptive",
+  "review_width": "standard",
+  "surface_revision": 1,
+  "shared_theme": true,
+  "match_sprout": true,
+  "visual_owner": "ask",
+  "ambience": true,
+  "review_context": "compact",
+  "companion_shortcuts": false,
+  "acknowledged_makeovers": [],
+  "native_surfaces": true,
+  "widget_mode": "balanced",
+  "remote": {
+    "enabled": false,
+    "bindings": {}
+  }
+}

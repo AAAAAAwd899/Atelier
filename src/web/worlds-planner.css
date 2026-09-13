@@ -1,0 +1,70 @@
+/* These rules target the planner only. Its original card Previewer is excluded. */
+html[data-atelier-world-enabled="true"] #es-app .es-brand::after{display:none}
+html[data-atelier-world-enabled="true"] #es-app .es-header-note{letter-spacing:1.3px;font:9px/1.5 system-ui;color:var(--ats-muted);}
+html[data-atelier-world-enabled="true"] #es-app .es-brand{font-size:23px;letter-spacing:-.8px;}
+html[data-atelier-world-enabled="true"] #es-app .es-app-header{background:var(--ats-bg);border-bottom:1px solid var(--ats-line-soft);padding:20px 26px;gap:14px;}
+.suite-world-switch{display:flex;align-items:center;gap:7px;font:10px/1.4 system-ui;color:var(--ats-muted);margin-left:auto;}
+.suite-world-switch select{font:12px/1.3 system-ui;background:var(--ats-panel);color:var(--ats-text);border:1px solid var(--ats-line);border-radius:8px;padding:8px;max-width:132px;}
+.suite-world-error{max-width:180px;color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-sidebar{width:auto;background:linear-gradient(170deg,var(--ats-side),var(--ats-bg));border-color:var(--ats-line-soft);}
+html[data-atelier-world-enabled="true"] #es-app .es-main{background:radial-gradient(ellipse at 100% 0%,var(--ats-hero-end),transparent 60%),var(--ats-bg);padding:30px;}
+html[data-atelier-world-enabled="true"] #es-app :is(.es-main>h1,.es-hero h1,.es-form h1,.es-empty h1,.es-readiness h2){font-family:var(--world-font);font-weight:500;letter-spacing:-.6px;}
+html[data-atelier-world-enabled="true"] #es-app .es-hero{position:relative;isolation:isolate;background:linear-gradient(110deg,var(--ats-hero),var(--ats-hero-end));border:1px solid var(--ats-line);border-radius:var(--world-radius);overflow:hidden;box-shadow:0 16px 45px #00000014;min-height:210px;padding:30px;}
+html[data-atelier-world-enabled="true"][data-atelier-scenery="true"] #es-app .es-hero::after{content:"";position:absolute;inset:0 0 0 58%;background:var(--world-art) center/cover;opacity:.28;z-index:-1;pointer-events:none;mask-image:linear-gradient(90deg,transparent,#000 45%);}
+html[data-atelier-world-enabled="true"] #es-app .es-hero h1{font-size:clamp(25px,2.7vw,40px);line-height:1.15;max-width:27ch;color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-hero :is(.es-hero-kicker,.es-hero-date,.es-countdown-label){color:var(--ats-muted)!important;}
+html[data-atelier-world-enabled="true"] #es-app :is(.es-practice-card,.es-readiness,.es-plan-card,.es-form,.es-companion-panel,.pip-card,.es-setting-row,.es-result-card){border-radius:var(--world-radius);border-color:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-readiness{background:var(--ats-panel);color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-readiness-grade{color:var(--ats-accent);background:var(--ats-accent-soft);border-color:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-readiness-disclaimer{color:var(--ats-muted);font-size:12px;opacity:1;}
+html[data-atelier-world-enabled="true"] #es-app .es-practice-card{background:var(--ats-panel);padding:26px;box-shadow:0 10px 32px #00000013;}
+html[data-atelier-world-enabled="true"] #es-app .es-mode-switch>button{border-radius:calc(var(--world-radius)*.55);}
+html[data-atelier-world-enabled="true"] #es-app .es-top-nav{background:var(--ats-side);border:1px solid var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-top-nav button[aria-current="page"]{background:var(--ats-accent-soft);color:var(--ats-accent);}
+html[data-atelier-world-enabled="true"] #es-app .es-primary{box-shadow:0 6px 16px #00000015;border:1px solid var(--ats-accent);border-radius:10px;}
+html[data-atelier-world-enabled="true"] #es-app .pip-card{--pip-surface:var(--ats-panel);background:radial-gradient(ellipse at center,var(--ats-hero-end),var(--ats-panel));color:var(--ats-text);border:1px solid var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .pip-card :is(.pip-kicker,.pip-name,.pip-speech,.pip-mode,.pip-pause){color:var(--ats-muted);}
+html[data-atelier-world-enabled="true"] #es-app .pip-card :is(.pip-name,.pip-speech){color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress{color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-modal{background:var(--ats-panel);color:var(--ats-text);border:1px solid var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-modal::backdrop{background:#060e14b0;}
+html[data-atelier-world-enabled="true"] #es-app .es-practice-card :is(input,select),html[data-atelier-world-enabled="true"] #es-app .es-modal :is(input,select){color:var(--ats-text);background:var(--ats-bg);border-color:var(--ats-line);}
+.suite-plan-controls{display:flex;gap:10px;align-items:center;margin:0 0 16px;flex-wrap:wrap}
+.suite-plan-controls button{font:12px/1.4 system-ui;color:var(--es-accent);background:var(--es-soft);border:1px solid var(--es-line);padding:9px 14px;border-radius:9px;}
+.suite-plan-controls span{font-size:11px;color:var(--es-muted);}
+html[data-atelier-world-enabled="true"][data-atelier-world="linen"] #es-app .es-hero{outline:1px solid var(--ats-line);outline-offset:4px;margin:4px;}
+html[data-atelier-world-enabled="true"][data-atelier-world="midnight"] #es-app .es-hero{border-left:3px solid var(--ats-accent);}
+html[data-atelier-world-enabled="true"][data-atelier-world="forest"] #es-app .es-hero{border-top:2px solid var(--ats-accent);}
+html[data-atelier-world-enabled="true"][data-atelier-world="tidal"] #es-app .es-hero{border-radius:28px 28px 40px 10px;}
+@media(max-width:1120px){.suite-world-switch{order:3;width:auto;margin-left:0;}html[data-atelier-world-enabled="true"] #es-app .es-app-header{flex-wrap:wrap;padding:14px 22px}.es-header-note{display:none!important}html[data-atelier-world-enabled="true"] #es-app .es-main{padding:22px}}
+@media(max-width:740px){html[data-atelier-world-enabled="true"] #es-app .es-hero{padding:22px;min-height:160px}.suite-world-switch{font-size:9px}.suite-world-switch select{font-size:11px;padding:6px}html[data-atelier-world-enabled="true"] #es-app .es-main{padding:15px}.es-app-header{gap:10px!important}}
+@media(prefers-reduced-motion:reduce){html[data-atelier-world-enabled="true"] #es-app *,html[data-atelier-world-enabled="true"] #es-app *::before,html[data-atelier-world-enabled="true"] #es-app *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Native Anki tools stay present in Exam Studio without taking over its forms. */
+.suite-tool-links{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.suite-tool-links button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.suite-tool-links svg{width:15px;height:15px;}
+html[data-atelier-sprout="true"] .suite-tool-links button{font:500 12px/1.4 "Segoe UI",system-ui,sans-serif;color:var(--es-text);background:var(--es-surface);border:1px solid var(--es-line);border-radius:9px;padding:8px 10px;}
+html[data-atelier-sprout="true"] .suite-tool-links button:hover{border-color:var(--es-accent);background:var(--es-soft);}
+@media(max-width:1250px){.es-app-header{flex-wrap:wrap!important;gap:12px!important;}.suite-tool-links{margin-left:auto;}.es-top-nav{flex-wrap:wrap;}}
+@media(max-width:640px){.suite-tool-links{margin-left:0;}.es-top-nav{width:100%;}.suite-tool-links button{padding:7px;font-size:11px;}}
+
+/* Pip's artwork stays authored; its surrounding progress panel follows the world. */
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress{background:linear-gradient(180deg,var(--ats-panel),var(--ats-side));color:var(--ats-text);border-top-color:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress>strong{color:var(--ats-text);}
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress :is(p,small),html[data-atelier-world-enabled="true"] #es-app .es-pip-progress>span{color:var(--ats-muted);}
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress .es-growth-bar{background:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-pip-progress .es-growth-bar span{background:var(--ats-accent);}
+/* The original Pip sculpture stays green; its old fixed-blue stage does not leak
+   through a light world. Controls retain their original callbacks and hitboxes. */
+html[data-atelier-world-enabled="true"] #es-app .es-companion-panel{background:var(--ats-panel);border-color:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .pip-card{--pip-fg:var(--ats-text);--pip-muted:var(--ats-muted);--pip-line:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .pip-card::before{background:radial-gradient(ellipse at 50% 25%,var(--ats-hero-end),transparent 70%);border-radius:var(--world-radius) var(--world-radius) 0 0;}
+html[data-atelier-world-enabled="true"] #es-app .pip-card .pip-actions button{background:var(--ats-accent-soft)!important;color:var(--ats-accent-strong)!important;border-color:var(--ats-line)!important;box-shadow:none!important;}
+html[data-atelier-world-enabled="true"] #es-app .pip-card .pip-actions button:hover{background:var(--ats-raised)!important;border-color:var(--ats-accent)!important;}
+html[data-atelier-world-enabled="true"] #es-app .pip-card .pip-pause{color:var(--ats-muted)!important;}
+html[data-atelier-world-enabled="true"] #es-app .pip-card button:focus-visible{outline-color:var(--ats-accent)!important;}
+html[data-atelier-world-enabled="true"] #es-app .es-growth-steps{color:var(--ats-muted);}
+html[data-atelier-world-enabled="true"] #es-app .es-growth-steps span::before{background:var(--ats-line);}
+html[data-atelier-world-enabled="true"] #es-app .es-growth-steps [aria-current="step"]{color:var(--ats-accent-strong);}
+html[data-atelier-world-enabled="true"] #es-app .es-growth-steps [aria-current="step"]::before{background:var(--ats-accent);box-shadow:none;}

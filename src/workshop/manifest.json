@@ -1,0 +1,9 @@
+{
+  "package": "daedalus_workshop",
+  "name": "Atelier \u00b7 Card Studio (embedded)",
+  "human_version": "1.1.0-rc.1",
+  "author": "Daedalus Works",
+  "min_point_version": 250900,
+  "homepage": "https://daedalusworks.net/",
+  "conflicts": []
+}

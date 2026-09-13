@@ -1,0 +1,12 @@
+html[data-atelier-world="obsidian"]{--world-font:"Segoe UI", system-ui, sans-serif;--world-radius:22px;}
+html[data-atelier-world="glacier"]{--world-font:"Segoe UI", system-ui, sans-serif;--world-radius:12px;}
+html[data-atelier-world="rose"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:28px;}
+html[data-atelier-world="bloom"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:24px;}
+html[data-atelier-world="linen"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:9px;}
+html[data-atelier-world="matcha"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:16px;}
+html[data-atelier-world="midnight"]{--world-font:ui-monospace, Consolas, monospace;--world-radius:10px;}
+html[data-atelier-world="peach"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:30px;}
+html[data-atelier-world="forest"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:20px;}
+html[data-atelier-world="tidal"]{--world-font:"Segoe UI", system-ui, sans-serif;--world-radius:26px;}
+html[data-atelier-world="ember"]{--world-font:"Segoe UI", system-ui, sans-serif;--world-radius:12px;}
+html[data-atelier-world="celestial"]{--world-font:Georgia, "Times New Roman", serif;--world-radius:18px;}

@@ -1,0 +1,25 @@
+{
+  "baseline": "Atelier 1.0.0 delivered installer",
+  "changed": {
+    "USER-GUIDE.md": "42b482369374e5d37d88dd4f0e0dd2b05cde4a4269572393ab43e7e105d18b83",
+    "config.md": "48422e96467ed0f554f47a10e4d949fb5b86a8d1562c1d79ed6afef019d1cb8c",
+    "review_theme.py": "38e6eb2731918041bc8209d44f87b43ad212b77feef2277ffed3f03238f15545",
+    "config.schema.json": "6c11530be0affbc22324e56754079a81f2216b54eed1987dc9443cf84e4f333d",
+    "config.json": "e0d45c0f22bea7b560a45f0e243ee548c51f0fac376922f89d038b736eb74588",
+    "manifest.json": "b0e7e20dfd14426a18c9802c60a60ef64b3fb01a1ece896ab77149b235232c81",
+    "RELEASE-NOTES.md": "7d528c22ae4f78a90a1ac6e508ddfb3e60b28ea094db60754ac7b6d086f55fe1",
+    "integration.py": "881554d6faa89519889af4321b836396073c3ed26a7032e8821cf9dfba1d9dc7",
+    "review_model.py": "0a8c0d24f6ca1232489c6ffbabbd61b2603e7be360f33b3a3d23780caa3ab65a",
+    "core.py": "ff61333cce503f34f997e495e3203c342ef4a77e40268654eec73d2cd0561902",
+    "web/atelier.js": "aa13ac181bb55a7c62fd36c84658f2068e1e8186eb1bf5d311a5b085f2f11623",
+    "web/reviewer.css": "63125aabe8196ff72ac480dcb466edf1427dbf48c0847a5b64143e1aedf966d8",
+    "web/reviewer.js": "e3d13f48012dc6816b4d208d174aaebc6c932243e3c8e42bee549eb3d535d004"
+  },
+  "added": {
+    "remote_model.py": "ec7d152e14943d1201842c89b184add12c68b21a13b04df55432df7889ae0f73",
+    "remote_ui.py": "7d9bd8ecb49815f363ba2bc826abcc19e529842f86abd3c9f4ae0f1f17952fda",
+    "remotes.py": "ab1702f114f77a764eef103ec0ad8ccacf3a8e2374ee946ca41d5b848c55a542",
+    "folder_study.py": "d4eb16a3cdc0ccd30fb0b6000d0eb462e2001314c5ecffe4b4b10da22a73e2ec",
+    "web/remote-input.js": "49f5ef322e1aa03b4ec0c12deb566e6a371c709259d01edde2d32e4d4c5d385c"
+  }
+}

@@ -1,0 +1,32 @@
+/* Optional visual-only adapter for the UPLOADED Exam Sprout 0.9.5 planner.
+   Never injected into its practice runner / card frames. No data-theme edits. */
+html[data-atelier-sprout="true"],html[data-atelier-sprout="true"] body {background:var(--ats-bg)!important;color:var(--ats-text)!important;color-scheme:var(--ats-scheme)!important;}
+html[data-atelier-sprout="true"] #es-app {
+  --es-bg:var(--ats-bg)!important;--es-surface:var(--ats-panel)!important;
+  --es-text:var(--ats-text)!important;--es-muted:var(--ats-muted)!important;
+  --es-line:var(--ats-line)!important;--es-accent:var(--ats-accent)!important;
+  --es-soft:var(--ats-accent-soft)!important;--es-on-accent:var(--ats-on-accent)!important;
+  --es-danger:var(--ats-pink)!important;--es-warning:var(--ats-amber)!important;
+  --es-shadow:0 8px 30px #00000012!important;
+}
+html[data-atelier-sprout="true"] #es-app #es-countdowns {
+  --es-accent:var(--ats-accent)!important;--es-tint:var(--ats-panel)!important;
+  --es-chip-line:var(--ats-line)!important;color:var(--ats-text)!important;
+}
+html[data-atelier-sprout="true"] #es-app .es-app-header {box-shadow:0 1px 0 var(--ats-line-soft);}
+html[data-atelier-sprout="true"] #es-app .es-chip-sub {opacity:1;color:var(--ats-muted);}
+html[data-atelier-sprout="true"] #es-app .es-sidebar {background:var(--ats-side);}
+html[data-atelier-sprout="true"] #es-app .es-app-header .es-brand::after {
+  content:"Atelier theme";font:500 10px/1.4 system-ui,sans-serif;color:var(--ats-muted);
+  border:1px solid var(--ats-line);padding:3px 7px;border-radius:6px;white-space:nowrap;
+}
+@media(max-width:920px){html[data-atelier-sprout="true"] #es-app .es-app-header .es-brand::after {display:none;}}
+
+/* Keep hero colors and ink from the same palette, including Sprout dark mode. */
+html[data-atelier-sprout="true"] #es-app {
+ --es-hero:var(--ats-hero,var(--ats-panel))!important;
+ --es-glow:var(--ats-hero-end,var(--ats-raised))!important;
+}
+html[data-atelier-sprout="true"] #es-app .es-hero {color:var(--ats-text)!important;}
+html[data-atelier-sprout="true"] #es-app .es-hero h1 {color:var(--ats-text)!important;}
+html[data-atelier-sprout="true"] #es-app .es-hero-kicker {color:var(--ats-accent)!important;}

@@ -1,0 +1,254 @@
+{
+  "version": "0.9.7",
+  "renderer": "Same production WebGL2 rig as planner",
+  "material": "Leaf skin and smooth organic surfaces; no plush/fur",
+  "stages": 4,
+  "size": [
+    480,
+    480
+  ],
+  "animations": [
+    "idle",
+    "pet",
+    "water"
+  ],
+  "fps": 30,
+  "frames_per_animation": {
+    "idle": 180,
+    "pet": 96,
+    "water": 96
+  },
+  "runtime": "Live WebGL2 in planner; exact-model RGBA frames in tiny native reviewer and GPU fallback",
+  "scene_sha256": "31cb40f0b46304c33df16fe26da5c1834972700d3df5791deca2351e6a8e50f4",
+  "assets": {
+    "stage1-idle.webp": {
+      "bytes": 5522484,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "ab634bcfdd8c4a07965d9537368226130e0e966cd0cea42663d107241992e52c"
+    },
+    "stage1-pet.webp": {
+      "bytes": 2905126,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "7f3317209a0f7863e868fe45a38aa2f22fb2457813afca0411ac544c5b75f9c9"
+    },
+    "stage1-water.webp": {
+      "bytes": 3329224,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "9ded2dcf3792d92878cd4bbd669fc4d5a15c2dd0b835fba63c843e79eed19aa1"
+    },
+    "stage2-idle.webp": {
+      "bytes": 5758992,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "f3069d4a6065108b9d12c3f63afb4faedc8de65a2b95d50c28a0bcabd652d02b"
+    },
+    "stage2-pet.webp": {
+      "bytes": 3024774,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "f2fac60645be3da5a54b502f150256722441fe14848b38e7943086d40ee63116"
+    },
+    "stage2-water.webp": {
+      "bytes": 3453600,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "6b1fe56ed668ed4557ff4dee578d44a62b189ac9d12bbe6487084409450b92cb"
+    },
+    "stage3-idle.webp": {
+      "bytes": 6377270,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "9afb130062afbbd3eec0a7d35a596714d2a328fd3ffa7a636b8d8e149c0f7100"
+    },
+    "stage3-pet.webp": {
+      "bytes": 3352400,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "2bc20824170d3803a105130e49a2a2eb4a27e3499e507246de3bc4e006c8e3a3"
+    },
+    "stage3-water.webp": {
+      "bytes": 3657074,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "b726520b2945ff8c7b3d81582a027657aec053b9c50dd1fac3a1babf7cf02d34"
+    },
+    "stage4-idle.webp": {
+      "bytes": 6510676,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "808f573b77b767245520be9f430596a6d8855cfc52e4ce52b67bf55dcd00d134"
+    },
+    "stage4-pet.webp": {
+      "bytes": 3430114,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "b552b1309c77ed0b8e691b74fe805700d63cfa8759b574f6862cf8cd89d046c7"
+    },
+    "stage4-water.webp": {
+      "bytes": 3720750,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "7bb6044b3fb874c7210e3114a4fe0258a0cef61e173768d5101ead0a666705c9"
+    },
+    "tiny-stage1-idle.webp": {
+      "bytes": 1293218,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "8748240a0a6300805d5e283676a4eaf649d6252ad95fab8f92ef465db8fe3a2f",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage1-pet.webp": {
+      "bytes": 688332,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "9319587c8e663af854f3a13bb07bd463b266f957cc82ee5bfcefa26c78fe088c",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage1-water.webp": {
+      "bytes": 755084,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "a795aa484cebcec2bf2f29cbf8a18d3fe95d70411c38fbe110ddb7cb4e0fe210",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage2-idle.webp": {
+      "bytes": 1345126,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "550f5c28605bf336f83c6cb43c4213f780a548b349b29b08fb391737d3aaadda",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage2-pet.webp": {
+      "bytes": 714702,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "d72d0444376ac664bfbf809e09161cbe9fe112ff95bf5a5ab7eda4ab6162e523",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage2-water.webp": {
+      "bytes": 782536,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "4991599174c04c2d0c971b0361b22551644713f389f5da2af081b939d94c985a",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage3-idle.webp": {
+      "bytes": 1451708,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "82d9630410c7606f592f94dcf4da255bad1d2bd86853f1e844a1f826236b03ae",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage3-pet.webp": {
+      "bytes": 771376,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "fa80ca799c6eb69b72a08bd993cb9cffcc85bf3fbcb736323c87a68787f7470e",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage3-water.webp": {
+      "bytes": 824612,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "b2b1b673f6659c87080147cccaaafbbca475d560b155f09f0859e3589ac6cdbe",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage4-idle.webp": {
+      "bytes": 1484956,
+      "frames": 180,
+      "duration_ms": 6000,
+      "fps": 30,
+      "sha256": "4d0b67e8c2840c9278df207b4a176c6d130a27acad6075dbdfdd3712fa83695b",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage4-pet.webp": {
+      "bytes": 790158,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "93a77cec8aedc44da1f7edcce1751f9b8cb8266fb0a5a068698d981aa1862c9e",
+      "size": [
+        96,
+        96
+      ]
+    },
+    "tiny-stage4-water.webp": {
+      "bytes": 842084,
+      "frames": 96,
+      "duration_ms": 3200,
+      "fps": 30,
+      "sha256": "8da1d29d23e517f76feb4bdc8c908446014e70b4940ada889f367051e30cd9d2",
+      "size": [
+        96,
+        96
+      ]
+    }
+  },
+  "reviewer": {
+    "size": [
+      96,
+      96
+    ],
+    "display_size": [
+      46,
+      46
+    ],
+    "maximum_decoded_frame_bytes": 6635520,
+    "webview": false,
+    "webgl": false
+  }
+}
