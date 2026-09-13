@@ -58,7 +58,7 @@ def main():
    p.locator('[data-action=world-filter][data-filter=all]').click()
    check(w['id']+' filter never rebuilds the dialog or original tile nodes',p.evaluate('savedDialog===document.querySelector("#atelier-root").shadowRoot.querySelector(".dialog")&&savedTiles.every(x=>x.isConnected)'))
    tile=p.locator('[data-theme-choice='+w['id']+']');tile.scroll_into_view_if_needed();p.wait_for_timeout(50)
-   check(w['id']+' current selection check and material frame are explicit',tile.get_attribute('aria-pressed')=='true' and tile.locator('.theme-check').is_visible() and tile.locator('.mini-screen').evaluate('e=>getComputedStyle(e).backgroundImage.includes("data:image/svg")'))
+   check(w['id']+' current selection check and matching scene preview are explicit',tile.get_attribute('aria-pressed')=='true' and tile.locator('.theme-check').is_visible() and tile.locator('.mini-screen').evaluate('(e,scene)=>getComputedStyle(e).backgroundImage.includes(scene)',w['scene']))
    p.locator('.dialog-body').evaluate('e=>e.scrollTop=0');p.screenshot(path=str(SHOTS/(w['id']+'-chooser.png')),animations='disabled');p.close()
   # Same open dialog: complete roundtrip and filter state remain consistent.
   p=page('midnight');p.locator('.unified-topbar [data-action=appearance]').click()

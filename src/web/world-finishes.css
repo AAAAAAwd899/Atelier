@@ -65,7 +65,7 @@ html[data-atelier-world-enabled="true"] #es-app :is(.suite-session-kicker,.suite
 .theme-tile{padding:7px 7px 12px;border-radius:14px;display:flex;flex-direction:column;align-items:stretch;background:var(--panel);min-width:0;transform:none!important;box-shadow:none!important;}
 .theme-tile[hidden]{display:none!important;}
 .theme-tile.selected{outline:2px solid var(--accent-strong);outline-offset:2px;}
-.theme-tile .mini-screen{display:block;position:relative;isolation:isolate;height:118px;border-radius:var(--finish-aperture);background:var(--world-art) center/cover,var(--hero);padding:0;}
+.theme-tile .mini-screen{display:block;position:relative;isolation:isolate;height:118px;border-radius:var(--finish-aperture);background:var(--world-scene,var(--world-art)) center/cover,var(--hero);padding:0;}
 .theme-tile .mini-screen::after{content:none!important;}
 .theme-material-sample{display:flex;gap:4px;position:absolute;left:10px;bottom:9px;right:10px;border-radius:7px;padding:6px;background:var(--panel);border:1px solid var(--line);}
 .theme-material-sample i{height:6px;display:block;border:0;border-radius:2px;width:20%;background:var(--accent);}
