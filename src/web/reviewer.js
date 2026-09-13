@@ -10,9 +10,9 @@
     let info=window.__atelierReviewCard||{eligible:false,path:[],stage:'question'},header=null,scheduled=false,resetQuestion=false;
     let gapOriginal=null,gapNode=null,qaSizeObserver=null,observedQA=null,alignFrame=0,settleUntil=0,userMoved=false,paintKey='',disposed=false;
     const keyOf=x=>String(x?.id||'')+':'+String(x?.stage||'question');
-    let fitted=null,fitEnabled=true,fitControl=null,fitTimers=[],imageSizeObserver=null;
-    function releaseImageFit(){
-      imageSizeObserver?.disconnect();imageSizeObserver=null;
+    let fitted=null,fitEnabled=true,fitControl=null,fitTimers=[],imageSizeObserver=null,observedImageStage=null;
+    function releaseImageFit(keepObserver=false){
+      if(!keepObserver){imageSizeObserver?.disconnect();imageSizeObserver=null;observedImageStage=null;}
       if(fitted){const {stage,box}=fitted;if(box.isConnected&&box.contains(stage))box.replaceWith(stage);fitted=null;}
     }
     function sizeImageFit(){
@@ -31,12 +31,18 @@
     function fitImage(){
       const viewport=innerWidth+'x'+innerHeight+':'+(header?.offsetHeight||0);
       if(fitEnabled&&fitted?.box.isConnected&&fitted.viewport===viewport){sizeImageFit();return;}
-      releaseImageFit();
+      releaseImageFit(true);
       const qa=document.getElementById('qa'),stage=qa?.querySelector('#image-occlusion-container');
       const supported=config.style==='adaptive'&&info.ioFit===true&&!info.protected&&
         stage&&stage.children.length===2&&stage.children[0].tagName==='IMG'&&
         stage.children[1].matches('canvas#image-occlusion-canvas')&&typeof window.anki?.imageOcclusion?.setup==='function';
-      if(!supported){fitControl?.remove();fitControl=null;return;}
+      if(!supported){releaseImageFit();fitControl?.remove();fitControl=null;return;}
+      // Native setup can enlarge the stage after image load, including when its
+      // first measured size needed no fit. Observe before every early return.
+      if(window.ResizeObserver&&observedImageStage!==stage){
+        imageSizeObserver?.disconnect();observedImageStage=stage;
+        imageSizeObserver=new ResizeObserver(scheduleLayout);imageSizeObserver.observe(stage);
+      }
       if(!fitControl){
         fitControl=document.createElement('button');fitControl.type='button';fitControl.id='atelier-image-fit';
         fitControl.addEventListener('click',()=>{fitEnabled=!fitEnabled;fitImage();});
@@ -57,7 +63,6 @@
       plane.style.cssText=`position:absolute;inset:0 auto auto 0;width:${r.width}px;height:${r.height}px;transform-origin:0 0;transform:scale(${scale});`;
       stage.before(box);box.append(plane);plane.append(stage);fitted={stage,box,plane,qa,scale,viewport};
       sizeImageFit();
-      if(window.ResizeObserver){imageSizeObserver=new ResizeObserver(scheduleLayout);imageSizeObserver.observe(stage);}
     }
     // Keep all flags/classes/styles owned by the card and every node in #qa.
     // Advanced/IO layouts retain their exact canvas and image geometry.
