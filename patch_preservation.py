@@ -6,7 +6,8 @@ import hashlib,json
 ROOT=Path(__file__).resolve().parent
 
 def before_patch(name):
- data=(ROOT/'src'/name).read_bytes()
+ from upgrade_preservation import before_upgrade
+ data=before_upgrade(name)
  allowed=json.loads((ROOT/'patch-101-changes.json').read_text())['changed']
  if name in allowed:
   if hashlib.sha256(data).hexdigest()!=allowed[name]:raise AssertionError('Undeclared patch byte change: '+name)

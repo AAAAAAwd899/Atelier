@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 from .core import json_for_html, profile_settings
 from .review_model import reading_template, theme_tokens
+from .io_view import recognized as recognized_io
 
 log = logging.getLogger("atelier.review")
 ROOT = Path(__file__).resolve().parent
@@ -36,7 +37,7 @@ class ReviewTheme:
 
     def options(self, screen: str) -> dict:
         cfg = self.owner.get_config()
-        return {"version": "1.0.2", "theme": cfg["theme"], "style": cfg["review_style"] if cfg.get("visual_owner", "atelier") == "atelier" else "off",
+        return {"version": "1.0.3", "theme": cfg["theme"], "style": cfg["review_style"] if cfg.get("visual_owner", "atelier") == "atelier" else "off",
                 "width": cfg["review_width"], "motion": cfg["motion"], "ambience": cfg.get("ambience", True), "context": cfg.get("review_context", "compact"),
                 "screen": screen, "layoutToken": self.layout_token if screen == "review-bottom" else ""}
 
@@ -61,7 +62,7 @@ class ReviewTheme:
             from .worlds import reviewer_css
             addition = boot + tokens + '<style id="atelier-review-css">' + (ROOT/'web'/'reviewer.css').read_text(encoding='utf8') + '\n' + reviewer_css() + '</style>' + early
             content.head += addition
-            content.js.append(f"/_addons/{self.owner.package}/web/reviewer.js?v=1.0.2")
+            content.js.append(f"/_addons/{self.owner.package}/web/reviewer.js?v=1.0.3")
         except Exception:
             log.exception("Reviewer styling skipped; native card rendering preserved")
 
@@ -134,7 +135,8 @@ class ReviewTheme:
             io = any("image-occlusion" in str(t.get("qfmt", "")).lower() or "io-wrapper" in str(t.get("qfmt", "")).lower() for t in model.get("tmpls", []) if isinstance(t, dict))
             safe = model_id not in self.owner.profile.get("native_note_types", []) and reading_template(model)
             return {"id": str(card.id), "stage": stage, "path": path.split("::"),
-                    "eligible": safe, "protected": model_id in self.owner.profile.get("native_note_types", []), "imageOcclusion": io and model_id not in self.owner.profile.get("native_note_types", [])}
+                    "eligible": safe, "protected": model_id in self.owner.profile.get("native_note_types", []), "imageOcclusion": io and model_id not in self.owner.profile.get("native_note_types", []),
+                    "ioFit": recognized_io(model) and model_id not in self.owner.profile.get("native_note_types", [])}
         except Exception:
             # Unknown templates or metadata failures never receive card overrides.
             return {"stage": stage, "eligible": False, "protected": True, "path": []}
@@ -151,7 +153,7 @@ class ReviewTheme:
         if cfg.get("visual_owner") != "atelier" or cfg.get("review_style") != "adaptive":
             return html
         info = self.card_info(card, "question" if context == "reviewQuestion" else "answer")
-        if not info.get("eligible") or info.get("protected"):
+        if not (info.get("eligible") or info.get("ioFit")) or info.get("protected"):
             return html
         data = json_for_html(info)
         return html + ('<script data-atelier-presentation="1">(()=>{const value=' + data + ';'
@@ -202,7 +204,7 @@ class ReviewTheme:
         from aqt.qt import QApplication
         from aqt.utils import tooltip
         import platform
-        report = {"atelier":"1.0.2", "os":platform.system(), "screen":mw.state,
+        report = {"atelier":"1.0.3", "os":platform.system(), "screen":mw.state,
                   "settings":self.owner.get_config(), "ownership":self.owner.ownership.diagnostics(), "webviews":{}}
         try:
             import anki

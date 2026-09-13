@@ -39,7 +39,7 @@
 :host([data-owner="atelier"]){--finish-line:color-mix(in srgb,var(--accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
 html[data-atelier-world-enabled="true"]{--finish-line:color-mix(in srgb,var(--ats-accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
 /* Materials occupy chapter panels, not the interactive fields or reading surface. */
-:host([data-owner="atelier"][data-ambience="true"]) .task-focus.quiet-focus {background-image:var(--finish-pattern),linear-gradient(var(--finish-angle),var(--hero),var(--hero-end));}
+:host([data-owner="atelier"][data-ambience="true"]) .task-focus.quiet-focus {background-image:var(--finish-sheen);background-color:var(--panel);}
 :host([data-owner="atelier"]) .world-window {border-radius:var(--finish-aperture);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
 :host([data-owner="atelier"]) :is(.revisit-column,.suite-plan,.deck-detail,.tools-spotlight){background-image:var(--finish-sheen);}
 :host([data-owner="atelier"]) .lecture-row:hover {background-color:var(--raised);}

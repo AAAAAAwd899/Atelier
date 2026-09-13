@@ -10,6 +10,55 @@
     let info=window.__atelierReviewCard||{eligible:false,path:[],stage:'question'},header=null,scheduled=false,resetQuestion=false;
     let gapOriginal=null,gapNode=null,qaSizeObserver=null,observedQA=null,alignFrame=0,settleUntil=0,userMoved=false,paintKey='',disposed=false;
     const keyOf=x=>String(x?.id||'')+':'+String(x?.stage||'question');
+    let fitted=null,fitEnabled=true,fitControl=null,fitTimers=[],imageSizeObserver=null;
+    function releaseImageFit(){
+      imageSizeObserver?.disconnect();imageSizeObserver=null;
+      if(fitted){const {stage,box}=fitted;if(box.isConnected&&box.contains(stage))box.replaceWith(stage);fitted=null;}
+    }
+    function sizeImageFit(){
+      if(!fitted)return;
+      const {stage,box,plane,qa}=fitted,w=stage.offsetWidth,h=stage.offsetHeight;
+      if(w<1||h<1)return;
+      const top=box.getBoundingClientRect().top+scrollY;
+      const tail=Math.max(0,qa.getBoundingClientRect().bottom-box.getBoundingClientRect().bottom);
+      const scale=Math.min(1,Math.max(120,innerHeight-top-tail-28)/h,Math.max(120,qa.clientWidth-16)/w);
+      const key=w+':'+h+':'+scale;
+      if(fitted.size===key)return;
+      fitted.size=key;fitted.scale=scale;
+      box.style.width=w*scale+'px';box.style.height=h*scale+'px';
+      plane.style.transform=`scale(${scale})`;
+    }
+    function fitImage(){
+      const viewport=innerWidth+'x'+innerHeight+':'+(header?.offsetHeight||0);
+      if(fitEnabled&&fitted?.box.isConnected&&fitted.viewport===viewport){sizeImageFit();return;}
+      releaseImageFit();
+      const qa=document.getElementById('qa'),stage=qa?.querySelector('#image-occlusion-container');
+      const supported=config.style==='adaptive'&&info.ioFit===true&&!info.protected&&
+        stage&&stage.children.length===2&&stage.children[0].tagName==='IMG'&&
+        stage.children[1].matches('canvas#image-occlusion-canvas')&&typeof window.anki?.imageOcclusion?.setup==='function';
+      if(!supported){fitControl?.remove();fitControl=null;return;}
+      if(!fitControl){
+        fitControl=document.createElement('button');fitControl.type='button';fitControl.id='atelier-image-fit';
+        fitControl.addEventListener('click',()=>{fitEnabled=!fitEnabled;fitImage();});
+      }
+      if(!fitControl.isConnected)qa.before(fitControl);
+      fitControl.textContent=fitEnabled?'Actual size':'Fit image';fitControl.setAttribute('aria-label',fitEnabled?'Show image at original view size':'Fit image and masks together');
+      fitControl.setAttribute('aria-pressed',String(fitEnabled));
+      if(!fitEnabled||!stage.children[0].complete||!stage.children[0].naturalWidth)return;
+      const r=stage.getBoundingClientRect();if(r.width<1||r.height<1)return;
+      const clearance=Math.max(0,Number(window.onigiriReviewerHeaderOffsetPx)||0);
+      const top=Math.max(clearance+48,r.top+scrollY);
+      const scale=Math.min(1,Math.max(120,innerHeight-top-40)/r.height,Math.max(120,qa.clientWidth-16)/r.width);
+      if(scale>=.999)return;
+      // A single transform on an owned parent scales image and native canvas
+      // together. Neither original node, canvas dimensions nor masks are edited.
+      const box=document.createElement('div'),plane=document.createElement('div');
+      box.className='atelier-image-fit-box';box.style.cssText=`position:relative;width:${r.width*scale}px;height:${r.height*scale}px;margin:12px auto;`;
+      plane.style.cssText=`position:absolute;inset:0 auto auto 0;width:${r.width}px;height:${r.height}px;transform-origin:0 0;transform:scale(${scale});`;
+      stage.before(box);box.append(plane);plane.append(stage);fitted={stage,box,plane,qa,scale,viewport};
+      sizeImageFit();
+      if(window.ResizeObserver){imageSizeObserver=new ResizeObserver(scheduleLayout);imageSizeObserver.observe(stage);}
+    }
     // Keep all flags/classes/styles owned by the card and every node in #qa.
     // Advanced/IO layouts retain their exact canvas and image geometry.
     function complexContent(){
@@ -43,6 +92,7 @@
     }
     function settleLayout(){
       alignFrame=0;
+      if(!disposed&&config.screen==='review'&&info.ioFit===true){fitImage();return;}
       if(disposed||config.screen!=='review'||root.dataset.atelierCard!=='reading')return;
       const qa=document.getElementById('qa');if(!qa)return;
       ownGap(qa);observeSize(qa);
@@ -61,6 +111,7 @@
     }
     function scheduleLayout(){if(!alignFrame&&!disposed)alignFrame=requestAnimationFrame(settleLayout);}
     function newPaint(value){
+      if(keyOf(value)!==paintKey){releaseImageFit();fitControl?.remove();fitControl=null;fitTimers.forEach(clearTimeout);fitTimers=[60,180,450,1000].map(ms=>setTimeout(scheduleLayout,ms));}
       const key=keyOf(value);if(key!==paintKey){paintKey=key;userMoved=false;settleUntil=performance.now()+1600;resetQuestion=value?.stage==='question';if(header){header.dataset.expanded='false';const b=header.querySelector('button');if(b){b.setAttribute('aria-expanded','false');b.textContent='Details';}}}
       info=value||{eligible:false,path:[]};queue();scheduleLayout();
     }
@@ -77,7 +128,7 @@
       if(config.screen!=='review-bottom'||config.style==='off'||!stockFooter())return null;
       const outer=document.getElementById('outer'),r=outer.getBoundingClientRect();
       const height=Math.ceil(Math.max(r.height,outer.scrollHeight)+Math.max(0,r.top)+2);
-      return {token:config.layoutToken,height,width:root.clientWidth,version:config.version||'1.0.2'};
+      return {token:config.layoutToken,height,width:root.clientWidth,version:config.version||'1.0.3'};
     }
     function requestFooterFit(force=false){
       if(config.screen!=='review-bottom')return;
@@ -105,13 +156,13 @@
     function update(){
       scheduled=false;
       const enabled=config.style!=='off';
-      if(!enabled){releaseGap();observeSize(null);delete root.dataset.atelierFit;delete root.dataset.atelierScreen;delete root.dataset.atelierCard;delete root.dataset.atelierToolbar;header?.remove();header=null;delete root.dataset.atelierContext;requestFooterFit();return;}
+      if(!enabled){releaseImageFit();fitControl?.remove();fitControl=null;releaseGap();observeSize(null);delete root.dataset.atelierFit;delete root.dataset.atelierScreen;delete root.dataset.atelierCard;delete root.dataset.atelierToolbar;header?.remove();header=null;delete root.dataset.atelierContext;requestFooterFit();return;}
       root.dataset.atelierScreen=config.screen;root.dataset.atelierWorld=config.theme;root.dataset.atelierMotion=config.motion?'on':'off';root.dataset.atelierWidth=config.width;root.dataset.atelierAmbience=String(config.ambience!==false);root.dataset.atelierContext=['compact','full','hidden'].includes(config.context)?config.context:'compact';
       if(config.screen==='review-bottom'){footer();return;}
       if(config.screen!=='review')return;
       const reading=config.style==='adaptive'&&info.eligible===true&&!complexContent();
       root.dataset.atelierCard=reading?'reading':config.style==='adaptive'&&imageOcclusion()?'media':'native';
-      if(reading&&config.context!=='hidden'){
+      if((reading||info.ioFit===true)&&config.context!=='hidden'){
         if(!header){
           header=document.createElement('div');header.id='atelier-review-header';
           const label=document.createElement('span');label.className='atelier-review-stage';
@@ -133,10 +184,11 @@
       }else{header?.remove();header=null;}
       if(reading){ownGap(document.getElementById('qa'));scheduleLayout();}
       else {resetQuestion=false;releaseGap();observeSize(null);delete root.dataset.atelierFit;}
+      if(info.ioFit===true)scheduleLayout();else{releaseImageFit();fitControl?.remove();fitControl=null;}
 
     }
     const queue=()=>{if(!scheduled){scheduled=true;queueMicrotask(update);}};
-    const api={painted:newPaint,settled(value){if(keyOf(value)===keyOf(info)){newPaint(value);scheduleLayout();}},measureFooter,refit:()=>requestFooterFit(true),setCard(value){newPaint(value);},configure(value){config={...config,...value};update();},diagnostics(){return {screen:root.dataset.atelierScreen||'off',card:root.dataset.atelierCard||'native',width:config.width,toolbar:root.dataset.atelierToolbar||'native',context:root.dataset.atelierContext||'original',layout:lastGeometry,version:config.version||'1.0.2',height:measureFooter()?.height||0,viewportHeight:innerHeight,scrollHeight:document.scrollingElement?.scrollHeight,fit:root.dataset.atelierFit||'native',headerClearance:root.style.getPropertyValue('--atelier-header-clearance'),bodyBackground:getComputedStyle(document.body).backgroundColor,controls:[...document.querySelectorAll('#outer button')].map(b=>{const r=b.getBoundingClientRect();return {command:b.getAttribute('onclick')?.match(/(?:ease[1-4]|ans|edit|more)/)?.[0]||'extension',x:r.x,y:r.y,width:r.width,height:r.height};})};}};
+    const api={painted:newPaint,settled(value){if(keyOf(value)===keyOf(info)){newPaint(value);scheduleLayout();}},measureFooter,refit:()=>requestFooterFit(true),setCard(value){newPaint(value);},configure(value){config={...config,...value};update();},diagnostics(){return {screen:root.dataset.atelierScreen||'off',card:root.dataset.atelierCard||'native',width:config.width,toolbar:root.dataset.atelierToolbar||'native',context:root.dataset.atelierContext||'original',layout:lastGeometry,version:config.version||'1.0.3',height:measureFooter()?.height||0,viewportHeight:innerHeight,scrollHeight:document.scrollingElement?.scrollHeight,fit:root.dataset.atelierFit||'native',headerClearance:root.style.getPropertyValue('--atelier-header-clearance'),bodyBackground:getComputedStyle(document.body).backgroundColor,controls:[...document.querySelectorAll('#outer button')].map(b=>{const r=b.getBoundingClientRect();return {command:b.getAttribute('onclick')?.match(/(?:ease[1-4]|ans|edit|more)/)?.[0]||'extension',x:r.x,y:r.y,width:r.width,height:r.height};})};}};
     window.AtelierReview=Object.freeze(api);
     const qa=document.getElementById('qa');
     if(qa){new MutationObserver(queue).observe(qa,{childList:true,subtree:true});new MutationObserver(scheduleLayout).observe(qa,{attributes:true,attributeFilter:['style']});}

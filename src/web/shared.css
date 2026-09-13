@@ -103,6 +103,12 @@ html[data-atelier-shared="true"] .modern-main-menu .unified-grid[data-atelier-gr
   min-width:0!important;min-height:0!important;height:auto!important;
 }
 html[data-atelier-shared="true"] .modern-main-menu .unified-grid[data-atelier-grid-compact="true"] > [data-atelier-widget-title] {grid-column:1 / -1!important;}
+/* Workspace adapter for the engine-owned light-DOM countdown. Keep its nodes,
+   handlers, timing and chosen palette. This scope disappears in original mode. */
+body.atelier-home #es-countdowns[data-host="atelier"] .es-chip{min-height:44px;padding:8px 12px;border-radius:10px;gap:10px;box-shadow:none;}
+body.atelier-home #es-countdowns[data-host="atelier"] .es-mark{width:28px;height:28px;flex-basis:28px;}
+body.atelier-home #es-countdowns[data-host="atelier"] .es-mark img{width:26px;height:26px;}
+body.atelier-home #es-countdowns[data-host="atelier"] .es-chip-title{font:600 13px/1.4 "Segoe UI",system-ui,sans-serif;}
 /* Sprout is a real responsive widget, not a sliver in a one-column tile. */
 html[data-atelier-home] .external-widget-container[data-atelier-sprout-wrap] {
   grid-column:1 / -1!important;grid-row:auto!important;align-self:start!important;
@@ -120,10 +126,10 @@ html[data-atelier-home] #es-countdowns {
   text-align:left!important;container-type:inline-size;
 }
 html[data-atelier-home] #es-countdowns .es-chip {
-  display:grid!important;grid-template-columns:36px minmax(0,1fr) auto 16px!important;
+  display:grid!important;grid-template-columns:28px minmax(0,1fr) auto 16px!important;
   align-items:center!important;gap:12px!important;width:100%!important;
-  max-width:100%!important;min-width:0!important;height:auto!important;min-height:78px!important;
-  padding:14px!important;border-radius:16px!important;overflow:visible!important;
+  max-width:100%!important;min-width:0!important;height:auto!important;min-height:48px!important;
+  padding:10px 14px!important;border-radius:10px!important;overflow:visible!important;
   font:inherit!important;line-height:1.4!important;text-shadow:none!important;
   transform:none!important;box-shadow:none!important;letter-spacing:normal!important;
 }
@@ -186,7 +192,6 @@ html[data-atelier-owner="atelier"] .modern-main-menu{gap:0!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu .onigiri-widget-title{font-size:22px!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu .stat-card{background:linear-gradient(140deg,var(--ats-panel),var(--ats-hero-end))!important;border-radius:20px!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu :is(.rl-chip-level,.restaurant-level-chip){background:var(--ats-accent-soft)!important;color:var(--ats-accent-strong)!important;}
-html[data-atelier-home][data-atelier-match-sprout="true"] #es-countdowns .es-chip{background:linear-gradient(120deg,var(--ats-panel),var(--ats-hero-end))!important;border-radius:17px!important;min-height:66px!important;}
 html[data-atelier-home][data-atelier-match-sprout="true"] #es-countdowns .es-time{background:var(--ats-accent-soft)!important;color:var(--ats-accent-strong)!important;}
 @media(max-width:700px){html[data-atelier-owner="atelier"] .modern-main-menu>.main-content{padding:12px!important;}}
 

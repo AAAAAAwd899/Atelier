@@ -19,5 +19,7 @@ __pycache__/
 .venv/
 /output/
 /native-test-profile/
+/native-io-test-profile/
+/workshop_checks/docs/
 *.log
 

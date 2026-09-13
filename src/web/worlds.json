@@ -8,8 +8,9 @@
     "radius": 22,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/obsidian.svg",
-    "material": "Prismatic glass · brushed stone",
-    "lighting": "dark"
+    "material": "Prismatic glass \u00b7 brushed stone",
+    "lighting": "dark",
+    "scene": "world-art/obsidian-1.0.3.png"
   },
   {
     "id": "glacier",
@@ -20,8 +21,9 @@
     "radius": 12,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/glacier.svg",
-    "material": "Frosted glass · alpine facets",
-    "lighting": "dark"
+    "material": "Frosted glass \u00b7 alpine facets",
+    "lighting": "dark",
+    "scene": "world-art/glacier-1.0.3.png"
   },
   {
     "id": "rose",
@@ -32,8 +34,9 @@
     "radius": 28,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/rose.svg",
-    "material": "Rose paper · garden arches",
-    "lighting": "light"
+    "material": "Rose paper \u00b7 garden arches",
+    "lighting": "light",
+    "scene": "world-art/rose-1.0.3.png"
   },
   {
     "id": "bloom",
@@ -44,8 +47,9 @@
     "radius": 24,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/bloom.svg",
-    "material": "Porcelain · conservatory glass",
-    "lighting": "light"
+    "material": "Porcelain \u00b7 conservatory glass",
+    "lighting": "light",
+    "scene": "world-art/bloom-1.0.3.png"
   },
   {
     "id": "linen",
@@ -56,8 +60,9 @@
     "radius": 9,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/linen.svg",
-    "material": "Bookcloth · brass rules",
-    "lighting": "light"
+    "material": "Bookcloth \u00b7 brass rules",
+    "lighting": "light",
+    "scene": "world-art/linen-1.0.3.png"
   },
   {
     "id": "matcha",
@@ -68,20 +73,22 @@
     "radius": 16,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/matcha.svg",
-    "material": "Ceramic glaze · shoji light",
-    "lighting": "light"
+    "material": "Ceramic glaze \u00b7 shoji light",
+    "lighting": "light",
+    "scene": "world-art/matcha-1.0.3.png"
   },
   {
     "id": "midnight",
     "name": "Midnight",
-    "title": "The night district",
+    "title": "The evening workspace",
     "description": "Precise geometry. Teal city lights.",
     "kind": "city",
     "radius": 10,
-    "font": "ui-monospace, Consolas, monospace",
+    "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/midnight.svg",
-    "material": "Technical glass · teal light",
-    "lighting": "dark"
+    "material": "Technical glass \u00b7 teal light",
+    "lighting": "dark",
+    "scene": "world-art/midnight-1.0.3.png"
   },
   {
     "id": "peach",
@@ -92,8 +99,9 @@
     "radius": 30,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/peach.svg",
-    "material": "Warm plaster · courtyard light",
-    "lighting": "light"
+    "material": "Warm plaster \u00b7 courtyard light",
+    "lighting": "light",
+    "scene": "world-art/peach-1.0.3.png"
   },
   {
     "id": "forest",
@@ -104,8 +112,9 @@
     "radius": 20,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/forest.svg",
-    "material": "Moss velvet · filtered canopy",
-    "lighting": "dark"
+    "material": "Moss velvet \u00b7 filtered canopy",
+    "lighting": "dark",
+    "scene": "world-art/forest-1.0.3.png"
   },
   {
     "id": "tidal",
@@ -116,8 +125,9 @@
     "radius": 26,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/tidal.svg",
-    "material": "Sea glass · flowing contours",
-    "lighting": "light"
+    "material": "Sea glass \u00b7 flowing contours",
+    "lighting": "light",
+    "scene": "world-art/tidal-1.0.3.png"
   },
   {
     "id": "ember",
@@ -128,8 +138,9 @@
     "radius": 12,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/ember.svg",
-    "material": "Basalt · copper strata",
-    "lighting": "dark"
+    "material": "Basalt \u00b7 copper strata",
+    "lighting": "dark",
+    "scene": "world-art/ember-1.0.3.png"
   },
   {
     "id": "celestial",
@@ -140,7 +151,8 @@
     "radius": 18,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/celestial.svg",
-    "material": "Astral glass · silver orbits",
-    "lighting": "dark"
+    "material": "Astral glass \u00b7 silver orbits",
+    "lighting": "dark",
+    "scene": "world-art/celestial-1.0.3.png"
   }
 ]

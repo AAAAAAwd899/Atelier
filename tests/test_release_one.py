@@ -24,10 +24,10 @@ def test_final_layout_icons_and_scene_art_unchanged():
     assert all(hashlib.sha256(before_release_copy(n)).hexdigest()==BASE[n] for n in paths)
 
 def test_version_identity_and_default_preferences():
-    manifest=json.loads((S/'manifest.json').read_text());assert manifest['human_version']=='1.0.2'
+    manifest=json.loads((S/'manifest.json').read_text());assert manifest['human_version']=='1.0.3'
     assert manifest['package']=='daedalus_atelier'
     tree=ast.parse((S/'core.py').read_text())
-    assert next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in n.targets))=='1.0.2'
+    assert next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in n.targets))=='1.0.3'
     for n in ['config.json','config.schema.json','native_widgets.py','figure_cache.py','focus_context.py','study_progress.py','quiet_navigation.py','ownership.py','native_tools.py','suite.py','card_studio.py']:
         assert hashlib.sha256(before_release_copy(n)).hexdigest()==BASE[n],n
 

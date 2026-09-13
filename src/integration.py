@@ -191,7 +191,7 @@ class Atelier:
             # body/button/card selectors cannot reach Atelier's interface.
             css = (ROOT / "web" / "atelier.css").read_text(encoding="utf-8")
             from .worlds import home_css
-            css += "\n" + home_css()
+            css += "\n" + home_css(self.package)
             addition = ('<div id="atelier-root"></div>'
                         '<script type="application/json" id="atelier-bootstrap">'
                         + json_for_html(boot) + '</script>'

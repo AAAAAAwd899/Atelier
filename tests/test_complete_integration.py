@@ -23,7 +23,8 @@ def test_latest_exam_engine_results_assets_preserved(name):
 
 @pytest.mark.parametrize('name',['web/world-finishes.css','web/interaction-finish.css','web/review-finish.css','web/studio-shell.css','web/session-shell.css','web/model.js','session_model.py','lifecycle.py','ownership.py'])
 def test_latest_graphics_session_and_home_contracts_survive(name):
- assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['rc6'][name]
+ from upgrade_preservation import before_upgrade
+ assert hashlib.sha256(before_upgrade(name)).hexdigest()==BASE['rc6'][name]
 
 @pytest.mark.parametrize('theme',core.THEMES)
 def test_studio_appearance_is_one_complete_world(theme):

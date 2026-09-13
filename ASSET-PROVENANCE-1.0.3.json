@@ -1,0 +1,74 @@
+[
+  {
+    "file": "src/web/world-art/bloom-1.0.3.png",
+    "sha256": "f837f4734d80ffa1806a81562bd9ef4bee42239db7ffb627986a29deb8cc7dea",
+    "bytes": 2720225,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/celestial-1.0.3.png",
+    "sha256": "ac4bc4d06f77f57869d66f2b33e25f6351ae8741950b0c073fd618563d4d6928",
+    "bytes": 2437870,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/ember-1.0.3.png",
+    "sha256": "f18a894f1557a3653a8e9217cd4e45b6b9cf35fb3aa5377448d327fd5fc9263e",
+    "bytes": 1977232,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/forest-1.0.3.png",
+    "sha256": "93233f41ad0ec5756b067b9d14f39207aa8ef769a04f825e0ab06c71c7510a18",
+    "bytes": 2161074,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/glacier-1.0.3.png",
+    "sha256": "5228c719a81704c8d8d74cb59bb9528fc1dfd7576797dac190b08da5874d5581",
+    "bytes": 2268858,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/linen-1.0.3.png",
+    "sha256": "1dcb8c5dc2152e52d838bc596e3072db764d43804e00605223bc2ceb65da673b",
+    "bytes": 2461663,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/matcha-1.0.3.png",
+    "sha256": "783cf11dc10ba79c091111a058e03e2580a78ad9ce361081d6f167df99ef560f",
+    "bytes": 2562515,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/midnight-1.0.3.png",
+    "sha256": "99cf43b5fde3386162c1b75e15c84976b996ecca3c6955ec0e82546b2df67477",
+    "bytes": 2234036,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/obsidian-1.0.3.png",
+    "sha256": "26a4bd7871cf944d1f586cdce7d571c26809e48ae52ed8918ed9d9e88ce31f5f",
+    "bytes": 2098107,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/peach-1.0.3.png",
+    "sha256": "f246f5d79001808b73dfc6c13f5d84117701968b4124808109285c670d2ba1d4",
+    "bytes": 2310205,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/rose-1.0.3.png",
+    "sha256": "4895716a3c72ea9805c178da1d96311d73c343bdd198b35d9dd647e2b3c95548",
+    "bytes": 2535607,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/tidal-1.0.3.png",
+    "sha256": "16a2c17e0db6d0287a83b05c0f17c642994460da36cf24e130294d0ac5697ad9",
+    "bytes": 2598988,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  }
+]

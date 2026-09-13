@@ -142,15 +142,18 @@ def test_invalid_scopes_and_periods_are_rejected(history,scope,days):
  with pytest.raises(ValueError):pr.read_progress(c,profile(),scope,days,now)
 
 @pytest.mark.parametrize('date,expected_hours',[(datetime(2026,3,9,4),23),(datetime(2026,11,2,4),25)])
-def test_study_day_uses_civil_rollover_across_dst(date,expected_hours):
- previous=os.environ.get('TZ');os.environ['TZ']='America/Chicago';time.tzset()
- try:
-  col=col_stub();col.sched=NS(day_cutoff=int(date.timestamp()));r=pr.read_progress(col,{'studies':[]},'active',7,int(date.timestamp()*1000))
-  assert any(round((x['end']-x['start'])/3600000)==expected_hours for x in r['daily'])
- finally:
-  if previous is None:os.environ.pop('TZ',None)
-  else:os.environ['TZ']=previous
-  time.tzset()
+def test_study_day_uses_civil_rollover_across_dst(date,expected_hours,monkeypatch):
+ # Windows has no time.tzset(). Inject only the local clock boundary; exercise
+ # the same real civil-day algorithm and both 23/25-hour assertions everywhere.
+ from zoneinfo import ZoneInfo
+ zone=ZoneInfo('America/Chicago')
+ class ChicagoClock(datetime):
+  @classmethod
+  def fromtimestamp(cls,value,tz=None):return datetime.fromtimestamp(value,tz or zone)
+ monkeypatch.setattr(pr,'datetime',ChicagoClock)
+ date=date.replace(tzinfo=zone)
+ col=col_stub();col.sched=NS(day_cutoff=int(date.timestamp()));r=pr.read_progress(col,{'studies':[]},'active',7,int(date.timestamp()*1000))
+ assert any(round((x['end']-x['start'])/3600000)==expected_hours for x in r['daily'])
 
 def methods(text):
  tree=ast.parse(text);out={}

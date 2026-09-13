@@ -31,7 +31,8 @@ def test_finishes_do_not_add_assets_or_card_content_rules():
  assert '#qa' not in css and 'http' not in css and '@import' not in css
  assert css.count('--finish-aperture:')==12
  assert len({w['material'] for w in CAT})==12
- css=(S/'web/review-finish.css').read_text()
+ from upgrade_preservation import before_upgrade
+ css=before_upgrade('web/review-finish.css').decode('utf8')
  assert '#qa' not in css and not re.search(r'(?<![-\w])(width|height|padding|margin|display)\s*:',css)
 
 def test_final_layers_loaded_in_all_intended_surfaces():

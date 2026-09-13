@@ -18,7 +18,7 @@ def main():
   def close():p.keyboard.press('Escape');p.wait_for_timeout(100)
   try:
    p.set_content(native_fixture('forest'));p.locator('.nw-toolbar').wait_for()
-   check('1.0.2 displayed on Widgets', '1.0.2' in p.locator('.brand').inner_text() and p.evaluate('AtelierMakeover.version')=='1.0.2')
+   check('Current version displayed on Widgets', core.VERSION in p.locator('.brand').inner_text() and p.evaluate('AtelierMakeover.version')==core.VERSION)
    check('Accepted three-action toolbar retained',p.locator('.nw-toolbar button').all_text_contents()==['Quick study','Practice exam','More tools'])
    p.screenshot(path=str(SH/'Atelier-1.0-Widgets.png'),animations='disabled')
    p.locator('.nw-toolbar [data-action="nw-tools"]').click();p.locator('.nw-tools-list').wait_for()

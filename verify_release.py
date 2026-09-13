@@ -3,7 +3,7 @@ All engine code executes from src/test-only copies; native Anki/Qt is explicit d
 """
 from __future__ import annotations
 from pathlib import Path
-import datetime,json,subprocess,sys,xml.etree.ElementTree as ET,shutil
+import datetime,json,subprocess,sys,xml.etree.ElementTree as ET,shutil,os
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from release_tools import *
 V=ROOT/'verification';V.mkdir(exist_ok=True);DIST.mkdir(exist_ok=True)
@@ -26,9 +26,12 @@ def main():
  setup_vendor();fingerprint=runtime_digest()
  for p in sorted(SRC.rglob('*.js')):subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
  root_tests=['test_core.py','test_sprout_link.py','test_release.py','test_071.py','test_readiness.py','test_suite.py','test_ui_model_audit.py','test_studio_polish.py','test_home_slice_model.py','test_session_slice.py','test_world_finish.py','test_complete_integration.py','test_usability_contract.py','test_release_finish.py','test_native_widgets.py','test_widget_routing.py','test_release_one.py','test_101.py','test_102.py']
- run([sys.executable,'-m','pytest',*[f'tests/{n}' for n in root_tests],'-q','--junitxml=verification/atelier-unit.xml'],'atelier-unit')
- run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'sprout-unit.xml')],'sprout-unit',ROOT/'vendor_tests')
- run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'workshop-unit.xml')],'workshop-unit',ROOT/'workshop_checks')
+ if '--browser-only' not in sys.argv:
+  run([sys.executable,'-m','pytest',*[f'tests/{n}' for n in root_tests],'tests/test_103.py','-q','--junitxml=verification/atelier-unit.xml'],'atelier-unit')
+  run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'sprout-unit.xml')],'sprout-unit',ROOT/'vendor_tests')
+  run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'workshop-unit.xml')],'workshop-unit',ROOT/'workshop_checks')
+  (V/'python-runtime.json').write_text(json.dumps({'runtime_sha256':fingerprint}))
+ if '--python-only' in sys.argv:return
  suites=[('tests/test_102_browser.py','folder-shuffle',V/'1.0.2/browser-results.json',ROOT),('tests/test_101_browser.py','review-101',V/'1.0.1/browser-results.json',ROOT),('tests/test_release_one_card_browser.py','release-one-card',V/'release-one-card/results.json',ROOT),
  ('tests/test_release_one_browser.py','release-one',V/'release-one/results.json',ROOT),
  ('tests/test_widget_routing_browser.py','widget-routing',V/'widget-routing/results.json',ROOT),
@@ -54,6 +57,7 @@ def main():
  ('tools/test_first_run.py','card-first-run',ROOT/'workshop_checks/docs/first-run-results.json',ROOT/'workshop_checks'),
  ('tools/test_mask_ui.py','mask-studio',ROOT/'workshop_checks/docs/authoring-110/results.json',ROOT/'workshop_checks')]
  outcomes={}
+ suites.append(('tests/test_103_browser.py','reviewer-103',ROOT/'output/playwright/reviewer-103/results.json',ROOT))
  def browser_job(job):
   script,name,path,cwd=job;run([sys.executable,script],name,cwd)
   result=json.loads(path.read_text());count=result.get('count',result.get('checks'))
@@ -63,10 +67,11 @@ def main():
   for future in as_completed([pool.submit(browser_job,j) for j in suites]):
    name,count=future.result();outcomes[name]=count;print('PASS',name,count,flush=True)
  if runtime_digest()!=fingerprint:raise RuntimeError('Runtime changed during verification; rerun')
+ if json.loads((V/'python-runtime.json').read_text())['runtime_sha256']!=fingerprint:raise RuntimeError('Python evidence is from different runtime bytes; rerun Python suites')
  report={'version':version(),'runtime_sha256':fingerprint,'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
  'python_suites':{'suite_integration_and_preservation':cases(V/'atelier-unit.xml'),'exam_engine_and_quiet_review':cases(V/'sprout-unit.xml'),'card_studio_importers_publishers_and_routes':cases(V/'workshop-unit.xml')},
  'python_failed':0,'python_skipped':0,'browser_suites':outcomes,'browser_errors':0,'native_windows_verified':False,'native_qt_verified':False,'live_webgl_verified':False,
- 'pip_browser_renderer':'shipped animated fallback; no live GPU claim','phase':'1.0.2 native whole-folder display-order patch; no native scheduler execution or hardware acceptance claimed', 'acceptance':json.loads((ROOT/'RELEASE-ACCEPTANCE.json').read_text())}
+ 'pip_browser_renderer':'shipped animated fallback; no live GPU claim','phase':'1.0.3 cumulative presentation upgrade; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
  report['python_total']=sum(report['python_suites'].values());report['browser_total']=sum(outcomes.values())
  (V/'verified.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2),flush=True)
 if __name__=='__main__':main()

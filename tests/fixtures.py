@@ -3,9 +3,9 @@ No Onigiri source/assets are bundled. This exercises the conflicting structure
 observed in public source, not the installed Onigiri application itself.
 """
 from pathlib import Path
-import json, sys, types, importlib, zipfile
+import json, sys, types, importlib, zipfile, os
 ROOT=Path(__file__).resolve().parents[1]
-SRC=ROOT/'src'
+SRC=Path(os.environ.get('ATELIER_FIXTURE_SRC',ROOT/'src'))
 package=types.ModuleType('atelier_testing');package.__path__=[str(SRC)];sys.modules.setdefault('atelier_testing',package)
 core=importlib.import_module('atelier_testing.core')
 review=importlib.import_module('atelier_testing.review_model')
@@ -15,7 +15,7 @@ def asset(name):
     text=(SRC/'web'/name).read_text()
     if name in ('atelier.css','reviewer.css'):
         from atelier_testing.worlds import home_css, reviewer_css
-        text+='\n'+(home_css() if name=='atelier.css' else reviewer_css())
+        text+='\n'+(home_css('daedalus_atelier') if name=='atelier.css' else reviewer_css())
     return text
 
 BASE_CSS='''html,body{padding:0;margin:0;background:#f6eed7;color:#333;font:14px Arial}body{overflow:hidden}table{border-spacing:0}button{font:14px Arial;background:#303030;color:white;border:1px solid #444;border-radius:12px;padding:10px}#outer{width:100%}.stattxt{font-size:12px}.new-count{color:#6f9bef}.learn-count{color:#efa2bc}.review-count{color:#8dd4b2}'''

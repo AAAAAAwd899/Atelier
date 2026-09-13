@@ -1,0 +1,40 @@
+"""Current upgrade contracts. Historical reconstructions are not behavior evidence."""
+from pathlib import Path
+import hashlib,json,subprocess,sys,importlib
+import pytest
+from fixtures import ROOT,SRC
+
+def test_exact_upgrade_declaration_and_protected_engines():
+    old=json.loads((ROOT/'baseline-1.0.2.json').read_text())
+    patch=json.loads((ROOT/'patch-103-changes.json').read_text())
+    actual={p.relative_to(SRC).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in SRC.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in ('.pyc','.pyo')}
+    assert {n:h for n,h in actual.items() if n in old and h!=old[n]}==patch['changed']
+    assert {n:h for n,h in actual.items() if n not in old}==patch['added']
+    assert set(old)<=set(actual) and not patch['removed']
+    protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')
+    assert not any(n.startswith(protected) for n in patch['changed'])
+
+def test_generated_adapters_are_reproducible():
+    subprocess.run([sys.executable,str(ROOT/'tools/generate_design.py'),'--check'],check=True)
+
+def luminance(hex):
+    rgb=[int(hex[i:i+2],16)/255 for i in (1,3,5)]
+    rgb=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in rgb]
+    return sum(v*w for v,w in zip(rgb,[.2126,.7152,.0722]))
+
+@pytest.mark.parametrize('world',json.loads((SRC/'web/design-contract.json').read_text())['worlds'])
+def test_readable_role_pairs(world):
+    roles=json.loads((SRC/'web/design-contract.json').read_text())['worlds'][world]['roles']
+    for fg,bg in [(fg,bg) for fg in ['text','muted'] for bg in ['canvas','sidebar','panel','raised','input']]+[('action-text','action')]:
+        a,b=sorted([luminance(roles[fg]),luminance(roles[bg])]);assert (b+.05)/(a+.05)>=4.5,(world,fg,bg,(b+.05)/(a+.05))
+
+def test_unknown_io_templates_fail_closed():
+    io=importlib.import_module('atelier_testing.io_view')
+    assert not io.recognized({})
+    assert not io.recognized({'originalStockKind':6,'css':'custom','tmpls':[]})
+    assert not io.recognized({'originalStockKind':6,'css':'','tmpls':[{'qfmt':'<script>custom()</script>'}]})
+
+def test_empty_resume_strip_collapses_and_owner_is_explicit():
+    text=(SRC/'web/atelier.js').read_text()
+    assert "if(!cards.length)return '';" in text
+    assert "host.dataset.owner=state.config.visual_owner||'ask'" in text

@@ -5,6 +5,8 @@ ROOT=Path(__file__).resolve().parent
 
 def before_release_copy(name, data=None):
     if data is None: data=(ROOT/'src'/name).read_bytes()
+    from upgrade_preservation import before_upgrade
+    data=before_upgrade(name,data)
     patch_path=ROOT/'patch-101-changes.json'
     if patch_path.exists():
         import hashlib

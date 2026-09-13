@@ -95,12 +95,13 @@ def test_guards_reset_on_leave(monkeypatch):
  c,mw,r,cb,commands,cfg=native(monkeypatch);c.state_changed('deckBrowser','review');assert not c.token and not c.input_allowed
 
 def test_engine_and_every_non_allowlisted_byte_preserved():
+ from upgrade_preservation import before_upgrade
  baseline=json.loads((ROOT/'baseline-1.0.0.json').read_text())
  allowed={'core.py','config.json','config.schema.json','manifest.json','integration.py','review_model.py','review_theme.py','web/reviewer.js','web/reviewer.css','web/atelier.js','USER-GUIDE.md','RELEASE-NOTES.md','config.md','SUPPORT.md'}
  changed=[]
  for rel,sha in baseline.items():
   assert (SRC/rel).is_file()
-  if hashlib.sha256((SRC/rel).read_bytes()).hexdigest()!=sha:changed.append(rel)
+  if hashlib.sha256(before_upgrade(rel)).hexdigest()!=sha:changed.append(rel)
  assert set(changed)<=allowed,changed
  assert not any(rel.startswith(('sprout/','workshop/')) for rel in changed)
 

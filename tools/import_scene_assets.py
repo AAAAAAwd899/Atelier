@@ -1,0 +1,8 @@
+from pathlib import Path
+import json,shutil
+web=Path('src/web')
+mapping=json.loads("{\"obsidian\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-1998d357-3877-4339-8f97-017fd7855ce0.png\",\"glacier\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-cf237f27-7489-46da-95ae-0dc2332711db.png\",\"bloom\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-6052173d-5099-4bed-be70-abac734cb172.png\",\"linen\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-395c2024-e7fc-484e-a754-956a22d2e5cf.png\",\"matcha\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-80ca7077-23f1-4a86-98f7-3082635a137c.png\",\"peach\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-e48af107-95ae-40e5-8ddd-9aa036709500.png\",\"tidal\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-7e865c12-c51f-4bce-b9ad-67c59d5f6f3d.png\",\"ember\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-d4bec1fc-6ed6-4f2d-8cf4-4eec3e13892e.png\",\"celestial\":\"C:\\\\Users\\\\lukoo\\\\.codex\\\\generated_images\\\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\\\exec-401f1e5e-4212-4329-9aef-9012ab5ac8d9.png\"}")
+for name,path in mapping.items():shutil.copyfile(path,web/'world-art'/f'{name}-1.0.3.png')
+p=web/'worlds.json';worlds=json.loads(p.read_text(encoding='utf8'))
+for w in worlds:w['scene']='world-art/'+w['id']+'-1.0.3.png'
+p.write_text(json.dumps(worlds,indent=2)+'\n',encoding='utf8')

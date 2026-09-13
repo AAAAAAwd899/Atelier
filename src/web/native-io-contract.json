@@ -1,0 +1,7 @@
+{
+  "host": "Anki 25.09.5 stock IO, inspected on Windows 2026-09-13",
+  "fingerprints": [
+    "1858c11d7f31e4ae15777fc7edbc9153aae3c1643a6a676243256c5be71079e2"
+  ],
+  "policy": "Exact stock CSS and templates only; custom, translated or newer templates fail closed until verified."
+}

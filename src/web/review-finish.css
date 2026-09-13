@@ -1,4 +1,11 @@
 /* Reader-first finish. No sizing, wrapping, transforms or card selectors added. */
+/* 1.0.3 stock IO adapter: only owned context/view controls; no image/canvas rule. */
+html[data-atelier-screen="review"][data-atelier-card="media"] #atelier-review-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:12px auto;color:var(--at-text);font:14px/1.5 "Segoe UI",system-ui,sans-serif;}
+html[data-atelier-screen="review"][data-atelier-card="media"] .atelier-review-stage{display:none;}
+html[data-atelier-screen="review"][data-atelier-card="media"] .atelier-review-path{display:none;}
+html[data-atelier-screen="review"][data-atelier-card="media"] #atelier-review-header[data-expanded="true"] .atelier-review-path{display:block;flex-basis:100%;overflow-wrap:anywhere;}
+#atelier-image-fit{font:14px/1.4 "Segoe UI",system-ui,sans-serif;min-height:40px;padding:8px 14px;background:var(--at-panel);color:var(--at-text);border:1px solid var(--at-line);border-radius:8px;}
+#atelier-image-fit:focus-visible{outline:2px solid var(--at-accent);outline-offset:3px;}
 html[data-atelier-screen="review"] #atelier-review-header button:focus-visible,
 html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer button:focus-visible{outline:2px solid var(--at-accent-strong)!important;outline-offset:3px!important;box-shadow:0 0 0 2px var(--at-side)!important;}
 html[data-atelier-screen="review-bottom"][data-atelier-toolbar="stock"] #outer button{transition:background-color .14s ease,border-color .14s ease!important;transform:none!important;}

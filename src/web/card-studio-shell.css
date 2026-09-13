@@ -1,12 +1,12 @@
 /* Suite Card Studio. Scoped to this document and its own root, never card content or mask coordinates. */
 html[data-atelier-card-studio="true"],html[data-atelier-card-studio="true"] body{margin:0;height:100%;overflow:hidden;}
 #workshop[data-integrated="true"]{--page-pad:clamp(20px,3vw,46px);font-family:"Segoe UI",system-ui,sans-serif;}
-#workshop[data-integrated="true"] .app-shell{grid-template-columns:230px minmax(0,1fr);}
+#workshop[data-integrated="true"] .app-shell{grid-template-columns:240px minmax(0,1fr);}
 #workshop[data-integrated="true"] .topbar{height:auto;min-height:0;display:grid;grid-template-columns:minmax(120px,1fr) auto;grid-template-areas:"crumb suite" "search search";gap:10px 20px;padding:16px var(--page-pad);flex:0 0 auto;background:var(--sidebar);}
 #workshop[data-integrated="true"] .breadcrumb{grid-area:crumb;min-width:0;flex-wrap:wrap;row-gap:4px;font-size:13px;}
 #workshop[data-integrated="true"] .breadcrumb strong{max-width:min(35vw,420px);}
 #workshop[data-integrated="true"] .suite-header-actions{grid-area:suite;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
-#workshop[data-integrated="true"] .suite-world{display:flex;align-items:center;gap:8px;margin:0;font-size:11px;color:var(--muted);}
+#workshop[data-integrated="true"] .suite-world{display:flex;align-items:center;gap:8px;margin:0;font-size:13px;color:var(--muted);}
 #workshop[data-integrated="true"] .suite-world select{width:150px;min-height:38px;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:10px;font:13px "Segoe UI",system-ui,sans-serif;padding:8px;}
 #workshop[data-integrated="true"] .suite-world[hidden]{display:none;}
 #workshop[data-integrated="true"] .top-actions{grid-area:search;display:flex;flex-wrap:nowrap;min-width:0;}
@@ -16,8 +16,8 @@ html[data-atelier-card-studio="true"],html[data-atelier-card-studio="true"] body
 #workshop[data-integrated="true"] .brand strong{font:750 29px/1 "Segoe UI",system-ui,sans-serif;letter-spacing:-1.5px;}
 #workshop[data-integrated="true"] .brand small{font:600 9px/1.4 "Segoe UI",system-ui,sans-serif;letter-spacing:1.6px;}
 #workshop[data-integrated="true"] .nav-link{min-height:42px;font-size:13px;border-radius:12px;}
-#workshop[data-integrated="true"] .page{max-width:1550px;padding-block:30px 40px;}
-#workshop[data-suite-theme="true"] .page-heading h1,#workshop[data-suite-theme="true"] .project-hero h1{font-family:var(--world-heading,Georgia,serif);font-size:clamp(30px,3.5vw,46px);line-height:1.15;letter-spacing:-1px;}
+#workshop[data-integrated="true"] .page{max-width:1550px;padding-block:22px 32px;}
+#workshop[data-suite-theme="true"] .page-heading h1,#workshop[data-suite-theme="true"] .project-hero h1{font-family:var(--world-heading,Georgia,serif);font-size:clamp(26px,2.8vw,34px);line-height:1.15;letter-spacing:-1px;}
 #workshop[data-suite-theme="true"] .page-heading p{font-size:14px;line-height:1.65;max-width:700px;}
 #workshop[data-suite-theme="true"] .summary-strip{background:linear-gradient(130deg,var(--panel),var(--raised));border-radius:var(--world-radius,18px);padding-block:18px;}
 #workshop[data-integrated="true"] .summary-number strong{font:650 29px/1.3 "Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;}
@@ -54,12 +54,12 @@ html[data-atelier-card-studio="true"],html[data-atelier-card-studio="true"] body
  #workshop[data-integrated="true"] .command-trigger kbd{display:none;}
  #workshop[data-integrated="true"] .suite-world{flex:1;min-width:0;}
  #workshop[data-integrated="true"] .suite-world select{width:100%;min-width:0;}
- #workshop[data-integrated="true"] .suite-header-actions>.quiet{font-size:12px;padding:8px;min-height:38px;}
+ #workshop[data-integrated="true"] .suite-header-actions>.quiet{font-size:14px;padding:8px;min-height:38px;}
 }
 @media(max-width:440px){
  #workshop[data-integrated="true"]{--page-pad:14px;}
  #workshop[data-integrated="true"] .suite-world{flex-basis:100%;}
- #workshop[data-integrated="true"] .command-trigger span{font-size:11px;}
+ #workshop[data-integrated="true"] .command-trigger span{font-size:13px;}
  #workshop[data-integrated="true"] .top-actions{gap:4px;}
  #workshop[data-integrated="true"] .page-heading h1{font-size:29px;}
  #workshop[data-integrated="true"] .form-grid{grid-template-columns:1fr;}
@@ -76,28 +76,28 @@ html[data-atelier-card-studio] #workshop .modal-heading,html[data-atelier-card-s
 /* rc3 discoverability: one source store, visible unfinished work and explicit approval. */
 #workshop[data-integrated="true"] .main-nav{flex:0 0 auto;gap:3px;}
 #workshop[data-integrated="true"] .sidebar{overflow-y:auto;overscroll-behavior:contain;gap:18px;}
-#workshop[data-integrated="true"] .nav-link{font-size:12px;min-height:39px;line-height:1.4;}
+#workshop[data-integrated="true"] .nav-link{font-size:14px;min-height:39px;line-height:1.4;}
 #workshop[data-integrated="true"] .ws-authoring-workflow{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 16px;margin:0 0 18px;background:var(--raised);border:1px solid var(--line);border-radius:14px;}
 #workshop[data-integrated="true"] .ws-authoring-workflow>div:first-child{flex:1;min-width:180px;}
 #workshop[data-integrated="true"] .ws-authoring-workflow strong{font:600 13px/1.5 "Segoe UI",system-ui,sans-serif;}
-#workshop[data-integrated="true"] .ws-authoring-workflow small{display:block;font-size:12px;line-height:1.55;color:var(--muted);margin-top:3px;max-width:540px;}
+#workshop[data-integrated="true"] .ws-authoring-workflow small{display:block;font-size:14px;line-height:1.55;color:var(--muted);margin-top:3px;max-width:540px;}
 #workshop[data-integrated="true"] .ws-authoring-workflow .row{flex:0 1 auto;}
 #workshop[data-integrated="true"] .ws-draft-filters{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin:0 0 18px;}
 #workshop[data-integrated="true"] .ws-draft-batch{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;font-size:13px;color:var(--muted);}
 #workshop[data-integrated="true"] .ws-draft-results{display:grid;gap:12px;}
 #workshop[data-integrated="true"] .ws-inbox-record{border:1px solid var(--line);border-radius:16px;padding:15px 18px;background:var(--panel);min-width:0;}
-#workshop[data-integrated="true"] .ws-draft-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;color:var(--muted);font-size:11px;line-height:1.5;padding-bottom:10px;border-bottom:1px solid var(--line);}
+#workshop[data-integrated="true"] .ws-draft-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;color:var(--muted);font-size:13px;line-height:1.5;padding-bottom:10px;border-bottom:1px solid var(--line);}
 #workshop[data-integrated="true"] .ws-draft-meta>span{overflow-wrap:anywhere;min-width:0;}
 #workshop[data-integrated="true"] .ws-inbox-record .draft-item{border:0;margin:10px 0 0;padding:0;background:none;}
 #workshop[data-integrated="true"] .ws-inbox-record .draft-copy h3{font:600 15px/1.55 "Segoe UI",system-ui,sans-serif;overflow-wrap:anywhere;}
 #workshop[data-integrated="true"] .ws-inbox-record .draft-copy p{font-size:13px;line-height:1.6;}
-#workshop[data-integrated="true"] .ws-draft-pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0;font-size:12px;color:var(--muted);}
+#workshop[data-integrated="true"] .ws-draft-pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0;font-size:14px;color:var(--muted);}
 #workshop[data-integrated="true"] .ws-import-card{max-width:1000px;padding:clamp(20px,3vw,36px);}
 #workshop[data-integrated="true"] .ws-import-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:25px 0;}
 #workshop[data-integrated="true"] .ws-import-choice{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:22px 18px;border:1px solid var(--line);border-radius:14px;background:var(--bg);text-align:left;white-space:normal;}
 #workshop[data-integrated="true"] .ws-import-choice svg{color:var(--accent);}
 #workshop[data-integrated="true"] .ws-import-choice strong{font-size:15px;line-height:1.4;}
-#workshop[data-integrated="true"] .ws-import-choice small{font-size:12px;line-height:1.65;color:var(--muted);}
+#workshop[data-integrated="true"] .ws-import-choice small{font-size:14px;line-height:1.65;color:var(--muted);}
 #workshop[data-integrated="true"] .ws-import-choice:hover{background:var(--raised);border-color:var(--accent);}
 #workshop[data-integrated="true"] .ws-import-note{margin:24px 0 0;border-top:1px solid var(--line);padding-top:18px;}
 @media(max-width:1100px){#workshop[data-integrated="true"] .ws-authoring-workflow{flex-wrap:wrap;}}

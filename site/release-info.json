@@ -1,0 +1,13 @@
+{
+  "name": "Atelier",
+  "version": "1.0.3",
+  "status": "private-review",
+  "source_repository": "https://github.com/AAAAAAwd899/Atelier",
+  "ankiweb_id": null,
+  "ankiweb_url": null,
+  "public_download_url": null,
+  "website_destination": null,
+  "owner_release_approved": false,
+  "private_package": "daedalus_atelier",
+  "update_channel": "AnkiWeb after the real listing, migration verification and owner approval"
+}

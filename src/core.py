@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 THEMES = ("obsidian", "glacier", "rose", "bloom", "linen", "matcha", "midnight", "peach", "forest", "tidal", "ember", "celestial")
 DEFAULTS = {
     "theme": "obsidian", "mode": "workspace", "density": "comfortable",
