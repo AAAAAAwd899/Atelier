@@ -175,7 +175,7 @@ def test_all_unaffected_native_methods_remain_semantically_identical(file):
 def test_publishing_and_native_rating_algorithm_files_unchanged():
  baseline=json.loads((R/'usability-baseline.json').read_text())
  for f,h in baseline.items():
-  if f.startswith('sprout/') and f not in ('sprout/integration.py','sprout/web/app.js') or f.startswith('workshop/') and f not in ('workshop/integration.py','workshop/web/app.js','workshop/INTEGRATION-NOTE.md'):
+  if f.startswith('sprout/') and f not in ('sprout/integration.py','sprout/web/app.js') or f.startswith('workshop/') and f not in ('workshop/integration.py','workshop/web/app.js','workshop/web/app.css','workshop/INTEGRATION-NOTE.md'):
    assert hashlib.sha256((S/f).read_bytes()).hexdigest()==h,f
 
 # Compile the actual changed handler, using strict host stand-ins and the original

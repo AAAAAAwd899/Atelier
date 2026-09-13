@@ -2,6 +2,8 @@
 
 Private review candidate. A shared design contract generates twelve-world web/native palette adapters. Home and Widgets use more compact layouts, near-solid work panels and locally packaged landscapes. Saved work and the existing engine routes remain intact.
 
+The Study desk now groups learning, creation and progress tools and shows the exact selected study scope. Card Studio presents source projects as card sets and guides learners from slides, PDFs, images, notes or text through exact page selection, question/cloze/image/image-occlusion creation, saved drafts and final deck approval.
+
 Recognized stock native image-occlusion cards gain Fit image / Actual size. The whole image-and-canvas stage scales together after rendering, including late native sizing. Source images, mask coordinates and card templates are not rewritten. Unknown templates retain native rendering.
 
 The verified 1.0.2 whole-folder shuffle, exam/card engines, stores, publication approval, Undo, masks, remotes and original-theme mode are cumulative. Read the accompanying audit for tested hosts and unperformed acceptance checks. This installer does not publish itself or update an AnkiWeb listing.

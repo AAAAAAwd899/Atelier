@@ -24,7 +24,12 @@ def main():
     assert set(baseline)<=set(actual) and not patch['removed']
     assert {n:h for n,h in actual.items() if n in baseline and h!=baseline[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in baseline}==patch['added']
-    assert all(actual[n]==h for n,h in baseline.items() if n.startswith(('sprout/','workshop/')))
+    allowed_workshop_presentation={'workshop/web/app.js','workshop/web/app.css'}
+    assert all(
+        actual[n]==h
+        for n,h in baseline.items()
+        if n.startswith(('sprout/','workshop/')) and n not in allowed_workshop_presentation
+    )
     installer=DIST/'Atelier-1.0.3.ankiaddon';build_installer(installer)
     extracted=ROOT/'output/extracted-1.0.3';extracted.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory() as td:

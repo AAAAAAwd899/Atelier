@@ -57,13 +57,13 @@ def test_every_bundled_exam_file_matches_actual_rc2_installer():
 
 def test_card_importers_approval_storage_and_masks_remain_original_rc2():
  for n,h in BASE.items():
-  if n.startswith('workshop/') and n not in ('workshop/web/app.js','workshop/integration.py','workshop/INTEGRATION-NOTE.md'):
+  if n.startswith('workshop/') and n not in ('workshop/web/app.js','workshop/web/app.css','workshop/integration.py','workshop/INTEGRATION-NOTE.md'):
    assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
 
 def test_old_byte_boundaries_are_not_hidden_by_version_bump():
  inputs=json.loads((ROOT/'integration-baselines.json').read_text())
  changed=[n for n,h in inputs['incoming'].items() if n.startswith('workshop/') and hashlib.sha256((SRC/n).read_bytes()).hexdigest()!=h]
- assert set(changed)=={'workshop/integration.py','workshop/web/app.js'}
+ assert set(changed)=={'workshop/integration.py','workshop/web/app.js','workshop/web/app.css'}
 
 def test_original_review_session_native_tools_ownership_and_store_contracts_unchanged():
  for n in ['web/model.js','web/reviewer.css','session_model.py','quiet_navigation.py','native_tools.py','ownership.py','suite.py','lifecycle.py']:

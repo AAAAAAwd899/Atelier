@@ -253,21 +253,26 @@
     }
     function sidebar() {
       const f=scope(),recent=state.profile.recent_locations.map(id=>state.map.get(id)).filter(Boolean).slice(0,3);
-      const badge=f.enabled?fmt(due(f.totals)):'';
+      const badge=f.enabled?fmt(due(f.totals)):'',chosen=f.active.find(s=>s.id===state.profile.selected_study),scopeName=chosen?.name||(f.active.length?'All active studies':'All folders'),scopeCount=f.selected.length;
       return `<aside class="sidebar ${state.mobile?'mobile-open':''}" aria-label="Folder navigation">
         <div class="brand-row"><button type="button" class="brand" data-action="home" aria-label="Atelier study desk">${brand}<span><strong>atelier</strong><small>Your space to learn · ${esc(boot.version)}</small></span></button>${ib('close-nav','Close navigation','close','','drawer-close')}</div>
+        <p class="brand-promise">Create, organize and study in one calm workspace.</p>
         <nav class="nav-group" aria-label="Main navigation">
+          <span class="nav-section-label">LEARN</span>
           ${btn('home','Study desk','home',`nav-row ${state.page==='desk'?'active':''}`)}
-          ${btn('page','Library','folder',`nav-row ${state.page==='library'?'active':''}`,'data-page="library"')}
+          ${btn('page','Library & study scope','folder',`nav-row ${state.page==='library'?'active':''}`,'data-page="library"')}
+          <span class="nav-section-label">CREATE & PREPARE</span>
           ${state.authoring.available?btn('authoring-open','Card Studio','edit','nav-row','data-view="studio"'):''}
           ${btn('suite-open','Exam Studio','calendar','nav-row','data-view="overview"')}
           ${btn('suite-open','Practice & mocks','book','nav-row','data-view="practice"')}
+          <span class="nav-section-label">TRACK & MANAGE</span>
           ${btn('suite-open','Pip Study','focus','nav-row','data-view="pip"')}
           ${btn('study-progress','Study progress','chart','nav-row')}
           ${btn('page','Anki tools','layers',`nav-row ${state.page==='tools'?'active':''}`,'data-page="tools"')}
         </nav>
         <div class="side-scroll" tabindex="0" aria-label="Scrollable folders and shortcuts">
-          <div class="side-utility-links">${btn('page','Due'+(badge?` <b>${badge}</b>`:''),'clock','recent-link','data-page="due"')}${btn('page','Recent','refresh','recent-link','data-page="recent"')}${btn('page','Saved','star','recent-link','data-page="favorites"')}</div>
+          <div class="side-utility-card"><span class="side-card-label">TODAY</span><div class="side-utility-links">${btn('page','Due'+(badge?` <b>${badge}</b>`:''),'clock','recent-link','data-page="due"')}${btn('page','Recent','refresh','recent-link','data-page="recent"')}${btn('page','Saved','star','recent-link','data-page="favorites"')}</div></div>
+          <section class="side-scope-card" aria-label="Current study scope"><header><span>${icon('focus',14)}STUDY SCOPE</span>${btn('studies','Edit','edit','side-scope-edit')}</header><strong>${esc(scopeName)}</strong><small>${scopeCount?`${scopeCount} selected ${scopeCount===1?'folder':'folders'} · ${fmt(f.totals.review)} review · ${fmt(f.totals.learn)} learning`:'Choose the exact folders you want included.'}</small><div class="side-scope-actions">${scopeCount?btn('quick-session','Study this scope','play','side-scope-study'):btn('studies','Choose folders','plus','side-scope-study')}${btn('page','Browse','folder','side-scope-browse','data-page="library"')}</div></section>
           ${state.page!=='library'&&f.enabled&&f.active.length?`<div class="side-label active-label">FOCUS FOLDERS</div><div class="side-studies">${f.active.map(s=>`<div class="side-exam"><button type="button" class="side-study" data-action="select-study" data-id="${s.id}" title="Choose lectures in ${esc(s.name)}"><span class="study-indicator"></span><span>${esc(s.name)}</span>${icon('chevron',12)}</button>${ib('finish-study','Remove '+s.name+' from active exams','close',`data-id="${s.id}"`,'side-remove')}</div>`).join('')}</div>`:''}
           <div class="side-label"><span>${state.page==='library'?'BROWSE FOLDERS':'FOLDERS'}</span><span>${ib('collapse-all','Collapse all folders','layers')}${ib('create','New folder','plus','data-kind="folder" data-parent="0"')}</span></div>
           <div class="tree" role="navigation" aria-label="Deck and folder tree">${sidebarTree()||'<p class="side-note">Your existing folders will appear here.</p>'}</div>
@@ -844,7 +849,7 @@
       if(el.id==='atelier-sort')updateConfig({sort:el.value},true);
       else if(el.id==='setting-density')updateConfig({density:el.value},true);
       else if(el.id==='entry-parent')updatePath();
-      else if(el.id==='active-study-selector'){updatePref({key:'selected_study',value:el.value});}
+      else if(el.id==='active-study-selector'||el.id==='side-study-selector'){updatePref({key:'selected_study',value:el.value});}
       else if(el.dataset.pickDeck){const id=el.dataset.pickDeck;state.dialogData.draft.deck_ids=state.dialogData.draft.deck_ids.filter(x=>x!==id);if(el.checked)state.dialogData.draft.deck_ids.push(id);el.closest('.picker-row').classList.toggle('checked',el.checked);refreshPickerSummary();}
     });
     function syncCapture(){

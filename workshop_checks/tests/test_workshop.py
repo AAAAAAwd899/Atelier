@@ -77,8 +77,16 @@ def test_blob_content_addressed_closes_files(store):
     name=store.save_blob(b'hello','txt');assert store.save_blob(b'hello','txt')==name
     assert store.blob_path(name).read_bytes()==b'hello'
     store.blob_path(name).rename(store.blobs/'other.txt')
-def test_blob_symlink_cannot_escape(store,tmp_path):
-    out=tmp_path/'outside';out.write_text('private');name='a'*64+'.txt';(store.blobs/name).symlink_to(out)
+def test_blob_symlink_cannot_escape(store,tmp_path,monkeypatch):
+    out=tmp_path/'outside';out.write_text('private');name='a'*64+'.txt';candidate=store.blobs/name
+    try:
+        candidate.symlink_to(out)
+    except OSError as error:
+        # Windows without Developer Mode cannot create an unprivileged symlink.
+        # Exercise the same resolved-path boundary without skipping the check.
+        if getattr(error,'winerror',None)!=1314:raise
+        original=Path.resolve
+        monkeypatch.setattr(Path,'resolve',lambda self,*a,**k:out if self==candidate else original(self,*a,**k))
     with pytest.raises(core.ValidationError):store.blob_path(name)
 def test_source_versions_no_false_duplicate(store,project):
     s=source(store,project);r=store.add_source(project['id'],s['title'],'text',[{'text':'Provenance preserves the origin and context of a claim.'}],source_id=s['id']);assert r['unchanged']

@@ -1,4 +1,4 @@
-# Atelier 1.0.1 — Your study space in Anki
+# Atelier 1.0.3 — Your study space in Anki
 
 Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and twelve visual worlds. Onigiri is optional.
 
@@ -6,25 +6,27 @@ Organize your classes, build cards from your sources, prepare for exams, and mak
 
 Save your work and finish any import or card-adding operation. In an active practice session, choose **Save & close**. Back up your Anki collection and the local Atelier, exam, and source data described below.
 
-In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.1.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
+In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.3.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
 
 Keep any separate **Exam Sprout** or **Workshop** add-on disabled. Their features are included here. Do not delete their data. Other add-ons, including Onigiri, can stay installed.
 
-Confirm **Tools → Atelier · 1.0.1**. This release targets Windows desktop Anki **26.08.1** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support target. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
+Confirm **Tools → Atelier · 1.0.3**. The cumulative folder-order contract originated against the accepted Anki **26.08.1** target. This candidate has also been exercised in isolated synthetic profiles on Windows desktop Anki **26.05** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support scope. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
 
 ## Start with what you need today
 
-**Study desk** is your home. Add cards, Browse, and Sync remain easy to reach. **Continue your work** brings back unfinished drafts, repairs, and saved practice. **Library** contains your Anki decks; **Sources & projects** contains the documents you use to build cards.
+**Study desk** is your home. Add cards, Browse, and Sync remain easy to reach. The sidebar groups learning, creation, and progress tools so the next action stays visible. **Continue your work** brings back unfinished drafts, repairs, and saved practice. **Library** contains your Anki decks; **Card sets** contains the documents and drafts you use to build cards.
 
-To study a class, find its folder in Library and set it as an active study. Open that group to choose a lecture. **Quick study** uses your usual Anki schedule and studies one lecture at a time. Studying a whole parent folder is a separate, clearly labelled action. Removing a group removes its shortcut, not its cards or their due dates.
+To study a class, find its folder in Library and set it as an active study. The **STUDY SCOPE** card shows the currently selected folders and due work. Choose **Edit** to select the exact folder or lecture, then **Study this scope** to begin with that material. **Quick study** uses your usual Anki schedule and studies one lecture at a time. Studying a whole parent folder is a separate, clearly labelled action. Removing a group removes its shortcut, not its cards or their due dates.
 
 ## Build cards with Card Studio
 
-Choose **Add cards**. Create or choose a source project, then write a question and answer, import a document, or work from an image. A source project keeps the document and your drafts together; it is not another Anki deck.
+Choose **Add cards**. Create a **card set** for a course, lecture, chapter, or topic, or return to one you already started. A card set keeps source files and drafts together; the destination **deck** is still the Anki deck that receives approved cards.
 
-Card Studio saves drafts locally. A saved draft is **not yet in Anki**. Choose **Review & add this draft**, check its destination, note/card counts, and any duplicate or field-mapping warnings, then confirm adding it. **Drafts & approval** is the inbox for unfinished cards from all projects.
+Add slides, a PDF, images, notes, or pasted text. PowerPoint imports retain slide order, extracted text, speaker notes, and embedded raster figures. When exact page appearance matters for masks, attach the matching PDF. Choose a specific slide or page from the ordered source rail, then create a question, cloze, image card, or image-occlusion mask beside it. This keeps large slide sets organized and makes it clear which source page each draft came from.
 
-For an image, use **Mask Studio** to cover the parts you want to recall. Figure previews load as you reach them; masks and attachments use the original image, not the thumbnail. PDF page rendering requires Qt PDF in your Anki installation. PowerPoint and Word imports preserve extracted content and embedded figures; they do not promise an exact slide/page reproduction. Attach a matching PDF when original layout matters.
+Card Studio saves drafts locally. A saved draft is **not yet in Anki**. Choose the destination deck, then **Review & add this draft**. Check the destination, note/card counts, and any duplicate or field-mapping warnings before confirming. **Drafts & approval** is the inbox for unfinished cards from every card set.
+
+For an image, use **Mask Studio** to cover the labels or regions you want to recall. Figure previews load as you reach them; masks and attachments use the original image, not the thumbnail. PDF page rendering requires Qt PDF in your Anki installation. PowerPoint and Word imports preserve extracted content and embedded figures; they do not promise an exact slide/page reproduction.
 
 From a deck’s page, **Add cards here** selects that destination for the editor. Specialized note types and editor extensions can use **Tools → Atelier → Card Studio → Add cards in native Anki…**.
 
@@ -98,13 +100,13 @@ Custom controls operate only while the scheduled reviewer or its answer bar is f
 
 A keyboard-mode adapter cannot reliably identify which keyboard sent the key or report the remote’s battery state. Gamepad-only and proprietary remotes need their own supported driver/add-on; this release does not add native gamepad/USB-HID enumeration. Keep Atelier custom mapping off when using another mapping add-on, such as Contanki or the remote maker’s add-on. No controller-specific hardware or Bluetooth connection has been tested here.
 
-## Reviewer spacing and protected cards in 1.0.1
+## Reviewer spacing and protected cards
 
 The text-card layout reserves the optional Onigiri header gap once, not in both body padding and an extra card margin. Short text answers that fully fit stay within the viewport. Long answers keep their normal scroll path; manual scrolling is not repeatedly reset. The answer bar uses less vertical space while retaining counts and stationary rating buttons.
 
 Geometry-sensitive cards, including legacy image-occlusion templates and positioned mask overlays, do not get the text-card layout. Images and masks are not resized, wrapped or reparented. No masks are edited by this update. Use **Controls only**, or **Use original design for this note type**, when a custom design needs its own presentation. If a mask is already incorrect in the native card, a theme cannot repair that source without inspecting it.
 
-This patch has not been independently run on native Windows or macOS Anki, paired hardware, real Qt PDF, or a real collection. Mac remains an unverified trial target. Test with sample cards before relying on custom remote mappings.
+The cumulative candidate has completed isolated native Windows Anki 26.05 tests with synthetic profiles for Home and Widgets, stock image occlusion, folder scheduling, and in-place add-on update behavior. macOS, physical remotes, every display scale, every card/media combination, real user collections, and live GPU Pip remain unverified. Test with sample cards before relying on custom remote mappings.
 
 
 ## Mix lectures when studying a folder

@@ -14,6 +14,7 @@ def main():
   if not value:raise AssertionError(name)
   results.append(name);print('PASS',name,flush=True)
  h=UnifiedHost();mod=h.appearance_module
+ slide_source=h.store.add_source(h.primary_project,'Cardiology lecture 04','pptx',[{'text':'Slide one: rhythm overview'},{'text':'Slide two: atrial fibrillation'},{'text':'Slide three: treatment decisions'},{'text':'Slide four: review'}])['source']['id']
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
   page=browser.new_page(viewport={'width':1440,'height':960});page.set_default_timeout(6000)
@@ -26,7 +27,8 @@ def main():
    check('Actual integrated workspace booted',page.locator('#workshop').get_attribute('data-integrated')=='true')
    check('One explicit Study desk return',page.locator('[data-action="study-desk"]').count()==1)
    check('No second home/toolbar widget',page.locator('#ws-home').count()==0)
-   check('Source projects distinct from deck Library','Sources' in page.locator('.nav-link').first.inner_text())
+   check('Card sets remain distinct from deck Library',page.get_by_role('button',name='Card sets & sources',exact=True).count()==1)
+   check('Card Studio navigation is grouped by task',page.locator('.ws-nav-section').count()==3 and all(x in page.locator('#ws-sidebar').inner_text() for x in ('MAKE','ORGANIZE','MAINTAIN')))
    for w in mod.CATALOG:
     page.locator('#ws-suite-world').select_option(w['id']);page.wait_for_timeout(130)
     p=mod.PALETTES[w['id']]
@@ -47,7 +49,14 @@ def main():
    check('Project uses exact-linked-note query',plan['target']=='new' and plan['setup']['query']==expected)
    check('No clipboard or card mutation during plan handoff',h.clipboard=='' and h.col.note_count()==before)
    check('No exam is automatically created',len(h.plan_requests)==1 and 'date' not in plan['setup'])
-   click(f'[data-action="open-source"][data-id="{h.primary_source}"]')
+   click(f'[data-action="open-source"][data-id="{slide_source}"]')
+   check('Four-step card set workflow is visible',page.locator('.creator-step').count()==4 and 'From material to study-ready cards' in page.locator('.creator-guide').inner_text())
+   check('Card set selector is explicit',page.locator('.studio-set-picker').count()==1 and page.locator('.studio-set-picker select').input_value()==h.primary_project)
+   check('Slide rail exposes the imported order',page.locator('.source-page-rail .page-chip').count()==4 and 'SLIDES' in page.locator('.source-page-rail').inner_text())
+   click('[data-action="jump-page"][data-page="3"]')
+   check('Exact slide can be selected',page.locator('.source-page-rail [aria-current="page"]').inner_text()=='3' and page.locator('[data-change="page-number"]').input_value()=='3')
+   check('Slide navigation does not create an Anki note',h.col.note_count()==before)
+   page.locator('[data-change="studio-source"]').select_option(h.primary_source);page.wait_for_timeout(180)
    field=page.locator('[data-draft="front"]');field.fill('Which exact features must stay unchanged?');page.wait_for_timeout(1200)
    page.evaluate('window.originalFront=document.querySelector(\'[data-draft="front"]\')')
    for w in ['rose','midnight','forest']:

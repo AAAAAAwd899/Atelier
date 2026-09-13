@@ -13,7 +13,7 @@ core=importlib.import_module('complete_contract.core')
 BASE=json.loads((ROOT/'integration-baselines.json').read_text())
 
 
-@pytest.mark.parametrize('name',[n for n in BASE['incoming'] if n.startswith('workshop/') and n not in ('workshop/integration.py','workshop/web/app.js')])
+@pytest.mark.parametrize('name',[n for n in BASE['incoming'] if n.startswith('workshop/') and n not in ('workshop/integration.py','workshop/web/app.js','workshop/web/app.css')])
 def test_incoming_card_engine_importers_mask_model_and_art_preserved(name):
  assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['incoming'][name]
 

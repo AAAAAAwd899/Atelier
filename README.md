@@ -4,6 +4,8 @@ Private review candidate. The visual upgrade introduces canonical web/native pal
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, twelve visual worlds, and a quieter reviewer.
 
+Card Studio organizes source material into card sets for a course, lecture, chapter, or topic. Import slides, PDFs, images, notes, or text; choose the exact slide or page from the ordered rail; build questions, clozes, image cards, or image-occlusion masks beside the source; then review drafts before adding them to a selected Anki deck. The Study desk shows the current study scope and lets a learner edit or start that exact folder selection.
+
 ## Preserved from 1.0.2
 
 **Study whole folder → Shuffle between lectures** uses Anki's native display-order options to mix eligible cards across the selected folder's lecture decks. The card's lecture context remains available. A shared parent preset is copied before changing its three ordering fields; unrelated decks and individual-lecture presets are left alone.
@@ -16,7 +18,7 @@ Use the paired `Atelier-1.0.3.ankiaddon` in **Tools → Add-ons → Install from
 
 ## Compatibility
 
-The preserved folder-order contract targets Anki 26.08.1. This candidate has actual Windows Anki 26.05 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
+The preserved folder-order contract originated against the accepted Anki 26.08.1 target. This candidate has actual Windows Anki 26.05 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
 
 ## Development and verification
 

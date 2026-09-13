@@ -236,7 +236,7 @@ def test_folder_dispatch_failure_keeps_data(app,monkeypatch):
 def test_no_engine_reviewer_or_remote_bytes_changed():
     baseline=json.loads((ROOT/'baseline-1.0.1.json').read_text())
     for n,h in baseline.items():
-        if n.startswith(('sprout/','workshop/')) or n in ['review_model.py','remote_model.py','remotes.py','web/reviewer.css','web/remote-input.js','web/worlds.css']:
+        if (n.startswith(('sprout/','workshop/')) and n not in ('workshop/web/app.js','workshop/web/app.css')) or n in ['review_model.py','remote_model.py','remotes.py','web/reviewer.css','web/remote-input.js','web/worlds.css']:
             assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
 
 

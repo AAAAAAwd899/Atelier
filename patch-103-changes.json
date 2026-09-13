@@ -4,13 +4,14 @@
     "core.py": "f401d3f79858090d5e515696868d0012642664f7d92d49ef3946ead3a9a11e45",
     "integration.py": "4ceb927a980430cb300f41834e6f281d989ab1bfdd2a0629d6fd30d3ba9f8872",
     "manifest.json": "216970a8ccd96ae95ea60451d6f155211d06b68886520260aaf7091db8a041cc",
-    "RELEASE-NOTES.md": "0100d0b9c36527d6747114cf41e0a75395b0976fde1f2b9a252edf52f75b0ed4",
+    "RELEASE-NOTES.md": "a758ce822257c7c6f6089faec664c2f69b6c5ce20411495a7ad428b7c2773f68",
     "review_theme.py": "80dae05d8d6db6b92bb5b48a3e25d9ee1726bddb2554deb3587b36665613a06e",
+    "USER-GUIDE.md": "77a59c2b062cbef29395182f56ca5d416571e308a1201883eedd4ac9a9652a0f",
     "worlds.py": "bd48401bfe6ce4b645251db1f78eae59b8f46a117e0c249dbbf982a36c46637c",
     "web/atelier.css": "a1c7022811ebf581a9e88365bb3da54b8587453395429790e5448e22aa350d79",
-    "web/atelier.js": "77b94f1ede9b2f846e50d0f36d8985226251e37f31d671ca2a4c9309e32df9ff",
+    "web/atelier.js": "3b7aa3cfc5a63750590fe049d2e78b894ea1041c14dbfbea2ac29828782bc8a8",
     "web/card-studio-shell.css": "bedf1d1ba57c6ac34977e49fe3c2632b6ecc1560236ea0f60b82f3efd506e9a3",
-    "web/home-shell.css": "29dc1b42068212b02327452f55d5e640fe496b38363a2b5741f008f8cd288b1f",
+    "web/home-shell.css": "8dbcc40c8e45b60b37ccc9f964f4a1edd404de85ddc2c3288aabe83c5b9b88f0",
     "web/native-widgets.css": "e6e12ee5f363c4fc63b9c702cc72adcb6ee4b185456c31b6bc21f0b0c9caefcc",
     "web/palettes.json": "206632221fd60600d7b988f581f79bfa63b4cc5b53cc2586c1fc1bf13b1b1ddf",
     "web/review-finish.css": "ef708284ce3f69891885572f42845c4ea3fb53e19582c243c1195235f44c1aa8",
@@ -26,7 +27,9 @@
     "web/worlds-review-tokens.css": "eb5e5c5e007e933f818e3426d6135fd887adfb390ba6c0972894ea6eaac64393",
     "web/worlds-review.css": "2d5b7bd38ad270cf3e118de3cea9f21f1dc15675cc2a36f77db9e8b01920ea9a",
     "web/worlds-tokens.css": "2dcecd20bd091e1aead950b99991bc104d3007703f7a0897cc587f927f3e421b",
-    "web/worlds.json": "cd04bc05334e9a459ae1b85686eefbf15d0145f2eed1c45391ba3712ed0f118f"
+    "web/worlds.json": "cd04bc05334e9a459ae1b85686eefbf15d0145f2eed1c45391ba3712ed0f118f",
+    "workshop/web/app.css": "e87f0e485723a93fbf090563e487974ded4d7b2bd04466d0b2ae42c2fda3a148",
+    "workshop/web/app.js": "ec3ada5ff1eea9e147ac1e7c2753fe7d718f26722b2e217a5e0974a8485979f1"
   },
   "added": {
     "io_view.py": "e671031cab1f2d39b29c7e4fdb0c1c36dc565d57bb4456a52f856a81531e1ffd",

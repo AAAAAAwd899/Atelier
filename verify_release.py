@@ -48,6 +48,7 @@ def main():
  ('tests/test_quiet_keys_browser.py','quiet-keys',V/'quiet-keys/results.json',ROOT),
  ('tests/test_complete_browser.py','complete-browser',V/'complete-browser/results.json',ROOT),
  ('tests/test_complete_home_browser.py','complete-home',V/'complete-home/results.json',ROOT),
+ ('tests/test_guided_card_sets_browser.py','guided-card-sets',V/'guided-card-sets/results.json',ROOT),
  ('tests/test_plan_handoff_browser.py','plan-handoff',V/'plan-handoff/results.json',ROOT),
  ('tests/test_usability_browser.py','usability-audit',V/'usability-audit/results.json',ROOT),
  ('tests/test_release_finish_browser.py','release-finish',V/'release-finish/results.json',ROOT),
