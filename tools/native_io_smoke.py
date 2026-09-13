@@ -12,7 +12,7 @@ from aqt.profiles import ProfileManager
 pm=ProfileManager(str(BASE));pm.setupMeta();pm.create('Atelier IO QA');pm.load('Atelier IO QA')
 pm.meta.update(firstRun=False,defaultLang='en_US',updates=False,uiScale=2/3);pm.profile.update(autoSync=False);pm.save();pm.db.close()
 target=BASE/'addons21/daedalus_atelier'
-shutil.copytree(ROOT/'src',target,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+shutil.copytree(Path(os.environ.get('ATELIER_NATIVE_SRC',ROOT/'src')),target,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
 cfg=json.loads((target/'config.json').read_text(encoding='utf8'));cfg.update(visual_owner='atelier',mode='workspace',theme='midnight',motion=False)
 (target/'meta.json').write_text(json.dumps({'config':cfg}),encoding='utf8')
 import aqt

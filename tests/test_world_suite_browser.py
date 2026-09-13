@@ -31,6 +31,8 @@ def run():
     p=homepage(theme)
     meta=p.evaluate('''()=>{const r=document.getElementById('atelier-root').shadowRoot;const h=r.querySelector('.quiet-focus h1'),w=r.querySelector('.world-window');return {font:getComputedStyle(h).fontFamily,art:getComputedStyle(w).backgroundImage,radius:getComputedStyle(r.querySelector('.quiet-focus')).borderRadius}}''')
     fonts.add(meta['font']);images.add(meta['art']);radii.add(meta['radius'])
+    expected_font=next(w['font'] for w in worlds.CATALOG if w['id']==theme)
+    check(theme+' heading uses the canonical local font stack',meta['font']==expected_font)
     check(theme+' home world renders real art, native controls, canonical plans',meta['art']!='none' and p.locator('.unified-topbar [data-command]').count()==3 and p.locator('.suite-plan').count()==2 and not home_overflow(p))
     # The graphic theme truly acts on the shadow host, not dead :host:not syntax.
     if theme in ('forest','linen','rose'):check(theme+' custom heading font applied','Georgia' in meta['font'])
@@ -41,7 +43,9 @@ def run():
     p.locator('.suite-plan').first.locator('[data-view="practice"]').click();p.locator('.dialog').wait_for()
     check(theme+' plan-specific Practice carries original record id',p.evaluate('events.at(-1)')=={'type':'atelier:preview-suite','view':'practice','id':'pharm3'})
     p.close()
-  check('Themes differ in scenery, heading families and silhouettes',len(images)==12 and len(fonts)>=3 and len(radii)>=6)
+  # 1.0.3 retires the duplicate home layer's incidental third font stack.
+  # Assert exact catalog typography above, while preserving scene/shape variety.
+  check('Themes differ in scenery, catalog heading families and silhouettes',len(images)==12 and len(fonts)==len({w['font'] for w in worlds.CATALOG}) and len(radii)>=6)
   # Native operations remain discoverable from a single tools page.
   p=homepage();p.locator('[data-page="tools"]').first.click()
   expected=['add','browse','stats','sync','import','export','preferences','addons','note_types','profiles','help','undo','redo','check_media','check_database','filtered_deck','empty_cards','fullscreen','check_updates']
