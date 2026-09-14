@@ -191,7 +191,7 @@ async function saveAndNextDraft(){
  createDraftObject(saved.kind||current.kind);
  Object.assign(S.draft,{deck_id:saved.deck_id,tags:[...(saved.tags||[])],source_id:saved.source_id||'',version_id:saved.version_id||'',page:saved.page||1,model_id:saved.model_id||0,mapping:structuredClone(saved.mapping||{}),hide_others:saved.hide_others!==false});
  S.view='studio';render();$('[data-draft="front"]')?.focus();
- toast('Draft saved locally. The next draft keeps this source, destination, tags, and card style.');
+ toast('Draft saved locally. The next draft keeps this source, destination, tags, card style, and note setup.');
 }
 function markDirty(){const wasDirty=S.dirty;S.dirty=true;S.editVersion++;if(!wasDirty)request('dirty',{value:true}).catch(()=>{});clearTimeout(saveTimer);const el=$('#ws-save-state');if(el)el.textContent='Saving locally…';saveTimer=setTimeout(()=>saveDraft(false).catch(e=>{const el=$('#ws-save-state');if(el)el.textContent='Not saved';toast(e.message,true);}),900);}
 async function saveDraft(explicit=false){if(!S.draft)return;if(savePromise){await savePromise;if(S.dirty)return saveDraft(explicit);return S.draft;}if(!S.dirty&&S.draft.id)return S.draft;

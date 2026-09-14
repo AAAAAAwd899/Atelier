@@ -31,7 +31,7 @@
     "web/worlds-tokens.css": "0c7f8a6d7700d14a77fa3136daaab5889aab0c1b30ebe62c0604dc7dda71540d",
     "web/worlds.json": "8f6c7feff3532a6ebaab19f820fe0f0676696f348c7ec4f6534574f37de2b69a",
     "workshop/web/app.css": "e87f0e485723a93fbf090563e487974ded4d7b2bd04466d0b2ae42c2fda3a148",
-    "workshop/web/app.js": "93d5a5cf9fa83066dbacd5dca9821ba3aef3300d90736caed2c507a30d59320d"
+    "workshop/web/app.js": "6e8bce8936845aa697e5fdadb72db7eafebd68437af6173388d40b1f313d4b78"
   },
   "added": {
     "io_view.py": "e671031cab1f2d39b29c7e4fdb0c1c36dc565d57bb4456a52f856a81531e1ffd",
