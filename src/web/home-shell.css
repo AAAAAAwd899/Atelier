@@ -15,7 +15,7 @@
 .sidebar{background:radial-gradient(circle at 10% 0%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 26%),linear-gradient(175deg,var(--side),var(--bg));}
 .brand-row{padding-bottom:10px;}
 .brand{min-width:0;}
-.brand-mark{width:31px;height:38px;filter:drop-shadow(0 5px 12px color-mix(in srgb,var(--accent) 24%,transparent));}
+.brand-mark{width:36px;height:36px;overflow:visible;filter:drop-shadow(0 5px 12px color-mix(in srgb,var(--accent) 24%,transparent));}
 .brand strong{font-family:var(--studio-font);font-size:25px;letter-spacing:-.9px;}
 .brand small{font-size:9px;letter-spacing:.3px;margin-top:6px;line-height:1.45;}
 .brand-promise{margin:0 9px 15px;padding:0 0 14px;border-bottom:1px solid var(--line-soft);color:var(--muted);font-size:12px;line-height:1.55;}

@@ -32,7 +32,7 @@ From a deck’s page, **Add cards here** selects that destination for the editor
 
 ## Plan an exam
 
-Open **Exam Studio**, name your exam, choose its decks, and set your routine. The form is saved at its final **Save** step; leaving unfinished setup asks for confirmation. Active study folders are quick links for normal review, while an exam plan also contains the date and practice settings.
+Open **Exam Studio**, name your exam, choose one or more parent folders or decks, and set your routine. You can combine two separate course folders in the same exam; each parent includes its subdecks and overlapping branches are counted once. The form is saved at its final **Save** step; leaving unfinished setup asks for confirmation. Active study folders are quick links for normal review, while an exam plan also contains the date and practice settings.
 
 **Build exam plan** inside a source project selects its linked notes. Review the exact material before saving. It does not automatically add a plan or expand a document into an entire class.
 

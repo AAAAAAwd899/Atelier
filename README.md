@@ -4,7 +4,7 @@ Private review candidate. The visual upgrade introduces canonical web/native pal
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, twelve visual worlds, and a quieter reviewer.
 
-Card Studio organizes source material into card sets for a course, lecture, chapter, or topic. Import slides, PDFs, images, notes, or text; choose the exact slide or page from the ordered rail; build questions, clozes, image cards, or image-occlusion masks beside the source; then review drafts before adding them to a selected Anki deck. The Study desk shows the current study scope and lets a learner edit or start that exact folder selection.
+Card Studio organizes source material into card sets for a course, lecture, chapter, or topic. Import slides, PDFs, images, notes, or text; choose the exact slide or page from the ordered rail; build questions, clozes, image cards, or image-occlusion masks beside the source; then review drafts before adding them to a selected Anki deck. The Study desk shows the current study scope and lets a learner edit or start that exact folder selection. Exam Studio accepts multiple parent folders in one exam, including two separate courses, while preserving each deck’s cards and schedule.
 
 ## Preserved from 1.0.2
 

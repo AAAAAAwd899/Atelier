@@ -25,7 +25,7 @@ def cases(path):
 def main():
  setup_vendor();fingerprint=runtime_digest()
  for p in sorted(SRC.rglob('*.js')):subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
- root_tests=['test_core.py','test_sprout_link.py','test_release.py','test_071.py','test_readiness.py','test_suite.py','test_ui_model_audit.py','test_studio_polish.py','test_home_slice_model.py','test_session_slice.py','test_world_finish.py','test_complete_integration.py','test_usability_contract.py','test_release_finish.py','test_native_widgets.py','test_widget_routing.py','test_release_one.py','test_101.py','test_102.py']
+ root_tests=['test_core.py','test_sprout_link.py','test_release.py','test_071.py','test_readiness.py','test_suite.py','test_ui_model_audit.py','test_studio_polish.py','test_home_slice_model.py','test_session_slice.py','test_world_finish.py','test_complete_integration.py','test_usability_contract.py','test_release_finish.py','test_native_widgets.py','test_widget_routing.py','test_release_one.py','test_101.py','test_102.py','test_pip_world_contract.py']
  if '--browser-only' not in sys.argv:
   run([sys.executable,'-m','pytest',*[f'tests/{n}' for n in root_tests],'tests/test_103.py','-q','--junitxml=verification/atelier-unit.xml'],'atelier-unit')
   run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'sprout-unit.xml')],'sprout-unit',ROOT/'vendor_tests')

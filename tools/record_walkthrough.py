@@ -3,13 +3,21 @@ from pathlib import Path
 import sys,json,os
 ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'tests')]
 from suite_fixtures import home_suite
+from card_studio_harness import UnifiedHost
 from release_tools import runtime_digest
 from playwright.sync_api import sync_playwright
 OUT=ROOT/'output/playwright/final-walkthrough';OUT.mkdir(parents=True,exist_ok=True)
 steps=[]
 with sync_playwright() as pw:
     b=pw.chromium.launch(executable_path=os.environ.get('ATELIER_TEST_BROWSER'))
-    ctx=b.new_context(viewport={'width':1440,'height':900},record_video_dir=str(OUT),record_video_size={'width':1440,'height':900});p=ctx.new_page()
+    host=UnifiedHost();source=host.store.add_source(host.primary_project,'Cardiology lecture 04','pptx',[
+        {'text':'Slide one: clinical overview'},
+        {'text':'Slide two: mechanism'},
+        {'text':'Slide three: treatment decisions'},
+        {'text':'Slide four: follow-up'},
+    ])['source']
+    host.settings['theme']='forest'
+    ctx=b.new_context(viewport={'width':1440,'height':900},record_video_dir=str(OUT),record_video_size={'width':1440,'height':900});p=ctx.new_page();p.expose_function('nativeBridge',host.dispatch)
     def pause(label):steps.append(label);p.wait_for_timeout(2000)
     p.set_content(home_suite('midnight'));p.locator('.unified-topbar').wait_for();pause('Midnight Study desk, explicitly labelled sample data')
     p.locator('.nav-group [data-page="library"]').click();pause('Open the Library')
@@ -20,5 +28,9 @@ with sync_playwright() as pw:
     p.locator('[data-action="nw-arrange"]').first.click();pause('Inspect the actual widget arrangement controls')
     p.locator('[data-action="close-dialog"]').first.click();p.locator('.nav-row[data-action="study-progress"]').click();pause('Open scoped study progress')
     p.locator('[data-action="close-dialog"]').first.click();p.locator('.nav-group [data-page="tools"]').click();pause('Native tools remain reachable')
+    p.set_content(host.html());p.locator('.shelf-grid').wait_for();p.locator(f'[data-action="open-project"][data-id="{host.primary_project}"]').first.click();pause('Open an organized card set')
+    p.locator(f'[data-action="open-source"][data-id="{source["id"]}"]').first.click();p.locator('[data-draft="front"]').wait_for();pause('Create beside an ordered slide source')
+    p.locator('[data-action="jump-page"][data-page="3"]').click();pause('Choose the exact slide to turn into cards')
+    p.locator('[data-action="card-style"][data-value="cloze"]').first.click();pause('Choose question, cloze, image, or image occlusion before review')
     video=p.video;ctx.close();video.save_as(str(OUT/'Atelier-1.0.3-Walkthrough.webm'));b.close()
 (OUT/'recording.json').write_text(json.dumps({'runtime_sha256':runtime_digest(),'category':'actual browser interactions; sample records; native commands are fixture doubles','steps':steps,'audio':False},indent=2)+'\n')
