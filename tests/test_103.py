@@ -98,3 +98,12 @@ def test_world_catalog_and_art_provenance_cover_every_shipped_world():
 def test_world_gallery_verification_scales_with_catalog():
     checker=(ROOT/'tests/check_gallery_final.py').read_text(encoding='utf8')
     assert 'world_count*10' in checker and "f'{world_count} worlds x 10 screens'" in checker
+
+def test_unpublished_site_inventory_matches_shipped_world_catalog():
+    catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
+    page=(ROOT/'site/index.html').read_text(encoding='utf8')
+    styles=(ROOT/'site/style.css').read_text(encoding='utf8')
+    assert '<strong>17</strong><span>distinct visual worlds</span>' in page
+    assert page.count('class="world ') == len(catalog)
+    assert all(f'class="world {world["id"]}"' in page for world in catalog)
+    assert all(f'.{world["id"]} {{ --world:' in styles for world in catalog)

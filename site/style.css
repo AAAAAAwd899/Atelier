@@ -139,6 +139,11 @@ h2 { margin: 0; font: 500 clamp(38px, 5vw, 64px)/1.04 Georgia, serif; letter-spa
 .forest { --world:radial-gradient(circle at 75% 15%,#6f9a73 0,transparent 24%),linear-gradient(145deg,#071c1d,#183e3d); }
 .tidal { --world:linear-gradient(155deg,#e4f2f0 0 55%,#a9d4d1 56% 66%,#d8eae8 67%); --world-ink:#1d555b; }
 .glacier { --world:linear-gradient(145deg,#0a2533,#1f526a); }
+.castle { --world:radial-gradient(circle at 78% 18%,#ffe8b8 0,transparent 16%),radial-gradient(circle at 18% 30%,rgba(255,255,255,.22) 0 2px,transparent 3px),linear-gradient(145deg,#3d265d,#a55f91 55%,#f1bd91); }
+.underworld { --world:radial-gradient(circle at 72% 22%,#ffbb55 0,transparent 18%),radial-gradient(circle at 24% 78%,#bb3c47 0,transparent 28%),linear-gradient(145deg,#170f22,#4c172d 58%,#a34832); }
+.mythic { --world:radial-gradient(circle at 78% 18%,#6df4e4 0,transparent 16%),repeating-linear-gradient(135deg,rgba(100,246,226,.12) 0 1px,transparent 1px 12px),linear-gradient(145deg,#071a2a,#16385b 55%,#3c2a68); }
+.cabin { --world:radial-gradient(circle at 76% 20%,#ffd891 0,transparent 19%),linear-gradient(155deg,rgba(67,34,23,.15) 0 48%,transparent 49%),linear-gradient(145deg,#283e42,#8b5b43 58%,#d49b63); }
+.sunset { --world:radial-gradient(circle at 74% 22%,#ffe7af 0,transparent 17%),linear-gradient(165deg,#ee9d80 0 42%,#f4c998 43% 55%,#397f91 56% 70%,#174e62 71%); }
 
 .release-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .release-grid article { padding: 32px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
