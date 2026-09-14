@@ -106,3 +106,11 @@ html.workshop-host,html.workshop-host body{margin:0;padding:0;background:#141b1b
 @media(max-width:470px){#workshop .creator-guide>header{display:block}#workshop .creator-local{margin-top:8px;text-align:left}#workshop .creator-steps,#workshop .import-roadmap{grid-template-columns:1fr}#workshop .creator-step{border-right:0;border-bottom:1px solid var(--soft-line)}#workshop .creator-step:last-child{border-bottom:0}#workshop .roadmap-step{padding:12px}#workshop .studio-set-picker{display:grid;grid-template-columns:auto minmax(0,1fr)}#workshop .source-picker{grid-template-columns:1fr}#workshop .creator-actions button{font-size:10px}}
 
 #workshop .toast{pointer-events:none}#workshop .toast button{pointer-events:auto}
+
+/* Draft inbox filters keep source-heavy slide sets easy to find. */
+#workshop .ws-draft-filters{display:grid;grid-template-columns:minmax(220px,1.6fr) repeat(3,minmax(145px,1fr));gap:12px;padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:17px}
+#workshop .ws-draft-filters .field{min-width:0}
+#workshop .ws-draft-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;color:var(--quiet);font-size:10px}
+#workshop .ws-draft-meta span{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:900px){#workshop .ws-draft-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:470px){#workshop .ws-draft-filters{grid-template-columns:1fr;padding:12px}}

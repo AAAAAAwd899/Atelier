@@ -54,6 +54,9 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "Save & next ${['pptx','odp'].includes(S.source.source.kind)?'slide':'page'}" in text
     assert "draftSort:'recent'" in text
     assert "data-change=\"draft-sort\"" in text
+    assert "draftSource:'all'" in text
+    assert "data-change=\"draft-source\"" in text
+    assert "S.draftSource==='all'||d.source_id===S.draftSource" in text
     assert "S.draftSort==='source'" in text
     assert "S.draftSort==='deck'" in text
     assert "page-chip-count" in text
@@ -61,6 +64,7 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "nextUncoveredPage" in text
     assert "next-uncovered" in text
     assert "source-coverage" in text
+    assert "No source linked" in text and "page ${Number(d.page||1)}" in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))

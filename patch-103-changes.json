@@ -4,9 +4,9 @@
     "core.py": "1440821e9682b983b27eb71a30a7a9de3b66be20aae20b075c74a44481f398bb",
     "integration.py": "4ceb927a980430cb300f41834e6f281d989ab1bfdd2a0629d6fd30d3ba9f8872",
     "manifest.json": "216970a8ccd96ae95ea60451d6f155211d06b68886520260aaf7091db8a041cc",
-    "RELEASE-NOTES.md": "3b08895c513a42014f57d11972f5a34c34480d268dbbba11fa99597d4c569cbc",
+    "RELEASE-NOTES.md": "1956cd811f29c6c05ea5bfcd44194307f9558fe7126a25e4497777e4565fb101",
     "review_theme.py": "80dae05d8d6db6b92bb5b48a3e25d9ee1726bddb2554deb3587b36665613a06e",
-    "USER-GUIDE.md": "7acd0fbd6740f0e924855886796527dd08948006a3cc1bb4c872e9d776e24c9f",
+    "USER-GUIDE.md": "90060e21624cec1f668223860175c73254c8b17758f3bbf07233a3d29e5aa9a0",
     "worlds.py": "bd48401bfe6ce4b645251db1f78eae59b8f46a117e0c249dbbf982a36c46637c",
     "sprout/web/app.js": "59947c0df075cb81d076eef6ef0a33cfdc14478af11e3c0bb20d3c8d308ee271",
     "sprout/web/pip.css": "e041499dad9bb70416c5339dcfe9cea154f6dd9f5253ee10f3bc4524712770e8",
@@ -30,8 +30,8 @@
     "web/worlds-review.css": "2d5b7bd38ad270cf3e118de3cea9f21f1dc15675cc2a36f77db9e8b01920ea9a",
     "web/worlds-tokens.css": "aabb2c3284967e5395d3d7912e63cad36a180ac51d59dab58f8ee7eafea27ed5",
     "web/worlds.json": "8f6c7feff3532a6ebaab19f820fe0f0676696f348c7ec4f6534574f37de2b69a",
-    "workshop/web/app.css": "14bdcbc347c0283d5436b1e96d697a06d7a0f2429eae16636ba92fe598691736",
-    "workshop/web/app.js": "7b8f813c1ca5170d7637a35286c77852f3f9763c8caabf5bb6ae91c2f7c9f489"
+    "workshop/web/app.css": "2d47216dbbcca4a6f77c24a2f5acd082ebf2fe2743627d15a0b823c9bd69bbaf",
+    "workshop/web/app.js": "5189da273d5eb8209f4b9cb9d31023da7e926d5a3481bb75a9de6a1671c1fe80"
   },
   "added": {
     "io_view.py": "e671031cab1f2d39b29c7e4fdb0c1c36dc565d57bb4456a52f856a81531e1ffd",
