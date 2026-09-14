@@ -58,6 +58,9 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "S.draftSort==='deck'" in text
     assert "page-chip-count" in text
     assert "drafts.filter(d=>d.status!=='committed'&&d.source_id===S.source.source.id" in text
+    assert "nextUncoveredPage" in text
+    assert "next-uncovered" in text
+    assert "source-coverage" in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
