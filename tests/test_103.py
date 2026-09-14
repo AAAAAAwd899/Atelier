@@ -99,6 +99,19 @@ def test_card_studio_compact_navigation_keeps_labels_visible():
     assert '.nav-link{flex:1 1 0;min-width:0;flex-direction:column' in css
     assert '.nav-link[data-view="settings"]{display:flex}' in css
 
+def test_card_studio_surfaces_specialized_card_types():
+    text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
+    assert 'creator-specialized' in text and 'Use Mask an image in the editor' in text
+    assert 'data-value="compare"' in text and 'data-value="sequence"' in text and 'data-value="application"' in text
+    assert "['occlusion','Mask an image','crop']" in text
+
+def test_library_exposes_scoped_export_share_action():
+    text=(SRC/'web/atelier.js').read_text(encoding='utf8')
+    assert "export-deck','Export / share this deck…'" in text
+    assert "export-deck','Export / share…'" in text
+    assert "case 'export-deck':closeDialog(true);await request('export_deck',{id});break;" in text
+    assert 'Choose a parent folder to include its subdecks' in text
+
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     ids={row['id'] for row in catalog}

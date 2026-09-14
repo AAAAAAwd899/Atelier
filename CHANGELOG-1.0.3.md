@@ -25,6 +25,8 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 - Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.
 - Added **Select all filtered** to the Drafts & approval inbox, with a filter-scoped clear toggle so multi-page lecture sets can be organized without repeating page selection.
 - Kept compact Card Studio navigation legible with short labels beside its icons, so the mobile-sized bar remains understandable for new users.
+- Added scoped **Export / share** actions to each library folder/deck menu. A parent folder can include its subdecks, while a single deck gives a focused handoff; Anki still owns the final format, media, and destination confirmation.
+- Made specialized Card Studio types visible in the guided workflow: compare, sequence, apply, cloze, image, and image occlusion remain available in the same editor, with a plain-language prompt for opening Mask Studio after attaching or opening an image.
 - Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft, carrying the current deck/tags/note setup into the new draft, and linking it to its exact source location.
 - Updated the unpublished add-on information page so its inventory matches the twelve-world packaged catalogue.
 

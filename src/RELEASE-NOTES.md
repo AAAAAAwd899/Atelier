@@ -6,6 +6,8 @@ The Study desk now groups learning, creation and progress tools and shows the ex
 
 On compact Card Studio windows, the bottom navigation keeps short text labels beside its icons so Create, Import, Sets, Drafts, Find, Repairs, Media, and Settings remain understandable without relying on icon recognition.
 
+Library folder and deck menus now include a scoped **Export / share** action. Choose a parent folder to include its subdecks or one deck for a focused handoff; Anki’s normal exporter still owns format, media, destination, and final confirmation. The Card Studio guide also names compare, sequence, application, cloze, image, and image occlusion card types up front, while the existing Mask Studio and native occlusion routes remain unchanged.
+
 Recognized stock native image-occlusion cards gain Fit image / Actual size. The whole image-and-canvas stage scales together after rendering, including late native sizing. Source images, mask coordinates and card templates are not rewritten. Unknown templates retain native rendering.
 
 The verified 1.0.2 whole-folder shuffle, exam/card engines, stores, publication approval, Undo, masks, remotes and original-theme mode are cumulative. Read the accompanying audit for tested hosts and unperformed acceptance checks. This installer does not publish itself or update an AnkiWeb listing.

@@ -89,6 +89,8 @@ html.workshop-host,html.workshop-host body{margin:0;padding:0;background:#141b1b
 #workshop .creator-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px;}
 #workshop .creator-actions button{font-size:9px;min-height:28px;padding:5px 7px;}
 #workshop .creator-actions .icon{width:13px;height:13px;}
+#workshop .creator-specialized{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;padding-top:5px;border-top:1px solid var(--soft-line);}
+#workshop .creator-help{color:var(--quiet)!important;font-size:8px!important;margin-top:5px!important;}
 #workshop .guide-choice{background:var(--bg);border-color:var(--soft-line);}
 #workshop .guide-choice[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--raised);}
 #workshop .source-picker{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px;color:var(--quiet);font-size:9px;}
