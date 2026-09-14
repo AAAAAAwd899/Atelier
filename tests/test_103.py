@@ -129,6 +129,7 @@ def test_projects_keep_a_clear_default_destination_for_new_drafts():
     assert 'rememberDeck(result.id,defaultDeck)' in text
     assert 'const preferred=project()?.default_deck_id??rememberedDeck(S.project)' in text
     assert 'project-destination' in text and 'New drafts →' in text
+    assert '<p class="micro project-destination">New drafts → ${E(projectDeckLabel(p))}</p>' in text
     assert 'targetProject=S.state.projects.find(p=>p.id===pid)' in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
