@@ -1,6 +1,6 @@
 """Deterministic private candidate packaging. Never publishes or accesses a profile."""
 from pathlib import Path
-import argparse,hashlib,json,subprocess,tempfile,zipfile
+import argparse,hashlib,json,subprocess,zipfile
 from release_tools import ROOT,SRC,DIST,version,runtime_digest,production_files,build_installer,write_archive
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -32,20 +32,26 @@ def main():
     )
     installer=DIST/'Atelier-1.0.3.ankiaddon';build_installer(installer)
     extracted=ROOT/'output/extracted-1.0.3';extracted.mkdir(parents=True,exist_ok=True)
-    with tempfile.TemporaryDirectory() as td:
-        second=Path(td)/'repeat.ankiaddon';build_installer(second);assert sha(installer)==sha(second)
+    repeat_installer=DIST/'.Atelier-1.0.3-repeat.ankiaddon'
+    try:
+        build_installer(repeat_installer);assert sha(installer)==sha(repeat_installer)
         with zipfile.ZipFile(installer) as z:
             assert not z.testzip() and len(z.namelist())==len(assets)==len(set(z.namelist()))
             assert all(z.read(n)==p.read_bytes() for p,n in assets)
             z.extractall(extracted)
+    finally:
+        repeat_installer.unlink(missing_ok=True)
     assert runtime_digest(extracted)==fingerprint
     names=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=ROOT).decode().split('\0')
     files=[(ROOT/n,'Atelier-1.0.3/'+n) for n in sorted(set(names)) if n and (ROOT/n).is_file()]
     forbidden=('.anki2','.sqlite3','.pem','.key','.ttf','.otf','.woff','.woff2')
     assert not any(p.suffix.lower() in forbidden or p.name.startswith('.env') for p,_ in files)
     source=DIST/'Atelier-1.0.3-Source.zip';write_archive(source,files)
-    with tempfile.TemporaryDirectory() as td:
-        repeat=Path(td)/'source.zip';write_archive(repeat,files);assert sha(source)==sha(repeat)
+    repeat_source=DIST/'.Atelier-1.0.3-repeat-source.zip'
+    try:
+        write_archive(repeat_source,files);assert sha(source)==sha(repeat_source)
+    finally:
+        repeat_source.unlink(missing_ok=True)
     with zipfile.ZipFile(source) as z:
         assert all(z.read('Atelier-1.0.3/src/'+n)==p.read_bytes() for p,n in assets)
     filemap=DIST/'Atelier-1.0.3-Files.json';filemap.write_text(json.dumps({'runtime_sha256':fingerprint,'files':actual},indent=2)+'\n')
