@@ -4,7 +4,7 @@
     "core.py": "f401d3f79858090d5e515696868d0012642664f7d92d49ef3946ead3a9a11e45",
     "integration.py": "4ceb927a980430cb300f41834e6f281d989ab1bfdd2a0629d6fd30d3ba9f8872",
     "manifest.json": "216970a8ccd96ae95ea60451d6f155211d06b68886520260aaf7091db8a041cc",
-    "RELEASE-NOTES.md": "67e5b33218bb1da42164d15932bdd858e44bf535b3442f2b50345f077a49be20",
+    "RELEASE-NOTES.md": "9ebad454069c02d54f619c6bf205ffe7e84819835f8c6461c9b7b50b491cb502",
     "review_theme.py": "80dae05d8d6db6b92bb5b48a3e25d9ee1726bddb2554deb3587b36665613a06e",
     "USER-GUIDE.md": "90a7fbbe9146b1ca8a6728655f321c408e78c8eae07a48b410584133c8f788f2",
     "worlds.py": "bd48401bfe6ce4b645251db1f78eae59b8f46a117e0c249dbbf982a36c46637c",
@@ -31,7 +31,7 @@
     "web/worlds-tokens.css": "628de685771d18dc5972b81d4ee20334b14da450fb73a0fb6fcd118b9eb5db7b",
     "web/worlds.json": "1246b3cb6cf62c9c4835d042bf7c1f12e1f9081cb73998f47014969002f3d9cf",
     "workshop/web/app.css": "813f8813360de07d36cf6899838a9b30c70f7ca6c2f82a31b756d8301272fa34",
-    "workshop/web/app.js": "556abe93bd00f6edd854b9732eb15a4e0042bc25e8b1c8591e7cca8f5fcabd38"
+    "workshop/web/app.js": "4aa69f4d8f157d17bbe992cace144cf5750ae875aba73ea3df1d1f6da15a4784"
   },
   "added": {
     "io_view.py": "e671031cab1f2d39b29c7e4fdb0c1c36dc565d57bb4456a52f856a81531e1ffd",

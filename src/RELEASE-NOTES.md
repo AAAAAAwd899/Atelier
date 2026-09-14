@@ -9,6 +9,7 @@ On compact Card Studio windows, the bottom navigation keeps short text labels be
 Library folder and deck menus now include a scoped **Export / share** action. Choose a parent folder to include its subdecks or one deck for a focused handoff; Anki’s normal exporter still owns format, media, destination, and final confirmation. The Card Studio guide also names compare, sequence, application, cloze, image, and image occlusion card types up front, while the existing Mask Studio and native occlusion routes remain unchanged.
 
 Image-backed source pages also expose **Native mask editor** directly beside Mask Studio. It hands the original rendered page image to Anki’s supported Image Occlusion editor, so rectangle, ellipse, polygon, and native hide-mode choices remain available without first creating a separate attachment.
+When you find exact notes in Card Studio, **Open selected in Anki** carries that selection into the native Browser so Anki’s familiar export/share controls are one step away.
 
 Recognized stock native image-occlusion cards gain Fit image / Actual size. The whole image-and-canvas stage scales together after rendering, including late native sizing. Source images, mask coordinates and card templates are not rewritten. Unknown templates retain native rendering.
 
