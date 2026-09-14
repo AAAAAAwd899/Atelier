@@ -7,14 +7,14 @@
   },
   {
     "file": "src/web/world-art/cabin-1.0.3.png",
-    "sha256": "316aaab883e26e898449d2ae5316ba7492b87d0f17f7d80dc2980b6673a27eae",
-    "bytes": 56156,
+    "sha256": "82b2889c62815024f9915c600b0128f93967f89c761f2389410ea176c769a6c7",
+    "bytes": 82628,
     "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   },
   {
     "file": "src/web/world-art/castle-1.0.3.png",
-    "sha256": "7c9abd6517910f7325a24b535edd865fbf08c2ba9bb6163300f2fbd984934209",
-    "bytes": 51298,
+    "sha256": "f968f163c2230d2bd4b4aa9ed365ed7357205b1a8a88feb45eb8742c80e8c7fa",
+    "bytes": 79173,
     "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   },
   {
@@ -61,8 +61,8 @@
   },
   {
     "file": "src/web/world-art/mythic-1.0.3.png",
-    "sha256": "579697857bc2e0d6d2fa91db93c0670eb661cc4a6015bfdc5fca93c48ed29bdd",
-    "bytes": 87417,
+    "sha256": "3448cbfd4c524e57fa9d2bedd52e53a7766c1a0609239171ef2057d7f87c9ed7",
+    "bytes": 139295,
     "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   },
   {
@@ -85,8 +85,8 @@
   },
   {
     "file": "src/web/world-art/sunset-1.0.3.png",
-    "sha256": "9db25bf9fe4dbcd1eca921f8fa146f3951fb5da7dfe80e19c80b8eb6bf0147d0",
-    "bytes": 12735,
+    "sha256": "2775b0adf9565a0d3153462937e5f03f1d7613e9282c1081f0ea80185532e28e",
+    "bytes": 60915,
     "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   },
   {
@@ -97,8 +97,8 @@
   },
   {
     "file": "src/web/world-art/underworld-1.0.3.png",
-    "sha256": "9acd0672aecc78a35b5c705f59337d8ab29f280ba85a8051d71a5f6c0f530e70",
-    "bytes": 32006,
+    "sha256": "6e1dbb6a8587f7787825384c5766eecae1a0d58ee6fef752d127b4293e3865da",
+    "bytes": 65486,
     "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   }
 ]

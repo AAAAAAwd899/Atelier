@@ -1,7 +1,8 @@
 """Create deterministic 1672x941 scene plates for the five authored worlds.
 
-The runtime uses these raster plates for fast backgrounds; the matching SVGs
-remain the source artwork for crisp theme tiles and future scaling.
+The plates are deliberately illustrated rather than icon-like: each scene has
+atmospheric gradients, a clear focal subject, depth layers, light falloff and
+small hand-authored details. Matching SVGs remain the scalable source artwork.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
@@ -15,69 +16,105 @@ def gradient(top, bottom):
     im = Image.new("RGB", (W, H)); p = im.load()
     a = tuple(int(top[i:i+2], 16) for i in (1,3,5)); b = tuple(int(bottom[i:i+2], 16) for i in (1,3,5))
     for y in range(H):
-        t = y/(H-1)
-        c = tuple(int(a[i]*(1-t)+b[i]*t) for i in range(3))
+        t = y/(H-1); c = tuple(int(a[i]*(1-t)+b[i]*t) for i in range(3))
         for x in range(W): p[x,y] = c
-    return im
+    return im.convert("RGBA")
 
 def haze(im, xy, r, color, alpha=110):
     layer = Image.new("RGBA", im.size); d=ImageDraw.Draw(layer)
-    d.ellipse((xy[0]-r,xy[1]-r,xy[0]+r,xy[1]+r), fill=color+(alpha,))
-    layer=layer.filter(ImageFilter.GaussianBlur(r//2)); im.paste(layer,(0,0),layer)
+    d.ellipse((xy[0]-r,xy[1]-r,xy[0]+r,xy[1]+r), fill=tuple(color)+(alpha,))
+    layer=layer.filter(ImageFilter.GaussianBlur(max(2,r//3))); im.alpha_composite(layer)
 
-def stars(d, seed, color=(255,245,220,190), n=85):
+def stars(d, seed, color=(255,245,220,190), n=100, y_max=430):
     rng=random.Random(seed)
     for _ in range(n):
-        x=rng.randrange(30,W-30); y=rng.randrange(30,390); r=rng.choice((1,1,2,2,3))
+        x=rng.randrange(28,W-28); y=rng.randrange(24,y_max); r=rng.choice((1,1,1,2,2,3))
         d.ellipse((x-r,y-r,x+r,y+r), fill=color)
+        if r==3: d.line((x-5,y,x+5,y), fill=color, width=1); d.line((x,y-5,x,y+5), fill=color, width=1)
+
+def vignette(im, edge=(4,7,20,145)):
+    v=Image.new("RGBA",im.size,(0,0,0,0)); d=ImageDraw.Draw(v)
+    d.rectangle((0,0,W,H),outline=edge,width=44); im.alpha_composite(v.filter(ImageFilter.GaussianBlur(18)))
 
 def castle():
-    im=gradient("#16122f","#d58ca8"); d=ImageDraw.Draw(im,"RGBA"); stars(d,4); d.ellipse((1240,105,1330,195), fill="#fff0cf")
-    d.polygon([(0,575),(180,470),(350,565),(520,470),(700,560),(870,475),(1050,570),(1250,460),(1672,570),(1672,941),(0,941)], fill="#302344")
-    d.polygon([(0,650),(260,535),(510,650),(760,545),(1020,650),(1280,535),(1672,650),(1672,941),(0,941)], fill="#11162d")
-    stone=(233,197,202); edge=(141,101,149); base=Image.new("RGBA",im.size); bd=ImageDraw.Draw(base)
-    for x,h in ((500,300),(790,420),(1080,300)):
-        bd.rectangle((x-105,580-h,x+105,580),fill=stone+(255,),outline=edge+(255,),width=8); bd.polygon([(x-130,580-h),(x,580-h-145),(x+130,580-h)],fill="#6f477d",outline=edge+(255,))
-        bd.rectangle((x-45,580-h+45,x+45,580-h+140),fill="#ffe4a9")
-    bd.rectangle((610,430,1060,580),fill=stone+(255,),outline=edge+(255,),width=8); bd.polygon([(590,430),(835,205),(1080,430)],fill="#7b4b84",outline=edge+(255,)); bd.rectangle((790,470,880,580),fill="#4f365d"); bd.ellipse((810,485,860,535),fill="#ad648d")
-    im.paste(base,(0,0),base); d=ImageDraw.Draw(im,"RGBA"); haze(im,(835,520),240,(239,158,180),30); d.line((0,785,1672,785),fill="#6f6c95",width=8); return im
+    im=gradient("#11152f","#d18aa5"); d=ImageDraw.Draw(im,"RGBA"); stars(d,4,n=150)
+    haze(im,(1280,132),150,(255,220,170),80); d=ImageDraw.Draw(im,"RGBA"); d.ellipse((1235,85,1325,175),fill="#fff1ce")
+    d.polygon([(0,575),(170,463),(332,553),(500,446),(694,558),(875,464),(1056,560),(1264,442),(1672,560),(1672,941),(0,941)],fill="#332448")
+    d.polygon([(0,667),(270,533),(510,658),(744,536),(1010,660),(1280,525),(1672,646),(1672,941),(0,941)],fill="#10162e")
+    d.polygon([(760,941),(855,600),(950,941)],fill="#29304c"); d.line((840,650,860,650),fill="#c6a6bb",width=5)
+    stone=Image.new("RGBA",im.size); sd=ImageDraw.Draw(stone,"RGBA")
+    for x,h,w in ((505,310,210),(835,438,250),(1160,310,210)):
+        sd.rounded_rectangle((x-w//2,586-h,x+w//2,586),radius=8,fill="#e9c7cf",outline="#886397",width=8)
+        sd.polygon([(x-w//2-24,586-h),(x,586-h-142),(x+w//2+24,586-h)],fill="#744782",outline="#996e9c",width=6)
+        sd.rectangle((x-40,586-h+42,x+40,586-h+142),fill="#ffe8b0",outline="#b87893",width=5)
+        sd.line((x,586-h+45,x,586-h+137),fill="#c58a9b",width=3); sd.line((x-38,586-h+92,x+38,586-h+92),fill="#c58a9b",width=3)
+    sd.rectangle((640,434,1032,586),fill="#e5c1cb",outline="#886397",width=8)
+    sd.polygon([(610,434),(836,215),(1062,434)],fill="#744782",outline="#996e9c",width=7)
+    sd.rectangle((794,482,878,586),fill="#4b355b"); sd.ellipse((815,498,857,540),fill="#ca789a",outline="#f5bdc3",width=4)
+    sd.line((730,466,942,466),fill="#f7dfc9",width=4); im.alpha_composite(stone); d=ImageDraw.Draw(im,"RGBA")
+    for x in (492,1162):
+        d.line((x,230,x,350),fill="#c79b8f",width=5); d.polygon([(x,348),(x+48,365),(x,385)],fill="#eeb0ba")
+    for x in range(250,1450,90): d.ellipse((x,735,x+10,745),fill="#e7b9c9")
+    d.polygon([(0,805),(210,728),(420,802),(610,747),(820,810),(1040,742),(1280,807),(1490,730),(1672,788),(1672,941),(0,941)],fill="#171c35")
+    d.line((0,792,1672,792),fill="#77719f",width=6); vignette(im,(20,16,38,150)); return im
 
 def underworld():
-    im=gradient("#100c19","#792c24"); d=ImageDraw.Draw(im,"RGBA"); haze(im,(835,730),300,(255,100,55),95); stars(d,9,(255,207,118,170),35)
-    d.polygon([(0,0),(350,0),(450,260),(335,420),(490,620),(0,700)],fill="#17121d"); d.polygon([(1672,0),(1322,0),(1222,260),(1337,420),(1182,620),(1672,700)],fill="#17121d")
-    d.polygon([(0,690),(170,560),(360,620),(530,545),(690,640),(850,565),(1050,650),(1260,540),(1450,625),(1672,520),(1672,941),(0,941)],fill="#26171f")
-    d.polygon([(0,820),(300,700),(550,830),(820,735),(1100,820),(1370,700),(1672,805),(1672,941),(0,941)],fill="#d75a35"); d.line((0,845,300,790,550,860,820,790,1100,850,1370,770,1672,830),fill="#ffd47a",width=12)
-    for x,h in ((380,420),(520,510),(1150,510),(1290,420)):
-        d.polygon([(x-70,760-h),(x,760-h-95),(x+70,760-h),(x+58,760)],fill="#3b2327",outline="#874538",width=10)
-    d.ellipse((650,325,1022,770),fill="#140f18",outline="#b45b45",width=12); d.arc((700,360,972,740),180,360,fill="#f0a15b",width=9); return im
+    im=gradient("#0b0a16","#7f3024"); d=ImageDraw.Draw(im,"RGBA"); stars(d,9,(255,208,120,190),45,380)
+    haze(im,(836,760),340,(255,91,42),120); haze(im,(836,545),180,(219,78,45),45); d=ImageDraw.Draw(im,"RGBA")
+    d.polygon([(0,0),(350,0),(430,178),(345,340),(470,506),(330,670),(470,941),(0,941)],fill="#17121e")
+    d.polygon([(1672,0),(1322,0),(1242,178),(1327,340),(1202,506),(1342,670),(1202,941),(1672,941)],fill="#17121e")
+    for poly in [[(0,120),(210,0),(310,240),(120,360)],[(1672,120),(1462,0),(1362,240),(1552,360)],[(0,560),(230,390),(380,610),(130,750)],[(1672,560),(1442,390),(1292,610),(1542,750)]]: d.polygon(poly,fill="#251622",outline="#47262d")
+    d.polygon([(0,710),(170,564),(360,625),(530,542),(690,652),(850,565),(1050,657),(1260,540),(1450,632),(1672,520),(1672,941),(0,941)],fill="#2a1821")
+    d.polygon([(0,828),(280,710),(545,842),(820,735),(1100,828),(1380,700),(1672,800),(1672,941),(0,941)],fill="#c4472e")
+    d.line((0,852,280,770,545,875,820,785,1100,856,1380,760,1672,833),fill="#ffd37c",width=18); d.line((0,878,280,803,545,902,820,812,1100,883,1380,790,1672,855),fill="#f06a39",width=8)
+    for x,h in ((380,420),(525,520),(1147,520),(1292,420)):
+        d.polygon([(x-72,760-h),(x,760-h-102),(x+74,760-h),(x+60,760)],fill="#3b242b",outline="#92503f",width=10); d.line((x,760-h+25,x+20,760-h+165),fill="#c26247",width=4)
+    d.ellipse((642,302,1030,780),fill="#120f19",outline="#bd6247",width=14); d.arc((704,345,968,730),180,360,fill="#f4a65b",width=12); d.arc((730,378,942,690),180,360,fill="#ffd27a",width=5)
+    for x,y in ((470,270),(1180,220),(410,490),(1260,460),(610,180),(1030,135)):
+        d.ellipse((x-4,y-4,x+4,y+4),fill="#ffc56d"); d.line((x,y-12,x,y+12),fill="#ff8c4c",width=2)
+    vignette(im,(22,8,24,180)); return im
 
 def mythic():
-    im=gradient("#091229","#13112e"); d=ImageDraw.Draw(im,"RGBA"); haze(im,(835,390),330,(91,228,223),90); stars(d,14,(220,194,255,210),70); c=(835,410)
-    for r in (310,205): d.ellipse((c[0]-r,c[1]-r,c[0]+r,c[1]+r),outline="#9de8e8",width=5)
-    for a in (0,45,90,135):
-        dx=math.cos(math.radians(a))*310; dy=math.sin(math.radians(a))*310; d.line((c[0]-dx,c[1]-dy,c[0]+dx,c[1]+dy),fill="#9de8e8",width=4)
-    d.polygon([(0,700),(320,620),(600,710),(830,620),(1100,710),(1400,600),(1672,700),(1672,941),(0,941)],fill="#101b36")
-    d.polygon([(690,735),(835,430),(980,735)],fill="#17264a",outline="#8ce3e7",width=9); d.polygon([(735,500),(835,395),(935,500)],outline="#d7c2ff",width=10); d.ellipse((790,550,880,640),fill="#8ce3e7",outline="#e7d89b",width=4); return im
+    im=gradient("#071027","#121735"); d=ImageDraw.Draw(im,"RGBA"); stars(d,14,(222,197,255,220),140,500)
+    haze(im,(836,410),330,(97,226,226),110); haze(im,(836,410),160,(204,177,255),65); d=ImageDraw.Draw(im,"RGBA"); c=(836,410)
+    for r,col,w in ((315,"#85e2e4",7),(220,"#9fe9e7",5),(120,"#d2b9ff",4)): d.ellipse((c[0]-r,c[1]-r,c[0]+r,c[1]+r),outline=col,width=w)
+    for a in (0,30,60,90,120,150):
+        dx=math.cos(math.radians(a))*315; dy=math.sin(math.radians(a))*315; d.line((c[0]-dx,c[1]-dy,c[0]+dx,c[1]+dy),fill="#8bdfe2",width=3)
+    for a in range(0,360,45):
+        x=c[0]+315*math.cos(math.radians(a)); y=c[1]+315*math.sin(math.radians(a)); d.ellipse((x-8,y-8,x+8,y+8),fill="#f2d88d")
+    d.polygon([(0,720),(280,604),(510,716),(770,595),(1000,718),(1280,580),(1672,710),(1672,941),(0,941)],fill="#101a37")
+    d.polygon([(610,790),(836,420),(1060,790)],fill="#1a2c54",outline="#86dfe1",width=9); d.polygon([(720,590),(836,430),(952,590)],fill="#18233f",outline="#d9c0ff",width=8); d.polygon([(795,790),(836,515),(877,790)],fill="#112142")
+    d.ellipse((800,580,872,652),fill="#92e2e2",outline="#f0d58a",width=5)
+    for x in (200,250,1420,1470): d.line((x,790,x,590),fill="#6fd0d4",width=5); d.line((x-30,790,x+30,790),fill="#6fd0d4",width=5)
+    vignette(im,(3,10,34,160)); return im
 
 def cabin():
-    im=gradient("#17253b","#c6a17e"); d=ImageDraw.Draw(im,"RGBA"); d.ellipse((1330,105,1405,180),fill="#f9e8bd"); stars(d,21,(213,235,195,180),55)
-    d.polygon([(0,500),(170,230),(270,410),(420,180),(560,440),(720,260),(850,450),(1030,220),(1180,450),(1370,280),(1672,510),(1672,690),(0,690)],fill="#152b2b")
-    d.rectangle((0,635,W,H),fill="#102727"); d.line((0,760,1672,760),fill="#9ac6b4",width=5)
-    d.polygon([(450,590),(835,315),(1220,590)],fill="#4f3b36",outline="#513c32"); d.rectangle((510,590,1160,840),fill="#76513e",outline="#513c32",width=10); d.rectangle((680,630,780,745),fill="#ffd88c"); d.rectangle((850,630,950,745),fill="#ffd88c"); d.rectangle((795,705,900,840),fill="#392b2c"); d.rectangle((1010,390,1080,570),fill="#3a3031")
-    for x in (150,290,1430,1560): d.polygon([(x,760),(x+70,350),(x+140,760)],fill="#17312c")
-    haze(im,(820,560),210,(241,180,119),48); return im
+    im=gradient("#12243c","#c4a27f"); d=ImageDraw.Draw(im,"RGBA"); haze(im,(1350,132),130,(255,225,175),80); d=ImageDraw.Draw(im,"RGBA"); d.ellipse((1310,92,1395,177),fill="#f9e9c0"); stars(d,21,(215,238,204,190),95,350)
+    d.polygon([(0,530),(166,242),(280,425),(430,185),(570,450),(725,275),(872,463),(1030,220),(1180,461),(1370,285),(1672,520),(1672,710),(0,710)],fill="#18312f")
+    d.polygon([(0,600),(200,350),(370,535),(560,315),(720,550),(920,342),(1080,560),(1290,360),(1450,550),(1672,390),(1672,710),(0,710)],fill="#214342")
+    for x in (125,300,1450,1590): d.polygon([(x,690),(x+68,350),(x+140,690)],fill="#12302e")
+    d.rectangle((0,660,W,H),fill="#0e2929"); d.line((0,773,1672,773),fill="#a1d2bc",width=6)
+    for y,wid,a in ((820,500,95),(850,360,80),(885,260,70)): d.line((835-wid,y,835+wid,y),fill=(154,206,188,a),width=4)
+    d.polygon([(430,585),(835,300),(1240,585)],fill="#4a3833",outline="#60443a",width=12); d.rectangle((500,580,1170,846),fill="#76513f",outline="#543b34",width=12)
+    for y in range(625,825,45): d.line((510,y,1160,y),fill="#9a6b4e",width=4)
+    d.rectangle((668,636,778,754),fill="#ffd88a",outline="#e6af68",width=6); d.rectangle((872,636,982,754),fill="#ffd88a",outline="#e6af68",width=6); d.line((723,640,723,750),fill="#d79057",width=4); d.line((668,695,778,695),fill="#d79057",width=4); d.line((927,640,927,750),fill="#d79057",width=4); d.line((872,695,982,695),fill="#d79057",width=4)
+    d.rectangle((800,738,900,846),fill="#342a2c"); d.rectangle((1020,382,1090,560),fill="#343235",outline="#523d38",width=8)
+    smoke=Image.new("RGBA",im.size); sd=ImageDraw.Draw(smoke,"RGBA"); sd.ellipse((1030,310,1100,380),fill=(224,230,211,45)); sd.ellipse((1000,240,1090,330),fill=(224,230,211,30)); im.alpha_composite(smoke.filter(ImageFilter.GaussianBlur(16)))
+    d=ImageDraw.Draw(im,"RGBA"); d.polygon([(330,846),(520,820),(720,846),(940,820),(1140,846),(1350,818),(1672,848),(1672,941),(0,941),(0,868)],fill="#0a2021")
+    vignette(im,(10,28,29,155)); return im
 
 def sunset():
-    im=gradient("#47315f","#f9d59b"); d=ImageDraw.Draw(im,"RGBA"); d.ellipse((750,280,910,440),fill="#ffe2a5"); d.rectangle((0,465,W,H),fill="#1f405b");
-    for y,amp,col,w in ((555,55,"#f9d8ac",8),(650,45,"#f9d8ac",6),(780,30,"#dfb895",4)):
-        pts=[]
-        for x in range(0,W+1,20): pts.append((x,y+amp*math.sin(x/145)))
-        d.line(pts,fill=col,width=w)
-    d.polygon([(0,730),(260,590),(500,730),(760,620),(1010,735),(1350,590),(1672,710),(1672,941),(0,941)],fill="#27364b")
-    for x in (150,1480):
-        d.polygon([(x,800),(x+55,430),(x+110,800)],fill="#2a3044"); d.line((x+55,540,x-20,500),fill="#2a3044",width=16); d.line((x+55,600,x+135,550),fill="#2a3044",width=14)
-    return im
+    im=gradient("#3c2c5b","#f8d69e"); d=ImageDraw.Draw(im,"RGBA"); stars(d,33,(255,238,205,160),35,240); haze(im,(835,334),190,(255,205,143),100); d=ImageDraw.Draw(im,"RGBA"); d.ellipse((760,260,910,410),fill="#ffe2a8")
+    d.polygon([(0,240),(200,210),(360,260),(540,190),(730,240),(910,185),(1120,245),(1320,210),(1672,250),(1672,390),(0,390)],fill=(255,198,174,48)); d.rectangle((0,420,W,H),fill="#21465e")
+    d.polygon([(0,520),(190,470),(400,520),(620,460),(850,515),(1050,468),(1300,522),(1510,470),(1672,510),(1672,941),(0,941)],fill="#2c5770")
+    for y,amp,col,w in ((510,34,"#ffe0ac",9),(590,28,"#f9c99e",7),(680,22,"#dfb38e",5),(770,15,"#a9b7ad",4)):
+        pts=[(x,y+amp*math.sin(x/145)) for x in range(0,W+1,18)]; d.line(pts,fill=col,width=w)
+    d.polygon([(0,735),(250,594),(490,730),(750,620),(1010,735),(1350,590),(1672,710),(1672,941),(0,941)],fill="#263b51"); d.polygon([(0,840),(310,780),(610,842),(920,780),(1250,840),(1500,790),(1672,820),(1672,941),(0,941)],fill="#b97d69")
+    for x,h in ((150,420),(1480,450)):
+        d.polygon([(x,900),(x+58,h),(x+114,900)],fill="#242c44")
+        for y,side in ((590,-1),(650,1),(710,-1)): d.line((x+58,y,x+58+side*100,y-55),fill="#242c44",width=15)
+    d.line((0,910,1672,910),fill="#f0c28f",width=4); vignette(im,(45,31,65,140)); return im
 
 for name, fn in (("castle",castle),("underworld",underworld),("mythic",mythic),("cabin",cabin),("sunset",sunset)):
-    fn().resize((1672,941), Image.Resampling.LANCZOS).save(OUT/f"{name}-1.0.3.png", optimize=True)
+    fn().resize((1672,941), Image.Resampling.LANCZOS).convert("RGB").save(OUT/f"{name}-1.0.3.png", optimize=True)
     print(name)
