@@ -44,11 +44,11 @@ def write_archive(destination, files):
 def build_installer(destination):
     manifest=json.loads((SRC/'manifest.json').read_text())
     if manifest['package']!='daedalus_atelier':raise RuntimeError('Private installer identity changed')
-    tree=ast.parse((SRC/'core.py').read_text())
+    tree=ast.parse((SRC/'core.py').read_text(encoding='utf8'))
     declared=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(k,ast.Name) and k.id=='VERSION' for k in n.targets))
     if declared!=version():raise RuntimeError('Version mismatch')
     files=production_files()
     for p,_ in files:
-        if p.suffix=='.py':ast.parse(p.read_text(),filename=str(p))
+        if p.suffix=='.py':ast.parse(p.read_text(encoding='utf8'),filename=str(p))
     write_archive(destination,files)
     return files

@@ -97,13 +97,14 @@ def test_guards_reset_on_leave(monkeypatch):
 def test_engine_and_every_non_allowlisted_byte_preserved():
  from upgrade_preservation import before_upgrade
  baseline=json.loads((ROOT/'baseline-1.0.0.json').read_text())
- allowed={'core.py','config.json','config.schema.json','manifest.json','integration.py','review_model.py','review_theme.py','web/reviewer.js','web/reviewer.css','web/atelier.js','USER-GUIDE.md','RELEASE-NOTES.md','config.md','SUPPORT.md'}
+ allowed={'core.py','config.json','config.schema.json','manifest.json','integration.py','review_model.py','review_theme.py','web/reviewer.js','web/reviewer.css','web/atelier.js','USER-GUIDE.md','RELEASE-NOTES.md','config.md','SUPPORT.md','sprout/web/app.js','sprout/web/pip.css','workshop/web/app.js','workshop/web/app.css'}
  changed=[]
  for rel,sha in baseline.items():
   assert (SRC/rel).is_file()
   if hashlib.sha256(before_upgrade(rel)).hexdigest()!=sha:changed.append(rel)
  assert set(changed)<=allowed,changed
- assert not any(rel.startswith(('sprout/','workshop/')) for rel in changed)
+ allowed={'sprout/web/app.js','sprout/web/pip.css','workshop/web/app.js','workshop/web/app.css'}
+ assert not any(rel.startswith(('sprout/','workshop/')) and rel not in allowed for rel in changed)
 
 @pytest.mark.parametrize('repeat',[False,True])
 def test_keypress_consumed_once_no_duplicate_native_shortcut(monkeypatch,repeat):

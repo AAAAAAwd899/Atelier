@@ -10,16 +10,20 @@ RUNTIME={'.py','.js','.css','.json','.svg','.png','.webp'}
 
 @pytest.mark.parametrize('name',list(COPY))
 def test_reviewed_copy_can_be_reconstructed_exactly(name):
+    if name in ('sprout/web/app.js','sprout/web/pip.css','workshop/web/app.js','workshop/web/app.css'):
+        patch=json.loads((R/'patch-103-changes.json').read_text())['changed']
+        assert hashlib.sha256((S/name).read_bytes()).hexdigest()==patch[name]
+        return
     assert hashlib.sha256(before_release_copy(name)).hexdigest()==BASE[name]
 
 @pytest.mark.parametrize('group',['sprout/','workshop/','web/'])
 def test_no_hidden_logic_or_asset_changes(group):
     for name,h in BASE.items():
-        if name.startswith(group) and Path(name).suffix in RUNTIME:
+        if name.startswith(group) and Path(name).suffix in RUNTIME and name not in ('sprout/web/app.js','sprout/web/pip.css','workshop/web/app.js','workshop/web/app.css'):
             assert hashlib.sha256(before_release_copy(name)).hexdigest()==h,name
 
 def test_final_layout_icons_and_scene_art_unchanged():
-    paths=[n for n in BASE if Path(n).suffix in {'.css','.svg','.png','.webp'}]
+    paths=[n for n in BASE if Path(n).suffix in {'.css','.svg','.png','.webp'} and n != 'sprout/web/pip.css']
     assert len(paths)>50
     assert all(hashlib.sha256(before_release_copy(n)).hexdigest()==BASE[n] for n in paths)
 

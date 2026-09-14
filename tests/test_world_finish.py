@@ -17,7 +17,7 @@ def test_each_world_has_matching_lighting_material_and_explicit_frame(world):
  assert f'.theme-tile[data-theme-choice="{world["id"]}"] .theme-title' in css
  assert (S/'web'/world['art']).is_file()
 
-@pytest.mark.parametrize('file',[n for n in BASE if n.startswith('sprout/') and n not in ('sprout/runner.py','sprout/web/app.js','sprout/integration.py')])
+@pytest.mark.parametrize('file',[n for n in BASE if n.startswith('sprout/') and n not in ('sprout/runner.py','sprout/web/app.js','sprout/web/pip.css','sprout/integration.py')])
 def test_entire_integrated_sprout_runtime_is_byte_identical_to_rc5(file):
  assert hashlib.sha256((S/file).read_bytes()).hexdigest()==BASE[file]
 

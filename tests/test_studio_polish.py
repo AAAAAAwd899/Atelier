@@ -16,7 +16,7 @@ def test_engine_and_original_presentation_assets_unchanged(name):
 def test_layout_assets_shipped_with_each_world(theme):
  cfg=core.settings({'visual_owner':'atelier','theme':theme})
  head=worlds.planner_head(cfg,'daedalus_atelier')
- assert 'Studio shell · rc3' in head
+ assert 'atelier-world-style' in head
  assert 'grid-template-rows:auto minmax(0,1fr)' in head
  assert 'suite-setup-scroll' in head
  assert 'suite-practice-summary' in (SRC/'sprout/web/app.js').read_text()

@@ -36,6 +36,6 @@ def test_unknown_io_templates_fail_closed():
     assert not io.recognized({'originalStockKind':6,'css':'','tmpls':[{'qfmt':'<script>custom()</script>'}]})
 
 def test_empty_resume_strip_collapses_and_owner_is_explicit():
-    text=(SRC/'web/atelier.js').read_text()
+    text=(SRC/'web/atelier.js').read_text(encoding='utf8')
     assert "if(!cards.length)return '';" in text
     assert "host.dataset.owner=state.config.visual_owner||'ask'" in text

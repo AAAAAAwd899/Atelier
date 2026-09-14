@@ -15,7 +15,7 @@ def setup_vendor():
   shutil.copytree(SRC/component,dest,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
 def run(cmd,name,cwd=ROOT,timeout=700):
  with (V/(name+'.log')).open('w') as stream:
-  result=subprocess.run(cmd,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,timeout=timeout)
+  result=subprocess.run(cmd,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,timeout=timeout,env={**os.environ,'PYTHONUTF8':'1'})
  (V/(name+'.exit')).write_text(str(result.returncode))
  if result.returncode:raise RuntimeError(name+' failed; see verification log')
 def cases(path):
