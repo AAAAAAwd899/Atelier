@@ -131,7 +131,7 @@ def test_pip_animation_and_live_model_manifest_unchanged():
         if n.startswith('web/pip') and n != 'web/pip.css':
             assert hashlib.sha256((SRC/'sprout'/n).read_bytes()).hexdigest()==h
 
-def test_all_twelve_worlds_have_unique_original_scenery():
+def test_all_worlds_have_unique_original_scenery():
     worlds=json.loads((SRC/'web/worlds.json').read_text())
     assert len(worlds)==len(core.THEMES)>=12 and {w['id'] for w in worlds}==set(core.THEMES)
     assert len({hashlib.sha256((SRC/'web'/w['art']).read_bytes()).hexdigest() for w in worlds})==len(worlds)

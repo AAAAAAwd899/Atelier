@@ -28,7 +28,7 @@ def main():
     p.evaluate('(theme)=>AtelierMakeover.applyAppearance({token:"preview",settings:{theme}})',theme)
     p.locator('.nw-header [data-action="appearance"]').click();p.locator('.dialog').wait_for()
     check(theme+' consumer explanation visible','Exam Studio is included.' in p.locator('.dialog').inner_text())
-    check(theme+' twelve world choices retained',p.locator('[data-theme-choice]').count()==len(core.THEMES))
+    check(theme+' world choices retained',p.locator('[data-theme-choice]').count()==len(core.THEMES))
     check(theme+' settings fit without horizontal scrolling',p.locator('.dialog-body').evaluate('(e)=>e.scrollWidth<=e.clientWidth+2'));close()
    for w in [390,620,1100,1650]:
     p.set_viewport_size({'width':w,'height':760});p.wait_for_timeout(120)
