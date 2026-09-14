@@ -107,6 +107,7 @@ def test_card_studio_surfaces_specialized_card_types():
 
 def test_library_exposes_scoped_export_share_action():
     text=(SRC/'web/atelier.js').read_text(encoding='utf8')
+    assert "Find cards & sources" in text and "data-view=\"find\"" in text
     assert "export-deck','Export / share this deck…'" in text
     assert "export-deck','Export / share…'" in text
     assert "case 'export-deck':closeDialog(true);await request('export_deck',{id});break;" in text
