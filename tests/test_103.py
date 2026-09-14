@@ -92,6 +92,12 @@ def test_first_run_study_desk_leads_with_focus_setup():
     assert "Select the two parent folders you want to sit together in this exam." not in text
     assert "!last?btn('page','Browse library','folder','secondary'" in text
 
+def test_card_studio_compact_navigation_keeps_labels_visible():
+    css=(SRC/'workshop/web/app.css').read_text(encoding='utf8')
+    assert '@media(max-width:470px)' in css
+    assert '.nav-link .nav-title{display:block' in css
+    assert '.nav-link{flex:1 1 0;min-width:0;flex-direction:column' in css
+
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     ids={row['id'] for row in catalog}
