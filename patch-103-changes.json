@@ -4,13 +4,13 @@
     "core.py": "1440821e9682b983b27eb71a30a7a9de3b66be20aae20b075c74a44481f398bb",
     "integration.py": "4ceb927a980430cb300f41834e6f281d989ab1bfdd2a0629d6fd30d3ba9f8872",
     "manifest.json": "216970a8ccd96ae95ea60451d6f155211d06b68886520260aaf7091db8a041cc",
-    "RELEASE-NOTES.md": "6fae3890ecf7cb54ea83fa71b6040f1f6388745cb00d5f111fd3dd575155ee3e",
+    "RELEASE-NOTES.md": "24abb86875fd7c0c6aa362c60f5271e660fea600ef25fbf4dd5e5c7119196457",
     "review_theme.py": "80dae05d8d6db6b92bb5b48a3e25d9ee1726bddb2554deb3587b36665613a06e",
     "USER-GUIDE.md": "5c06c97cfce2d6a1a1d9dbd98c18b0c66e826ce37df40333a018eb4532e3ecfa",
     "worlds.py": "bd48401bfe6ce4b645251db1f78eae59b8f46a117e0c249dbbf982a36c46637c",
     "sprout/web/app.js": "59947c0df075cb81d076eef6ef0a33cfdc14478af11e3c0bb20d3c8d308ee271",
     "sprout/web/pip.css": "e041499dad9bb70416c5339dcfe9cea154f6dd9f5253ee10f3bc4524712770e8",
-    "web/atelier.css": "f83c15ea27951e4c381bf28b68d0b8217125f4dcfb892e28e8ebfa09d1b8c162",
+    "web/atelier.css": "86e3506879ab15c85fbedcd1919846b26f4e0f98862b40e56ca434b22b646899",
     "web/atelier.js": "0ea84d84fc35661879ad83b73108ea4194fc51b9d6e38c495e6fe6366cb76d05",
     "web/card-studio-shell.css": "bedf1d1ba57c6ac34977e49fe3c2632b6ecc1560236ea0f60b82f3efd506e9a3",
     "web/home-shell.css": "d5e5c3dc772c0b97191664a58ad0dffc1554a63b682f22188f0d64096519aa28",
@@ -31,7 +31,7 @@
     "web/worlds-tokens.css": "aabb2c3284967e5395d3d7912e63cad36a180ac51d59dab58f8ee7eafea27ed5",
     "web/worlds.json": "8f6c7feff3532a6ebaab19f820fe0f0676696f348c7ec4f6534574f37de2b69a",
     "workshop/web/app.css": "d34ace53479da0fba1b06673a5676c899c9fb66d74d35ac5873d61a6232f2198",
-    "workshop/web/app.js": "a9ce5b211d8c08754cdf8ddeac8225d1f928086260d2b15791cc9477e8d3b298"
+    "workshop/web/app.js": "8394e808707a4933ef40f8e43ae66602e7eed8cb003e1b59b619a01b56488dfe"
   },
   "added": {
     "io_view.py": "e671031cab1f2d39b29c7e4fdb0c1c36dc565d57bb4456a52f856a81531e1ffd",

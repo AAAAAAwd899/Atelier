@@ -74,3 +74,5 @@ Ordinary review affects scheduling. Independent practice does not. Pip's **Intro
 Anki Sync and its collection backup do not include all local Atelier data. Optional AI assistance requires its own service configuration and explicit approval. Source images and note content are not automatically fact-checked. See **USER-GUIDE.md** and **PRIVACY.md**.
 
 Atelier has not been uploaded to AnkiWeb by this release process. The supplied installer updates the existing `daedalus_atelier` installation directly.
+
+- Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.

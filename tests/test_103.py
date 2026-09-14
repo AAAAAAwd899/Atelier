@@ -41,6 +41,10 @@ def test_empty_resume_strip_collapses_and_owner_is_explicit():
     assert "host.dataset.owner=state.config.visual_owner||'ask'" in text
     css=(SRC/'web/atelier.css').read_text(encoding='utf8')
     assert 'var(--world-scene,var(--world-art))' in css and '.appearance-link::after' in css
+    # The final cascade must retain the scenic layer; a later background
+    # shorthand must not flatten the world-aware atmosphere tile.
+    final_tile=css[css.rfind('.appearance-link{'):css.find('}',css.rfind('.appearance-link{'))+1]
+    assert 'var(--world-scene,var(--world-art))' in final_tile
 
 def test_card_studio_save_and_next_keeps_authoring_context():
     text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
@@ -60,6 +64,7 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "data-change=\"draft-source\"" in text
     assert "S.draftSource==='all'||d.source_id===S.draftSource" in text
     assert "organizeDrafts" in text and "B('organize-drafts'" in text
+    assert "clear-draft-selection" in text and "S.selectedDrafts.clear();$('#ws-inbox-results').innerHTML=inboxResults()" in text
     assert "Only local unapproved drafts are changed" in text
     assert "exceed Anki’s 40-tag limit" in text
     assert "S.draftSort==='source'" in text

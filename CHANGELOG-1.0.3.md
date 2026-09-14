@@ -22,3 +22,5 @@ Private review candidate. The name and private package identity remain Atelier /
 - Added deterministic cumulative packaging, paired source verification, real screenshot matrices, isolated native probes, a real-interaction walkthrough and staged AnkiWeb information.
 
 Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migration and public rollout wait for a real listing and owner approval. A GitHub push or website update does not update installed Anki add-ons.
+
+- Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.
