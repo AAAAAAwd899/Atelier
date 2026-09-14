@@ -6,18 +6,6 @@
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
-    "file": "src/web/world-art/cabin-1.0.3.png",
-    "sha256": "02bd515478cfaed8609e118084dcbdc5ff4289262141e002cbc76bd5e10bdb75",
-    "bytes": 407264,
-    "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
-  },
-  {
-    "file": "src/web/world-art/castle-1.0.3.png",
-    "sha256": "2cd37e8af440924653da85ba57d6376f40b3b0172d0e72bf9954820ecbd7d3cd",
-    "bytes": 450427,
-    "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
-  },
-  {
     "file": "src/web/world-art/celestial-1.0.3.png",
     "sha256": "ac4bc4d06f77f57869d66f2b33e25f6351ae8741950b0c073fd618563d4d6928",
     "bytes": 2437870,
@@ -60,12 +48,6 @@
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
-    "file": "src/web/world-art/mythic-1.0.3.png",
-    "sha256": "057a6e5099d59e1128f8b9cd3580b604e786a726b8e7d4c5f2060498239f02b9",
-    "bytes": 474338,
-    "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
-  },
-  {
     "file": "src/web/world-art/obsidian-1.0.3.png",
     "sha256": "26a4bd7871cf944d1f586cdce7d571c26809e48ae52ed8918ed9d9e88ce31f5f",
     "bytes": 2098107,
@@ -84,21 +66,9 @@
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
-    "file": "src/web/world-art/sunset-1.0.3.png",
-    "sha256": "22a03b1f9d728ec94c56b9d5a22873288f8b2efb09f481a1e2ee92bdf2d64338",
-    "bytes": 387486,
-    "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
-  },
-  {
     "file": "src/web/world-art/tidal-1.0.3.png",
     "sha256": "16a2c17e0db6d0287a83b05c0f17c642994460da36cf24e130294d0ac5697ad9",
     "bytes": 2598988,
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
-  },
-  {
-    "file": "src/web/world-art/underworld-1.0.3.png",
-    "sha256": "210498d9f44fbadde20fe072072495f7e11d1ef8c73c00f0377e025d33b9e0ba",
-    "bytes": 392625,
-    "origin": "Deterministic local rasterization of the bundled authored SVG; no external request"
   }
 ]

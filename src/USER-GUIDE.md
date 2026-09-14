@@ -1,6 +1,6 @@
 # Atelier 1.0.3 — Your study space in Anki
 
-Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and seventeen visual worlds. Onigiri is optional.
+Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and twelve visual worlds. Onigiri is optional.
 
 ## Install or update
 

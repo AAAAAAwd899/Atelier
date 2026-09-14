@@ -1,14 +1,14 @@
 {
   "name": "Atelier current Python release gate",
   "version": "1.0.3",
-  "runtime_sha256": "688d5e4dcbc79a17d117be8a68eaa1580ac08aa6b13ffe14ef90a221378fd5dc",
-  "completed_utc": "2026-09-14T10:00:00Z",
+  "runtime_sha256": "b4a7aba0f1b86b1900f8cfc5da54b40dd15da012b80eb9e43dc1184398d243c4",
+  "completed_utc": "2026-09-14T10:20:00Z",
   "suites": {
-    "atelier": 1223,
+    "atelier": 1161,
     "sprout": 460,
     "workshop": 209
   },
-  "total": 1892,
+  "total": 1830,
   "failed": 0,
   "skipped": 0,
   "command": ".venv\\Scripts\\python.exe verify_release.py --python-only",
@@ -18,4 +18,4 @@
     "sprout-unit.log",
     "workshop-unit.log"
   ]
-}\n
+}

@@ -114,11 +114,6 @@
 @media(max-width:950px){.unified-topbar{padding:12px 20px}.unified-topbar .top-actions{flex-wrap:wrap}.unified-topbar .search{flex-basis:100%;height:36px}.unified-topbar .refresh-library{display:none}.desk-tools{grid-template-columns:repeat(3,minmax(0,1fr));}.desk-tool{min-height:66px}.suite-plan-list{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr}.tool-tile{padding:17px}.tools-spotlight .secondary{font-size:11px}}
 @media(max-width:860px){.unified-topbar .topbar-left{display:flex;}.unified-topbar .owner-badge{display:none}.unified-topbar .top-actions{flex-basis:calc(100% - 70px)}.unified-topbar .search{flex-basis:100%}.unified-topbar .top-actions .primary,.unified-topbar .top-actions .secondary{padding:8px;font-size:11px;}}
 @media(max-width:480px){.unified-topbar{padding:10px 14px}.unified-topbar .top-actions{gap:5px}.unified-topbar .icon-button{width:26px;flex-basis:26px}.unified-topbar .top-actions .secondary .icon{display:none}.desk-tool{font-size:10px}.tools-spotlight{display:grid;grid-template-columns:1fr 1fr}.tools-heading h1{font-size:28px}.tools-heading{padding-top:12px}}
-:host([data-theme="castle"]) .world-window{box-shadow:inset 0 0 0 1px rgba(255,224,239,.18),0 16px 44px rgba(20,8,36,.22);}
-:host([data-theme="underworld"]) .world-window{box-shadow:inset 0 0 0 1px rgba(240,155,99,.2),0 16px 42px rgba(25,5,8,.28);}
-:host([data-theme="mythic"]) .world-window{box-shadow:inset 0 0 0 1px rgba(140,227,231,.2),0 16px 44px rgba(2,8,24,.28);}
-:host([data-theme="cabin"]) .world-window{box-shadow:inset 0 0 0 1px rgba(200,224,159,.18),0 16px 42px rgba(5,17,10,.24);}
-:host([data-theme="sunset"]) .world-window{box-shadow:inset 0 0 0 1px rgba(168,79,85,.18),0 16px 38px rgba(105,49,46,.12);}
 :host([data-motion="off"]) *, :host([data-motion="off"]) *::before, :host([data-motion="off"]) *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
 

@@ -3,8 +3,7 @@
 Private review candidate. The name and private package identity remain Atelier / `daedalus_atelier`.
 
 - Consolidated visual roles in a generated design contract, with scoped home, planner, authoring, reviewer and native palette adapters. Removed the duplicate home presentation layer.
-- Added five authored local scene assets: Storybook Castle, Underworld, Mythic Code, Cabin, and Golden Shore. The original twelve worlds, artwork, fonts, and engine files remain intact. Reworked spacing, compact controls, workspace hierarchy, and panel contrast.
-- Refined the five new scene plates with authored atmospheric depth, lighting falloff, layered terrain, reflections, masonry/log detail, and world-specific focal motifs; the raster plates and matching SVG sources remain local and deterministic.
+- Kept the original twelve accepted worlds as the shipped catalogue. Reworked spacing, compact controls, workspace hierarchy, and panel contrast without adding unreviewed theme art.
 - Added a guarded **Save & next card** action in Card Studio. It saves the local draft, then opens a clean draft carrying the same source page, destination deck, tags, card style, selected note type, field mapping, and occlusion display preference so slide-set authoring stays coherent without copying the previous question, quotation, masks, or media.
 - Added **Save & next slide/page** for multi-page sources. It advances to the next source page while retaining the authoring context above, so a deck can be built as an organized sequence without repetitive setup.
 - Added Drafts & approval ordering by recently edited, source order, or destination deck so larger card sets remain easy to review.
@@ -26,5 +25,5 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 - Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.
 - Added **Select all filtered** to the Drafts & approval inbox, with a filter-scoped clear toggle so multi-page lecture sets can be organized without repeating page selection.
 - Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft, carrying the current deck/tags/note setup into the new draft, and linking it to its exact source location.
-- Updated the unpublished add-on information page to enumerate every shipped world, including the five new theme treatments, so its inventory matches the packaged catalogue.
+- Updated the unpublished add-on information page so its inventory matches the twelve-world packaged catalogue.
 
