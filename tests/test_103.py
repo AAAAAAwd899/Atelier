@@ -101,7 +101,7 @@ def test_card_studio_compact_navigation_keeps_labels_visible():
 
 def test_card_studio_surfaces_specialized_card_types():
     text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
-    assert 'creator-specialized' in text and 'Use Mask an image in the editor' in text
+    assert 'creator-specialized' in text and 'choose Mask an image in the editor' in text
     assert 'data-value="compare"' in text and 'data-value="sequence"' in text and 'data-value="application"' in text
     assert "['occlusion','Mask an image','crop']" in text
 
