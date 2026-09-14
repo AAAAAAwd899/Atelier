@@ -10,6 +10,7 @@ Library folder and deck menus now include a scoped **Export / share** action. Ch
 
 Image-backed source pages also expose **Native mask editor** directly beside Mask Studio. It hands the original rendered page image to Anki’s supported Image Occlusion editor, so rectangle, ellipse, polygon, and native hide-mode choices remain available without first creating a separate attachment.
 When you find exact notes in Card Studio, **Open selected in Anki** carries that selection into the native Browser so Anki’s familiar export/share controls are one step away.
+The selection tray explains those choices in place, including when to compare, link, or export the exact notes you selected.
 
 Recognized stock native image-occlusion cards gain Fit image / Actual size. The whole image-and-canvas stage scales together after rendering, including late native sizing. Source images, mask coordinates and card templates are not rewritten. Unknown templates retain native rendering.
 

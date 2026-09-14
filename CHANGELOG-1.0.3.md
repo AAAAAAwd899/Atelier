@@ -29,6 +29,7 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 - Made specialized Card Studio types visible in the guided workflow: compare, sequence, apply, cloze, image, and image occlusion remain available in the same editor, with a plain-language prompt for opening Mask Studio after attaching or opening an image.
 - Added a direct **Native mask editor** action beside source-page Mask Studio. It hands the original rendered page image to Anki’s supported Image Occlusion editor, preserving native rectangle, ellipse, polygon, and hide-mode choices.
 - Added **Open selected in Anki** to exact note search selections, handing the selected note IDs to Anki’s native Browser for familiar export/share controls.
+- Clarified the selected-note action tray so its compare, link, and export paths are visible before a user takes action.
 - Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft, carrying the current deck/tags/note setup into the new draft, and linking it to its exact source location.
 - Updated the unpublished add-on information page so its inventory matches the twelve-world packaged catalogue.
 

@@ -117,6 +117,7 @@ def test_library_exposes_scoped_export_share_action():
 def test_find_can_open_exact_selection_in_native_browser():
     text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
     assert "browse-selected" in text and "nativeAction('browse',null,'nid:'+ids.join(','))" in text
+    assert 'Select notes to compare, link, or open in Anki for export' in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
