@@ -2,7 +2,7 @@
 
 Private review candidate. A shared design contract generates seventeen-world web/native palette adapters. Home and Widgets use more compact layouts, near-solid work panels and locally packaged landscapes. Saved work and the existing engine routes remain intact.
 
-The Study desk now groups learning, creation and progress tools and shows the exact selected study scope. Card Studio presents source projects as card sets and guides learners from slides, PDFs, images, notes or text through exact page selection, question/cloze/image/image-occlusion creation, saved drafts and final deck approval. Its **Save & next card** action carries the current source page, destination, tags, and card style into a clean draft for efficient slide-set authoring without copying masks or media.
+The Study desk now groups learning, creation and progress tools and shows the exact selected study scope. Card Studio presents source projects as card sets and guides learners from slides, PDFs, images, notes or text through exact page selection, question/cloze/image/image-occlusion creation, saved drafts and final deck approval. Its **Save & next card** action carries the current source page, destination, tags, card style, selected note type, field mapping, and occlusion display preference into a clean draft for efficient slide-set authoring without copying the previous question, quotation, masks, or media.
 
 Recognized stock native image-occlusion cards gain Fit image / Actual size. The whole image-and-canvas stage scales together after rendering, including late native sizing. Source images, mask coordinates and card templates are not rewritten. Unknown templates retain native rendering.
 

@@ -189,7 +189,7 @@ async function saveAndNextDraft(){
  const saved=await saveDraft(true);
  await refreshState();
  createDraftObject(saved.kind||current.kind);
- Object.assign(S.draft,{deck_id:saved.deck_id,tags:[...(saved.tags||[])],source_id:saved.source_id||'',version_id:saved.version_id||'',page:saved.page||1});
+ Object.assign(S.draft,{deck_id:saved.deck_id,tags:[...(saved.tags||[])],source_id:saved.source_id||'',version_id:saved.version_id||'',page:saved.page||1,model_id:saved.model_id||0,mapping:structuredClone(saved.mapping||{}),hide_others:saved.hide_others!==false});
  S.view='studio';render();$('[data-draft="front"]')?.focus();
  toast('Draft saved locally. The next draft keeps this source, destination, tags, and card style.');
 }

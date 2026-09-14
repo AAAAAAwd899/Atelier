@@ -47,6 +47,8 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "source_id:saved.source_id||''" in text
     assert "deck_id:saved.deck_id" in text
     assert "tags:[...(saved.tags||[])]" in text
+    assert "mapping:structuredClone(saved.mapping||{})" in text
+    assert "hide_others:saved.hide_others!==false" in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
