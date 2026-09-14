@@ -104,6 +104,7 @@ def test_card_studio_surfaces_specialized_card_types():
     assert 'creator-specialized' in text and 'choose Mask an image in the editor' in text
     assert 'data-value="compare"' in text and 'data-value="sequence"' in text and 'data-value="application"' in text
     assert "['occlusion','Mask an image','crop']" in text
+    assert "native-source-occlusion" in text and "request('occlude'" in text
 
 def test_library_exposes_scoped_export_share_action():
     text=(SRC/'web/atelier.js').read_text(encoding='utf8')
