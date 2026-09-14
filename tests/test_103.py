@@ -85,6 +85,11 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "Your card setup was kept." in text
     assert "No source linked" in text and "page ${Number(d.page||1)}" in text
 
+def test_first_run_study_desk_leads_with_focus_setup():
+    text=(SRC/'web/atelier.js').read_text(encoding='utf8')
+    assert "btn('studies','Set your focus','focus','primary'" in text
+    assert "!last?btn('page','Browse library','folder','secondary'" in text
+
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     ids={row['id'] for row in catalog}
