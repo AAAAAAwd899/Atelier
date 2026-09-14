@@ -4,6 +4,7 @@ Private review candidate. The name and private package identity remain Atelier /
 
 - Consolidated visual roles in a generated design contract, with scoped home, planner, authoring, reviewer and native palette adapters. Removed the duplicate home presentation layer.
 - Added five authored local scene assets: Storybook Castle, Underworld, Mythic Code, Cabin, and Golden Shore. The original twelve worlds, artwork, fonts, and engine files remain intact. Reworked spacing, compact controls, workspace hierarchy, and panel contrast.
+- Refined the five new scene plates with authored atmospheric depth, lighting falloff, layered terrain, reflections, masonry/log detail, and world-specific focal motifs; the raster plates and matching SVG sources remain local and deterministic.
 - Added a guarded **Save & next card** action in Card Studio. It saves the local draft, then opens a clean draft carrying the same source page, destination deck, tags, card style, selected note type, field mapping, and occlusion display preference so slide-set authoring stays coherent without copying the previous question, quotation, masks, or media.
 - Added **Save & next slide/page** for multi-page sources. It advances to the next source page while retaining the authoring context above, so a deck can be built as an organized sequence without repetitive setup.
 - Reorganized the Study desk sidebar into cohesive learning, creation and progress groups, with a visible study-scope card for selecting and starting the exact folder or lecture.
