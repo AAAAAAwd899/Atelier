@@ -39,3 +39,11 @@ def test_empty_resume_strip_collapses_and_owner_is_explicit():
     text=(SRC/'web/atelier.js').read_text(encoding='utf8')
     assert "if(!cards.length)return '';" in text
     assert "host.dataset.owner=state.config.visual_owner||'ask'" in text
+
+def test_card_studio_save_and_next_keeps_authoring_context():
+    text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
+    assert "saveAndNextDraft" in text
+    assert "save-and-next" in text
+    assert "source_id:saved.source_id||''" in text
+    assert "deck_id:saved.deck_id" in text
+    assert "tags:[...(saved.tags||[])]" in text
