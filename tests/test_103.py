@@ -66,6 +66,8 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "S.draftSource==='all'||d.source_id===S.draftSource" in text
     assert "organizeDrafts" in text and "B('organize-drafts'" in text
     assert "clear-draft-selection" in text and "S.selectedDrafts.clear();$('#ws-inbox-results').innerHTML=inboxResults()" in text
+    assert "allSelected=ds.length>0&&selected===ds.length" in text
+    assert "select-all-filtered" in text and "rows.forEach(d=>all?S.selectedDrafts.delete(d.id):S.selectedDrafts.add(d.id))" in text
     assert "Only local unapproved drafts are changed" in text
     assert "exceed Anki’s 40-tag limit" in text
     assert "S.draftSort==='source'" in text
