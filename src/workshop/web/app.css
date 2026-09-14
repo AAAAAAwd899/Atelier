@@ -99,6 +99,11 @@ html.workshop-host,html.workshop-host body{margin:0;padding:0;background:#141b1b
 #workshop .source-page-rail .source-coverage{margin-left:auto;color:var(--quiet);font:10px/1.3 system-ui,sans-serif;white-space:nowrap;}
 #workshop .source-page-rail .source-coverage-complete{color:var(--accent);font:600 10px/1.3 system-ui,sans-serif;}
 #workshop .source-page-rail .page-chip.active{background:var(--accent);color:var(--on-accent);border-color:transparent;font-weight:700;}
+#workshop .source-context-note{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:9px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--panel)),var(--panel));color:var(--muted);font-size:10px;line-height:1.45;}
+#workshop .source-context-note>div{min-width:0;display:grid;gap:2px;}
+#workshop .source-context-note strong{color:var(--fg);font-size:10px;}
+#workshop .source-context-note span{overflow-wrap:anywhere;}
+#workshop .source-context-note button{flex-shrink:0;font-size:10px;padding:6px 8px;min-height:30px;}
 
 @media(max-width:1150px){#workshop .creator-steps{grid-template-columns:repeat(2,minmax(0,1fr))}#workshop .creator-step:nth-child(2){border-right:0}#workshop .creator-step:nth-child(-n+2){border-bottom:1px solid var(--soft-line)}#workshop .import-roadmap{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:930px){#workshop .side-intro,#workshop .ws-nav-section>span{display:none}#workshop .ws-nav-section{display:contents}#workshop .main-nav{gap:8px}#workshop .creator-guide>header{align-items:flex-start}#workshop .creator-local{white-space:normal;text-align:right}}
