@@ -2,7 +2,7 @@
   "name": "Atelier current Python release gate",
   "version": "1.0.3",
   "runtime_sha256": "80ad7e16cf8bb93c063c36599ef608e3d830a3b401e7e4985c558301ca786f49",
-  "completed_utc": "2026-09-14T07:19:23.571381+00:00",
+  "completed_utc": "2026-09-14T07:31:54.706141+00:00",
   "suites": {
     "atelier": 1223,
     "sprout": 460,
@@ -11,7 +11,7 @@
   "total": 1892,
   "failed": 0,
   "skipped": 0,
-  "command": ".venv\\\\Scripts\\\\python.exe verify_release.py --python-only",
+  "command": ".venv\\Scripts\\python.exe verify_release.py --python-only",
   "scope": "Python model, preservation, importer, authoring and route suites; browser/native host coverage is separate and remains incomplete.",
   "log_files": [
     "atelier-unit.log",

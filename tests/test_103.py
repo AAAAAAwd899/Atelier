@@ -47,3 +47,18 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "source_id:saved.source_id||''" in text
     assert "deck_id:saved.deck_id" in text
     assert "tags:[...(saved.tags||[])]" in text
+
+def test_world_catalog_and_art_provenance_cover_every_shipped_world():
+    catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
+    ids={row['id'] for row in catalog}
+    assert len(catalog)==17 and {'castle','underworld','mythic','cabin','sunset'}<=ids
+    provenance=json.loads((ROOT/'ASSET-PROVENANCE-1.0.3.json').read_text(encoding='utf8'))
+    files={row['file'] for row in provenance}
+    assert files=={f'src/web/world-art/{world}-1.0.3.png' for world in ids}
+    assert all(row['sha256'] and row['bytes']>1000 and row['origin'] for row in provenance)
+    authored={row['file'] for row in provenance if 'authored SVG' in row['origin']}
+    assert authored=={f'src/web/world-art/{world}-1.0.3.png' for world in ('castle','underworld','mythic','cabin','sunset')}
+
+def test_world_gallery_verification_scales_with_catalog():
+    checker=(ROOT/'tests/check_gallery_final.py').read_text(encoding='utf8')
+    assert 'world_count*10' in checker and "f'{world_count} worlds x 10 screens'" in checker
