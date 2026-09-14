@@ -92,6 +92,14 @@ def test_first_run_study_desk_leads_with_focus_setup():
     assert "Select the two parent folders you want to sit together in this exam." not in text
     assert "!last?btn('page','Browse library','folder','secondary'" in text
 
+def test_empty_library_guides_beginner_to_existing_paths():
+    text=(SRC/'web/atelier.js').read_text(encoding='utf8')
+    css=(SRC/'web/atelier.css').read_text(encoding='utf8')
+    assert "state.location==='0'&&!state.query&&state.filter==='all'&&!state.nodes.length" in text
+    assert 'I already use Anki' in text and 'I have notes or study material' in text and 'I want a clear structure' in text
+    assert "nativeBtn('import','Import an Anki deck'" in text and 'data-view="import"' in text
+    assert 'library-first-run' in css and 'empty-guide-grid' in css
+
 def test_card_studio_compact_navigation_keeps_labels_visible():
     css=(SRC/'workshop/web/app.css').read_text(encoding='utf8')
     assert '@media(max-width:470px)' in css
