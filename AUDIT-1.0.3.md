@@ -2,6 +2,12 @@
 
 Status: implemented and packaged for owner review, with the automated verification recorded below. This is not public-release approval or universal compatibility acceptance. The owner rejected the first flat Forest render. Final captures use the revised runtime; earlier renders remain historical failure evidence.
 
+## Current candidate delta
+
+The current private candidate is commit `e7d5e881340c28e430ab2cce4093178255499ae5` with runtime fingerprint `19686ead6a35531bebead164c275498335abe3fe51319a84f20c0e0703abffc6`. It adds authored, scalable Pip world emblems around the existing animated/3D sculpture: a soft cat treatment for cutesy worlds, botanical leaves for green worlds, and tide, orbit, ember, or paper treatments for the remaining worlds. It also makes selecting two separate parent folders for one exam explicit and explains overlap handling. Growth stages, Pip actions, card engines, scheduling, masks, remotes, widgets, saved work and original-theme compatibility are unchanged.
+
+The installer and source archive below are rebuilt from this fingerprint and are marked `full_automated_verification: false`. The browser, native, performance, memory and endurance receipts described later are retained historical evidence for the prior fingerprint and must be rerun before a production-ready claim. Local browser escalation is currently unavailable; no stale receipt is relabeled as current.
+
 ## Source and checkpoints
 
 The supplied 1.0.2 source archive was checked and extracted. Its 233 runtime entries matched the recorded baseline. The original installer itself was not supplied for independent rechecking; the kit records its earlier source/installer equality. No newer accepted build existed. Git main preserves the baseline.
