@@ -59,6 +59,9 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "draftSource:'all'" in text
     assert "data-change=\"draft-source\"" in text
     assert "S.draftSource==='all'||d.source_id===S.draftSource" in text
+    assert "organizeDrafts" in text and "B('organize-drafts'" in text
+    assert "Only local unapproved drafts are changed" in text
+    assert "exceed Anki’s 40-tag limit" in text
     assert "S.draftSort==='source'" in text
     assert "S.draftSort==='deck'" in text
     assert "page-chip-count" in text

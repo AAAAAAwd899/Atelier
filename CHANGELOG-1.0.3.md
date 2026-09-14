@@ -9,6 +9,7 @@ Private review candidate. The name and private package identity remain Atelier /
 - Added **Save & next slide/page** for multi-page sources. It advances to the next source page while retaining the authoring context above, so a deck can be built as an organized sequence without repetitive setup.
 - Added Drafts & approval ordering by recently edited, source order, or destination deck so larger card sets remain easy to review.
 - Added Project and Source filters to Drafts & approval, with source/page metadata on each row so slide-set drafts remain traceable.
+- Added a guarded **Organize selected** action for unapproved drafts to change a destination deck and add shared tags without touching card content or Anki scheduling.
 - Added source coverage markers and a next unwritten slide/page shortcut, making it clear which source material still needs cards.
 - Reorganized the Study desk sidebar into cohesive learning, creation and progress groups, with a visible study-scope card for selecting and starting the exact folder or lecture.
 - Added a clear first step for new users and a direct **Study with Pip** action from the current focus. A matching saved plan opens directly; otherwise Exam Studio opens prefilled with the focused parent folders.
