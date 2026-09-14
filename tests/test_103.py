@@ -119,6 +119,15 @@ def test_find_can_open_exact_selection_in_native_browser():
     assert "browse-selected" in text and "nativeAction('browse',null,'nid:'+ids.join(','))" in text
     assert 'Select notes to compare, link, or open in Anki for export' in text
 
+def test_projects_keep_a_clear_default_destination_for_new_drafts():
+    text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
+    assert 'Default destination deck' in text
+    assert 'New drafts start here. You can change any card individually before approval.' in text
+    assert 'defaultDeck=Number($(\'#ws-project-deck\').value)||0' in text
+    assert 'rememberDeck(result.id,defaultDeck)' in text
+    assert 'const preferred=project()?.default_deck_id??rememberedDeck(S.project)' in text
+    assert 'targetProject=S.state.projects.find(p=>p.id===pid)' in text
+
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     ids={row['id'] for row in catalog}
