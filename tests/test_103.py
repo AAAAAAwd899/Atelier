@@ -80,6 +80,8 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "sourceContextNotice" in text and "source-context-note" in text
     assert "hasDraftWork" in text and "S.draft.front?.trim()" in text
     assert "new-page-draft" in text and "source_id:S.source.source.id" in text and "version_id:S.source.version.id" in text
+    assert "const prior=S.draft" in text and "tags:[...(prior.tags||[])]" in text and "mapping:structuredClone(prior.mapping||{})" in text
+    assert "Your card setup was kept." in text
     assert "No source linked" in text and "page ${Number(d.page||1)}" in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():

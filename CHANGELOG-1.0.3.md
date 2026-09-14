@@ -25,4 +25,5 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 
 - Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.
 - Added **Select all filtered** to the Drafts & approval inbox, with a filter-scoped clear toggle so multi-page lecture sets can be organized without repeating page selection.
-- Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft and linking the new one to its exact source location.
+- Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft, carrying the current deck/tags/note setup into the new draft, and linking it to its exact source location.
+
