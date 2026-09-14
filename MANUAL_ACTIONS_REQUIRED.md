@@ -1,6 +1,7 @@
 # Atelier owner decisions and external actions
 
 - Review the actual 1.0.3 interfaces and the outstanding native/usability evidence before approving release. The first Forest capture was explicitly rejected by the owner and is not accepted visual evidence.
+- During that review, switch through at least one cutesy and one green world to inspect the authored Pip emblem treatment, then create an exam containing two parent folders and confirm the combined scope and overlap wording are clear.
 - Private source destination: https://github.com/AAAAAAwd899/Atelier. No public visibility change, Pages deployment or AnkiWeb upload is authorized by the current private-development instruction.
 - When AnkiWeb permits the owner account to share an add-on, create/identify the exact listing and record its numeric code. Verify the then-current upload rules. Account eligibility has not been verified and no eligibility date is promised.
 - Test migration from private `daedalus_atelier` to the real numeric listing in a disposable profile, including add-on configuration, widget notes/layouts, source projects, masks, exam plans and saved sessions. No automatic migration is claimed before this test.
