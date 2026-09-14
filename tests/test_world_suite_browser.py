@@ -45,7 +45,7 @@ def run():
     p.close()
   # 1.0.3 retires the duplicate home layer's incidental third font stack.
   # Assert exact catalog typography above, while preserving scene/shape variety.
-  check('Themes differ in scenery, catalog heading families and silhouettes',len(images)==12 and len(fonts)==len({w['font'] for w in worlds.CATALOG}) and len(radii)>=6)
+  check('Themes differ in scenery, catalog heading families and silhouettes',len(images)==len(core.THEMES) and len(fonts)==len({w['font'] for w in worlds.CATALOG}) and len(radii)>=6)
   # Native operations remain discoverable from a single tools page.
   p=homepage();p.locator('[data-page="tools"]').first.click()
   expected=['add','browse','stats','sync','import','export','preferences','addons','note_types','profiles','help','undo','redo','check_media','check_database','filtered_deck','empty_cards','fullscreen','check_updates']
@@ -60,7 +60,7 @@ def run():
     p=homepage(width=width,height=800)
     check(str(width)+' essential home actions remain reachable',p.locator('.unified-topbar [data-command="sync"]').is_visible() and p.locator('.unified-topbar [data-command="add"]').is_visible() and not home_overflow(p))
     p.locator('.unified-topbar [data-action="appearance"]').click();p.locator('.dialog').wait_for()
-    check(str(width)+' all twelve worlds in accessible appearance dialog',p.locator('[data-theme-choice]').count()==12)
+    check(str(width)+' all worlds in accessible appearance dialog',p.locator('[data-theme-choice]').count()==len(core.THEMES))
     # Select a world without rebuilding the dialog or discarding its scroll.
     p.evaluate("window.keptDialog=document.getElementById('atelier-root').shadowRoot.querySelector('.dialog');")
     p.locator('[data-theme-choice="tidal"]').click();p.wait_for_timeout(80)

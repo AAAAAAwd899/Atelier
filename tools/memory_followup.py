@@ -19,6 +19,6 @@ with sync_playwright() as pw:
         row={'label':label,'bytes_by_node_type':dict(totals),'counts_by_node_type':dict(counts),'runtime_heap':cdp.send('Runtime.getHeapUsage'),'dom':cdp.send('Memory.getDOMCounters')};report['samples'].append(row)
         (OUT/'results.json').write_text(json.dumps(report,indent=2)+'\n');print(label,row['runtime_heap'],flush=True)
     for cycle in range(288):
-        p.locator('.nav-group [data-action="home"]').click();p.locator('.nav-group [data-page="library"]').click();p.locator('.unified-topbar [data-action="appearance"]').click();p.locator(f'[data-theme-choice="{list(core.THEMES)[cycle%12]}"]').click();p.locator('[data-action="close-dialog"]').first.click();p.locator('.sidebar [data-action="widget-page"]').click()
+        p.locator('.nav-group [data-action="home"]').click();p.locator('.nav-group [data-page="library"]').click();p.locator('.unified-topbar [data-action="appearance"]').click();p.locator(f'[data-theme-choice="{list(core.THEMES)[cycle%len(core.THEMES)]}"]').click();p.locator('[data-action="close-dialog"]').first.click();p.locator('.sidebar [data-action="widget-page"]').click()
         if cycle in (47,143,287):snapshot('cycle-'+str(cycle+1))
     report['completed']=True;report['cycles']=288;assert runtime_digest()==report['runtime_sha256'];(OUT/'results.json').write_text(json.dumps(report,indent=2)+'\n');b.close()

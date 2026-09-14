@@ -51,7 +51,7 @@ def main():
    check(w['id']+' actual task panel uses the world material treatment',p.locator('.task-focus').evaluate('e=>getComputedStyle(e).backgroundImage')!='none')
    check(w['id']+' scenery is outside the interactive reading/lecture content',p.locator('.world-window').evaluate('e=>getComputedStyle(e).borderTopLeftRadius')!='0px' and p.locator('#qa').count()==0)
    p.locator('.unified-topbar [data-action=appearance]').click();p.wait_for_timeout(60)
-   check(w['id']+' world chooser has twelve named, illustrated and typed variants',p.locator('.theme-tile').count()==12 and p.locator('.theme-tile[data-theme-choice='+w['id']+']>small').inner_text()==w['material'] and p.locator('.theme-tile .theme-light').count()==12)
+   check(w['id']+' world chooser has twelve named, illustrated and typed variants',p.locator('.theme-tile').count()==len(core.THEMES) and p.locator('.theme-tile[data-theme-choice='+w['id']+']>small').inner_text()==w['material'] and p.locator('.theme-tile .theme-light').count()==len(core.THEMES))
    p.evaluate('window.savedDialog=document.querySelector("#atelier-root").shadowRoot.querySelector(".dialog");window.savedTiles=[...savedDialog.querySelectorAll(".theme-tile")]')
    p.locator('[data-action=world-filter][data-filter=dark]').click();check(w['id']+' Dark filters six tiles without changing the current theme',p.locator('.theme-tile:visible').count()==6 and p.locator('#atelier-root').get_attribute('data-theme')==w['id'])
    p.locator('[data-action=world-filter][data-filter=light]').click();check(w['id']+' Light filters six tiles and preserves current selection readout',p.locator('.theme-tile:visible').count()==6 and w['name']+' selected' in p.locator('#world-filter-count').inner_text())

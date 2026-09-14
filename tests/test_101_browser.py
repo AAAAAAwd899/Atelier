@@ -44,7 +44,7 @@ with sync_playwright() as pw:
  p.locator('#typeans').fill('retain text');check('remote blocked in typed answer',not p.evaluate('AtelierRemoteInput.check().ready'))
  p.locator('#notes').fill('keep notes');check('remote blocked in editable region',not p.evaluate('AtelierRemoteInput.check().ready'))
  p.locator('#stage').focus();p.evaluate('document.getElementById("modal").showModal()');check('remote blocked in dialog',not p.evaluate('AtelierRemoteInput.check(true).ready'));p.evaluate('document.getElementById("modal").close()')
- for i in range(12):p.evaluate(asset('remote-input.js'))
+ for i in range(len(core.THEMES)):p.evaluate(asset('remote-input.js'))
  check('reconfiguration retains written text',p.locator('#typeans').input_value()=='retain text' and p.locator('#notes').inner_text()=='keep notes')
  p.evaluate('AtelierRemoteInput.dispose()');check('disposed input permission false',not p.evaluate('AtelierRemoteInput.check().ready'));p.close()
  check('Each world has a distinct answer material',len(answer_materials)==len(core.THEMES))

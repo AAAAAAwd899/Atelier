@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-label="Basalt underworld with an ember river">
+ <defs><linearGradient id="under-sky" x2="0" y2="1"><stop stop-color="#100c19"/><stop offset=".6" stop-color="#32151f"/><stop offset="1" stop-color="#792c24"/></linearGradient><linearGradient id="under-lava" x2="0" y2="1"><stop stop-color="#ffcf70"/><stop offset=".4" stop-color="#ef6b3b"/><stop offset="1" stop-color="#721d24"/></linearGradient><filter id="under-glow"><feGaussianBlur stdDeviation="18"/></filter></defs>
+ <rect width="1200" height="680" fill="url(#under-sky)"/><ellipse cx="600" cy="555" rx="430" ry="110" fill="#ff7440" opacity=".25" filter="url(#under-glow)"/>
+ <path d="M0 0h260l80 130-90 120 65 118-110 120 80 192H0Zm1200 0H940l-80 130 90 120-65 118 110 120-80 192h185Z" fill="#17121d"/><path d="M0 470 118 356l82 32 74-94 100 77 70-62 86 92 70-58 94 80 95-72 92 60 89-93 84 68 96-120 100 83 50-55v286H0Z" fill="#26171f"/>
+ <path d="M0 588q170-80 324-15t280-12q168-84 324 1t272-35v153H0Z" fill="url(#under-lava)" opacity=".9"/><path d="M0 606q185-70 338-6t274-13q150-63 300 0t288-30" fill="none" stroke="#ffd47a" stroke-width="10" opacity=".8"/>
+ <g fill="#3b2327" stroke="#874538" stroke-width="7"><path d="M260 490V206l44-64 45 64v284Z"/><path d="M360 490V112l48-65 48 65v378Z"/><path d="M792 490V112l48-65 48 65v378Z"/><path d="M892 490V206l44-64 45 64v284Z"/></g>
+ <path d="M460 490V290q0-148 140-148t140 148v200Z" fill="#140f18" stroke="#b45b45" stroke-width="10"/><path d="M510 450v-160q0-90 90-90t90 90v160" fill="none" stroke="#f0a15b" stroke-width="8" opacity=".7"/>
+ <g fill="#ffcf76"><circle cx="160" cy="350" r="5"/><circle cx="226" cy="286" r="3"/><circle cx="1010" cy="300" r="4"/><circle cx="1080" cy="370" r="3"/><circle cx="520" cy="100" r="3"/><circle cx="700" cy="84" r="4"/></g>
+ <rect width="1200" height="680" fill="none" stroke="#e37b55" stroke-opacity=".18" stroke-width="20"/>
+</svg>

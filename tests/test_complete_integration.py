@@ -32,7 +32,7 @@ def test_studio_appearance_is_one_complete_world(theme):
  owner=NS(get_config=lambda:cfg)
  a=studio.appearance(owner)
  assert a['enabled'] and a['theme']==theme and a['world']['id']==theme
- assert len(a['worlds'])==12 and a['palette']['text'] and a['palette']['scheme'] in ('light','dark')
+ assert len(a['worlds'])==len(core.THEMES) and a['palette']['text'] and a['palette']['scheme'] in ('light','dark')
  h=studio.head(owner)
  assert 'atelier-card-studio-shell' in h and 'http' not in h and '#qa' not in h
 

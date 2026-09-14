@@ -96,3 +96,13 @@ html[data-atelier-world-enabled="true"] #es-app :is(.suite-session-kicker,.suite
 .theme-tile[data-theme-choice="tidal"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
 .theme-tile[data-theme-choice="ember"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
 .theme-tile[data-theme-choice="celestial"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="castle"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="underworld"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
+.theme-tile[data-theme-choice="mythic"] .theme-title{font-family:ui-monospace, Consolas, monospace;}
+.theme-tile[data-theme-choice="cabin"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="sunset"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+:host([data-owner="atelier"][data-theme="castle"]),.mini-screen[data-theme="castle"]{--finish-aperture:42px 42px 16px 16px;--finish-angle:126deg;--finish-alpha:.045;--finish-pattern:radial-gradient(circle at 76% 18%,var(--finish-line) 0 2px,transparent 3px),linear-gradient(120deg,transparent 58%,var(--finish-line) 58.3%,transparent 59%);}
+:host([data-owner="atelier"][data-theme="underworld"]),.mini-screen[data-theme="underworld"]{--finish-aperture:14px;--finish-angle:108deg;--finish-alpha:.05;--finish-pattern:repeating-linear-gradient(160deg,transparent 0 52px,var(--finish-line) 53px 55px,transparent 56px 120px);}
+:host([data-owner="atelier"][data-theme="mythic"]),.mini-screen[data-theme="mythic"]{--finish-aperture:20px;--finish-angle:135deg;--finish-alpha:.045;--finish-pattern:radial-gradient(circle at 50% 0,var(--finish-line) 0 1px,transparent 2px),linear-gradient(45deg,transparent 48%,var(--finish-line) 49%,transparent 50%);}
+:host([data-owner="atelier"][data-theme="cabin"]),.mini-screen[data-theme="cabin"]{--finish-aperture:24px 24px 10px 10px;--finish-angle:118deg;--finish-alpha:.04;--finish-pattern:repeating-linear-gradient(82deg,transparent 0 60px,var(--finish-line) 61px 63px,transparent 64px 130px);}
+:host([data-owner="atelier"][data-theme="sunset"]),.mini-screen[data-theme="sunset"]{--finish-aperture:30px 30px 10px 10px;--finish-angle:155deg;--finish-alpha:.028;--finish-pattern:repeating-radial-gradient(ellipse at 10% 100%,transparent 0 48px,var(--finish-line) 49px 50px,transparent 51px 92px);}

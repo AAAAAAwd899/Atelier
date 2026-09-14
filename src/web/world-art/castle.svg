@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-label="Moonlit storybook castle">
+ <defs>
+  <linearGradient id="castle-sky" x2="0" y2="1"><stop stop-color="#16122f"/><stop offset=".58" stop-color="#3d2850"/><stop offset="1" stop-color="#d58ca8"/></linearGradient>
+  <linearGradient id="castle-ground" x2="0" y2="1"><stop stop-color="#2b2245"/><stop offset="1" stop-color="#11162d"/></linearGradient>
+  <linearGradient id="castle-stone" x2="1" y2="1"><stop stop-color="#f7d9d6"/><stop offset="1" stop-color="#b889ae"/></linearGradient>
+  <filter id="castle-glow"><feGaussianBlur stdDeviation="12"/></filter>
+ </defs>
+ <rect width="1200" height="680" fill="url(#castle-sky)"/>
+ <circle cx="920" cy="126" r="67" fill="#ffecc4" opacity=".3" filter="url(#castle-glow)"/><circle cx="920" cy="126" r="44" fill="#fff0cf"/>
+ <g fill="#fff4d8" opacity=".8"><circle cx="130" cy="105" r="3"/><circle cx="210" cy="176" r="2"/><circle cx="360" cy="82" r="3"/><circle cx="1080" cy="210" r="2"/><circle cx="760" cy="68" r="2"/><circle cx="1010" cy="62" r="3"/></g>
+ <path d="M0 420Q150 350 300 418t300 0t300 0t300 0v260H0Z" fill="#302344" opacity=".9"/><path d="M0 475Q180 400 330 470t320-3t300 4t250-2v211H0Z" fill="url(#castle-ground)"/>
+ <g fill="url(#castle-stone)" stroke="#8d6595" stroke-width="5">
+  <path d="M360 440V270h72V188l42-48 42 48v82h42v-98l42-50 42 50v98h72v170Z"/>
+  <path d="M315 440V285h82v-78l37-42 37 42v78h36v-44h94v44h36V207l37-42 37 42v78h82v155Z"/>
+ </g>
+ <g fill="#ffe4a9"><path d="M402 204h44v78h-44zM588 141h44v141h-44zM770 202h44v80h-44z"/><path d="M470 330h54v110h-54zM672 330h54v110h-54z"/></g>
+ <g fill="#6f477d"><path d="m360 270 78-120 78 120zM542 238l82-148 82 148zM724 270l78-120 78 120z"/></g>
+ <path d="M600 430c-26-45-24-83 0-112 24 29 26 67 0 112Z" fill="#ad648d" stroke="#f4b5c3" stroke-width="4"/>
+ <path d="M0 575Q250 526 480 584t400 0t320 0" fill="none" stroke="#6f6c95" stroke-width="7" opacity=".7"/>
+ <g fill="#d88fa8" opacity=".8"><circle cx="180" cy="570" r="9"/><circle cx="210" cy="548" r="7"/><circle cx="238" cy="576" r="10"/><circle cx="1020" cy="568" r="9"/><circle cx="1060" cy="542" r="8"/></g>
+ <rect width="1200" height="680" fill="none" stroke="#f7d6c8" stroke-opacity=".18" stroke-width="18"/>
+</svg>

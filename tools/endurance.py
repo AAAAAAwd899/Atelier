@@ -17,7 +17,7 @@ with sync_playwright() as pw:
     try:
         while time.monotonic()-start<1800:
             began=time.monotonic()
-            p.locator('.nav-group [data-action="home"]').click();p.locator('.nav-group [data-page="library"]').click();p.locator('.unified-topbar [data-action="appearance"]').click();p.locator(f'[data-theme-choice="{list(core.THEMES)[cycle%12]}"]').click();p.locator('[data-action="close-dialog"]').first.click();p.locator('.sidebar [data-action="widget-page"]').click()
+            p.locator('.nav-group [data-action="home"]').click();p.locator('.nav-group [data-page="library"]').click();p.locator('.unified-topbar [data-action="appearance"]').click();p.locator(f'[data-theme-choice="{list(core.THEMES)[cycle%len(core.THEMES)]}"]').click();p.locator('[data-action="close-dialog"]').first.click();p.locator('.sidebar [data-action="widget-page"]').click()
             if cycle%6==0:
                 cdp.send('HeapProfiler.collectGarbage');metrics={m['name']:m['value'] for m in cdp.send('Performance.getMetrics')['metrics']}
                 report['samples'].append({'elapsed':time.monotonic()-start,'cycle':cycle,'heap_bytes':metrics.get('JSHeapUsedSize'),**cdp.send('Memory.getDOMCounters')});save();print('Sample',cycle,flush=True)

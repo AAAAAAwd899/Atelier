@@ -29,8 +29,8 @@ def test_accepted_behaviour_unchanged_except_version(file):
 def test_finishes_do_not_add_assets_or_card_content_rules():
  css=(S/'web/world-finishes.css').read_text()
  assert '#qa' not in css and 'http' not in css and '@import' not in css
- assert css.count('--finish-aperture:')==12
- assert len({w['material'] for w in CAT})==12
+ assert css.count('--finish-aperture:')==len(CAT)
+ assert len({w['material'] for w in CAT})==len(CAT)
  from upgrade_preservation import before_upgrade
  css=before_upgrade('web/review-finish.css').decode('utf8')
  assert '#qa' not in css and not re.search(r'(?<![-\w])(width|height|padding|margin|display)\s*:',css)
