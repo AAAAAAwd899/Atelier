@@ -27,6 +27,7 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 - Added **Select all filtered** to the Drafts & approval inbox, with a filter-scoped clear toggle so multi-page lecture sets can be organized without repeating page selection.
 - Kept compact Card Studio navigation legible with short labels beside its icons, so the mobile-sized bar remains understandable for new users.
 - Added scoped **Export / share** actions to each library folder/deck menu. A parent folder can include its subdecks, while a single deck gives a focused handoff; Anki still owns the final format, media, and destination confirmation.
+- Made project sharing explicit: **Open linked cards to export** opens the exact linked notes in Anki’s Browser and tells the learner to choose **Notes → Export**.
 - Made specialized Card Studio types visible in the guided workflow: compare, sequence, apply, cloze, image, and image occlusion remain available in the same editor, with a plain-language prompt for opening Mask Studio after attaching or opening an image.
 - Added a direct **Native mask editor** action beside source-page Mask Studio. It hands the original rendered page image to Anki’s supported Image Occlusion editor, preserving native rectangle, ellipse, polygon, and hide-mode choices.
 - Added **Open selected in Anki** to exact note search selections, handing the selected note IDs to Anki’s native Browser for familiar export/share controls.

@@ -66,6 +66,8 @@ Widgets work without Onigiri. Compatible installed add-ons can offer optional wi
 
 **Export cards** lets you search decks and put active classes first, then opens Anki’s own export options. Choosing a parent includes its subdecks. Selecting a deck does not write a file until you confirm in Anki.
 
+From a Card Studio project, **Open linked cards to export** opens exactly the original notes connected to that project in Anki’s Browser. Choose **Notes → Export** there to share them; the original cards and scheduling stay under Anki’s control.
+
 **Sync** uses Anki’s normal synchronization. It does not include all local exam plans, source projects, drafts, widget notes, or Atelier preferences. **Anki tools** keeps Import, Export, note types, collection checks, preferences, profiles, Undo/Redo, and other original tools available.
 
 ## Back up all of your work

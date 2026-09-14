@@ -118,6 +118,8 @@ def test_find_can_open_exact_selection_in_native_browser():
     text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
     assert "browse-selected" in text and "nativeAction('browse',null,'nid:'+ids.join(','))" in text
     assert 'Select notes to compare, link, or open in Anki for export' in text
+    assert 'Open linked cards to export' in text
+    assert 'Anki Browser opened with the exact notes. Choose Notes → Export to share them.' in text
 
 def test_projects_keep_a_clear_default_destination_for_new_drafts():
     text=(SRC/'workshop/web/app.js').read_text(encoding='utf8')
