@@ -70,6 +70,7 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "select-all-filtered" in text and "rows.forEach(d=>all?S.selectedDrafts.delete(d.id):S.selectedDrafts.add(d.id))" in text
     assert "Only local unapproved drafts are changed" in text
     assert "exceed Anki’s 40-tag limit" in text
+    assert 'ws-organize-remove-tags' in text and 'removeSet=new Set(remove)' in text
     assert "S.draftSort==='source'" in text
     assert "S.draftSort==='deck'" in text
     assert "page-chip-count" in text
