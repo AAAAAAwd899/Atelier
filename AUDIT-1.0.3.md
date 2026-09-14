@@ -17,7 +17,7 @@ The current candidate delta contains 31 changed files, 15 added files and 0 remo
 
 - A: canonical roles, retired duplicate home layer, compact Home/Widgets hierarchy and twelve accepted local landscapes. Midnight, Rose and Forest were rendered in actual Anki. The original Forest screenshot was superseded after inspection.
 - B: existing world IDs retained across Home, Library list/grid, Card Studio, Mask Studio, Exam setup, Practice builder, reviewer question/answer, Results, Pip, Widgets, Progress and Tools. The checked-in final matrix contains 360 historical interface captures for the twelve worlds at 1440×900, 1280×720, 1024×768, 800×600 and browser-only 390×720. Rejected replacement plates are held outside the runtime and have no interface captures.
-- C: preserved-engine verification, exact stock IO native lifecycle tests, actual folder scheduler checks, cumulative installer, matching source, repeat-build equality, extracted-payload checks, real recording and private GitHub handoff. Owner visual acceptance and the unavailable host/hardware gates remain open.
+- C: preserved-engine verification, exact stock IO native lifecycle tests, actual folder scheduler checks, cumulative installer, matching source, repeat-build equality, extracted-payload checks, real recording and a private-repository-ready handoff. Owner visual acceptance and the unavailable host/hardware gates remain open.
 
 ## Current automated evidence
 
