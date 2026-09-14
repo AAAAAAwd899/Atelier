@@ -88,6 +88,8 @@ def test_card_studio_save_and_next_keeps_authoring_context():
 def test_first_run_study_desk_leads_with_focus_setup():
     text=(SRC/'web/atelier.js').read_text(encoding='utf8')
     assert "btn('studies','Set your focus','focus','primary'" in text
+    assert "Select every parent folder or deck you want to sit together in this exam." in text
+    assert "Select the two parent folders you want to sit together in this exam." not in text
     assert "!last?btn('page','Browse library','folder','secondary'" in text
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():

@@ -21,7 +21,7 @@ def test_pip_worlds_keep_shared_growth_and_add_authored_marks():
 def test_exam_picker_explains_multiple_parent_folders():
     assert "combine parents for one exam" in ATELIER
     assert "overlapping branches count once" in ATELIER
-    assert "Select the two parent folders" in ATELIER
+    assert "Select every parent folder or deck" in ATELIER
 
 
 def test_focus_desk_has_direct_pip_entry_and_clear_first_step():
