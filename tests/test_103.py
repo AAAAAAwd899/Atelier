@@ -58,6 +58,7 @@ def test_card_studio_save_and_next_keeps_authoring_context():
     assert "saveAndNextPageDraft" in text
     assert "save-and-next-page" in text
     assert "Save & next ${['pptx','odp'].includes(S.source.source.kind)?'slide':'page'}" in text
+    assert "S.source?.version.pages.length>1&&S.page<S.source.version.pages.length?B('save-and-next-page'" in text
     assert "draftSort:'recent'" in text
     assert "data-change=\"draft-sort\"" in text
     assert "draftSource:'all'" in text
