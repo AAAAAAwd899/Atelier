@@ -97,6 +97,7 @@ def test_card_studio_compact_navigation_keeps_labels_visible():
     assert '@media(max-width:470px)' in css
     assert '.nav-link .nav-title{display:block' in css
     assert '.nav-link{flex:1 1 0;min-width:0;flex-direction:column' in css
+    assert '.nav-link[data-view="settings"]{display:flex}' in css
 
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
