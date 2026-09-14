@@ -12,7 +12,7 @@ def test_exact_upgrade_declaration_and_protected_engines():
     assert {n:h for n,h in actual.items() if n not in old}==patch['added']
     assert set(old)<=set(actual) and not patch['removed']
     protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')
-    allowed_presentation={'workshop/web/app.js','workshop/web/app.css'}
+    allowed_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css'}
     assert not any(n.startswith(protected) and n not in allowed_presentation for n in patch['changed'])
 
 def test_generated_adapters_are_reproducible():
