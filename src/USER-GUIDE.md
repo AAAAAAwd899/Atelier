@@ -16,7 +16,7 @@ Confirm **Tools → Atelier · 1.0.3**. The cumulative folder-order contract ori
 
 **Study desk** is your home. Add cards, Browse, and Sync remain easy to reach. The sidebar groups learning, creation, and progress tools so the next action stays visible. **Continue your work** brings back unfinished drafts, repairs, and saved practice. **Library** contains your Anki decks; **Card sets** contains the documents and drafts you use to build cards.
 
-To study a class, find its folder in Library and set it as an active study. The **STUDY SCOPE** card shows the currently selected folders and due work. Choose **Edit** to select the exact folder or lecture, then **Study this scope** to begin with that material. **Quick study** uses your usual Anki schedule and studies one lecture at a time. Studying a whole parent folder is a separate, clearly labelled action. Removing a group removes its shortcut, not its cards or their due dates.
+To study a class, find its folder in Library and set it as an active study. The **STUDY SCOPE** card shows the currently selected folders and due work. Choose **Edit** to select the exact folder or lecture, then **Study this scope** to begin with that material. **Quick study** uses your usual Anki schedule and studies one lecture at a time. Studying a whole parent folder is a separate, clearly labelled action. When a focus is active, **Study with Pip** opens the matching saved Pip plan or starts a prefilled Pip exam setup for those folders. Removing a group removes its shortcut, not its cards or their due dates.
 
 ## Build cards with Card Studio
 

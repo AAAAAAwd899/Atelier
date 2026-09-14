@@ -5,6 +5,7 @@ Private review candidate. The name and private package identity remain Atelier /
 - Consolidated visual roles in a generated design contract, with scoped home, planner, authoring, reviewer and native palette adapters. Removed the duplicate home presentation layer.
 - Added twelve local landscape assets to the existing twelve worlds. Kept original world IDs, artwork, fonts and engine files. Reworked spacing, compact controls, workspace hierarchy and panel contrast.
 - Reorganized the Study desk sidebar into cohesive learning, creation and progress groups, with a visible study-scope card for selecting and starting the exact folder or lecture.
+- Added a clear first step for new users and a direct **Study with Pip** action from the current focus. A matching saved plan opens directly; otherwise Exam Studio opens prefilled with the focused parent folders.
 - Reworked Card Studio around card sets and a four-step creation path. Slides, PDFs, images, notes and text stay beside an ordered page rail; learners can select the exact source page, choose question, cloze, image or image occlusion, save a draft, and review it before adding it to an Anki deck.
 - Clarified multi-parent exam setup: two or more separate course folders can be selected for one exam, with subdecks included and overlapping branches counted once.
 - Added authored vector Pip world accents: soft cat companion treatment for cutesy worlds, botanical leaves for green worlds, tide/orbit/ember/paper motifs for the other worlds. Pip’s growth stages, controls, animation and study behavior remain shared.
