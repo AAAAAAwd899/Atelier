@@ -60,7 +60,9 @@ The earlier 360-capture matrix remains historical evidence for the original twel
 
 ## Native and performance evidence boundaries
 
-Historical native evidence used installed Windows Anki 26.05, disposable synthetic profiles, and payload equality checks. It covered six Home/Widgets captures in Midnight, Rose, and Forest; stock image-occlusion question/answer canvases and mask registration; folder scheduling and Undo; and AddonManager in-place update preservation. Those tests did not run against the final five scenes or final emblem and are not presented as current native visual acceptance.
+The final installer passed the actual Anki 26.05 AddonManager API in a fresh disposable Windows profile against the current runtime fingerprint. The check installed the verified 1.0.2 baseline, wrote synthetic preference and saved-work markers, installed the cumulative 1.0.3 add-on, and confirmed byte-equal runtime files, preserved preferences and saved work, the private add-on identity, no conflicts, and Anki's compatible flag. It did not access the owner's profile or automate the GUI file picker. The receipt is `verification/native-install-current.json`.
+
+Earlier native visual evidence used disposable synthetic profiles and payload equality checks. It covered six Home/Widgets captures in Midnight, Rose, and Forest; stock image-occlusion question/answer canvases and mask registration; and folder scheduling and Undo. Those visual tests did not run against the final five scenes or final emblem and are not presented as current native visual acceptance.
 
 Physical remote input, macOS/Retina, independent 100/125/200% native scale configurations, native fullscreen/autohide combinations, arbitrary custom templates, third-party IO Enhanced editing, live GPU Pip, decoded-image/GPU memory, native endurance, complete 200% text review, and uncoached newcomer testing remain unperformed. The browser Pip evidence uses the shipped animated fallback and makes no live WebGL claim.
 
