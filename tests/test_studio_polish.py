@@ -8,7 +8,7 @@ worlds=importlib.import_module('atelier_studio_contract.worlds')
 core=importlib.import_module('atelier_studio_contract.core')
 BASELINE=json.loads((R/'vendor-baseline.json').read_text())['sha256']
 
-@pytest.mark.parametrize('name',['core.py','exam_engine.py','exam_session.py','collection_reader.py','storage.py','drafts.py','answers.py','evidence.py','readiness.py','progress.py','session_tools.py','new_learning.py','companion.py','companion_layout.py','widget.py','web/app.css','web/pip.js','web/pip-scene.js'])
+@pytest.mark.parametrize('name',['core.py','exam_engine.py','exam_session.py','collection_reader.py','storage.py','drafts.py','answers.py','evidence.py','readiness.py','progress.py','session_tools.py','new_learning.py','companion.py','companion_layout.py','widget.py','web/app.css','web/pip/asset_manifest.json','web/pip-scene.js'])
 def test_engine_and_original_presentation_assets_unchanged(name):
  assert hashlib.sha256((SRC/'sprout'/name).read_bytes()).hexdigest()==BASELINE[name]
 

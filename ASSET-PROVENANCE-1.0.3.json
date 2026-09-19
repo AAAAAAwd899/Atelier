@@ -1,5 +1,41 @@
 [
   {
+    "file": "src/sprout/web/pip/companion-cutesy-1.0.3.png",
+    "sha256": "c118761a730603d6e2d9ae614db136aa10dbbd59c857d2a5527a60d37182d0d5",
+    "bytes": 408967,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
+    "file": "src/sprout/web/pip/companion-ember-1.0.3.png",
+    "sha256": "92ac2176ca9889ac4573ab18e1253bd28bdea88abad7d97482495b91888144bf",
+    "bytes": 454779,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
+    "file": "src/sprout/web/pip/companion-green-1.0.3.png",
+    "sha256": "6091fadc9600b156b74878c036d07fcc82fd4659edbdab38bb9a9154bd446fea",
+    "bytes": 399210,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
+    "file": "src/sprout/web/pip/companion-linen-1.0.3.png",
+    "sha256": "89ff01c320a124105daaf2e0171ed6c4a25d87d0d137347cf412b898b47775d9",
+    "bytes": 428055,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
+    "file": "src/sprout/web/pip/companion-orbit-1.0.3.png",
+    "sha256": "968c1a871a8e7a620ee25c01c85748f058fcacb774611f80021e647b73c7d12a",
+    "bytes": 336298,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
+    "file": "src/sprout/web/pip/companion-water-1.0.3.png",
+    "sha256": "2e7bbdb03eb891870adb63f26d5df1e6fae4a57e3526cceb5f6878829eade626",
+    "bytes": 328028,
+    "origin": "OpenAI image generation, this implementation session; locally normalized and composition-cropped to a 512 px application portrait"
+  },
+  {
     "file": "src/web/atelier-mark-1.0.3.png",
     "sha256": "6b3ee9c2e8ca06b7b95fe32726e809a691505e3938dc178c9d032620bd645c25",
     "bytes": 687409,

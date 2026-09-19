@@ -3,6 +3,7 @@ Only host commands/data are fixtures; no native Anki review is claimed.
 """
 from fixtures import *
 from bs4 import BeautifulSoup
+import copy
 sys.path[:0]=[str(ROOT/'vendor_tests'),str(ROOT/'vendor_tests/tools')]
 import test_ui_0100 as assessment
 import test_ui_096 as motion
@@ -11,10 +12,13 @@ worlds=importlib.import_module('atelier_testing.worlds')
 link=importlib.import_module('atelier_testing.sprout_link')
 BASE_COMMAND=assessment.command
 CALLS=[]
+ACTIVE_THEME='forest'
 
 def command(action,p):
     CALLS.append((action,p))
-    if action=='load': return {**BASE_COMMAND(action,p),'suite':True,'asset_base':'/_addons/daedalus_atelier/sprout/web'}
+    if action=='load':
+        out=copy.deepcopy(BASE_COMMAND(action,p));out['state']['settings']['theme']=ACTIVE_THEME
+        return {**out,'suite':True,'asset_base':'/_addons/daedalus_atelier/sprout/web'}
     if action=='suite_groups':return []
     if action=='suite_theme':
         if p.get('theme') not in core.THEMES:raise ValueError('Unknown world')
@@ -24,13 +28,20 @@ def command(action,p):
 original.command=command
 
 def html(theme='forest',enabled=True):
+    global ACTIVE_THEME
+    ACTIVE_THEME=theme
     cfg=core.settings({'visual_owner':'atelier' if enabled else 'onigiri','theme':theme,'ambience':True,'match_sprout':enabled,'motion':False})
-    soup=BeautifulSoup(motion.html(),'html.parser')
+    web=SRC/'sprout/web'
+    css='\n'.join((web/name).read_text(encoding='utf8') for name in ('app.css','countdown.css','pip.css'))
+    js=';\n'.join((web/name).read_text(encoding='utf8') for name in ('countdown.js','pip-scene.js','pip.js','app.js'))
     head=worlds.planner_head(cfg,'daedalus_atelier')
     head+='<style id="atelier-sprout-tokens">'+link.tokens_css(cfg)+'</style><style id="atelier-sprout-css">'+(SRC/'web/sprout.css').read_text()+'</style>'
     head+='<script>document.documentElement.dataset.atelierSprout="'+str(enabled).lower()+'";</script>'
-    for n in list(BeautifulSoup(head,'html.parser').contents):soup.head.append(n.extract())
-    return str(soup)
+    return ('<!doctype html><html lang="en"><head><base href="http://sprout.test/">'
+            '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            +head+'<style>'+css+'</style></head><body><main id="es-app"></main>'
+            '<script>window.pycmd=m=>window.fixtureCommand(JSON.parse(m.slice(12))).then(window.ExamSprout.receive);</script>'
+            '<script>'+js+'</script></body></html>')
 
 def route(req):
     url=req.request.url

@@ -4,9 +4,9 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `7b4195e784e751051e5f13d01bd21f2cf731fe8db588eeaaed7ab3c32f1eb3fa`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `81cb51430219630c06addb23dda8fe28d8b9474e110baaf22928f89bb8b14daa`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
-Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, distinct materials, and theme-specific Pip companion accents. The rejected flat castle illustration is not shipped. The wordmark now uses an original transparent gold architectural emblem rather than the temporary circled letter.
+Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
 The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. Sunset Cove received an authored coastal sidebar, stronger selected navigation, layered translucent workflow and study surfaces, warm edge light, distinct repair and lecture materials, deeper elevation, and restrained coral accents. Other themes keep their own scene, shape, type, surface, and Card Studio treatment.
 
@@ -24,7 +24,7 @@ The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 
 ## Source and checkpoints
 
-The supplied verified 1.0.2 source was used because no newer accepted build existed. Its 233 runtime entries matched the recorded baseline. The 1.0.3 runtime manifest records 31 changed files, 21 added files, and zero removed files, for 254 runtime files. Preserved-engine hashes and the baseline/patch declarations are checked during packaging. The original installer was not supplied for a new independent baseline extraction; the kit retains its earlier source/installer equality evidence.
+The supplied verified 1.0.2 source was used because no newer accepted build existed. Its 233 runtime entries matched the recorded baseline. The 1.0.3 runtime manifest records 33 changed files, 27 added files, and zero removed files, for 260 runtime files. Preserved-engine hashes and the baseline/patch declarations are checked during packaging. The original installer was not supplied for a new independent baseline extraction; the kit retains its earlier source/installer equality evidence.
 
 Checkpoint A established semantic roles, navigation hierarchy, study scope, theme scenes, the emblem, and world-specific materials. Checkpoint B carried all seventeen worlds through Home, Library, Card Studio, Mask Studio, Exam Studio, Practice, reviewer question/answer, Results, Pip, Widgets, Progress, and Tools while preserving node identity and saved values during theme changes. Checkpoint C runs the cumulative source, browser, preservation, packaging, extracted-payload, and deterministic-build gates.
 
@@ -53,8 +53,14 @@ The final shipping source was rendered in Chromium with explicitly fictional dat
 - `output/playwright/current-art/sunset-beach-home-final-390x720.png`
 - `output/playwright/current-art/world-chooser-new-worlds-1024x768.png`
 - `output/playwright/current-art/new-worlds-contact-sheet.png`
+- `output/playwright/companion-family/cutesy-rose.png`
+- `output/playwright/companion-family/green-forest.png`
+- `output/playwright/companion-family/water-tidal.png`
+- `output/playwright/companion-family/orbit-midnight.png`
+- `output/playwright/companion-family/ember-ember.png`
+- `output/playwright/companion-family/linen-linen.png`
 
-`output/playwright/current-art/final-responsive-evidence.json` records exact host/layout widths, equal main `scrollWidth`/`clientWidth`, and zero page errors for the three final Sunset Cove captures. These are real browser renders of the shipped source, not native Anki screenshots.
+`output/playwright/current-art/final-responsive-evidence.json` records exact host/layout widths, equal main `scrollWidth`/`clientWidth`, and zero page errors for the three final Sunset Cove captures. `output/playwright/companion-family/results.json` records the shipped portrait file, themed stage language, portrait renderer, image hash, zero page errors, and measured text contrast for each companion family; the lowest explanatory-text result is 6.89:1. These are real browser renders of the shipped source, not native Anki screenshots.
 
 The earlier 360-capture matrix remains historical evidence for the original twelve worlds and five viewport sizes. It is not claimed as a final native render of the five added worlds. Earlier rejected or stale-compositor frames remain failure evidence and are not cited as final screenshots.
 
@@ -64,7 +70,7 @@ The final installer passed the actual Anki 26.05 AddonManager API in a fresh dis
 
 Earlier native visual evidence used disposable synthetic profiles and payload equality checks. It covered six Home/Widgets captures in Midnight, Rose, and Forest; stock image-occlusion question/answer canvases and mask registration; and folder scheduling and Undo. Those visual tests did not run against the final five scenes or final emblem and are not presented as current native visual acceptance.
 
-Physical remote input, macOS/Retina, independent 100/125/200% native scale configurations, native fullscreen/autohide combinations, arbitrary custom templates, third-party IO Enhanced editing, live GPU Pip, decoded-image/GPU memory, native endurance, complete 200% text review, and uncoached newcomer testing remain unperformed. The browser Pip evidence uses the shipped animated fallback and makes no live WebGL claim.
+Physical remote input, macOS/Retina, independent 100/125/200% native scale configurations, native fullscreen/autohide combinations, arbitrary custom templates, third-party IO Enhanced editing, live GPU Pip, decoded-image/GPU memory, native endurance, complete 200% text review, and uncoached newcomer testing remain unperformed. The browser Pip evidence uses the shipped local portrait renderer; the preserved fallback path remains covered, and no live WebGL claim is made.
 
 The retained performance/endurance receipts are historical measurements from an earlier 1.0.3 fingerprint. They are useful regression context but are not relabeled as measurements of the final artwork bytes. Current functional/browser verification is complete; a new isolated-host performance run would be required for a final performance claim.
 

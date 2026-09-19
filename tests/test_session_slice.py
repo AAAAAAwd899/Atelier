@@ -44,7 +44,7 @@ def test_map_cannot_dispatch_a_jump_after_submission(phase):
 def test_bad_map_requests_rejected(view,page):
  with pytest.raises(ValueError):model.question_page(session(),view,page)
 
-PROTECTED=['core.py','exam_engine.py','exam_session.py','new_learning.py','storage.py','drafts.py','answers.py','evidence.py','readiness.py','progress.py','session_tools.py','companion.py','companion_layout.py','web/pip.js','web/pip-scene.js','web/app.css']
+PROTECTED=['core.py','exam_engine.py','exam_session.py','new_learning.py','storage.py','drafts.py','answers.py','evidence.py','readiness.py','progress.py','session_tools.py','companion.py','companion_layout.py','web/pip/asset_manifest.json','web/pip-scene.js','web/app.css']
 @pytest.mark.parametrize('file',PROTECTED)
 def test_original_engine_and_card_integration_bytes_still_identical(file):
  before=json.loads((R/'session-slice-baseline.json').read_text())
@@ -69,5 +69,3 @@ def test_result_model_asset_loaded_with_each_theme(theme):
  worlds=importlib.import_module('session_contract.worlds');cfg=importlib.import_module('session_contract.core').settings({'theme':theme,'visual_owner':'atelier'})
  head=worlds.planner_head(cfg,'daedalus_atelier')
  assert 'AtelierSessionModel' in head and 'Session/results · rc5' in head
-
-

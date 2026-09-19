@@ -15,6 +15,13 @@ def overflow(page):
     return page.evaluate('document.documentElement.scrollWidth>innerWidth+1')
 def home_overflow(page):
     return page.evaluate('''()=>{let r=document.getElementById('atelier-root').shadowRoot;let n=r.querySelector('.main');return n&&n.scrollWidth>n.clientWidth+1}''')
+def companion_family(theme):
+    if theme in ('rose','bloom','peach','castle','lavender','sky'):return 'cutesy'
+    if theme in ('forest','matcha','cabin','sage'):return 'green'
+    if theme in ('tidal','glacier','sunset-beach'):return 'water'
+    if theme in ('midnight','obsidian','celestial','mythic'):return 'orbit'
+    if theme in ('ember','underworld'):return 'ember'
+    return 'linen'
 def capture(page,path):
     page.screenshot(path=str(path),animations='disabled',timeout=60000)
 
@@ -73,7 +80,8 @@ def run():
     check(theme+' planner uses shared world and all native links',p.evaluate('document.documentElement.dataset.atelierWorld')==theme and p.locator('.suite-tool-links [data-command]').count()==3 and not overflow(p))
     # Both font and the Pip footer, which originally retained a dark blue fixed skin.
     colours=p.evaluate('''()=>({text:getComputedStyle(document.querySelector('.es-pip-progress>strong')).color, panel:getComputedStyle(document.querySelector('.es-pip-progress')).backgroundImage,hero:getComputedStyle(document.querySelector('.es-hero')).backgroundImage,pipBackdrop:getComputedStyle(document.querySelector('.pip-card'),'::before').backgroundImage,pipButton:getComputedStyle(document.querySelector('.pip-actions button')).backgroundImage})''')
-    check(theme+' planner/Pip surfaces are from the same world','rgb(20, 42, 49)' not in colours['panel'] and '15, 34, 42' not in colours['pipBackdrop'] and colours['pipButton']=='none' and colours['hero']!='none')
+    family=companion_family(theme);pip=p.locator('.pip-card')
+    check(theme+' planner/Pip surfaces are from the same world','rgb(20, 42, 49)' not in colours['panel'] and '15, 34, 42' not in colours['pipBackdrop'] and colours['pipButton']=='none' and colours['hero']!='none' and pip.get_attribute('data-pip-world')==family and f'companion-{family}-1.0.3.png' in p.locator('.pip-image').get_attribute('src') and pip.get_attribute('data-pip-renderer')=='portrait' and p.locator('.es-pip-stage-label').inner_text().removesuffix(' stage') in p.locator('.es-growth-steps span').all_inner_texts())
     capture(p,SHOTS/f'{theme}-planner.png')
     p.locator('.es-top-nav [data-view="practice"]').click()
     check(theme+' original practice limits/strategy survive',p.locator('[data-practice="size"]').get_attribute('max')=='500' and p.locator('[data-practice="minutes"]').get_attribute('max')=='720' and p.locator('[data-practice="strategy"]').count()==1)

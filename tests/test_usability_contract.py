@@ -52,7 +52,7 @@ def test_visible_new_routes_keep_host_lifecycle_guards(routes,state):
 
 def test_every_bundled_exam_file_matches_actual_rc2_installer():
  for n,h in BASE.items():
-  if n.startswith('sprout/') and n not in ('sprout/integration.py','sprout/web/app.js','sprout/web/pip.css'):
+  if n.startswith('sprout/') and n not in ('sprout/integration.py','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'):
    assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
 
 def test_card_importers_approval_storage_and_masks_remain_original_rc2():

@@ -12,7 +12,7 @@ def test_exact_upgrade_declaration_and_protected_engines():
     assert {n:h for n,h in actual.items() if n not in old}==patch['added']
     assert set(old)<=set(actual) and not patch['removed']
     protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')
-    allowed_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css'}
+    allowed_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
     assert not any(n.startswith(protected) and n not in allowed_presentation for n in patch['changed'])
 
 def test_generated_adapters_are_reproducible():
@@ -146,10 +146,14 @@ def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     assert len(catalog)==17 and ids=={'obsidian','glacier','rose','bloom','linen','matcha','midnight','peach','forest','tidal','ember','celestial','castle','underworld','mythic','cabin','sunset-beach'}
     provenance=json.loads((ROOT/'ASSET-PROVENANCE-1.0.3.json').read_text(encoding='utf8'))
     files={row['file'] for row in provenance}
-    assert files=={f'src/web/world-art/{world}-1.0.3.png' for world in ids}|{'src/web/atelier-mark-1.0.3.png'}
-    assert all(row['sha256'] and row['bytes']>500_000 and row['origin'] for row in provenance)
+    companion_files={f'src/sprout/web/pip/companion-{kind}-1.0.3.png' for kind in ('cutesy','green','water','orbit','ember','linen')}
+    landscape_files={f'src/web/world-art/{world}-1.0.3.png' for world in ids}
+    assert files==landscape_files|companion_files|{'src/web/atelier-mark-1.0.3.png'}
+    assert all(row['sha256'] and row['origin'] for row in provenance)
+    assert all(row['bytes']>500_000 for row in provenance if row['file'] in landscape_files or row['file']=='src/web/atelier-mark-1.0.3.png')
+    assert all(row['bytes']>250_000 for row in provenance if row['file'] in companion_files)
     assert all('authored SVG' not in row['origin'] for row in provenance)
-    assert len({row['sha256'] for row in provenance})==len(catalog)+1
+    assert len({row['sha256'] for row in provenance})==len(catalog)+7
     assert all((SRC/'web'/row['scene']).read_bytes()[:8]==b'\x89PNG\r\n\x1a\n' for row in catalog)
 
 def test_world_gallery_verification_scales_with_catalog():

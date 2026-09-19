@@ -14,7 +14,7 @@
    for(const world of boot.catalog){const option=document.createElement('option');option.value=world.id;option.textContent=world.name;select.append(option);}
    select.addEventListener('change',async()=>{
     if(busy)return;const restoreFocus=document.activeElement===select;busy=true;select.disabled=true;const was=config.theme;
-    try{const saved=await window.ExamSprout.suiteRequest('suite_theme',{theme:select.value});configure({theme:saved.theme});}
+    try{const saved=await window.ExamSprout.suiteRequest('suite_theme',{theme:select.value});window.ExamSprout.suiteWorld?.(saved.theme);configure({theme:saved.theme});}
     catch(err){select.value=was;const msg=document.createElement('span');msg.className='suite-world-error';msg.setAttribute('role','alert');msg.textContent=err.message;shell.append(msg);setTimeout(()=>msg.remove(),7000);}
     finally{busy=false;select.disabled=false;if(restoreFocus&&select.isConnected&&[document.body,document.documentElement,select].includes(document.activeElement))select.focus({preventScroll:true});}
    });shell.append(select);header.querySelector('.es-top-nav')?.before(shell);

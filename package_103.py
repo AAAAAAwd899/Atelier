@@ -24,7 +24,7 @@ def main():
     assert set(baseline)<=set(actual) and not patch['removed']
     assert {n:h for n,h in actual.items() if n in baseline and h!=baseline[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in baseline}==patch['added']
-    allowed_workshop_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css'}
+    allowed_workshop_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
     assert all(
         actual[n]==h
         for n,h in baseline.items()

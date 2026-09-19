@@ -84,7 +84,7 @@ def main():
  report={'version':version(),'runtime_sha256':fingerprint,'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
  'python_suites':{'suite_integration_and_preservation':cases(V/'atelier-unit.xml'),'exam_engine_and_quiet_review':cases(V/'sprout-unit.xml'),'card_studio_importers_publishers_and_routes':cases(V/'workshop-unit.xml')},
  'python_failed':0,'python_skipped':0,'browser_suites':outcomes,'browser_errors':0,'native_windows_verified':False,'native_qt_verified':False,'live_webgl_verified':False,
- 'pip_browser_renderer':'shipped animated fallback; no live GPU claim','phase':'1.0.3 cumulative presentation upgrade; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
+ 'pip_browser_renderer':'authored local portrait family; preserved fallback path; no live GPU claim','phase':'1.0.3 cumulative presentation upgrade; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
  report['python_total']=sum(report['python_suites'].values());report['browser_total']=sum(outcomes.values())
  (V/'verified.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2),flush=True)
 if __name__=='__main__':main()

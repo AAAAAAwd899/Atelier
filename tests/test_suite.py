@@ -117,18 +117,18 @@ def test_hardened_engine_module_is_unchanged(filename):
     expected=json.loads((ROOT/'vendor-baseline.json').read_text())['sha256'][filename]
     assert hashlib.sha256((SRC/'sprout'/filename).read_bytes()).hexdigest()==expected
 
-def test_only_four_integration_files_changed():
+def test_only_narrow_integration_and_presentation_files_changed():
     baseline=json.loads((ROOT/'vendor-baseline.json').read_text())['sha256']
     changed={n for n,h in baseline.items() if hashlib.sha256((SRC/'sprout'/n).read_bytes()).hexdigest()!=h}
     # 1.0.3 deliberately updates the suite presentation and themed Pip frame;
     # the engine modules remain covered by the exact hash assertions above.
-    assert changed=={'__init__.py','integration.py','runner.py','web/app.js','web/pip.css'}
+    assert changed=={'__init__.py','integration.py','runner.py','web/app.js','web/pip.css','web/pip.js'}
     assert all((SRC/'sprout'/n).is_file() for n in baseline)
 
-def test_pip_animation_and_live_model_manifest_unchanged():
+def test_pip_stage_animation_assets_and_live_model_manifest_unchanged():
     baseline=json.loads((ROOT/'vendor-baseline.json').read_text())['sha256']
     for n,h in baseline.items():
-        if n.startswith('web/pip') and n != 'web/pip.css':
+        if n.startswith('web/pip') and n not in ('web/pip.css','web/pip.js'):
             assert hashlib.sha256((SRC/'sprout'/n).read_bytes()).hexdigest()==h
 
 def test_all_worlds_have_unique_original_scenery():

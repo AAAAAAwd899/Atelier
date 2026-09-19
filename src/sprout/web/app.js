@@ -40,6 +40,7 @@
   window.ExamSprout = {
     suiteReady(){return !!S.data;},
     suiteRequest(action,payload={}){if(!S.data?.suite||!["suite_theme","suite_focus","suite_native"].includes(action))return Promise.reject(new Error("Unavailable suite action"));return request(action,payload);},
+    suiteWorld(theme){if(!S.data)return;S.data.state.settings.theme=String(theme||'');updateCompanionWorld(theme);},
     receive(message) {
       const p = pending.get(message.id);
       if (!p) return;
@@ -86,6 +87,40 @@
     if (['midnight','obsidian','celestial','mythic'].includes(id)) return {kind:'orbit', label:'Pip · night companion'};
     if (['ember','underworld'].includes(id)) return {kind:'ember', label:'Pip · ember companion'};
     return {kind:'linen', label:'Pip · paper companion'};
+  }
+  function pipStages(kind) {
+    return ({
+      cutesy:['Curious','Cozy','Confident','Radiant'],
+      green:['Sprout','Rooted','Flourishing','Canopy'],
+      water:['Ripple','Current','Tide','Horizon'],
+      orbit:['Spark','Orbit','Constellation','Zenith'],
+      ember:['Coal','Glow','Flame','Hearth'],
+      linen:['Fold','Page','Chapter','Archive']
+    })[kind] || ['Start','Steady','Growing','Flourishing'];
+  }
+  function pipActions(kind) {
+    return ({
+      cutesy:['Pet','Treat'], green:['Pet','Water'], water:['Wave','Splash'],
+      orbit:['Greet','Stargaze'], ember:['Pet','Warm'], linen:['Greet','Read']
+    })[kind] || ['Greet','Encourage'];
+  }
+  function pipStageLabel(kind, stage) {
+    const stages=pipStages(kind),index=Math.max(0,Math.min(stages.length-1,Number(stage||1)-1));
+    return `${stages[index]} stage`;
+  }
+  function updateCompanionWorld(theme) {
+    const card=root?.querySelector('.pip-card');if(!card)return;
+    const world=pipWorld(theme),base=card.dataset.pipBase,portrait=`${base}/companion-${world.kind}-1.0.3.png`;
+    [...card.classList].filter(name=>name.startsWith('pip-world-')).forEach(name=>card.classList.remove(name));
+    card.classList.add(`pip-world-${world.kind}`);card.dataset.pipWorld=world.kind;card.dataset.pipWorldLabel=world.label;card.dataset.pipPortrait=portrait;
+    const image=card.querySelector('.pip-image');if(image){image.src=portrait;image.alt=world.label;}
+    card.querySelector('.pip-world-label')?.replaceChildren(world.label);
+    card.querySelector('.pip-touch')?.setAttribute('aria-label',`Greet ${world.label}`);
+    const actions=pipActions(world.kind),buttons=card.querySelectorAll('.pip-actions button');if(buttons[0])buttons[0].textContent=actions[0];if(buttons[1])buttons[1].textContent=actions[1];
+    const stages=pipStages(world.kind);card.closest('.es-companion-panel')?.querySelectorAll('.es-growth-steps span').forEach((node,index)=>{node.textContent=stages[index]||'';});
+    const progressLabel=card.closest('.es-companion-panel')?.querySelector('.es-pip-stage-label');if(progressLabel)progressLabel.textContent=pipStageLabel(world.kind,card.dataset.pipStage);
+    card.querySelector('.pip-speech')?.replaceChildren('Quiet company. No distractions.');
+    window.PipCompanion?.mount?.();
   }
   function pipWorldMark(kind) {
     const marks = {
@@ -201,7 +236,8 @@
     const base=E((S.data.asset_base||'/_addons/exam_sprout/web')+'/pip');
     const animate=S.data.state.settings.animate_pip!==false;
     const world=pipWorld(S.data?.state?.settings?.theme);
-    return `<aside class="es-companion-panel" aria-label="Pip companion"><section class="pip-card pip-world-${world.kind}" data-pip-world="${world.kind}" data-pip-world-label="${E(world.label)}" data-pip-base="${base}" data-pip-key="profile-companion" data-pip-stage="${growth.stage}" data-pip-animate="${animate}"><span class="pip-kicker">A LITTLE LIFE BESIDE YOUR STUDY</span><button class="pip-touch" data-pip-action="greet" aria-label="Greet Pip. Drag gently to look around."><span class="pip-world-aura" aria-hidden="true"><span class="pip-world-emblem">${pipWorldMark(world.kind)}</span></span><img class="pip-image" src="${base}/stage${growth.stage}.png" alt="${E(world.label)}, a living woodland sprout with a leaf hood and acorn pin" draggable="false"><canvas class="pip-canvas" aria-hidden="true" hidden></canvas></button><strong class="pip-name">Meet Pip</strong><span class="pip-world-label">${E(world.label)}</span><span class="pip-speech" aria-live="polite">Quiet company. No distractions.</span><div class="pip-actions"><button data-pip-action="pet">Pet</button><button data-pip-action="water">Water</button></div><button class="pip-pause" data-pip-action="pause">Pause motion</button><span class="pip-mode">Loading the grove…</span></section><div class="es-pip-progress"><span>${E(growth.label)}</span><strong>${growth.score}<small>%</small></strong><div class="es-growth-bar" role="meter" aria-label="Effort progress toward Pip’s next stage, not readiness" aria-valuenow="${growth.score}" aria-valuemin="0" aria-valuemax="100"><span style="width:${growth.score}%"></span></div><div class="es-growth-steps" aria-label="Pip growth">${['Sprout','Rooted','Flourishing','Canopy'].map((name,i)=>`<span aria-current="${i+1===growth.stage?'step':'false'}">${name}</span>`).join('')}</div><p><strong>${growth.points||0} effort points</strong>${growth.next?` · ${growth.next} for the next stage`:" · Lifetime growth"}. One point per studied note per day, across exams. Incorrect effort counts too. Exam readiness is separate; petting and watering add no points.</p><button class="es-small es-full-width" data-action="pip-study">Study with Pip</button></div></aside>`;
+    const portrait=`${base}/companion-${world.kind}-1.0.3.png`, actions=pipActions(world.kind), stages=pipStages(world.kind);
+    return `<aside class="es-companion-panel" aria-label="Pip companion"><section class="pip-card pip-world-${world.kind}" data-pip-world="${world.kind}" data-pip-world-label="${E(world.label)}" data-pip-base="${base}" data-pip-portrait="${portrait}" data-pip-key="profile-companion" data-pip-stage="${growth.stage}" data-pip-animate="${animate}"><span class="pip-kicker">A LITTLE LIFE BESIDE YOUR STUDY</span><button class="pip-touch" data-pip-action="greet" aria-label="Greet ${E(world.label)}"><span class="pip-world-aura" aria-hidden="true"><span class="pip-world-emblem">${pipWorldMark(world.kind)}</span></span><img class="pip-image" src="${portrait}" alt="${E(world.label)}" draggable="false"><canvas class="pip-canvas" aria-hidden="true" hidden></canvas></button><strong class="pip-name">Meet Pip</strong><span class="pip-world-label">${E(world.label)}</span><span class="pip-speech" aria-live="polite">Quiet company. No distractions.</span><div class="pip-actions"><button data-pip-action="pet">${actions[0]}</button><button data-pip-action="water">${actions[1]}</button></div><button class="pip-pause" data-pip-action="pause">Pause motion</button><span class="pip-mode">Loading your companion…</span></section><div class="es-pip-progress"><span class="es-pip-stage-label">${E(pipStageLabel(world.kind,growth.stage))}</span><strong>${growth.score}<small>%</small></strong><div class="es-growth-bar" role="meter" aria-label="Effort progress toward Pip’s next stage, not readiness" aria-valuenow="${growth.score}" aria-valuemin="0" aria-valuemax="100"><span style="width:${growth.score}%"></span></div><div class="es-growth-steps" aria-label="Pip growth">${stages.map((name,i)=>`<span aria-current="${i+1===growth.stage?'step':'false'}">${name}</span>`).join('')}</div><p><strong>${growth.points||0} effort points</strong>${growth.next?` · ${growth.next} for the next stage`:" · Lifetime growth"}. One point per studied note per day, across exams. Incorrect effort counts too. Exam readiness is separate; companion interactions add no points.</p><button class="es-small es-full-width" data-action="pip-study">Study with Pip</button></div></aside>`;
   }
 
   function renderFocusRow(r,i){

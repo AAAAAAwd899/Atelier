@@ -17,7 +17,7 @@ BASE=json.loads((ROOT/'integration-baselines.json').read_text())
 def test_incoming_card_engine_importers_mask_model_and_art_preserved(name):
  assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['incoming'][name]
 
-@pytest.mark.parametrize('name',[n for n in BASE['rc6'] if n.startswith('sprout/') and n not in ('sprout/runner.py','sprout/web/app.js','sprout/web/pip.css','sprout/integration.py')])
+@pytest.mark.parametrize('name',[n for n in BASE['rc6'] if n.startswith('sprout/') and n not in ('sprout/runner.py','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','sprout/integration.py')])
 def test_latest_exam_engine_results_assets_preserved(name):
  assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['rc6'][name]
 
