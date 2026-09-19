@@ -62,7 +62,7 @@ def shot(p,name):
 
 try:
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=browser.new_page(viewport={'width':1440,'height':960},device_scale_factor=1)
   p.set_default_timeout(7000);p.on('pageerror',lambda e:errors.append(str(e)));p.on('request',lambda r:requests.append(r.url));p.expose_function('nativeBridge',host.dispatch)
   html=HTML

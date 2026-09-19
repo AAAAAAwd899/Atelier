@@ -80,11 +80,11 @@
   }
   function pipWorld(theme) {
     const id = String(theme || '').toLowerCase();
-    if (['rose','bloom','peach','lavender','sky'].includes(id)) return {kind:'cutesy', label:'Pip · soft cat companion'};
-    if (['forest','matcha','sage'].includes(id)) return {kind:'green', label:'Pip · grove companion'};
-    if (['tidal','glacier'].includes(id)) return {kind:'water', label:'Pip · tide companion'};
-    if (['midnight','obsidian','celestial'].includes(id)) return {kind:'orbit', label:'Pip · night companion'};
-    if (id === 'ember') return {kind:'ember', label:'Pip · ember companion'};
+    if (['rose','bloom','peach','castle','lavender','sky'].includes(id)) return {kind:'cutesy', label:'Pip · soft cat companion'};
+    if (['forest','matcha','cabin','sage'].includes(id)) return {kind:'green', label:'Pip · grove companion'};
+    if (['tidal','glacier','sunset-beach'].includes(id)) return {kind:'water', label:'Pip · tide companion'};
+    if (['midnight','obsidian','celestial','mythic'].includes(id)) return {kind:'orbit', label:'Pip · night companion'};
+    if (['ember','underworld'].includes(id)) return {kind:'ember', label:'Pip · ember companion'};
     return {kind:'linen', label:'Pip · paper companion'};
   }
   function pipWorldMark(kind) {

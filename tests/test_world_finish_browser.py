@@ -30,7 +30,7 @@ def menu_scroll(p):
 
 def main():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
   def page(theme='forest',width=1440,height=960,doc=None,**kwargs):
    p=b.new_page(viewport={'width':width,'height':height},**kwargs);p.set_default_timeout(8000);p.on('pageerror',lambda e:ERRORS.append(str(e)));p.set_content(doc or home_suite(theme));p.locator('.unified-topbar').wait_for();p.wait_for_timeout(70);return p
   # Source-faithful old-handler regression, same settled menu viewport in both cases.
@@ -53,8 +53,9 @@ def main():
    p.locator('.unified-topbar [data-action=appearance]').click();p.wait_for_timeout(60)
    check(w['id']+' world chooser has named, illustrated and typed variants',p.locator('.theme-tile').count()==len(core.THEMES) and p.locator('.theme-tile[data-theme-choice='+w['id']+']>small').inner_text()==w['material'] and p.locator('.theme-tile .theme-light').count()==len(core.THEMES))
    p.evaluate('window.savedDialog=document.querySelector("#atelier-root").shadowRoot.querySelector(".dialog");window.savedTiles=[...savedDialog.querySelectorAll(".theme-tile")]')
-   p.locator('[data-action=world-filter][data-filter=dark]').click();check(w['id']+' Dark filters six tiles without changing the current theme',p.locator('.theme-tile:visible').count()==6 and p.locator('#atelier-root').get_attribute('data-theme')==w['id'])
-   p.locator('[data-action=world-filter][data-filter=light]').click();check(w['id']+' Light filters six tiles and preserves current selection readout',p.locator('.theme-tile:visible').count()==6 and w['name']+' selected' in p.locator('#world-filter-count').inner_text())
+   dark_count=sum(x['lighting']=='dark' for x in worlds.CATALOG);light_count=sum(x['lighting']=='light' for x in worlds.CATALOG)
+   p.locator('[data-action=world-filter][data-filter=dark]').click();check(w['id']+f' Dark filters {dark_count} tiles without changing the current theme',p.locator('.theme-tile:visible').count()==dark_count and p.locator('#atelier-root').get_attribute('data-theme')==w['id'])
+   p.locator('[data-action=world-filter][data-filter=light]').click();check(w['id']+f' Light filters {light_count} tiles and preserves current selection readout',p.locator('.theme-tile:visible').count()==light_count and w['name']+' selected' in p.locator('#world-filter-count').inner_text())
    p.locator('[data-action=world-filter][data-filter=all]').click()
    check(w['id']+' filter never rebuilds the dialog or original tile nodes',p.evaluate('savedDialog===document.querySelector("#atelier-root").shadowRoot.querySelector(".dialog")&&savedTiles.every(x=>x.isConnected)'))
    tile=p.locator('[data-theme-choice='+w['id']+']');tile.scroll_into_view_if_needed();p.wait_for_timeout(50)
@@ -66,12 +67,14 @@ def main():
    p.locator('[data-theme-choice='+w['id']+']').click();p.wait_for_timeout(40)
    check('Live world '+w['id']+' caption and selected count update together',w['name'] in p.locator('.world-window small').text_content() and w['name']+' selected' in p.locator('#world-filter-count').inner_text())
   p.close()
-  # Seven real window geometries, actual mouse/key targets, not forced clicks.
-  for width,height in [(320,540),(390,650),(620,620),(820,650),(1040,720),(1440,900),(1725,900)]:
+  # Eight real window geometries, including a fullscreen desktop width; actual
+  # mouse/key targets, not forced clicks.
+  for width,height in [(320,540),(390,650),(620,620),(820,650),(1040,720),(1440,900),(1725,900),(1915,1000)]:
    p=page('rose',width,height);p.locator('.unified-topbar [data-action=appearance]').click();p.wait_for_timeout(40)
+   check(f'{width}px workspace shell fills the viewport',p.locator('#atelier-root').evaluate('(e,w)=>Math.abs(e.getBoundingClientRect().width-w)<1',width) and p.locator('.layout').evaluate('(e,w)=>Math.abs(e.getBoundingClientRect().width-w)<1',width))
    check(f'{width}px modal header/footer remain within the window',p.locator('.dialog-header').bounding_box()['y']>=0 and hit(p.locator('.dialog-footer [data-action=close-dialog]')))
    p.locator('[data-action=world-filter][data-filter=dark]').click();p.locator('[data-theme-choice=forest]').click()
-   check(f'{width}px filtering and choosing a dark world keeps the same usable dialog',p.locator('.dialog').count()==1 and 'Forest selected' in p.locator('#world-filter-count').inner_text() and p.locator('.theme-tile:visible').count()==6)
+   check(f'{width}px filtering and choosing a dark world keeps the same usable dialog',p.locator('.dialog').count()==1 and 'Forest selected' in p.locator('#world-filter-count').inner_text() and p.locator('.theme-tile:visible').count()==dark_count)
    p.locator('.dialog-body').hover();p.mouse.wheel(0,800);p.wait_for_timeout(70)
    check(f'{width}px scrolling settings does not bury Close',hit(p.locator('.dialog-footer [data-action=close-dialog]')))
    check(f'{width}px no horizontal dialog overflow',p.locator('.dialog').evaluate('e=>e.scrollWidth<=e.clientWidth+1') and p.locator('.dialog-body').evaluate('e=>e.scrollWidth<=e.clientWidth+1'))

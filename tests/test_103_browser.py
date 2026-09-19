@@ -7,7 +7,7 @@ def check(name,value):
     assert value,name
     checks.append(name)
 with sync_playwright() as pw:
-    b=pw.chromium.launch(executable_path='/usr/bin/chromium')
+    b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'))
     p=b.new_page(viewport={'width':1000,'height':720})
     p.on('pageerror',lambda e:errors.append(str(e)))
     p.set_content(card('midnight','basic'))

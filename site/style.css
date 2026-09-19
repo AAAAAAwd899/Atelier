@@ -56,16 +56,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; width: fit-content; text-decoration: none; font: 600 22px/1 Georgia, serif; }
 .brand-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(246, 220, 177, .55);
-  border-radius: 11px 3px 11px 3px;
-  color: #f6dcb1;
-  font: italic 600 22px/1 Georgia, serif;
-  transform: rotate(-3deg);
-  box-shadow: 0 0 28px rgba(246, 220, 177, .14);
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 14px rgba(246, 220, 177, .2));
 }
 .topbar nav { display: flex; gap: 26px; color: var(--muted); font-size: 14px; }
 .topbar nav a { text-decoration: none; }
@@ -139,6 +134,11 @@ h2 { margin: 0; font: 500 clamp(38px, 5vw, 64px)/1.04 Georgia, serif; letter-spa
 .forest { --world:radial-gradient(circle at 75% 15%,#6f9a73 0,transparent 24%),linear-gradient(145deg,#071c1d,#183e3d); }
 .tidal { --world:linear-gradient(155deg,#e4f2f0 0 55%,#a9d4d1 56% 66%,#d8eae8 67%); --world-ink:#1d555b; }
 .glacier { --world:linear-gradient(145deg,#0a2533,#1f526a); }
+.castle { --world:radial-gradient(circle at 76% 18%,#e4b6d0 0,transparent 24%),linear-gradient(145deg,#171425,#4e3752); }
+.underworld { --world:radial-gradient(circle at 77% 18%,#d06c3d 0,transparent 22%),linear-gradient(145deg,#120c0c,#45241c); }
+.mythic { --world:radial-gradient(circle at 72% 18%,#d8c795 0,transparent 20%),linear-gradient(145deg,#10152b,#35415f); }
+.cabin { --world:radial-gradient(circle at 76% 18%,#c6a268 0,transparent 24%),linear-gradient(145deg,#0d1717,#35453d); }
+.sunset-beach { --world:radial-gradient(circle at 72% 15%,#ee9e84 0,transparent 25%),linear-gradient(145deg,#111a2b,#35566a); }
 
 .release-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .release-grid article { padding: 32px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
@@ -148,7 +148,7 @@ h2 { margin: 0; font: 500 clamp(38px, 5vw, 64px)/1.04 Georgia, serif; letter-spa
 
 footer { width: min(1320px, calc(100% - 48px)); margin: 0 auto; padding: 30px 0 46px; display: flex; align-items: center; justify-content: space-between; gap: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 footer div { display: flex; align-items: center; gap: 12px; }
-.brand-mark.small { width: 28px; height: 28px; font-size: 17px; }
+.brand-mark.small { width: 30px; height: 30px; }
 footer strong { color: var(--ink); }
 footer a { color: #c8eff3; }
 
@@ -168,7 +168,7 @@ footer a { color: #c8eff3; }
   .topbar, .hero, .proof-strip, .workspace, .worlds, .release, footer { width: min(100% - 28px, 1320px); }
   .topbar { margin-top: 10px; padding: 10px 12px; }
   .brand { font-size: 19px; }
-  .brand-mark { width: 30px; height: 30px; font-size: 19px; }
+  .brand-mark { width: 32px; height: 32px; }
   .version { font-size: 10px; }
   .hero { min-height: auto; padding: 54px 0 70px; gap: 42px; }
   h1 { font-size: clamp(46px, 15vw, 68px); }

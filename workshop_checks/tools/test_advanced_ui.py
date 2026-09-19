@@ -11,7 +11,7 @@ def click(p,sel):p.locator(sel).first.click();p.wait_for_timeout(65)
 html=HTML.replace('<link rel="stylesheet" href="/web/app.css">','<style>'+(ROOT/'addon/web/app.css').read_text()+'</style>')
 for f in ('icons.js','art.js','mask-editor.js','app.js'):html=html.replace('<script src="/web/'+f+'"></script>','<script>'+(ROOT/'addon/web'/f).read_text()+'</script>')
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1350,'height':1000})
+ b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1350,'height':1000})
  p.set_default_timeout(5000);p.on('pageerror',lambda e:errors.append(str(e)));p.expose_function('nativeBridge',h.dispatch);p.set_content(html);p.wait_for_selector('.folio')
  # Successful discard and live refresh after external native note-type/deck changes.
  click(p,'[data-action="open-project"][data-id="'+h.primary_project+'"]');before=len(h.store.list('draft'));click(p,'[data-action="discard-draft"]');click(p,'[data-action="confirm-modal"]')

@@ -12,7 +12,7 @@ def main():
         if not v:raise AssertionError(name)
         results.append(name)
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+        browser=p.chromium.launch(headless=True,executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
         page=browser.new_page(viewport={'width':1100,'height':760})
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.set_content('''<!doctype html><html><body tabindex="-1"><main id="qa"><p id="question">What is 12 × 8?</p><div id="image" style="position:relative;width:600px;height:300px"><img style="width:600px;height:300px" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Crect width='600' height='300' fill='%237ca890'/%3E%3C/svg%3E"><div id="mask" style="position:absolute;left:20%;top:20%;width:30%;height:15%;background:salmon"></div></div><input id="typed"><textarea id="notes"></textarea><select id="choices"><option>One</option><option>Two</option></select><div contenteditable="true" id="editable"></div><button id="button">Card control</button><div data-atelier-keys="off" id="custom" tabindex="0">Custom widget</div><div id="shadow"></div></main><script>window.sent=[];window.pycmd=s=>window.sent.push(s);</script></body></html>''')

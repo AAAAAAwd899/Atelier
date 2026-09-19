@@ -16,11 +16,11 @@ def overflow(page):
 def home_overflow(page):
     return page.evaluate('''()=>{let r=document.getElementById('atelier-root').shadowRoot;let n=r.querySelector('.main');return n&&n.scrollWidth>n.clientWidth+1}''')
 def capture(page,path):
-    page.screenshot(path=str(path),animations='disabled')
+    page.screenshot(path=str(path),animations='disabled',timeout=60000)
 
 def run():
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
+  browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   def homepage(theme='forest',width=1440,height=1000):
     p=browser.new_page(viewport={'width':width,'height':height});p.set_default_timeout(9000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
     p.set_content(home_suite(theme));p.locator('.suite-plan').first.wait_for();p.wait_for_timeout(120)

@@ -3,7 +3,7 @@
 Private review candidate. The name and private package identity remain Atelier / `daedalus_atelier`.
 
 - Consolidated visual roles in a generated design contract, with scoped home, planner, authoring, reviewer and native palette adapters. Removed the duplicate home presentation layer.
-- Kept the original twelve accepted worlds as the shipped catalogue. Reworked spacing, compact controls, workspace hierarchy, and panel contrast without adding unreviewed theme art.
+- Expanded the accepted catalogue from twelve to seventeen worlds with premium raster scenes for Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove. Each new world has its own accessible role palette, materials, type treatment, atmosphere, and matching Pip emblem family.
 - Added a guarded **Save & next card** action in Card Studio. It saves the local draft, then opens a clean draft carrying the same source page, destination deck, tags, card style, selected note type, field mapping, and occlusion display preference so slide-set authoring stays coherent without copying the previous question, quotation, masks, or media.
 - Added **Save & next slide/page** for multi-page sources. It advances to the next source page while retaining the authoring context above, so a deck can be built as an organized sequence without repetitive setup.
 - Added Drafts & approval ordering by recently edited, source order, or destination deck so larger card sets remain easy to review.
@@ -34,5 +34,5 @@ Remaining acceptance work is listed in `AUDIT-1.0.3.md`. AnkiWeb identity migrat
 - Added **Open selected in Anki** to exact note search selections, handing the selected note IDs to Anki’s native Browser for familiar export/share controls.
 - Clarified the selected-note action tray so its compare, link, and export paths are visible before a user takes action.
 - Added an explicit source-context notice when the viewed slide/page differs from the active draft, with **Start draft from this page** preserving the existing draft, carrying the current deck/tags/note setup into the new draft, and linking it to its exact source location.
-- Updated the unpublished add-on information page so its inventory matches the twelve-world packaged catalogue.
+- Updated the unpublished add-on information page so its inventory matches the seventeen-world packaged catalogue.
 

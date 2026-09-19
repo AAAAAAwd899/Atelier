@@ -22,7 +22,7 @@ Choose from seventeen coordinated worlds, including a storybook castle, underwor
 
 ## Install and update
 
-Version **1.0.0** targets **Windows desktop Anki 26.08.1 with the standard editor**. Experimental editors, beta Anki releases, other desktop platforms, and arbitrary third-party combinations are not advertised as verified targets. It is not an AnkiMobile, AnkiDroid, or AnkiWeb interface add-on.
+Version **1.0.3** targets **Windows desktop Anki 26.08.1 with the standard editor**. Experimental editors, beta Anki releases, other desktop platforms, and arbitrary third-party combinations are not advertised as verified targets. It is not an AnkiMobile, AnkiDroid, or AnkiWeb interface add-on.
 
 The supplied direct-file installer uses Tools → Add-ons → Install from file. Install over earlier Atelier, keep standalone Exam Sprout and Workshop disabled, and fully restart. Do not delete their data. When distributing through an AnkiWeb listing, use that listing's real installation instructions and verify migration from the direct-file identity before directing existing users to it.
 
@@ -34,7 +34,7 @@ Anki Sync does not include all local source projects, exam records, widget notes
 
 ## About this release
 
-The project owner reported visual and primary testing passed. The release also passes its automated regression and packaging checks. This is not a claim that every card template, GPU, import codec, or add-on combination is independently certified.
+The final candidate passes its automated regression and packaging checks and includes actual browser screenshots for owner review. Public owner approval is still pending. This is not a claim that every card template, GPU, import codec, or add-on combination is independently certified.
 
 Atelier is an independent project by Daedalus Works, not an official Anki product. This package includes the separately developed Exam Studio and Card Studio components with their original license notices. There is no need to install independent copies of those components.
 

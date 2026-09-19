@@ -185,7 +185,7 @@ class Atelier:
             boot = {"version": VERSION, "token": nonce, "settings": config,
                     "profile": self.profile, "ui": self._ui_state,
                     "openSettings": self.open_settings_next, "preview": False,
-                    "worlds": CATALOG, "authoring": self.authoring_summary() if hasattr(self, "authoring_summary") else {}, "suite": self.sprout_link.summary(), "nativeTools": capabilities(mw), "suiteAssets": f"/_addons/{self.package}/sprout/web",
+                    "worlds": CATALOG, "authoring": self.authoring_summary() if hasattr(self, "authoring_summary") else {}, "suite": self.sprout_link.summary(), "nativeTools": capabilities(mw), "assetBase": f"/_addons/{self.package}/web", "suiteAssets": f"/_addons/{self.package}/sprout/web",
                     "integrations": {"bundled": True, "exam_sprout": self.sprout_link.available(), "onigiri": self.ownership.available(), **self.ownership.report()}}
             # Read CSS as text and mount it *inside* a shadow root. Other add-ons'
             # body/button/card selectors cannot reach Atelier's interface.

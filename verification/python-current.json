@@ -1,18 +1,18 @@
 {
   "name": "Atelier current Python release gate",
   "version": "1.0.3",
-  "runtime_sha256": "be638a3344654ca514083c3a1bdb9060eeceaf78dcc8a24b99c59ce0d9edf28a",
-  "completed_utc": "2026-09-14T13:38:42.379355Z",
+  "runtime_sha256": "a3a34d14125121ef6686d5fd9ca9f352c5f8464f86fe8dec05f3c55add4bb9bf",
+  "completed_utc": "2026-09-19T21:04:10.643117+00:00",
   "suites": {
-    "atelier": 1167,
+    "atelier": 1233,
     "sprout": 460,
     "workshop": 209
   },
-  "total": 1836,
+  "total": 1902,
   "failed": 0,
   "skipped": 0,
-  "command": ".venv\\Scripts\\python.exe verify_release.py --python-only",
-  "scope": "Python model, preservation, importer, authoring and route suites; browser/native host coverage is separate and remains incomplete.",
+  "command": ".venv\\Scripts\\python.exe verify_release.py",
+  "scope": "Python model, preservation, importer, authoring and route suites from the same runtime fingerprint as verification/verified.json; native host coverage is reported separately.",
   "log_files": [
     "atelier-unit.log",
     "sprout-unit.log",

@@ -16,7 +16,7 @@ def main():
  h=UnifiedHost();mod=h.appearance_module
  slide_source=h.store.add_source(h.primary_project,'Cardiology lecture 04','pptx',[{'text':'Slide one: rhythm overview'},{'text':'Slide two: atrial fibrillation'},{'text':'Slide three: treatment decisions'},{'text':'Slide four: review'}])['source']['id']
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   page=browser.new_page(viewport={'width':1440,'height':960});page.set_default_timeout(6000)
   page.on('pageerror',lambda e:errors.append(str(e)))
   page.expose_function('nativeBridge',h.dispatch)

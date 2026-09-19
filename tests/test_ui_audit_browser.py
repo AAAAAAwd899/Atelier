@@ -45,7 +45,7 @@ def large_doc():
 
 def run():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
   def page(doc,width=1440,height=960):
    p=b.new_page(viewport={'width':width,'height':height});p.set_default_timeout(7000);p.on('pageerror',lambda e:ERRORS.append(str(e)));p.set_content(doc);p.locator('.world-window').wait_for();return p
   def status(p):return p.evaluate("()=>{const h=document.querySelector('#atelier-root'),r=h.shadowRoot,w=r.querySelector('.world-window');return {theme:h.dataset.theme,label:w.querySelector('small').textContent,title:w.querySelector('strong').textContent,world:w.dataset.world,aria:w.getAttribute('aria-label'),art:getComputedStyle(w).backgroundImage,side:r.querySelector('.appearance-link small').textContent}}")

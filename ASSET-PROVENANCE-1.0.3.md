@@ -1,6 +1,8 @@
 # Atelier 1.0.3 landscape provenance
 
-Atelier ships twelve local world plates (`obsidian`, `glacier`, `rose`, `bloom`, `linen`, `matcha`, `midnight`, `peach`, `forest`, `tidal`, `ember`, and `celestial`). They are scenery generated through OpenAI image generation during the implementation session and copied from local output without image modification. All are scenery, never application screenshots or evidence. No user source image, mask original, logo, font, or third-party screenshot was used to create them.
+Atelier ships seventeen local world plates (`obsidian`, `glacier`, `rose`, `bloom`, `linen`, `matcha`, `midnight`, `peach`, `forest`, `tidal`, `ember`, `celestial`, `castle`, `underworld`, `mythic`, `cabin`, and `sunset-beach`). They are scenery generated through OpenAI image generation during the implementation session and copied from local output without image modification. All are scenery, never application screenshots or evidence. No user source image, mask original, logo, font, or third-party screenshot was used to create them.
+
+The local `atelier-mark-1.0.3.png` is a separately generated transparent brand emblem. It replaces the generic circled-letter placeholder in the shipped navigation and loading state. The unpublished information page carries an exact copy.
 
 Art direction: original, calm 16:9 landscapes with atmospheric depth, quiet central space, and more detail at the bottom and edges. Prompts and SVG source expressly exclude interface panels, controls, labels, devices, promotional layouts, and text.
 

@@ -1,8 +1,26 @@
 [
   {
+    "file": "src/web/atelier-mark-1.0.3.png",
+    "sha256": "6b3ee9c2e8ca06b7b95fe32726e809a691505e3938dc178c9d032620bd645c25",
+    "bytes": 687409,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
     "file": "src/web/world-art/bloom-1.0.3.png",
     "sha256": "f837f4734d80ffa1806a81562bd9ef4bee42239db7ffb627986a29deb8cc7dea",
     "bytes": 2720225,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/cabin-1.0.3.png",
+    "sha256": "9d1f5fa40a47dd0c090b0597cf87b52632b4ee61b64827edc4b47d4696679902",
+    "bytes": 2545388,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/castle-1.0.3.png",
+    "sha256": "c0b27814a50477d231c47d61491e5060fd614df80996e5d097322928ac3d8ffa",
+    "bytes": 2572493,
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
@@ -48,6 +66,12 @@
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
+    "file": "src/web/world-art/mythic-1.0.3.png",
+    "sha256": "308569ad965817c143716f2da004292bc7d4fe3afe679548d4a4be0faab1d3fe",
+    "bytes": 2561687,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
     "file": "src/web/world-art/obsidian-1.0.3.png",
     "sha256": "26a4bd7871cf944d1f586cdce7d571c26809e48ae52ed8918ed9d9e88ce31f5f",
     "bytes": 2098107,
@@ -66,9 +90,21 @@
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   },
   {
+    "file": "src/web/world-art/sunset-beach-1.0.3.png",
+    "sha256": "a362268b0fe88a3b229fb33081231c8350125406cd7946248ba2629d64339001",
+    "bytes": 2561607,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
     "file": "src/web/world-art/tidal-1.0.3.png",
     "sha256": "16a2c17e0db6d0287a83b05c0f17c642994460da36cf24e130294d0ac5697ad9",
     "bytes": 2598988,
+    "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
+  },
+  {
+    "file": "src/web/world-art/underworld-1.0.3.png",
+    "sha256": "553a8b19d37d3c97ab947800ea100fa1cdb9a555f69a993935389d3bec18c705",
+    "bytes": 2194962,
     "origin": "OpenAI image generation, this implementation session; original local output copied without modification"
   }
 ]

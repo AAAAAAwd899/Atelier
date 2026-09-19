@@ -38,7 +38,7 @@ def setup(p,name='Clinical science · Exam 3'):
 
 def run():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   def page(theme='forest',width=1440,height=980,enabled=True):
    p=b.new_page(viewport={'width':width,'height':height});p.set_default_timeout(12000);p.on('pageerror',lambda e:ERRORS.append(str(e)));expose(p)
    p.set_content(html(theme,enabled));p.locator('[data-action="new"]').first.wait_for(state='attached');p.wait_for_timeout(80);return p

@@ -10,7 +10,7 @@ changed={n:sha(b) for n,b in current.items() if n in old and b!=old[n]}
 added={n:sha(b) for n,b in current.items() if n not in old}
 removed=sorted(set(old)-set(current))
 if removed:raise SystemExit('Unexpected runtime removal: '+str(removed))
-(ROOT/'baseline-1.0.2.json').write_text(json.dumps({n:sha(b) for n,b in old.items()},indent=2)+'\n',encoding='utf8')
-(ROOT/'tests/data/release-102-baseline.json').write_text(json.dumps({n:old[n].decode('utf8') for n in changed},ensure_ascii=True)+'\n',encoding='utf8')
-(ROOT/'patch-103-changes.json').write_text(json.dumps({'baseline':'verified Atelier 1.0.2 source','changed':changed,'added':added,'removed':removed},indent=2)+'\n',encoding='utf8')
+(ROOT/'baseline-1.0.2.json').write_text(json.dumps({n:sha(b) for n,b in old.items()},indent=2)+'\n',encoding='utf8',newline='\n')
+(ROOT/'tests/data/release-102-baseline.json').write_text(json.dumps({n:old[n].decode('utf8') for n in changed},ensure_ascii=True)+'\n',encoding='utf8',newline='\n')
+(ROOT/'patch-103-changes.json').write_text(json.dumps({'baseline':'verified Atelier 1.0.2 source','changed':changed,'added':added,'removed':removed},indent=2)+'\n',encoding='utf8',newline='\n')
 print('Declared',len(changed),'changed;',len(added),'added; zero removed runtime files.')

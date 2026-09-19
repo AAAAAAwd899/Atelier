@@ -35,6 +35,21 @@
 :host([data-owner="atelier"][data-theme="celestial"]),.mini-screen[data-theme="celestial"],html[data-atelier-world-enabled="true"][data-atelier-world="celestial"]{
  --finish-aperture:54px 54px 12px 12px;--finish-angle:130deg;--finish-alpha:0.035;--finish-pattern:radial-gradient(ellipse at 110% -10%,transparent 52%,var(--finish-line) 52.2%,transparent 52.5%,transparent 67%,var(--finish-line) 67.2%,transparent 67.5%);
 }
+:host([data-owner="atelier"][data-theme="castle"]),.mini-screen[data-theme="castle"],html[data-atelier-world-enabled="true"][data-atelier-world="castle"]{
+ --finish-aperture:72px 72px 14px 14px;--finish-angle:118deg;--finish-alpha:0.035;--finish-pattern:radial-gradient(ellipse at 50% 120%,transparent 50%,var(--finish-line) 50.2%,transparent 50.6%,transparent 68%,var(--finish-line) 68.2%,transparent 68.6%);
+}
+:host([data-owner="atelier"][data-theme="underworld"]),.mini-screen[data-theme="underworld"],html[data-atelier-world-enabled="true"][data-atelier-world="underworld"]{
+ --finish-aperture:5px 28px 5px 28px;--finish-angle:112deg;--finish-alpha:0.045;--finish-pattern:repeating-linear-gradient(167deg,transparent 0 54px,var(--finish-line) 55px 56px,transparent 57px 112px);
+}
+:host([data-owner="atelier"][data-theme="mythic"]),.mini-screen[data-theme="mythic"],html[data-atelier-world-enabled="true"][data-atelier-world="mythic"]{
+ --finish-aperture:52px 52px 9px 9px;--finish-angle:132deg;--finish-alpha:0.035;--finish-pattern:radial-gradient(ellipse at 105% -8%,transparent 48%,var(--finish-line) 48.2%,transparent 48.6%,transparent 65%,var(--finish-line) 65.2%,transparent 65.6%);
+}
+:host([data-owner="atelier"][data-theme="cabin"]),.mini-screen[data-theme="cabin"],html[data-atelier-world-enabled="true"][data-atelier-world="cabin"]{
+ --finish-aperture:15px;--finish-angle:128deg;--finish-alpha:0.03;--finish-pattern:repeating-linear-gradient(90deg,transparent 0 63px,var(--finish-line) 64px 65px,transparent 66px 128px);
+}
+:host([data-owner="atelier"][data-theme="sunset-beach"]),.mini-screen[data-theme="sunset-beach"],html[data-atelier-world-enabled="true"][data-atelier-world="sunset-beach"]{
+ --finish-aperture:34px 13px 46px 13px;--finish-angle:148deg;--finish-alpha:0.03;--finish-pattern:repeating-radial-gradient(ellipse at 100% 130%,transparent 0 48px,var(--finish-line) 49px 50px,transparent 51px 88px);
+}
 
 :host([data-owner="atelier"]){--finish-line:color-mix(in srgb,var(--accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
 html[data-atelier-world-enabled="true"]{--finish-line:color-mix(in srgb,var(--ats-accent) 10%,transparent);--finish-sheen:linear-gradient(var(--finish-angle,120deg),rgba(255,255,255,var(--finish-alpha,.03)),transparent 60%);}
@@ -96,3 +111,8 @@ html[data-atelier-world-enabled="true"] #es-app :is(.suite-session-kicker,.suite
 .theme-tile[data-theme-choice="tidal"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
 .theme-tile[data-theme-choice="ember"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;}
 .theme-tile[data-theme-choice="celestial"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="castle"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="underworld"] .theme-title{font-family:"Segoe UI", system-ui, sans-serif;letter-spacing:.04em;}
+.theme-tile[data-theme-choice="mythic"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="cabin"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+.theme-tile[data-theme-choice="sunset-beach"] .theme-title{font-family:Georgia, "Times New Roman", serif;}

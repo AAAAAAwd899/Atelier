@@ -6,7 +6,7 @@ def main():
  checks=[];errors=[]
  def check(n,v):assert v,n;checks.append(n)
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1440,'height':960});expose(p);p.on('pageerror',lambda e:errors.append(str(e)));p.set_content(html('forest'));p.locator('[data-action="new"]').first.wait_for()
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1440,'height':960});expose(p);p.on('pageerror',lambda e:errors.append(str(e)));p.set_content(html('forest'));p.locator('[data-action="new"]').first.wait_for()
   # deck ID from the original fixture is used rather than a made-up target.
   data=command('load',{});did=data['decks'][0]['id'];query='nid:1700000000001,1700000000002'
   p.evaluate('(v)=>ExamSprout.event("suite-navigate",v)',{'view':'new','setup':{'name':'Source-linked preparation','deck_ids':[str(did)],'query':query}})

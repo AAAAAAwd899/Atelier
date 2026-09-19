@@ -20,7 +20,7 @@ def main():
   assert v,name
   checks.append(name);print('PASS',name,flush=True)
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':960});p.set_default_timeout(6500);p.on('pageerror',lambda e:errors.append(str(e)))
   def click(sel):p.locator(sel).first.click();p.wait_for_timeout(150)
   def shot(name):p.screenshot(path=str(SHOTS/name),full_page=True)

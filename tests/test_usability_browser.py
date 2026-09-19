@@ -28,7 +28,7 @@ def main():
   assert v,n
   checks.append(n);print('PASS',n,flush=True)
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=browser.new_page(viewport={'width':1440,'height':900});p.set_default_timeout(5500);p.on('pageerror',lambda e:errors.append(str(e)))
   def clk(sel):p.locator(sel).first.click();p.wait_for_timeout(110)
   def shot(n):p.screenshot(path=str(SHOTS/(n+'.png')),full_page=True)

@@ -9,7 +9,7 @@ OUT=ROOT/'dist';OUT.mkdir(exist_ok=True)
 checks=[];errors=[]
 def ok(name):checks.append(name);print('PASS',name,flush=True)
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
  def page(html,w=1400,h=900):
   p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(3500);p.on('pageerror',lambda e:errors.append(str(e)));p.set_content(html);p.wait_for_timeout(160);return p
  for owner,mixed,layout in itertools.product(['onigiri','external'],[False,True],[False,True]):

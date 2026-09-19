@@ -1,85 +1,73 @@
 # Atelier 1.0.3 — private candidate audit
 
-Status: implemented and packaged for owner review, with the automated verification recorded below. This is not public-release approval or universal compatibility acceptance. The owner rejected the first flat Forest render and also rejected the five unreviewed replacement world plates; they are held outside `src/` and are not shipped. The checked-in interface captures are historical evidence from the prior reviewed runtime.
+Status: implemented and verified for private owner review. This is not public-release approval, an AnkiWeb upload, or universal compatibility acceptance. Atelier is a local desktop application with no server accounts, payments, telemetry, or production database. The staged `site/` is an unpublished informational site.
 
-## Current candidate delta
+## Current candidate
 
-The runtime source for this private candidate is bound by fingerprint `be638a3344654ca514083c3a1bdb9060eeceaf78dcc8a24b99c59ce0d9edf28a`; the exact source commit is recorded in `dist/Atelier-1.0.3-Build.json`. It adds authored, scalable Pip world emblems around the existing animated/3D sculpture: a soft cat treatment for cutesy worlds, botanical leaves for green worlds, and tide, orbit, ember, or paper treatments for the remaining worlds. The accepted twelve-world catalogue remains unchanged; five replacement scene concepts are held outside the runtime for a future image-generation pass and are excluded from the installer. It makes selecting multiple parent folders for one exam explicit and explains overlap handling. The sidebar, scope card, workflow inbox, focus panel, exam sections and deck cards now use layered world-aware surfaces, depth, and clearer navigation grouping; the atmosphere control is a restrained scenic tile using the selected world. The no-focus desk leads with Set your focus and keeps Browse library beside it, so a new learner can establish an exact study scope immediately. The Drafts & approval inbox can be filtered by project or source, ordered by recently edited, source order, or destination deck, and each row retains source/page provenance. Selected drafts can be organized in one guarded step by destination deck, shared tags, and exact tags to remove; the normal approval preflight remains required. Projects can remember a local default destination deck for new and split-note drafts while retaining per-card overrides. The source rail marks pages that already contain saved drafts, shows slide/page coverage, and jumps to the next unwritten page. A focused study can open a matching Pip plan directly or start a prefilled plan. Growth stages, Pip actions, card engines, scheduling, masks, remotes, widgets, saved work and original-theme compatibility are unchanged.
-Card Studio also has guarded **Save & next card** and **Save & next slide/page** actions for slide-set authoring. The first saves the current local draft and carries only the source page, destination deck, tags, card style, selected note type, field mapping, and occlusion display preference into a clean draft. The second additionally advances to the next page of a multi-page source. Neither action copies the previous question, masks, media, or source quotation. The guided step now surfaces compare, sequence, application, cloze, image, and image occlusion choices before the editor, with a plain-language path to Mask Studio for an opened or attached image. Library folder and deck menus also expose scoped **Export / share** actions; parent-folder exports include subdecks and single-deck exports stay focused while Anki retains its native confirmation flow.
+The current runtime fingerprint is `a3a34d14125121ef6686d5fd9ca9f352c5f8464f86fe8dec05f3c55add4bb9bf`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
-Compact Card Studio navigation retains short text labels beside its icons so the mobile-sized action bar remains discoverable for new users. Image-backed source pages also expose **Native mask editor** beside Mask Studio, handing the rendered page image directly to Anki’s supported Image Occlusion editor so its native shapes and hide modes remain available without a separate attachment step. Exact note search selections also expose **Open selected in Anki**, carrying those note IDs into Anki’s native Browser for its normal export/share controls; the tray explains compare, link, and export choices before action.
+Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, distinct materials, and theme-specific Pip companion accents. The rejected flat castle illustration is not shipped. The wordmark now uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
-The installer is `dist/Atelier-1.0.3.ankiaddon` with SHA-256 `cf8d30eb10b7e7b647f92a1979226c9331269fb31a52b96c2c09ee70bcc5d907`; the matching source archive digest is recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`. Both are rebuilt from this fingerprint and marked `full_automated_verification: false`. The browser, native, performance, memory and endurance receipts described later are retained historical evidence for prior fingerprints and must be rerun before a production-ready claim. Local browser escalation is currently unavailable; no stale receipt is relabeled as current. The draft inbox also exposes a one-click **Clear selection** action so a filtered batch can be reset safely before another organization pass. It also exposes **Select all filtered** with a filter-scoped clear toggle for multi-page batches. Card Studio also explains when the viewed source page differs from the active draft and offers an explicit page-linked new draft without implicit source attachment. That new draft carries the current destination, tags, note mapping, card style and occlusion display preference so source-set authoring does not require repeating setup.
+The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. Sunset Cove received an authored coastal sidebar, stronger selected navigation, differentiated task and repair surfaces, a deeper study-focus material, and restrained warm accents. Other themes keep their own scene, shape, type, surface, and Card Studio treatment.
+
+The functional upgrade preserves and extends the accepted 1.0.2 behavior:
+
+- whole-folder shuffle and native Anki scheduling remain intact;
+- one exam can explicitly include multiple parent folders, with overlapping descendants de-duplicated;
+- a focused class or folder is available from Home, Pip, and Exam Studio;
+- Pip keeps the shared growth/study behavior while its companion treatment changes by world;
+- Card Studio retains local source projects, drafts, field mapping, approval, duplicate checks, publishing, and slide/page provenance;
+- guarded **Save & next card** and **Save & next slide/page** actions carry only source/destination/mapping preferences into a clean draft;
+- image-backed pages can open Mask Studio or hand the rendered image to Anki's supported native Image Occlusion editor;
+- exact note selections can open in Anki's Browser, and folder/deck menus expose scoped native export/share actions;
+- masks, remotes, native widgets, saved work, source images, exam sessions, original themes, and optional Onigiri boundaries remain preserved.
 
 ## Source and checkpoints
 
-The supplied 1.0.2 source archive was checked and extracted. Its 233 runtime entries matched the recorded baseline. The original installer itself was not supplied for independent rechecking; the kit records its earlier source/installer equality. No newer accepted build existed. Git main preserves the baseline.
+The supplied verified 1.0.2 source was used because no newer accepted build existed. Its 233 runtime entries matched the recorded baseline. The 1.0.3 runtime manifest records 31 changed files, 21 added files, and zero removed files, for 254 runtime files. Preserved-engine hashes and the baseline/patch declarations are checked during packaging. The original installer was not supplied for a new independent baseline extraction; the kit retains its earlier source/installer equality evidence.
 
-The current candidate delta contains 31 changed files, 15 added files and 0 removed files: 248 runtime files total. Original exam and authoring runtime trees, stores, scheduling/folder-order operation, remotes, mask publication and widget data logic remain byte-identical. The generated palette contract and scoped presentation adapters contain the upgrade; source images and stored mask coordinates are not converted.
-
-- A: canonical roles, retired duplicate home layer, compact Home/Widgets hierarchy and twelve accepted local landscapes. Midnight, Rose and Forest were rendered in actual Anki. The original Forest screenshot was superseded after inspection.
-- B: existing world IDs retained across Home, Library list/grid, Card Studio, Mask Studio, Exam setup, Practice builder, reviewer question/answer, Results, Pip, Widgets, Progress and Tools. The checked-in final matrix contains 360 historical interface captures for the twelve worlds at 1440×900, 1280×720, 1024×768, 800×600 and browser-only 390×720. Rejected replacement plates are held outside the runtime and have no interface captures.
-- C: preserved-engine verification, exact stock IO native lifecycle tests, actual folder scheduler checks, cumulative installer, matching source, repeat-build equality, extracted-payload checks, real recording and a private-repository-ready handoff. Owner visual acceptance and the unavailable host/hardware gates remain open.
+Checkpoint A established semantic roles, navigation hierarchy, study scope, theme scenes, the emblem, and world-specific materials. Checkpoint B carried all seventeen worlds through Home, Library, Card Studio, Mask Studio, Exam Studio, Practice, reviewer question/answer, Results, Pip, Widgets, Progress, and Tools while preserving node identity and saved values during theme changes. Checkpoint C runs the cumulative source, browser, preservation, packaging, extracted-payload, and deterministic-build gates.
 
 ## Current automated evidence
 
-Current Python verification: 1,167 Atelier checks, 460 Sprout checks and 209 Workshop checks passed with zero failures/skips (1,836 total) after removing the rejected replacement world art from the shipped runtime. The runtime-bound receipt is `verification/python-current.json`. Browser verification was attempted but could not start Playwright on this Windows host (`WinError 5: Access is denied` while creating its subprocess pipes); no browser receipt is relabeled as current. The historical receipt below records 27 browser suites with 2,127 checks and zero reported page errors for an earlier fingerprint. Pure logic/model/storage tests and browser native-API doubles are identified in the individual receipts. Native tests are separate below. The full verification gate is `verify_release.py`; deterministic packaging additionally checks syntax, manifest, ZIP CRC, preserved engine hashes, forbidden/private files, exact source/installer bytes and repeat builds.
+The final `verify_release.py` run completed on 2026-09-19 against the fingerprint above:
 
-The complete CI run is https://github.com/AAAAAAwd899/Atelier/actions/runs/34750594169, runtime source commit `0bd95a6bf9d4751e79fcfaa04a7e7206d4dc5e78`. The combined Card Studio launcher checks, including repeated mount, narrow layouts, theme-specific materials and original-theme round trips, are included in the full-verifier total above.
-
-The 360 historical captures reported no horizontal page overflow or uncaught page errors. Contact sheets for every captured screen were inspected at 1440×900 and 390×720 across the twelve worlds. The unpublished add-on information page was also rendered at desktop and phone widths with its real interface images loaded, no horizontal overflow and no page errors. Nine scoped axe scans (Midnight/Rose/Forest × Home/Widgets/Tools) found zero violations; incomplete axe checks are retained. The conservative 78%-canvas composited backdrop probe passes normal-text 4.5:1 for the twelve worlds, with a minimum measured 4.653:1. These probes are not a complete accessibility certification or a claim that every possible user template was checked.
-
-The extracted installer ran 16 unit checks and the designated 1.0.3 IO, 1.0.1 reviewer/remote-focus and 1.0.2 folder/browser checks. Their separate logs bind execution to the extracted files, whose runtime bytes equal the delivered source. Initial extracted 1.0.1 testing exposed a fixed 40 ms test race; the harness now waits for the measured long-content layout before testing user scrolling, retaining the scroll assertion.
-
-Windows original authoring tests passed 208 of 209; the unchanged filesystem symlink test requires Windows privilege 1314. The complete Linux verifier passed all 209 authoring cases. Windows DST fixtures now use explicit America/Chicago transitions with their original 23/25-hour assertions. Older world font assertions were corrected to check every computed heading against the existing catalog; the original catalog had two font stacks, not three. Panel-radius regression and insufficient muted-text contrast found during rendering were fixed. CI Pip timeouts led to explicit loaded-screen waits and sequential browser execution; assertions were retained.
-
-The project development environment dependency scan initially reported vulnerable pip/setuptools versions. Updating those project-local packaging tools produced a clean rescan. Both scan receipts are included. This covers the scanned development environment, not Anki's own Python/Qt distribution or a guarantee against unknown vulnerabilities.
-
-## Historical native evidence
-
-Windows, installed Anki 26.05 build e64c6b1a; disposable synthetic profiles only, no owner profile or sync. Payload bytes are checked against the installer source before loading. Rendering tests copy the extracted payload into the QA add-on folder. A separate real AddonManager installer test exercises the ZIP update path; the GUI file picker was not automated.
-
-- Six real main-window captures: Home and fully loaded built-in Widgets in Midnight, Rose and Forest. Measured logical window 1283×700, screenshot 1925×1050, device pixel ratio 1.5. No fabricated title bars or substituted statistics.
-- Stock native IO: real question/answer canvases, fitted whole image/mask registration, Actual size, original note/media preservation, native rating/revlog and native Undo. Nine checks pass. A known landmark is visibly occluded on question and revealed on answer. Fit support is restricted to the documented exact stock-template fingerprint; unknown/custom templates fail closed.
-- Actual Anki folder backend: eight checks pass for parent preset isolation, unchanged lecture/unrelated presets, preserved global options, native Undo, no repeated preset clone, exact scope and a native queue containing all three synthetic lecture decks. The recorded order does not promise strict alternation or override Anki limits/learning rules.
-- Actual Anki AddonManager: eight checks pass for baseline installation, cumulative update, payload equality, retained preferences, retained `user_files`, untouched profile-local saved-file sentinels, private package identity and no conflicting installs. The native compatible flag is true on this host. Saved-file sentinels test update preservation, while semantic store operations are covered by the separate original engine suites. A test-profile lock collision was resolved with a fresh unique QA profile for each native IO run.
-
-Input was scripted API/JavaScript, not a physical remote. Native GPU initialization warnings occurred and rendering used the software path; no live GPU claim. Requested 100% scaling was clamped by the host, so those attempts are not independent 100/125/200% tests. Initial offscreen/late-sizing/blank-canvas failures are retained separately; final screenshots wait for actual canvas painting. Native QA shutdown can block in collection close after completed receipts; the harness bounds shutdown for its disposable profile.
-
-Final gallery inspection also caught stale native compositor frames in two Home/Widgets captures despite ready browser diagnostics. The capture harness now checks the requested world and route, allows the native compositor to settle, and the six-screen set was retaken and inspected. The rejected frames remain explicitly labelled capture failures, not final passing screenshots.
-
-## Performance evidence
-
-Same local Windows host, baseline source and candidate fixtures. Baseline measurements were run from the untouched Git baseline during final verification, not recorded before development began. Other task processes were active. Values are median / p95 milliseconds.
-
-| Probe | Samples each | Baseline 1.0.2 | Candidate 1.0.3 |
+| Evidence | Passed | Failed | Skipped/errors |
 |---|---:|---:|---:|
-| open | 5 | 1139.5 / 3091.3 | 955.3 / 1098.6 |
-| navigation | 30 | 198.1 / 356.9 | 149.6 / 181.2 |
-| search_5000 | 10 | 385.3 / 452.0 | 356.5 / 509.6 |
+| Atelier integration and preservation | 1,233 | 0 | 0 |
+| Exam engine and quiet review | 460 | 0 | 0 |
+| Card Studio importers, publishers, and routes | 209 | 0 | 0 |
+| 28 browser suites | 2,628 | 0 | 0 page errors |
+| **Total** | **4,530** | **0** | **0** |
 
-Open means HTML through controls, fonts and two frames, not disk-cold scenery or native Anki startup. Navigation includes automation and two frames; 5,000-deck search includes production debounce and paint. The table records both median and p95 so the observed search-tail variance remains visible; this is not an isolated-host speed claim.
+The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
-The browser endurance probe completed 1808.7 seconds and 180 route/theme cycles with no page errors. After the first complete palette rotation, retained nodes stayed at 2670, listeners at 62 and documents at 2. Forced-GC JavaScript heap rose from 2.98 MiB at cycle 18 to 3.36 MiB at the last sample. This small rise remains an observation, not a no-leak guarantee. Decoded scenery/GPU memory, native 30–60-minute review endurance and isolated source/figure-load timing remain unmeasured.
+The expanded world-finish suite passes 266 checks. It verifies all seventeen world materials and chooser previews, light/dark filters, keyboard focus, reduced motion, forced-color focus, failed-save alerts, planner value preservation, stable grading targets, and exact workspace width at 320, 390, 620, 820, 1040, 1440, 1725, and 1915 pixels. Current receipts are in `verification/verified.json`, `verification/python-current.json`, and the suite-specific verification folders.
 
-An additional 288-cycle accelerated investigation captured actual V8 heap snapshots after warmup. DOM/listener/document counts remained unchanged. Between cycles 48 and 288, snapshot `code` entries grew by 315920 bytes, while closure self-size was unchanged and object self-size grew by only 240 bytes. The observed growth was dominated by V8 code entries rather than retained page nodes/handlers. Embedder heap use fell from 6010600 to 5098872 bytes across those samples. This investigation does not measure total decoded-image or GPU RAM.
+## Rendered interface evidence
 
-## Visual scorecard and open gates
+The final shipping source was rendered in Chromium with explicitly fictional data and visually inspected at fullscreen, desktop, and phone widths:
 
-Composition: richer local scenery, tighter hierarchy and world-specific shapes; the inspected source plates and historical captures support the change. Readability: composited palette and scoped axe checks pass; arbitrary card content remains outside that claim. Consistency: catalog font/shape and theme-switch assertions pass. Task clarity: preserved actual workflows and default/empty/error/long/dirty-form browser cases are in the evidence; an uncoached newcomer study is still needed. Native integration: limited historical Windows Home/Widgets/IO and folder backend checks pass.
+- `output/playwright/current-art/sunset-beach-home-fullscreen-1915x1000.png`
+- `output/playwright/current-art/sunset-beach-home-final-1280x800.png`
+- `output/playwright/current-art/sunset-beach-home-final-390x720.png`
+- `output/playwright/current-art/world-chooser-new-worlds-1024x768.png`
+- `output/playwright/current-art/new-worlds-contact-sheet.png`
 
-Representative full-size screens were inspected and failures corrected. This does not claim a human inspected every one of the 360 captures or every possible visual state. Owner acceptance of the five scorecard dimensions remains pending. The recording shows actual browser interactions using explicitly synthetic data; generated landscapes have separate provenance and are never presented as UI test evidence.
+`output/playwright/current-art/final-responsive-evidence.json` records exact host/layout widths, equal main `scrollWidth`/`clientWidth`, and zero page errors for the three final Sunset Cove captures. These are real browser renders of the shipped source, not native Anki screenshots.
 
-Unperformed release gates: macOS/Retina, physical keyboard-mode remotes, native Windows 100/125/200% configurations, native fullscreen/autohide combinations, third-party IO Enhanced edit acceptance, every custom/media template, full native workflow integration, decoded-image memory, native endurance, 200% text enlargement across every surface, complete manual visual-state/accessibility review and uncoached newcomer tests. These require additional work and/or an available host/device; do not call the candidate production ready.
+The earlier 360-capture matrix remains historical evidence for the original twelve worlds and five viewport sizes. It is not claimed as a final native render of the five added worlds. Earlier rejected or stale-compositor frames remain failure evidence and are not cited as final screenshots.
+
+## Native and performance evidence boundaries
+
+Historical native evidence used installed Windows Anki 26.05, disposable synthetic profiles, and payload equality checks. It covered six Home/Widgets captures in Midnight, Rose, and Forest; stock image-occlusion question/answer canvases and mask registration; folder scheduling and Undo; and AddonManager in-place update preservation. Those tests did not run against the final five scenes or final emblem and are not presented as current native visual acceptance.
+
+Physical remote input, macOS/Retina, independent 100/125/200% native scale configurations, native fullscreen/autohide combinations, arbitrary custom templates, third-party IO Enhanced editing, live GPU Pip, decoded-image/GPU memory, native endurance, complete 200% text review, and uncoached newcomer testing remain unperformed. The browser Pip evidence uses the shipped animated fallback and makes no live WebGL claim.
+
+The retained performance/endurance receipts are historical measurements from an earlier 1.0.3 fingerprint. They are useful regression context but are not relabeled as measurements of the final artwork bytes. Current functional/browser verification is complete; a new isolated-host performance run would be required for a final performance claim.
 
 ## Release boundary
 
-Private repository: https://github.com/AAAAAAwd899/Atelier. Source branch `atelier-1.0.3`; no public visibility change, AnkiWeb listing or website deployment. `site/` contains unpublished add-on information with no invented numeric code, public download or approval flag. A GitHub push/site change cannot update installed copies. A future numeric AnkiWeb listing requires a verified one-time migration from private `daedalus_atelier`; subsequent approved updates must use that same listing. Account eligibility and the date it changes have not been verified.
+No repository was made public, no Pages/site deployment was performed, and no AnkiWeb listing was created or updated. A GitHub push cannot update installed Anki copies. Future automatic updates require the owner's real numeric AnkiWeb listing, a verified migration from the private `daedalus_atelier` identity, and approval of the exact installer hash, support statement, listing, and website destination.
 
-Before public rollout, approve the exact installer hash, support statement, real listing and website destination. See MANUAL_ACTIONS_REQUIRED.md, PROFESSIONAL_REVIEW_REQUIRED.md and INSTALL-1.0.3.md. Historical marketing/acceptance files retained from the source kit do not grant current approval. The shared Daedalus standards were consulted; no Atelier-specific shared dashboard report existed, so this repository audit is the current project report.
-
-
-
-
-
-
+The shared Daedalus production standard, owner directive, and operating dashboard were consulted. The dashboard's existing “Daedalus Atelier” report concerns a different local website-editor project at `apps/atelier`; no shared project report existed for this Anki add-on, so this repository audit is the current project record. External publication, account eligibility, platform rules, support/contact wording, and commercial/legal decisions remain in `MANUAL_ACTIONS_REQUIRED.md` and `PROFESSIONAL_REVIEW_REQUIRED.md`.

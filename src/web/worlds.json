@@ -8,7 +8,7 @@
     "radius": 22,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/obsidian.svg",
-    "material": "Prismatic glass \u00c2\u00b7 brushed stone",
+    "material": "Prismatic glass \u00b7 brushed stone",
     "lighting": "dark",
     "scene": "world-art/obsidian-1.0.3.png"
   },
@@ -21,7 +21,7 @@
     "radius": 12,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/glacier.svg",
-    "material": "Frosted glass \u00c2\u00b7 alpine facets",
+    "material": "Frosted glass \u00b7 alpine facets",
     "lighting": "dark",
     "scene": "world-art/glacier-1.0.3.png"
   },
@@ -34,7 +34,7 @@
     "radius": 28,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/rose.svg",
-    "material": "Rose paper \u00c2\u00b7 garden arches",
+    "material": "Rose paper \u00b7 garden arches",
     "lighting": "light",
     "scene": "world-art/rose-1.0.3.png"
   },
@@ -47,7 +47,7 @@
     "radius": 24,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/bloom.svg",
-    "material": "Porcelain \u00c2\u00b7 conservatory glass",
+    "material": "Porcelain \u00b7 conservatory glass",
     "lighting": "light",
     "scene": "world-art/bloom-1.0.3.png"
   },
@@ -60,7 +60,7 @@
     "radius": 9,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/linen.svg",
-    "material": "Bookcloth \u00c2\u00b7 brass rules",
+    "material": "Bookcloth \u00b7 brass rules",
     "lighting": "light",
     "scene": "world-art/linen-1.0.3.png"
   },
@@ -73,7 +73,7 @@
     "radius": 16,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/matcha.svg",
-    "material": "Ceramic glaze \u00c2\u00b7 shoji light",
+    "material": "Ceramic glaze \u00b7 shoji light",
     "lighting": "light",
     "scene": "world-art/matcha-1.0.3.png"
   },
@@ -86,7 +86,7 @@
     "radius": 10,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/midnight.svg",
-    "material": "Technical glass \u00c2\u00b7 teal light",
+    "material": "Technical glass \u00b7 teal light",
     "lighting": "dark",
     "scene": "world-art/midnight-1.0.3.png"
   },
@@ -99,7 +99,7 @@
     "radius": 30,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/peach.svg",
-    "material": "Warm plaster \u00c2\u00b7 courtyard light",
+    "material": "Warm plaster \u00b7 courtyard light",
     "lighting": "light",
     "scene": "world-art/peach-1.0.3.png"
   },
@@ -112,7 +112,7 @@
     "radius": 20,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/forest.svg",
-    "material": "Moss velvet \u00c2\u00b7 filtered canopy",
+    "material": "Moss velvet \u00b7 filtered canopy",
     "lighting": "dark",
     "scene": "world-art/forest-1.0.3.png"
   },
@@ -125,7 +125,7 @@
     "radius": 26,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/tidal.svg",
-    "material": "Sea glass \u00c2\u00b7 flowing contours",
+    "material": "Sea glass \u00b7 flowing contours",
     "lighting": "light",
     "scene": "world-art/tidal-1.0.3.png"
   },
@@ -138,7 +138,7 @@
     "radius": 12,
     "font": "\"Segoe UI\", system-ui, sans-serif",
     "art": "world-art/ember.svg",
-    "material": "Basalt \u00c2\u00b7 copper strata",
+    "material": "Basalt \u00b7 copper strata",
     "lighting": "dark",
     "scene": "world-art/ember-1.0.3.png"
   },
@@ -151,8 +151,73 @@
     "radius": 18,
     "font": "Georgia, \"Times New Roman\", serif",
     "art": "world-art/celestial.svg",
-    "material": "Astral glass \u00c2\u00b7 silver orbits",
+    "material": "Astral glass \u00b7 silver orbits",
     "lighting": "dark",
     "scene": "world-art/celestial-1.0.3.png"
+  },
+  {
+    "id": "castle",
+    "name": "Moonlit Castle",
+    "title": "The moonlit court",
+    "description": "Pearl stone. Rose gardens. Champagne light.",
+    "kind": "castle",
+    "radius": 26,
+    "font": "Georgia, \"Times New Roman\", serif",
+    "art": "world-art/rose.svg",
+    "material": "Pearl stone \u00b7 rose-gold light",
+    "lighting": "dark",
+    "scene": "world-art/castle-1.0.3.png"
+  },
+  {
+    "id": "underworld",
+    "name": "Underworld",
+    "title": "The obsidian citadel",
+    "description": "Basalt halls. Ember rivers. A solemn horizon.",
+    "kind": "underworld",
+    "radius": 14,
+    "font": "\"Segoe UI\", system-ui, sans-serif",
+    "art": "world-art/ember.svg",
+    "material": "Obsidian \u00b7 ember bronze",
+    "lighting": "dark",
+    "scene": "world-art/underworld-1.0.3.png"
+  },
+  {
+    "id": "mythic",
+    "name": "Mythic",
+    "title": "The scholar's sanctuary",
+    "description": "Moonstone terraces. Celestial instruments.",
+    "kind": "mythic",
+    "radius": 18,
+    "font": "Georgia, \"Times New Roman\", serif",
+    "art": "world-art/celestial.svg",
+    "material": "Moonstone \u00b7 antique gold",
+    "lighting": "dark",
+    "scene": "world-art/mythic-1.0.3.png"
+  },
+  {
+    "id": "cabin",
+    "name": "Lakeside Cabin",
+    "title": "The lakeside cabin",
+    "description": "Cedar. Firelight. Mountain rain.",
+    "kind": "cabin",
+    "radius": 18,
+    "font": "Georgia, \"Times New Roman\", serif",
+    "art": "world-art/forest.svg",
+    "material": "Cedar \u00b7 hearthstone",
+    "lighting": "dark",
+    "scene": "world-art/cabin-1.0.3.png"
+  },
+  {
+    "id": "sunset-beach",
+    "name": "Sunset Cove",
+    "title": "The sunset cove",
+    "description": "Coral dusk. Clear water. Lantern light.",
+    "kind": "coast",
+    "radius": 26,
+    "font": "Georgia, \"Times New Roman\", serif",
+    "art": "world-art/tidal.svg",
+    "material": "Sea glass \u00b7 coral dusk",
+    "lighting": "dark",
+    "scene": "world-art/sunset-beach-1.0.3.png"
   }
 ]

@@ -37,7 +37,7 @@ def main():
     )['source']['id']
     before = host.col.note_count()
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(executable_path='/usr/bin/chromium', headless=True, args=['--no-sandbox'])
+        browser = pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'), headless=True, args=['--no-sandbox'])
         page = browser.new_page(viewport={'width': 1440, 'height': 960})
         page.set_default_timeout(8000)
         page.on('pageerror', lambda error: errors.append(str(error)))

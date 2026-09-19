@@ -23,7 +23,7 @@ def hit(loc):
 
 def run():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
   def page(html=None,width=1440,height=960):
    p=b.new_page(viewport={'width':width,'height':height});p.set_default_timeout(9000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
    p.set_content(html or doc());p.locator('.unified-topbar').wait_for();p.wait_for_timeout(60);return p

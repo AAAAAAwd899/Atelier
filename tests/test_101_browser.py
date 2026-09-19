@@ -8,7 +8,7 @@ def check(name,value=True):
  assert value,name
  checks.append(name)
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
  def page(html,w=1100,h=430):
   p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(5000);p.on('pageerror',lambda e:errors.append(str(e)));p.set_content(html);p.wait_for_timeout(80);return p
  for theme in core.THEMES:

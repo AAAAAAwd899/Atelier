@@ -134,7 +134,8 @@ def test_pip_animation_and_live_model_manifest_unchanged():
 def test_all_worlds_have_unique_original_scenery():
     worlds=json.loads((SRC/'web/worlds.json').read_text())
     assert len(worlds)==len(core.THEMES)>=12 and {w['id'] for w in worlds}==set(core.THEMES)
-    assert len({hashlib.sha256((SRC/'web'/w['art']).read_bytes()).hexdigest() for w in worlds})==len(worlds)
+    assert all((SRC/'web'/w['art']).is_file() and (SRC/'web'/w['scene']).is_file() for w in worlds)
+    assert len({hashlib.sha256((SRC/'web'/w['scene']).read_bytes()).hexdigest() for w in worlds})==len(worlds)
     assert len({w['kind'] for w in worlds})==len(worlds) and len({w['radius'] for w in worlds})>=8
 
 def merged_host(app,monkeypatch,tmp_path):

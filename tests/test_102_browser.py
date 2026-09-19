@@ -29,7 +29,7 @@ def setup(theme):
     return str(soup)
 
 with sync_playwright() as pw:
-    b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+    b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
     for theme in core.THEMES:
         p=b.new_page(viewport={'width':1440,'height':920});p.set_default_timeout(6000);p.on('pageerror',lambda e:errors.append(str(e)))
         p.set_content(setup(theme));p.locator('.layout[data-page="desk"]').wait_for()

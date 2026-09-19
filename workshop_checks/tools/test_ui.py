@@ -25,7 +25,7 @@ def shot(page,path):
     page.screenshot(path=str(path),full_page=True)
 def overflow(page):return page.evaluate("document.documentElement.scrollWidth>innerWidth||[...document.querySelectorAll('#ws-page')].some(e=>e.scrollWidth>e.clientWidth+2)")
 with sync_playwright() as pw:
-    browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+    browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':1440,'height':1000},device_scale_factor=1)
     page.set_default_timeout(5000)
     page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))

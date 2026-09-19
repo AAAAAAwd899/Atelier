@@ -16,7 +16,7 @@ def check(name,v):
 
 def run():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':980});p.set_default_timeout(30000);p.on('pageerror',lambda e:errors.append(str(e)));expose(p)
   try:
    p.set_content(html('forest'));p.locator('.es-hero').wait_for();p.locator('[data-action="pip-study"]').first.click();p.locator('#suite-pip-material').wait_for()

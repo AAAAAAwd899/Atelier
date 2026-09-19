@@ -13,7 +13,7 @@ def main():
   assert v,name
   checks.append(name);print('PASS',name,flush=True)
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=browser.new_page(viewport={'width':1440,'height':950});p.set_default_timeout(9000);p.on('pageerror',lambda e:errors.append(str(e)))
   def close():p.keyboard.press('Escape');p.wait_for_timeout(100)
   try:

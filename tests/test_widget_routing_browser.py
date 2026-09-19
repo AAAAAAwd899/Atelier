@@ -49,7 +49,7 @@ def run():
   assert v,name
   checks.append(name);print('PASS',name,flush=True)
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':950});p.set_default_timeout(6500);p.on('pageerror',lambda e:errors.append(str(e)))
   def ready(html):
    p.goto('about:blank')  # New document: mirrors Anki webview replacement

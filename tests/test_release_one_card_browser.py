@@ -11,7 +11,7 @@ def main():
   checks.append(name)
  host=UnifiedHost()
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':950});p.set_default_timeout(10000);p.on('pageerror',lambda e:errors.append(str(e)));p.expose_function('nativeBridge',host.dispatch)
   try:
    p.set_content(host.html());p.locator('.shelf-grid').wait_for()

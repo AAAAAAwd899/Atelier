@@ -31,7 +31,7 @@ def generate(check=False):
     for path,text in outputs.items():
         if check:
             if path.read_text(encoding='utf8')!=text:raise SystemExit('Stale generated adapter: '+path.name)
-        else:path.write_text(text,encoding='utf8')
+        else:path.write_text(text,encoding='utf8',newline='\n')
     print(f'Canonical roles: {len(worlds)} worlds; home, planner, reviewer and native palette adapters verified.')
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');generate(parser.parse_args().check)

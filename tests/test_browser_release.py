@@ -32,7 +32,7 @@ def home(owner='ask'):
     return str(soup)
 
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
  errors=[]
  def page_for(html,w=1200,h=700):
     p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(4000)

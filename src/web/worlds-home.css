@@ -78,6 +78,64 @@
 :host([data-theme="tidal"]) .quiet-focus{border-bottom:3px solid var(--line);border-radius:28px 28px 40px 12px;}
 :host([data-theme="ember"]) .quiet-focus{border:1px solid var(--line);border-left:4px solid var(--accent);}
 :host([data-theme="celestial"]) .world-window{border-radius:90px 90px 10px 10px;}
+:host([data-theme="castle"]) .quiet-focus{border-color:color-mix(in srgb,var(--accent) 42%,var(--line));box-shadow:0 22px 58px #0d071250,inset 0 1px #ffffff12;}
+:host([data-theme="castle"]) .world-window{border-radius:92px 92px 14px 14px;}
+:host([data-theme="underworld"]) .quiet-focus{border-left:3px solid var(--accent);border-radius:7px 28px 7px 28px;box-shadow:0 20px 54px #08030370;}
+:host([data-theme="underworld"]) .world-window{border-radius:4px 28px 4px 28px;}
+:host([data-theme="mythic"]) .quiet-focus{border-top:2px solid var(--accent);box-shadow:0 22px 58px #05081760;}
+:host([data-theme="mythic"]) .world-window{border-radius:88px 88px 9px 9px;}
+:host([data-theme="cabin"]) .quiet-focus{border-color:color-mix(in srgb,var(--accent) 32%,var(--line));box-shadow:0 18px 50px #020b0860,inset 0 1px #ffffff10;}
+:host([data-theme="cabin"]) .world-window{border-radius:15px;}
+:host([data-theme="sunset-beach"]) .sidebar{
+  background:
+    radial-gradient(ellipse at 2% 1%,rgba(255,188,145,.16),transparent 34%),
+    linear-gradient(180deg,rgba(13,28,48,.76),rgba(10,24,43,.94)),
+    var(--world-scene,var(--world-art)) 42% bottom/auto 48% no-repeat,
+    var(--side);
+  border-right-color:color-mix(in srgb,var(--accent) 28%,var(--line));
+  box-shadow:inset -1px 0 rgba(255,206,175,.11),inset -18px 0 42px rgba(4,13,27,.30),12px 0 42px rgba(3,10,22,.18);
+}
+:host([data-theme="sunset-beach"]) .brand-promise{border-bottom-color:rgba(255,190,151,.18);}
+:host([data-theme="sunset-beach"]) .nav-section-label{color:color-mix(in srgb,var(--accent) 74%,var(--quiet));}
+:host([data-theme="sunset-beach"]) .nav-row.active{
+  border-color:rgba(255,187,145,.42);
+  background:linear-gradient(105deg,rgba(245,154,119,.24),rgba(39,63,90,.72) 58%,rgba(21,43,69,.72));
+  color:#fff3e9;
+  box-shadow:inset 4px 0 0 #ffc2a0,inset 0 1px rgba(255,255,255,.13),0 10px 26px rgba(2,10,23,.28);
+}
+:host([data-theme="sunset-beach"]) .side-utility-card{
+  background:linear-gradient(145deg,rgba(39,61,86,.86),rgba(16,35,59,.90));
+  border-color:rgba(154,190,219,.24);
+}
+:host([data-theme="sunset-beach"]) .side-scope-card{
+  background:radial-gradient(circle at 100% 0%,rgba(255,176,132,.22),transparent 52%),linear-gradient(150deg,rgba(45,65,91,.94),rgba(21,39,64,.94));
+  border-color:rgba(255,184,143,.38);
+}
+:host([data-theme="sunset-beach"]) .workflow-inbox{
+  background:linear-gradient(112deg,rgba(45,66,92,.96),rgba(29,53,80,.88));
+  border-color:rgba(153,192,224,.28);
+  box-shadow:inset 0 1px rgba(255,255,255,.10),0 16px 38px rgba(2,10,23,.26);
+}
+:host([data-theme="sunset-beach"]) .workflow-item{
+  background:linear-gradient(145deg,rgba(28,57,84,.96),rgba(24,47,73,.88));
+  border-color:rgba(132,181,216,.30);
+}
+:host([data-theme="sunset-beach"]) .workflow-item:nth-child(2){
+  background:linear-gradient(145deg,rgba(47,61,84,.96),rgba(57,47,68,.88));
+  border-color:rgba(248,169,134,.28);
+}
+:host([data-theme="sunset-beach"]) .quiet-focus{
+  background:
+    radial-gradient(circle at 96% 6%,rgba(255,178,132,.13),transparent 34%),
+    linear-gradient(125deg,rgba(37,61,89,.98),rgba(28,51,78,.98));
+  border:1px solid rgba(145,187,219,.30);
+  border-bottom:3px solid color-mix(in srgb,var(--accent) 72%,var(--line));
+  border-radius:30px 14px 42px 14px;
+  box-shadow:inset 0 1px rgba(255,255,255,.11),0 24px 64px rgba(2,10,23,.35);
+}
+:host([data-theme="sunset-beach"]) .focus-footer{background:linear-gradient(90deg,rgba(21,44,69,.96),rgba(34,55,80,.92));}
+:host([data-theme="sunset-beach"]) .world-window{border-radius:38px 12px 48px 12px;border-color:rgba(255,191,154,.38);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 28px rgba(2,10,23,.28);}
+:host([data-theme="sunset-beach"]) .scope-bar{background:linear-gradient(90deg,rgba(15,35,59,.88),rgba(27,50,75,.76));border-color:rgba(148,188,217,.22);}
 :host([data-theme="celestial"]) .focus-intro .eyebrow{letter-spacing:2.5px;}
 /* Passive owner is always a genuine boundary. */
 :host([data-companion="true"]) :is(.quiet-focus,.sidebar,.main){background-image:none!important;outline:none;border-radius:18px;}

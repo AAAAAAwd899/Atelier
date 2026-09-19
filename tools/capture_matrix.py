@@ -14,7 +14,7 @@ def shot(p,theme,screen,w,h):
     overflow=p.evaluate('''()=>{const root=document.getElementById('atelier-root')?.shadowRoot;const s=root?.querySelector('.main')||document.scrollingElement;return s.scrollWidth>s.clientWidth+2}''')
     records.append({'file':file.name,'world':theme,'screen':screen,'viewport':[w,h],'horizontal_overflow':overflow,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
 def save():
-    (OUT/'results.json').write_text(json.dumps({'category':'real shipped frontend, fictional browser fixtures','runtime_sha256':fingerprint,'records':records,'errors':errors,'complete':len(records)==12*5*6},indent=2)+'\n')
+    (OUT/'results.json').write_text(json.dumps({'category':'real shipped frontend, fictional browser fixtures','runtime_sha256':fingerprint,'records':records,'errors':errors,'complete':len(records)==len(core.THEMES)*5*6},indent=2)+'\n')
 with sync_playwright() as pw:
     browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER'))
     try:

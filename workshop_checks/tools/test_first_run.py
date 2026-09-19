@@ -11,7 +11,7 @@ def click(p,selector):p.locator(selector).first.click();p.wait_for_timeout(85)
 html=HTML.replace('<link rel="stylesheet" href="/web/app.css">','<style>'+(ROOT/'addon/web/app.css').read_text()+'</style>')
 for f in ('icons.js','art.js','app.js'):html=html.replace('<script src="/web/'+f+'"></script>','<script>'+(ROOT/'addon/web'/f).read_text()+'</script>')
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1360,'height':940});p.set_default_timeout(5000)
+ b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1360,'height':940});p.set_default_timeout(5000)
  p.expose_function('nativeBridge',h.dispatch);p.on('pageerror',lambda e:errors.append(str(e)));p.set_content(html);p.wait_for_selector('[data-action="new-project"]')
  check('Real first run has no example project or collection notes',not h.store.list('project') and h.col.note_count()==0)
  check('First run is not labelled as sample library','SAMPLE LIBRARY' not in p.locator('body').inner_text())

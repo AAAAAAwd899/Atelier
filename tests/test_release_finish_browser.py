@@ -39,7 +39,7 @@ def widget_fixture(theme='ember'):
 
 def run():
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':900});p.set_default_timeout(8000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
   def click(sel):p.locator(sel).first.click();p.wait_for_timeout(90)
   def shot(name):p.screenshot(path=str(SH/(name+'.png')),animations='disabled')
@@ -74,7 +74,7 @@ def run():
    check('Export defaults to active classes first','Active class' in p.locator('.export-row').first.inner_text())
    p.locator('#export-search').fill('cardiology');check('Export searches full parent path',p.locator('.export-row').count()>0 and all('cardiology' in t.lower() for t in p.locator('.export-row').all_inner_texts()))
    p.locator('#export-sort').select_option('name');check('Export sort selector retains new choice',p.locator('#export-sort').input_value()=='name')
-   p.locator('#export-search').fill('absent impossible deck');check('Export empty state cannot silently change destination',p.locator('.export-row').count()==0 and 'No deck matches' in p.locator('#export-results').inner_text())
+   p.locator('#export-search').fill('absent impossible deck');check('Export empty state cannot silently change destination',p.locator('.export-row').count()==0 and 'No folder or deck matches' in p.locator('#export-results').inner_text())
    p.locator('#export-search').fill('');
    if p.locator('[data-action=toast-dismiss]').count():p.locator('[data-action=toast-dismiss]').first.click()
    shot('export');p.keyboard.press('Escape')

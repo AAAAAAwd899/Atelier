@@ -7,6 +7,13 @@ import datetime,json,subprocess,sys,xml.etree.ElementTree as ET,shutil,os
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from release_tools import *
 V=ROOT/'verification';V.mkdir(exist_ok=True);DIST.mkdir(exist_ok=True)
+def verification_env():
+ env={**os.environ,'PYTHONUTF8':'1'}
+ if os.name=='nt' and not env.get('ATELIER_TEST_BROWSER'):
+  browser_root=Path(env.get('LOCALAPPDATA',''))/'ms-playwright'
+  candidates=sorted(browser_root.glob('chromium-*/chrome-win64/chrome.exe'),reverse=True)
+  if candidates:env['ATELIER_TEST_BROWSER']=str(candidates[0])
+ return env
 def setup_vendor():
  for component,target in [('sprout','vendor_tests/addon'),('workshop','workshop_checks/addon')]:
   dest=ROOT/target
@@ -15,7 +22,7 @@ def setup_vendor():
   shutil.copytree(SRC/component,dest,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
 def run(cmd,name,cwd=ROOT,timeout=700):
  with (V/(name+'.log')).open('w') as stream:
-  result=subprocess.run(cmd,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,timeout=timeout,env={**os.environ,'PYTHONUTF8':'1'})
+  result=subprocess.run(cmd,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,timeout=timeout,env=verification_env())
  (V/(name+'.exit')).write_text(str(result.returncode))
  if result.returncode:raise RuntimeError(name+' failed; see verification log')
 def cases(path):

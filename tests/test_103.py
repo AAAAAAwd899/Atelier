@@ -143,12 +143,14 @@ def test_projects_keep_a_clear_default_destination_for_new_drafts():
 def test_world_catalog_and_art_provenance_cover_every_shipped_world():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     ids={row['id'] for row in catalog}
-    assert len(catalog)==12 and ids=={'obsidian','glacier','rose','bloom','linen','matcha','midnight','peach','forest','tidal','ember','celestial'}
+    assert len(catalog)==17 and ids=={'obsidian','glacier','rose','bloom','linen','matcha','midnight','peach','forest','tidal','ember','celestial','castle','underworld','mythic','cabin','sunset-beach'}
     provenance=json.loads((ROOT/'ASSET-PROVENANCE-1.0.3.json').read_text(encoding='utf8'))
     files={row['file'] for row in provenance}
-    assert files=={f'src/web/world-art/{world}-1.0.3.png' for world in ids}
-    assert all(row['sha256'] and row['bytes']>1000 and row['origin'] for row in provenance)
+    assert files=={f'src/web/world-art/{world}-1.0.3.png' for world in ids}|{'src/web/atelier-mark-1.0.3.png'}
+    assert all(row['sha256'] and row['bytes']>500_000 and row['origin'] for row in provenance)
     assert all('authored SVG' not in row['origin'] for row in provenance)
+    assert len({row['sha256'] for row in provenance})==len(catalog)+1
+    assert all((SRC/'web'/row['scene']).read_bytes()[:8]==b'\x89PNG\r\n\x1a\n' for row in catalog)
 
 def test_world_gallery_verification_scales_with_catalog():
     checker=(ROOT/'tests/check_gallery_final.py').read_text(encoding='utf8')
@@ -158,7 +160,7 @@ def test_unpublished_site_inventory_matches_shipped_world_catalog():
     catalog=json.loads((SRC/'web/worlds.json').read_text(encoding='utf8'))
     page=(ROOT/'site/index.html').read_text(encoding='utf8')
     styles=(ROOT/'site/style.css').read_text(encoding='utf8')
-    assert '<strong>12</strong><span>distinct visual worlds</span>' in page
+    assert f'<strong>{len(catalog)}</strong><span>distinct visual worlds</span>' in page
     assert page.count('class="world ') == len(catalog)
     assert all(f'class="world {world["id"]}"' in page for world in catalog)
     assert all(f'.{world["id"]} {{ --world:' in styles for world in catalog)

@@ -22,7 +22,7 @@ with sync_playwright() as pw:
     p.set_content(home_suite('midnight'));p.locator('.unified-topbar').wait_for();pause('Midnight Study desk, explicitly labelled sample data')
     p.locator('.nav-group [data-page="library"]').click();pause('Open the Library')
     p.locator('[data-action="view"][data-view="list"]').click();pause('Switch to list view')
-    p.locator('.unified-topbar [data-action="appearance"]').click();pause('Open the twelve existing worlds')
+    p.locator('.unified-topbar [data-action="appearance"]').click();pause('Open the seventeen shipped worlds')
     p.locator('[data-theme-choice="forest"]').click();pause('Switch the live interface to Forest')
     p.locator('[data-action="close-dialog"]').first.click();p.locator('.sidebar [data-action="widget-page"]').click();pause('Open built-in Widgets')
     p.locator('[data-action="nw-arrange"]').first.click();pause('Inspect the actual widget arrangement controls')

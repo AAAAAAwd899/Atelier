@@ -54,7 +54,7 @@ def layout(p):
 def run():
  global EMPTY
  with sync_playwright() as pw:
-  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
   def page(th='forest',w=1440,h=1000,enabled=True):
    p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(30000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
    expose(p);p.set_content(html(th,enabled));p.locator('.es-hero').wait_for();p.wait_for_timeout(100);return p
