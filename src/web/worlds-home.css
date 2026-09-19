@@ -112,30 +112,62 @@
   border-color:rgba(255,184,143,.38);
 }
 :host([data-theme="sunset-beach"]) .workflow-inbox{
-  background:linear-gradient(112deg,rgba(45,66,92,.96),rgba(29,53,80,.88));
-  border-color:rgba(153,192,224,.28);
-  box-shadow:inset 0 1px rgba(255,255,255,.10),0 16px 38px rgba(2,10,23,.26);
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(112deg,rgba(31,59,86,.78),rgba(17,39,66,.68)) padding-box,
+    linear-gradient(112deg,rgba(255,205,178,.48),rgba(112,173,211,.30) 52%,rgba(255,255,255,.08)) border-box;
+  border:1px solid transparent;
+  box-shadow:inset 0 1px rgba(255,255,255,.13),0 18px 44px rgba(2,10,23,.30);
+  backdrop-filter:blur(20px) saturate(1.18);
+  -webkit-backdrop-filter:blur(20px) saturate(1.18);
 }
+:host([data-theme="sunset-beach"]) .workflow-inbox::before{content:"";position:absolute;inset:0 18% auto 0;height:1px;background:linear-gradient(90deg,rgba(255,220,197,.72),transparent);pointer-events:none;}
+:host([data-theme="sunset-beach"]) .workflow-inbox>*{position:relative;z-index:1;}
 :host([data-theme="sunset-beach"]) .workflow-item{
-  background:linear-gradient(145deg,rgba(28,57,84,.96),rgba(24,47,73,.88));
-  border-color:rgba(132,181,216,.30);
+  background:linear-gradient(145deg,rgba(25,56,84,.68),rgba(15,38,65,.52));
+  border-color:rgba(144,193,226,.30);
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 7px 18px rgba(2,10,22,.18);
 }
 :host([data-theme="sunset-beach"]) .workflow-item:nth-child(2){
-  background:linear-gradient(145deg,rgba(47,61,84,.96),rgba(57,47,68,.88));
-  border-color:rgba(248,169,134,.28);
+  background:linear-gradient(145deg,rgba(56,57,78,.70),rgba(66,42,59,.56));
+  border-color:rgba(255,179,143,.34);
 }
 :host([data-theme="sunset-beach"]) .quiet-focus{
+  position:relative;
   background:
-    radial-gradient(circle at 96% 6%,rgba(255,178,132,.13),transparent 34%),
-    linear-gradient(125deg,rgba(37,61,89,.98),rgba(28,51,78,.98));
-  border:1px solid rgba(145,187,219,.30);
-  border-bottom:3px solid color-mix(in srgb,var(--accent) 72%,var(--line));
+    radial-gradient(circle at 92% 0%,rgba(255,179,135,.18),transparent 32%) padding-box,
+    linear-gradient(125deg,rgba(30,56,84,.88),rgba(17,39,66,.82)) padding-box,
+    linear-gradient(128deg,rgba(255,218,194,.62),rgba(120,181,219,.30) 45%,rgba(255,170,126,.42)) border-box;
+  border:1px solid transparent;
+  border-bottom-width:3px;
   border-radius:30px 14px 42px 14px;
-  box-shadow:inset 0 1px rgba(255,255,255,.11),0 24px 64px rgba(2,10,23,.35);
+  box-shadow:inset 0 1px rgba(255,255,255,.14),inset 24px 0 54px rgba(110,169,205,.035),0 28px 72px rgba(2,10,23,.42);
+  backdrop-filter:blur(24px) saturate(1.16);
+  -webkit-backdrop-filter:blur(24px) saturate(1.16);
 }
-:host([data-theme="sunset-beach"]) .focus-footer{background:linear-gradient(90deg,rgba(21,44,69,.96),rgba(34,55,80,.92));}
+:host([data-theme="sunset-beach"]) .quiet-focus::after{content:"";position:absolute;z-index:0;inset:0 0 auto 56%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,218,194,.70),transparent);pointer-events:none;}
+:host([data-theme="sunset-beach"]) .quiet-focus>*{position:relative;z-index:1;}
+:host([data-theme="sunset-beach"]) .resume-lecture{background:linear-gradient(135deg,rgba(11,34,59,.58),rgba(29,53,79,.42));border-color:rgba(143,188,219,.26);box-shadow:inset 0 1px rgba(255,255,255,.07);}
+:host([data-theme="sunset-beach"]) .focus-footer{background:linear-gradient(90deg,rgba(10,32,56,.76),rgba(29,53,78,.66));border-top-color:rgba(151,194,222,.24);box-shadow:inset 0 1px rgba(255,255,255,.055);}
 :host([data-theme="sunset-beach"]) .world-window{border-radius:38px 12px 48px 12px;border-color:rgba(255,191,154,.38);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 28px rgba(2,10,23,.28);}
-:host([data-theme="sunset-beach"]) .scope-bar{background:linear-gradient(90deg,rgba(15,35,59,.88),rgba(27,50,75,.76));border-color:rgba(148,188,217,.22);}
+:host([data-theme="sunset-beach"]) .scope-bar{background:linear-gradient(90deg,rgba(9,31,54,.68),rgba(24,49,75,.56));border-color:rgba(148,188,217,.25);box-shadow:inset 0 1px rgba(255,255,255,.06),0 10px 28px rgba(2,10,22,.20);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+:host([data-theme="sunset-beach"]) .exam-section{
+  background:
+    linear-gradient(145deg,rgba(24,53,78,.82),rgba(13,34,59,.76)) padding-box,
+    linear-gradient(120deg,rgba(255,206,179,.38),rgba(110,173,212,.27),rgba(255,255,255,.07)) border-box;
+  border:1px solid transparent;
+  box-shadow:inset 0 1px rgba(255,255,255,.10),0 24px 58px rgba(2,10,23,.34);
+  backdrop-filter:blur(20px) saturate(1.12);
+  -webkit-backdrop-filter:blur(20px) saturate(1.12);
+}
+:host([data-theme="sunset-beach"]) .exam-section-head{background:linear-gradient(102deg,rgba(28,61,86,.72),rgba(19,43,69,.44));border-bottom-color:rgba(143,188,219,.24);}
+:host([data-theme="sunset-beach"]) .exam-section-symbol{background:linear-gradient(145deg,rgba(255,184,144,.13),rgba(45,75,99,.45));border-color:rgba(255,192,155,.32);box-shadow:inset 0 1px rgba(255,255,255,.09);}
+:host([data-theme="sunset-beach"]) .lecture-table{background:linear-gradient(180deg,rgba(5,25,48,.15),rgba(7,28,50,.32));}
+:host([data-theme="sunset-beach"]) .lecture-row{background:transparent;border-bottom-color:rgba(139,181,211,.16);}
+:host([data-theme="sunset-beach"]) .lecture-row:hover{background:linear-gradient(90deg,rgba(255,177,135,.075),rgba(92,154,196,.08));}
+:host([data-theme="sunset-beach"]) .lecture-branch{background:linear-gradient(90deg,rgba(49,77,99,.24),rgba(16,39,64,.10));}
+:host([data-theme="sunset-beach"]) :is(.focus-actions .secondary,.lecture-study){background:linear-gradient(145deg,rgba(43,73,98,.64),rgba(17,42,68,.54));border-color:rgba(151,194,223,.32);box-shadow:inset 0 1px rgba(255,255,255,.08),0 6px 16px rgba(2,10,22,.16);}
+:host([data-theme="sunset-beach"]) :is(.focus-actions .secondary,.lecture-study):hover{border-color:rgba(255,186,148,.56);background:linear-gradient(145deg,rgba(55,84,107,.74),rgba(38,58,80,.66));}
 :host([data-theme="celestial"]) .focus-intro .eyebrow{letter-spacing:2.5px;}
 /* Passive owner is always a genuine boundary. */
 :host([data-companion="true"]) :is(.quiet-focus,.sidebar,.main){background-image:none!important;outline:none;border-radius:18px;}

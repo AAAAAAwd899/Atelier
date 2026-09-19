@@ -4,11 +4,11 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `a3a34d14125121ef6686d5fd9ca9f352c5f8464f86fe8dec05f3c55add4bb9bf`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `7b4195e784e751051e5f13d01bd21f2cf731fe8db588eeaaed7ab3c32f1eb3fa`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, distinct materials, and theme-specific Pip companion accents. The rejected flat castle illustration is not shipped. The wordmark now uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
-The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. Sunset Cove received an authored coastal sidebar, stronger selected navigation, differentiated task and repair surfaces, a deeper study-focus material, and restrained warm accents. Other themes keep their own scene, shape, type, surface, and Card Studio treatment.
+The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. Sunset Cove received an authored coastal sidebar, stronger selected navigation, layered translucent workflow and study surfaces, warm edge light, distinct repair and lecture materials, deeper elevation, and restrained coral accents. Other themes keep their own scene, shape, type, surface, and Card Studio treatment.
 
 The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 
