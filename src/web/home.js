@@ -1,8 +1,9 @@
 /* Atelier Shared Home 1.0.0.
  * Interoperability layer, not a replacement for another add-on's renderer.
- * Widgets remain in their original DOM ancestry. Only explicit, reversible
- * grid presentation changes are applied. No HTML copying, script execution,
- * pycmd interception, Onigiri monkey patches, or collection writes.
+ * Widgets normally remain in their original DOM ancestry. When Atelier owns
+ * the home, an installed Onigiri page may be moved as one intact live subtree
+ * into Atelier's rewards slot. The move is reversible and never copies HTML,
+ * replaces handlers, patches Onigiri, intercepts pycmd, or writes progress.
  */
 (() => {
   'use strict';
@@ -45,6 +46,7 @@
   `;
   function create(api) {
     let rail=null, railShadow=null, scheduled=false, restoring=false, lastFingerprint='', records=[];
+    const inline={host:null,enabled:false,node:null,parent:null,next:null,slot:null};
     const pins=new Map(), styling=new Map(), resized=new Set();
     const native = () => {const s=api.state();return s.loaded && s.config.mode==='native' && s.config.visual_owner!=='ask';};
     const state = () => api.state();
@@ -70,6 +72,35 @@
       restoring=true;
       for(const [el,entries] of styling){for(const [key,v] of entries){if(el.style.getPropertyValue(key)===v.applied&&el.style.getPropertyPriority(key)===v.appliedPriority){if(v.value)el.style.setProperty(key,v.value,v.priority);else el.style.removeProperty(key);}}}
       styling.clear();restoring=false;
+    }
+    function providerRoot() {
+      return [...document.querySelectorAll('.modern-main-menu')].find(el=>!own(el))||null;
+    }
+    function restoreInline() {
+      const node=inline.node;if(!node)return false;
+      node.removeAttribute('data-atelier-inline-rewards');
+      if(inline.slot===null)node.removeAttribute('slot');else node.setAttribute('slot',inline.slot);
+      if(inline.parent?.isConnected){
+        if(inline.next?.parentNode===inline.parent)inline.parent.insertBefore(node,inline.next);else inline.parent.append(node);
+      }
+      inline.node=inline.parent=inline.next=null;inline.slot=null;
+      return true;
+    }
+    function syncInline() {
+      if(!inline.enabled||!inline.host?.isConnected){restoreInline();return false;}
+      if(inline.node?.isConnected&&inline.node.parentNode===inline.host)return true;
+      restoreInline();
+      const node=providerRoot();if(!node)return false;
+      inline.node=node;inline.parent=node.parentNode;inline.next=node.nextSibling;inline.slot=node.getAttribute('slot');
+      node.setAttribute('slot','atelier-onigiri-rewards');node.setAttribute('data-atelier-inline-rewards','true');
+      inline.host.append(node);
+      return true;
+    }
+    function embed(host,enabled) {
+      inline.host=host;inline.enabled=!!enabled;
+      const mounted=syncInline();
+      host.dataset.onigiriEmbedded=String(mounted);
+      return mounted;
     }
     function rowFrom(target) {
       if(!(target instanceof Element) || own(target))return null;
@@ -210,7 +241,7 @@
     }
     function queue() {
       if(scheduled||restoring)return;scheduled=true;
-      setTimeout(()=>{scheduled=false;sync();},80);
+      setTimeout(()=>{scheduled=false;syncInline();sync();},80);
     }
     const observer=new MutationObserver(changes=>{
       if(changes.some(c=>!own(c.target)&&(c.type==='attributes'||[...c.addedNodes,...c.removedNodes].some(n=>n.nodeType===1&&!own(n)))))queue();
@@ -232,12 +263,12 @@
     window.addEventListener('resize',queue);
     if(window.ResizeObserver){const ro=new ResizeObserver(queue);for(const el of document.querySelectorAll('.unified-grid,[data-atelier-widget-grid]')){ro.observe(el);resized.add(el);}}
     return Object.freeze({
-      sync, hasRail:()=>!!rail?.isConnected,
+      sync, embed, hasRail:()=>!!rail?.isConnected,
       list(){discover();const saved=layout().items||[], order=new Map(saved.map((x,i)=>[x.id,i]));return records.map(r=>({id:r.id,title:r.title,source:r.source,reflow:r.parent.matches('.unified-grid,[data-atelier-widget-grid]'),...(saved.find(x=>x.id===r.id)||{visible:true,size:'small',height:'auto'})})).sort((a,b)=>(order.get(a.id)??999)-(order.get(b.id)??999));},
       originalMenu(target,x,y){if(!target?.isConnected)return;const e=new MouseEvent('contextmenu',{bubbles:true,cancelable:true,view:window,clientX:x,clientY:y,button:2});Object.defineProperty(e,'__atelierOriginal',{value:true});target.dispatchEvent(e);},
       refresh(){sync();window.dispatchEvent(new Event('resize'));},
-      diagnostics:()=>({rail:!!rail?.isConnected,rowControls:pins.size,widgets:records.map(r=>({id:r.id,title:r.title})),layoutEnabled:layout().enabled,widgetNodesMoved:0}),
-      dispose(){observer.disconnect();window.removeEventListener('contextmenu',context,true);restoreStyles();rail?.remove();for(const pin of pins.values())pin.remove();}
+      diagnostics:()=>({rail:!!rail?.isConnected,rowControls:pins.size,widgets:records.map(r=>({id:r.id,title:r.title})),layoutEnabled:layout().enabled,onigiriEmbedded:!!inline.node?.isConnected,widgetNodesMoved:inline.node?1:0}),
+      dispose(){observer.disconnect();window.removeEventListener('contextmenu',context,true);restoreInline();restoreStyles();rail?.remove();for(const pin of pins.values())pin.remove();}
     });
   }
   window.AtelierSharedHome=Object.freeze({create});

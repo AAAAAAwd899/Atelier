@@ -15,7 +15,9 @@ def main():
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=browser.new_page(viewport={'width':1440,'height':950});p.set_default_timeout(9000);p.on('pageerror',lambda e:errors.append(str(e)))
-  def close():p.keyboard.press('Escape');p.wait_for_timeout(100)
+  def close():
+   p.locator('.dialog-footer [data-action="close-dialog"]').click()
+   p.locator('.overlay').wait_for(state='detached')
   try:
    p.set_content(native_fixture('forest'));p.locator('.nw-toolbar').wait_for()
    check('Current version displayed on Widgets', core.VERSION in p.locator('.brand').inner_text() and p.evaluate('AtelierMakeover.version')==core.VERSION)
@@ -35,7 +37,7 @@ def main():
     p.locator('.nw-header [data-action="appearance"]').click();p.locator('.dialog').wait_for()
     p.locator('#setting-review-context').scroll_into_view_if_needed()
     check(str(w)+' context options fit',p.locator('.dialog-body').evaluate('(e)=>e.scrollWidth<=e.clientWidth+2'))
-    p.locator('.dialog-footer [data-action="close-dialog"]').click();p.wait_for_timeout(50)
+    close()
     check(str(w)+' widgets fit',p.locator('.main').evaluate('(e)=>e.scrollWidth<=e.clientWidth+2'))
    # Dispatch the installed-handler error path with a missing exam component.
    # This is a handler fixture, not an invented visible navigation control.

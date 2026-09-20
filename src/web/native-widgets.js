@@ -9,7 +9,7 @@
     ['recent', 'Recently opened', 'Return to the folders and lectures you visited.', 'clock'],
     ['saved', 'Saved collections', 'Your favorite decks and folders, without copies.', 'star'],
     ['notes', 'My note', 'A small plain-text note saved only in this profile.', 'book'],
-    ['onigiri', 'Onigiri rewards', 'Open the real rewards and widgets from your optional add-on.', 'addons']
+    ['onigiri', 'Onigiri rewards', 'Keep the real rewards section on your Atelier Study desk.', 'addons']
   ];
   const defaults = () => ({items: ['today', 'focus', 'plans', 'work'].map(id => ({id, size: ['today', 'work'].includes(id) ? 'wide' : 'normal', home: false}))});
   function normalize(v) {
@@ -73,7 +73,7 @@
         return shell(id, `<div class="nw-link-list">${nodes.map(n => `<button type="button" class="nw-open" data-action="navigate" data-id="${esc(n.id)}">${icon(n.children.length ? 'folder' : 'layers', 18)}<span><strong>${esc(n.name)}</strong><small>${esc(n.path.split('::').slice(0,-1).join(' › ') || 'Library')}</small></span>${icon('chevron', 14)}</button>`).join('') || `<p class="nw-state">${id === 'recent' ? 'Open a deck or folder to see it here.' : 'Star a deck or folder to keep a shortcut here.'}</p>`}</div><div class="nw-card-footer">${btn('page', 'See all', 'arrow', 'quiet', `data-page="${id === 'recent' ? 'recent' : 'favorites'}"`)}</div>`);
       }
       if (id === 'notes') return shell(id, `<p class="nw-note-text">${esc(state.profile.native_widget_note || 'Keep a reminder or a question for your next study session.')}</p><div class="nw-card-footer">${btn('nw-note', 'Edit note', 'edit', 'quiet')}<span class="nw-caption">Local to this profile · not synced</span></div>`);
-      if (id === 'onigiri' && api.onigiri()) return shell(id, '<p class="nw-state">Your rewards still belong to Onigiri. Open its real widgets and game without copying progress or artwork.</p><div class="nw-card-footer">' + btn('provider-home', 'Open Onigiri rewards (separate page)', 'external', 'secondary') + '</div>', 'Optional add-on');
+      if (id === 'onigiri' && api.onigiri()) return shell(id, '<p class="nw-state">Your real Onigiri reward room is included on the Study desk while the add-on is enabled. Its artwork, controls, and progress remain owned by Onigiri.</p><div class="nw-card-footer">' + btn('page', 'Show on Study desk', 'arrow', 'secondary', 'data-page="desk"') + btn('external-layout', 'Onigiri settings', 'sliders', 'quiet') + '</div>', 'Live on Home');
       const provider = window.AtelierWidgets?.catalog().find(x => x.id === id);
       if (provider) return shell(id, `<div data-native-provider="${esc(id)}"></div>`, 'Installed add-on');
       return shell(id, '<p class="nw-state">This optional add-on is not loaded. Your saved placement is retained; enable its add-on or remove this widget.</p>' + btn('nw-arrange', 'Arrange widgets', 'sliders', 'quiet'));
@@ -101,7 +101,8 @@
         ['native-tool', 'Add cards', 'plus', 'data-command="add"'], ['native-tool', 'Browse', 'browse', 'data-command="browse"'],
         ['native-tool', 'Sync', 'sync', 'data-command="sync"'], ['export-picker', 'Export cards', 'export', ''],
         ['suite-open', 'Exam Studio', 'calendar', 'data-view="overview"'], ['nw-reload', 'Refresh widgets', 'reload', ''],
-        ['nw-original', api.onigiri() ? 'Onigiri rewards — original page' : 'Other add-ons — original page', 'addons', ''],
+        [api.onigiri() ? 'external-layout' : 'nw-original', api.onigiri() ? 'Onigiri settings' : 'Other add-ons — original page', 'addons', ''],
+        ...(api.onigiri() ? [['nw-original', 'Original Onigiri page · compatibility', 'external', '']] : []),
       ];
       return `<div class="nw-tools-list">${entries.map(([a, label, glyph, extra]) => btn(a, label, glyph, 'nw-tool', extra)).join('')}</div><p class="note">These tools are also available on your Study desk. Sync updates your Anki collection, not local widget notes or layouts.</p>`;
     }

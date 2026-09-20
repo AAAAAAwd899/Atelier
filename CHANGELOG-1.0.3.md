@@ -1,5 +1,7 @@
 # Atelier 1.0.3
 
+- Places the optional live Onigiri rewards room directly on Atelier’s Study desk while preserving its node identity, artwork, progress, controls, handlers, and original-page recovery path.
+
 Private review candidate. The name and private package identity remain Atelier / `daedalus_atelier`.
 
 - Consolidated visual roles in a generated design contract, with scoped home, planner, authoring, reviewer and native palette adapters. Removed the duplicate home presentation layer.

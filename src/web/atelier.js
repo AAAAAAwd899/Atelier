@@ -15,9 +15,10 @@
       if(boot.demo)boot.demo.settings={...boot.settings};
     }
 
-    // Place only OUR host outside the body. This avoids third-party body
-    // transforms, flex/grid, overflow locks, zoom inheritance and positioning.
-    // No native or Onigiri nodes are moved, cloned or deleted.
+    // Place our host outside the body. This avoids third-party body transforms,
+    // flex/grid, overflow locks, zoom inheritance and positioning. The optional
+    // Onigiri integration may move its whole live page wrapper into a named slot;
+    // it is never cloned and is restored before original-provider mode.
     document.documentElement.appendChild(host);
     const shadow = host.attachShadow({mode:'open'});
     shadow.append(template.content.cloneNode(true));
@@ -462,6 +463,11 @@
     }
     function ownerScreen(){const names=(boot.integrations?.makeovers||[]).map(x=>esc(x.name));return `<main class="owner-screen"><div class="owner-intro"><span class="owner-kicker">ATELIER / COMPATIBILITY / ${esc(boot.version)}</span><h1>One visual owner.<br><em>Your tools, together.</em></h1><p>${names.length?'Another possible makeover was detected: '+names.join(', ')+'.<br>':'Onigiri is enabled.<br>'}Choose which design stays in control. No add-on is disabled.</p></div>${ownershipChoices()}<p class="owner-footnote">This only changes presentation. Decks, schedules, game progress and saved exam records are preserved.</p></main>`;}
 
+    function onigiriRewards(){
+      if(!boot.integrations?.onigiri)return '';
+      return `<section class="onigiri-inline" aria-labelledby="onigiri-inline-title"><header><div><span class="eyebrow">OPTIONAL ADD-ON · LIVE REWARDS</span><h2 id="onigiri-inline-title">Onigiri rewards</h2><p>Your real restaurant, progress, and reward widgets stay here on the Study desk while Onigiri is enabled.</p></div>${btn('external-layout','Onigiri settings','sliders','secondary')}</header><div class="onigiri-inline-stage"><slot name="atelier-onigiri-rewards"><div class="onigiri-inline-loading" role="status">Onigiri is enabled. Waiting for its home widgets to finish loading…</div></slot></div><p class="onigiri-inline-note">Atelier changes only placement and outer presentation. Onigiri still owns the artwork, progress, rewards, and controls.</p></section>`;
+    }
+
     function quickChoices(){
       const f=scope();
       const roots=f.enabled?f.roots:[];
@@ -483,11 +489,13 @@
         frame.innerHTML=`<main class="workspace-loading"><div class="loading-mark">${brand}</div><h1>${state.failure?'Your study desk is taking longer to open.':'Opening your study desk…'}</h1><p>${state.failure?esc(state.failure):'Your folders and active exams will appear here.'}</p><div>${state.failure?btn('refresh','Try again','refresh','primary'):''}${btn('native','Other add-ons / original home','external','secondary')}</div></main>`;
       }else{
         frame.style.display='';
-        frame.innerHTML=`<div class="layout" data-page="${esc(state.page)}">${sidebar()}<button type="button" class="side-scrim ${state.mobile?'open':''}" data-action="close-nav" aria-label="Dismiss navigation"></button><main class="main" tabindex="-1" ${state.mobile?'inert':''}>${topbar()}<div class="main-inner">${state.page==='widgets'?nativeWidgets.page():state.page==='tools'?toolsPage():state.page==='desk'&&!state.query?`<div class="desk-heading"><span>${esc(now().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}))}</span><span class="desk-status">${icon('check',13)}Your library, preserved</span></div><div id="atelier-workflow-inbox">${workflowInbox()}</div>${nativeWidgets?.onHome()||''}${focusPanel()}${scopeBar()}`:state.page==='due'?scopeBar():''}${['tools','widgets'].includes(state.page)?'':librarySection()}${state.page==='desk'&&!state.query?revisitPanel()+suitePlans()+deskTools()+'<div id="atelier-authoring-hub">'+authoringHub()+'</div>':''}<div class="extension-slot"><slot name="atelier-widgets"></slot></div><footer class="help-strip"><span>${icon('shield',14)}${scope().enabled?'Focus changes what you see, not when cards are due.':esc(state.studied||'Your decks stay in Anki’s native structure.')}</span><div>${btn('import','Import',null,'quiet')}${btn('study-progress','Study progress','chart','quiet')}${btn('stats','Statistics',null,'quiet')}${btn('widget-page','Widgets','grid','quiet')}${btn('nw-arrange','Customize home','grid','quiet')}</div></footer></div></main></div>`;
+        frame.innerHTML=`<div class="layout" data-page="${esc(state.page)}">${sidebar()}<button type="button" class="side-scrim ${state.mobile?'open':''}" data-action="close-nav" aria-label="Dismiss navigation"></button><main class="main" tabindex="-1" ${state.mobile?'inert':''}>${topbar()}<div class="main-inner">${state.page==='widgets'?nativeWidgets.page():state.page==='tools'?toolsPage():state.page==='desk'&&!state.query?`<div class="desk-heading"><span>${esc(now().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}))}</span><span class="desk-status">${icon('check',13)}Your library, preserved</span></div><div id="atelier-workflow-inbox">${workflowInbox()}</div>${nativeWidgets?.onHome()||''}${focusPanel()}${scopeBar()}${onigiriRewards()}`:state.page==='due'?scopeBar():''}${['tools','widgets'].includes(state.page)?'':librarySection()}${state.page==='desk'&&!state.query?revisitPanel()+suitePlans()+deskTools()+'<div id="atelier-authoring-hub">'+authoringHub()+'</div>':''}<div class="extension-slot"><slot name="atelier-widgets"></slot></div><footer class="help-strip"><span>${icon('shield',14)}${scope().enabled?'Focus changes what you see, not when cards are due.':esc(state.studied||'Your decks stay in Anki’s native structure.')}</span><div>${btn('import','Import',null,'quiet')}${btn('study-progress','Study progress','chart','quiet')}${btn('stats','Statistics',null,'quiet')}${btn('widget-page','Widgets','grid','quiet')}${btn('nw-arrange','Customize home','grid','quiet')}</div></footer></div></main></div>`;
         const main=shadow.querySelector('.main'),side=shadow.querySelector('.side-scroll');
         main.scrollTop=options.resetMain?0:pos.main;side.scrollTop=pos.side;
         if(focus&&!options.resetMain&&!state.dialog){const target=focus.field?shadow.getElementById(focus.field):[...frame.querySelectorAll('[data-action]')].find(el=>el.dataset.action===focus.action&&el.dataset.id===focus.id&&el.dataset.view===focus.view&&el.dataset.category===focus.category&&el.dataset.filter===focus.filter&&el.dataset.page===focus.page);target?.focus({preventScroll:true});}
       }
+      const inlineOnigiri=state.config.mode!=='native'&&state.config.visual_owner==='atelier'&&!!boot.integrations?.onigiri;
+      home?.embed(host,inlineOnigiri);
       setHost();updateThemeControls();syncCapture();nativeWidgets?.mount();
     }
     async function load(){

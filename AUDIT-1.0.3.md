@@ -4,7 +4,7 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `d804f65f15a74502cba8debdc862a3aaa37409c564b83f40dd661aceea8d3ca5`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `22d189c8aa7b86ae2458f5103daf4c86083e8861c63b66b2dc5cb5a0fc98b76f`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
@@ -21,10 +21,11 @@ The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 - image-backed pages can open Mask Studio or hand the rendered image to Anki's supported native Image Occlusion editor;
 - exact note selections can open in Anki's Browser, and folder/deck menus expose scoped native export/share actions;
 - masks, remotes, native widgets, saved work, source images, exam sessions, original themes, and optional Onigiri boundaries remain preserved.
+- when Onigiri is enabled under Atelier's appearance, its single live rewards subtree is slotted directly into the Study desk; node identity, unfinished input, event handlers, settings, progress, artwork, and the explicit original-page recovery route are preserved.
 
 ## Source and checkpoints
 
-The supplied verified 1.0.2 source was used because no newer accepted build existed. Its 233 runtime entries matched the recorded baseline. The 1.0.3 runtime manifest records 33 changed files, 27 added files, and zero removed files, for 260 runtime files. Preserved-engine hashes and the baseline/patch declarations are checked during packaging. The original installer was not supplied for a new independent baseline extraction; the kit retains its earlier source/installer equality evidence.
+The supplied verified 1.0.2 source was used because no newer accepted build existed. Its 233 runtime entries matched the recorded baseline. The 1.0.3 runtime manifest records 35 changed files, 27 added files, and zero removed files, for 260 runtime files. Preserved-engine hashes and the baseline/patch declarations are checked during packaging. The original installer was not supplied for a new independent baseline extraction; the kit retains its earlier source/installer equality evidence.
 
 Checkpoint A established semantic roles, navigation hierarchy, study scope, theme scenes, the emblem, and world-specific materials. Checkpoint B carried all seventeen worlds through Home, Library, Card Studio, Mask Studio, Exam Studio, Practice, reviewer question/answer, Results, Pip, Widgets, Progress, and Tools while preserving node identity and saved values during theme changes. Checkpoint C runs the cumulative source, browser, preservation, packaging, extracted-payload, and deterministic-build gates.
 
@@ -37,16 +38,16 @@ The final `verify_release.py` run completed on 2026-09-19 against the fingerprin
 | Atelier integration and preservation | 1,233 | 0 | 0 |
 | Exam engine and quiet review | 460 | 0 | 0 |
 | Card Studio importers, publishers, and routes | 209 | 0 | 0 |
-| 28 browser suites | 2,630 | 0 | 0 page errors |
-| **Total** | **4,532** | **0** | **0** |
+| 28 browser suites | 2,648 | 0 | 0 page errors |
+| **Total** | **4,550** | **0** | **0** |
 
-The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
+The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 121 widget-routing checks cover the live provider subtree on Home, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, and horizontal fit at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
 The expanded world-finish suite passes 266 checks. It verifies all seventeen world materials and chooser previews, light/dark filters, keyboard focus, reduced motion, forced-color focus, failed-save alerts, planner value preservation, stable grading targets, and exact workspace width at 320, 390, 620, 820, 1040, 1440, 1725, and 1915 pixels. Current receipts are in `verification/verified.json`, `verification/python-current.json`, and the suite-specific verification folders.
 
 ## Rendered interface evidence
 
-The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
+The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, two dedicated desktop/mobile Onigiri integration captures, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
 
 - `output/playwright/visual-review-boards/forest-1440x900-all-screens.png`
 - `output/playwright/visual-review-boards/forest-390x720-all-screens.png`

@@ -60,7 +60,7 @@ Choose **Appearance** to select a world, spacing, motion, reviewer context, and 
 
 **Widgets → Arrange widgets** adds, removes, reorders, and sizes your widgets. **Show on Study desk** also places a chosen widget on the main home. Choose **Save layout** to keep changes. **My note** saves when you choose **Save note**. Removing its widget does not erase the note.
 
-Widgets work without Onigiri. Compatible installed add-ons can offer optional widgets. **More tools → Onigiri rewards — original page** opens Onigiri’s actual game and widgets when available; the **Atelier widgets** return takes you back to the built-in page. **Original Onigiri / other theme** lets that add-on keep control of its home and reviewer.
+Widgets work without Onigiri. When Onigiri is installed, enabled, and Atelier owns the appearance, its live rewards room appears directly on the **Study desk**. Atelier moves the intact provider subtree into its Home slot, so Onigiri keeps its real artwork, controls, progress, and event handlers. **Onigiri settings** opens the provider’s supported settings shortcut. **Original Onigiri page · compatibility** remains in More tools for recovery, and **Original Onigiri / other theme** lets that add-on keep control of the complete home and reviewer.
 
 ## Review progress, export, and sync
 

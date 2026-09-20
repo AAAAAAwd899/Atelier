@@ -190,6 +190,18 @@ html[data-atelier-owner="atelier"] #onigiri-sidebar-edge-pill{display:none!impor
 html[data-atelier-owner="atelier"] .modern-main-menu>.main-content{width:100%!important;max-width:1500px!important;margin:0 auto!important;padding:24px 32px 40px!important;overflow:auto!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu{gap:0!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu .onigiri-widget-title{font-size:22px!important;}
+/* Installed Onigiri can live inside Atelier's Study desk as one intact slotted
+   subtree. Its descendants, IDs, canvases, images and event handlers are not
+   copied or replaced. These rules only remove duplicate page chrome and let
+   the live reward grid size to Atelier's content column. */
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"]{display:block!important;position:static!important;inset:auto!important;width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;background:transparent!important;color:inherit!important;}
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"]>.sidebar-left,
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"]>.resize-handle,
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"] #onigiri-sidebar-edge-pill,
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"] [data-atelier-native-rail]{display:none!important;}
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"]>.main-content{display:block!important;width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;background:transparent!important;}
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"]>.main-content>:first-child{margin-top:0!important;}
+#atelier-root>.modern-main-menu[data-atelier-inline-rewards="true"] .unified-grid{width:100%!important;max-width:none!important;min-width:0!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu .stat-card{background:linear-gradient(140deg,var(--ats-panel),var(--ats-hero-end))!important;border-radius:20px!important;}
 html[data-atelier-owner="atelier"] .modern-main-menu :is(.rl-chip-level,.restaurant-level-chip){background:var(--ats-accent-soft)!important;color:var(--ats-accent-strong)!important;}
 html[data-atelier-home][data-atelier-match-sprout="true"] #es-countdowns .es-time{background:var(--ats-accent-soft)!important;color:var(--ats-accent-strong)!important;}

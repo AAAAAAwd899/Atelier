@@ -17,7 +17,7 @@ After applying the exact reviewed substitutions to their recorded baselines, eve
 
 ## Controls and saving remain meaningful
 
-Add cards, Browse, Sync, exports, project/draft approval, exact project-to-plan handoff, active-group Pip, practice answer locking, saved-session resumption, card-local keyboard behavior, and independent built-in Widgets retain their existing routes. Original Onigiri is still a separate, optional destination rather than the built-in Widgets page.
+Add cards, Browse, Sync, exports, project/draft approval, exact project-to-plan handoff, active-group Pip, practice answer locking, saved-session resumption, card-local keyboard behavior, and independent built-in Widgets retain their existing routes. When enabled, Onigiri’s intact live rewards subtree is slotted into the Study desk; its original page remains a compatibility destination and is restored without changing its saved state.
 
 Card draft autosave is not replaced with a new format. Practice still requires Save & close for durable resumption. Exam setup still saves at its final step. Timed saved sessions retain their deadlines. Independent practice remains separate from scheduled review, while explicit eligible-new-card learning retains native-rating authorization. Source originals are still used for masking and publication, not thumbnails.
 

@@ -61,7 +61,7 @@ Atelier 1.0 brings the integrated study, organization, and card-building tools i
 
 Seventeen visual worlds; a complete home with Add cards, Browse, and Sync; a searchable library with natural sorting and active study groups; independent customizable widgets; study progress and active-first export selection; Card Studio with sources, drafts, image masks and approval; Exam Studio with planning, practice, written responses, saved sessions and results; and Pip with clearly labelled rehearsal or new-card learning. Exam plans can combine multiple parent folders, and Pip’s companion accents adapt to each world while preserving the shared growth and study behavior.
 
-Original Anki tools remain available. Onigiri is optional and has its own explicit original-page route. Specialized card designs retain their appropriate rendering and editing paths.
+Original Anki tools remain available. Onigiri is optional; when it is enabled under Atelier’s appearance, its live rewards room is embedded on the Study desk without copying its progress, artwork, or controls. Its original page remains an explicit compatibility route. Specialized card designs retain their appropriate rendering and editing paths.
 
 ## What changed from 0.9.0-rc6
 

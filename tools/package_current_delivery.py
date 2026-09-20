@@ -39,7 +39,7 @@ def main() -> None:
     files = dist / "Atelier-1.0.3-Files.json"
 
     assert verified["runtime_sha256"] == native["runtime_sha256"] == companion["runtime_sha256"] == fingerprint
-    assert verified["python_total"] == 1902 and verified["browser_total"] == 2630
+    assert verified["python_total"] == 1902 and verified["browser_total"] == 2648
     assert verified["python_failed"] == verified["python_skipped"] == verified["browser_errors"] == 0
     assert world_receipt["count"] == verified["browser_suites"]["world-suite"] == 175
     assert not world_receipt["errors"] and not native["errors"] and all(native["checks"].values())
@@ -101,6 +101,23 @@ def main() -> None:
         archive_files.append((path, "Atelier-1.0.3-Screenshots/" + relative))
         manifest.append({"file": relative, "sha256": row["sha256"], "bytes": path.stat().st_size, "category": "current shipped companion panel; fictional data", "contrast": row["contrast"]})
 
+    onigiri_folder = ROOT / "screenshots/widget-routing"
+    for name, viewport in (
+        ("embedded-onigiri-home-1440.png", [1440, 950]),
+        ("embedded-onigiri-home-390.png", [390, 760]),
+    ):
+        path = onigiri_folder / name
+        assert path.is_file()
+        relative = f"onigiri-integration/{name}"
+        archive_files.append((path, "Atelier-1.0.3-Screenshots/" + relative))
+        manifest.append({
+            "file": relative,
+            "sha256": sha(path),
+            "bytes": path.stat().st_size,
+            "category": "live-subtree Onigiri integration; provider-shaped fictional browser fixture",
+            "viewport": viewport,
+        })
+
     receipt_files = [
         (ROOT / "verification/world-suite/results.json", "receipts/world-suite.json"),
         (ROOT / "output/playwright/companion-family/results.json", "receipts/companion-family.json"),
@@ -144,6 +161,7 @@ def main() -> None:
             "count": len(manifest),
             "sha256": sha(screenshot_zip),
             "companion_count": 6,
+            "onigiri_integration_count": 2,
             "review_board_count": len(review_boards),
             "selected_interface_count": selected_matrix_count,
             "full_matrix_render_count": matrix_render_count,

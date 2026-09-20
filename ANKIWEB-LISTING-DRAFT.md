@@ -18,7 +18,7 @@ Independent practice does not change normal Anki scheduling. Pip's optional **In
 
 ## Make it your space
 
-Choose from seventeen coordinated worlds, including a storybook castle, underworld ember river, mythic code, warm cabin, and golden beach sunset. Built-in widgets can show your activity, active groups, upcoming exams, unfinished work, recent material, or a personal note. Put selected widgets on the Study desk too. Onigiri is optional; its own rewards remain available through a separate, clearly labelled route.
+Choose from seventeen coordinated worlds, including a storybook castle, underworld ember river, mythic code, warm cabin, and golden beach sunset. Built-in widgets can show your activity, active groups, upcoming exams, unfinished work, recent material, or a personal note. Put selected widgets on the Study desk too. Onigiri is optional; when enabled, its live rewards room appears inside the Atelier Study desk while Onigiri keeps ownership of its artwork, controls, and progress.
 
 ## Install and update
 
