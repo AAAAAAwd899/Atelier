@@ -15,6 +15,19 @@ SH=ROOT/'screenshots/widget-routing';SH.mkdir(parents=True,exist_ok=True)
 
 def route_fixture(owner='atelier',mode='workspace',migrate=False,onigiri=True,theme='ember',page='desk',missing=False):
  s=BeautifulSoup(native_fixture(theme,onigiri=onigiri,page=page),'html.parser')
+ if onigiri:
+  # Reproduce Onigiri's full-page dashboard placements. These explicit rows and
+  # minimum height must be released only while the live subtree is embedded.
+  grid=s.select_one('.modern-main-menu .unified-grid')
+  grid['style']='grid-template-rows:repeat(4,280px);min-height:1160px'
+  extras=BeautifulSoup('''
+   <section class="onigiri-widget-container" id="building" style="grid-column:span 2;grid-row:1/span 2;min-height:560px"><div class="onigiri-restaurant-level-widget"><h3>Restaurant level</h3><strong class="level-number">14</strong><p>675 / 1450 XP</p></div></section>
+   <section class="onigiri-widget-container" id="pace-widget" style="grid-column:3;grid-row:2"><div class="stat-card"><h3>PACE</h3><p class="stat-value">24 s/card</p></div></section>
+   <section class="onigiri-widget-container" id="favorites-widget" style="grid-column:1;grid-row:4;min-height:240px"><div class="onigiri-favorites-widget"><h3>Favorites</h3><p>No favorite decks selected.</p></div></section>
+   <section class="onigiri-widget-container" id="onigiri-heatmap-container" style="grid-column:2/span 3;grid-row:4;min-height:240px"><h3>Study activity</h3><div aria-label="Review heatmap">Activity grid</div></section>
+  ''','html.parser')
+  for item in list(extras.contents):
+   if getattr(item,'name',None):grid.append(item.extract())
  boot=json.loads(s.find(id='atelier-bootstrap').string)
  cfg={**boot['settings'],'visual_owner':owner,'mode':mode}
  p=core.profile_settings({**boot['profile'],'surfaces_version':1})
@@ -66,16 +79,20 @@ def run():
    check('Onigiri rewards are part of the Atelier Study desk',p.locator('.onigiri-inline').is_visible() and not p.locator('.onigiri-inline-loading').is_visible())
    check('Live Onigiri subtree is slotted without copying its nodes',p.evaluate('originalNativeNode===document.querySelector(".modern-main-menu")&&originalNativeNode.parentElement.id==="atelier-root"&&originalNativeNode.slot==="atelier-onigiri-rewards"'))
    check('Duplicate Onigiri sidebar is removed inside Atelier',p.locator('.modern-main-menu>.sidebar-left').evaluate('e=>getComputedStyle(e).display')=='none')
+   check('Embedded rewards release provider row reservations',p.locator('.unified-grid').evaluate('e=>e.hasAttribute("data-atelier-inline-grid")&&getComputedStyle(e).minHeight==="0px"&&e.getBoundingClientRect().height<900'))
+   check('Embedded reward cards pack into natural rows',p.locator('.unified-grid').evaluate('e=>[...e.children].filter(x=>x.matches("[data-atelier-inline-item]")).every(x=>getComputedStyle(x).gridRowStart==="auto"&&x.getBoundingClientRect().height<500)'))
    p.locator('#retained-input').fill('Live embedded reward input');click('#retained-button')
    check('Embedded Onigiri controls keep their original handlers',p.locator('#retained-button').get_attribute('data-clicks')=='1' and p.locator('#retained-input').input_value()=='Live embedded reward input')
    click('.sidebar .native-link[data-action="widget-page"]');native()
    click('.sidebar [data-action="home"]');p.locator('.onigiri-inline').wait_for()
    check('Workspace navigation preserves embedded reward state',p.locator('#retained-input').input_value()=='Live embedded reward input' and p.locator('#retained-button').get_attribute('data-clicks')=='1')
    p.screenshot(path=str(SH/'embedded-onigiri-home-1440.png'),animations='disabled')
+   p.locator('.onigiri-inline').screenshot(path=str(SH/'embedded-onigiri-panel-1440.png'),animations='disabled')
    for width,height in [(320,620),(390,760),(620,760),(940,820),(1440,950),(1725,950)]:
     p.set_viewport_size({'width':width,'height':height});ready(route_fixture())
     check(str(width)+' embedded Onigiri stays on Study desk',p.locator('.onigiri-inline').is_visible() and p.evaluate('originalNativeNode.parentElement.id==="atelier-root"'))
     check(str(width)+' embedded Home has no horizontal overflow',p.locator('.main').evaluate('e=>e.scrollWidth<=e.clientWidth+2'))
+    check(str(width)+' embedded rewards have no reserved blank dashboard rows',p.locator('.unified-grid').evaluate('''e=>{const items=[...e.children].filter(x=>x.matches('[data-atelier-inline-item]')&&getComputedStyle(x).display!=='none').map(x=>x.getBoundingClientRect()).sort((a,b)=>a.top-b.top);let edge=items[0]?.bottom||0,gap=0;for(const r of items.slice(1)){if(r.top>edge)gap=Math.max(gap,r.top-edge);edge=Math.max(edge,r.bottom)}return gap<80&&items.every((r,i)=>getComputedStyle([...e.children].filter(x=>x.matches('[data-atelier-inline-item]')&&getComputedStyle(x).display!=='none')[i]||e).gridRowStart==='auto')}'''))
     if width==390:
      p.locator('.onigiri-inline').scroll_into_view_if_needed();p.screenshot(path=str(SH/'embedded-onigiri-home-390.png'),animations='disabled')
    p.set_viewport_size({'width':1440,'height':950})

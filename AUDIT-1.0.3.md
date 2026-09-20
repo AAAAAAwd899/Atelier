@@ -4,7 +4,7 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `debf1936050562159adb5c66b0a63c515c2f826d8064593ef2536949dfb47cae`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `e4ffd12e81f073fa9d40dd5f3b9979a9789519af0c6610805ce33a9f42c3dc4c`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
@@ -24,6 +24,7 @@ The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 - exact note selections can open in Anki's Browser, and folder/deck menus expose scoped native export/share actions;
 - masks, remotes, native widgets, saved work, source images, exam sessions, original themes, and optional Onigiri boundaries remain preserved.
 - when Onigiri is enabled under Atelier's appearance, its single live rewards subtree is slotted directly into the Study desk; node identity, unfinished input, event handlers, settings, progress, artwork, and the explicit original-page recovery route are preserved.
+- full-page Onigiri grid rows, fixed minimum heights, and explicit item positions are released only inside the embedded rewards slot; a dedicated responsive contract packs the live widgets without blank reserved rows and restores the provider's original attributes and geometry on exit.
 
 ## Source and checkpoints
 
@@ -40,10 +41,10 @@ The final `verify_release.py` run completed on 2026-09-19 against the fingerprin
 | Atelier integration and preservation | 1,233 | 0 | 0 |
 | Exam engine and quiet review | 460 | 0 | 0 |
 | Card Studio importers, publishers, and routes | 209 | 0 | 0 |
-| 28 browser suites | 2,648 | 0 | 0 page errors |
-| **Total** | **4,550** | **0** | **0** |
+| 28 browser suites | 2,656 | 0 | 0 page errors |
+| **Total** | **4,558** | **0** | **0** |
 
-The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 121 widget-routing checks cover the live provider subtree on Home, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, and horizontal fit at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
+The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 129 widget-routing checks cover the live provider subtree on Home, a reproduced 1,160-pixel fixed provider grid, natural-height packing, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, and overflow/gap checks at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
 The expanded world-finish suite passes 266 checks. It verifies all seventeen world materials and chooser previews, light/dark filters, keyboard focus, reduced motion, forced-color focus, failed-save alerts, planner value preservation, stable grading targets, and exact workspace width at 320, 390, 620, 820, 1040, 1440, 1725, and 1915 pixels. Current receipts are in `verification/verified.json`, `verification/python-current.json`, and the suite-specific verification folders.
 

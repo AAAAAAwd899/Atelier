@@ -46,7 +46,7 @@
   `;
   function create(api) {
     let rail=null, railShadow=null, scheduled=false, restoring=false, lastFingerprint='', records=[];
-    const inline={host:null,enabled:false,node:null,parent:null,next:null,slot:null};
+    const inline={host:null,enabled:false,node:null,parent:null,next:null,slot:null,attrs:new Map(),observer:null};
     const pins=new Map(), styling=new Map(), resized=new Set();
     const native = () => {const s=api.state();return s.loaded && s.config.mode==='native' && s.config.visual_owner!=='ask';};
     const state = () => api.state();
@@ -76,8 +76,40 @@
     function providerRoot() {
       return [...document.querySelectorAll('.modern-main-menu')].find(el=>!own(el))||null;
     }
+    function inlineAttr(el,name,value) {
+      if(!inline.attrs.has(el))inline.attrs.set(el,new Map());
+      const saved=inline.attrs.get(el);
+      if(!saved.has(name))saved.set(name,{present:el.hasAttribute(name),value:el.getAttribute(name)});
+      if(value===null)el.removeAttribute(name);else el.setAttribute(name,value);
+    }
+    function restoreInlineLayout() {
+      inline.observer?.disconnect();inline.observer=null;
+      for(const [el,attrs] of inline.attrs)for(const [name,old] of attrs){
+        if(old.present)el.setAttribute(name,old.value);else el.removeAttribute(name);
+      }
+      inline.attrs.clear();
+    }
+    function packInline() {
+      const node=inline.node;if(!node?.isConnected||node.parentNode!==inline.host)return false;
+      const width=inline.host?.clientWidth||node.clientWidth||innerWidth;
+      const cols=width>=900?4:width>=540?2:1;
+      for(const grid of node.querySelectorAll('.unified-grid,[data-atelier-widget-grid]')){
+        inlineAttr(grid,'data-atelier-inline-grid',String(cols));
+        for(const el of grid.children){
+          if(!(el instanceof HTMLElement)||el.matches('script,style,template'))continue;
+          let role='widget';
+          if(el.querySelector('.onigiri-restaurant-level-widget'))role='building';
+          else if(el.matches('.external-widget-container')||el.hasAttribute('data-atelier-sprout-wrap'))role='external';
+          else if(el.querySelector('.onigiri-widget-title'))role='title';
+          else if(el.querySelector('.stat-card'))role='metric';
+          inlineAttr(el,'data-atelier-inline-item',role);
+        }
+      }
+      return true;
+    }
     function restoreInline() {
       const node=inline.node;if(!node)return false;
+      restoreInlineLayout();
       node.removeAttribute('data-atelier-inline-rewards');
       if(inline.slot===null)node.removeAttribute('slot');else node.setAttribute('slot',inline.slot);
       if(inline.parent?.isConnected){
@@ -88,12 +120,15 @@
     }
     function syncInline() {
       if(!inline.enabled||!inline.host?.isConnected){restoreInline();return false;}
-      if(inline.node?.isConnected&&inline.node.parentNode===inline.host)return true;
+      if(inline.node?.isConnected&&inline.node.parentNode===inline.host)return packInline();
       restoreInline();
       const node=providerRoot();if(!node)return false;
       inline.node=node;inline.parent=node.parentNode;inline.next=node.nextSibling;inline.slot=node.getAttribute('slot');
       node.setAttribute('slot','atelier-onigiri-rewards');node.setAttribute('data-atelier-inline-rewards','true');
       inline.host.append(node);
+      packInline();
+      inline.observer=new MutationObserver(()=>queue());
+      inline.observer.observe(node,{childList:true,subtree:true});
       return true;
     }
     function embed(host,enabled) {
