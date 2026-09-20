@@ -2,6 +2,8 @@
 
 Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and seventeen visual worlds. Onigiri is optional.
 
+The sidebar keeps **Today** and **Study scope** visible while the folder list scrolls independently. The wider themed scrollbar shows the folder region clearly. **Worlds** and **Widgets** share the compact dock at the bottom, so all primary tools remain within reach on shorter laptop windows.
+
 ## Install or update
 
 Save your work and finish any import or card-adding operation. In an active practice session, choose **Save & close**. Back up your Anki collection and the local Atelier, exam, and source data described below.

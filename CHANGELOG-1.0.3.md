@@ -1,6 +1,7 @@
 # Atelier 1.0.3
 
 - Places the optional live Onigiri rewards room directly on Atelier’s Study desk while preserving its node identity, artwork, progress, controls, handlers, and original-page recovery path.
+- Compacts the sidebar into an always-visible Today and study-scope shelf, a dedicated folder scroller with a wider themed scrollbar, and a single-row Worlds/Widgets dock so navigation no longer consumes the folder view at common laptop heights.
 
 Private review candidate. The name and private package identity remain Atelier / `daedalus_atelier`.
 

@@ -273,16 +273,18 @@
           ${btn('study-progress','Study progress','chart','nav-row')}
           ${btn('page','Anki tools','layers',`nav-row ${state.page==='tools'?'active':''}`,'data-page="tools"')}
         </nav>
-        <div class="side-scroll" tabindex="0" aria-label="Scrollable folders and shortcuts">
+        <div class="side-hud" aria-label="Study shortcuts">
           <div class="side-utility-card"><span class="side-card-label">TODAY</span><div class="side-utility-links">${btn('page','Due'+(badge?` <b>${badge}</b>`:''),'clock','recent-link','data-page="due"')}${btn('page','Recent','refresh','recent-link','data-page="recent"')}${btn('page','Saved','star','recent-link','data-page="favorites"')}</div></div>
           <section class="side-scope-card" aria-label="Current study scope"><header><span>${icon('focus',14)}STUDY SCOPE</span>${btn('studies','Edit','edit','side-scope-edit')}</header><strong>${esc(scopeName)}</strong><small>${scopeCount?`${scopeCount} selected ${scopeCount===1?'folder':'folders'} · ${fmt(f.totals.review)} review · ${fmt(f.totals.learn)} learning`:'Choose the exact folders you want included.'}</small><div class="side-scope-actions">${scopeCount?btn('quick-session','Study this scope','play','side-scope-study'):btn('studies','Choose folders','plus','side-scope-study')}${btn('page','Browse','folder','side-scope-browse','data-page="library"')}</div></section>
+        </div>
+        <div class="side-scroll" tabindex="0" aria-label="Scrollable folders and focused studies">
           ${state.page!=='library'&&f.enabled&&f.active.length?`<div class="side-label active-label">FOCUS FOLDERS</div><div class="side-studies">${f.active.map(s=>`<div class="side-exam"><button type="button" class="side-study" data-action="select-study" data-id="${s.id}" title="Choose lectures in ${esc(s.name)}"><span class="study-indicator"></span><span>${esc(s.name)}</span>${icon('chevron',12)}</button>${ib('finish-study','Remove '+s.name+' from active exams','close',`data-id="${s.id}"`,'side-remove')}</div>`).join('')}</div>`:''}
           <div class="side-label"><span>${state.page==='library'?'BROWSE FOLDERS':'FOLDERS'}</span><span>${ib('collapse-all','Collapse all folders','layers')}${ib('create','New folder','plus','data-kind="folder" data-parent="0"')}</span></div>
           <div class="tree" role="navigation" aria-label="Deck and folder tree">${sidebarTree()||'<p class="side-note">Your existing folders will appear here.</p>'}</div>
           ${recent.length?`<div class="side-label recent-label">PICK UP WHERE YOU LEFT OFF</div><div class="recent-links">${recent.map(n=>btn('navigate',`<span class="truncate">${esc(n.name)}</span>`,'clock','recent-link',`data-id="${n.id}" title="${esc(nicePath(n.path))}"`)).join('')}</div>`:''}
         </div>
-        <div class="side-bottom">${btn('appearance',`<strong>Change the atmosphere</strong><small>${THEMES.find(t=>t[0]===state.config.theme)?.[1]||'Appearance'} · ${THEMES.length} worlds</small>`,'palette','appearance-link')}
-          ${btn('widget-page','Widgets','grid','native-link',`aria-current="${state.page==='widgets'?'page':'false'}"`)}
+        <div class="side-bottom"><div class="side-bottom-actions">${btn('appearance',`<strong>Worlds</strong><small>${THEMES.find(t=>t[0]===state.config.theme)?.[1]||'Appearance'} · ${THEMES.length}</small>`,'palette','appearance-link')}
+          ${btn('widget-page','Widgets','grid','native-link',`aria-current="${state.page==='widgets'?'page':'false'}"`)}</div>
           <button type="button" class="credit" data-action="website">DAEDALUS WORKS<small>daedalusworks.net</small></button>
         </div>
       </aside>`;

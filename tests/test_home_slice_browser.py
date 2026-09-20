@@ -86,7 +86,9 @@ def run():
   # Actual hit testing after main scroll and short/narrow viewport.
   for width,height in [(320,540),(390,650),(620,700),(820,740),(1024,600),(1250,760),(1725,900)]:
    p=page(width=width,height=height)
-   check(f'{width} Home contains all essential controls',not overflow(p) and all(hit(p.locator('.unified-topbar [data-command="'+k+'"]')) for k in ('add','browse','sync')))
+   sidebar_fit=p.evaluate('''()=>{if(innerWidth<=820)return true;const r=document.querySelector('#atelier-root').shadowRoot,h=r.querySelector('.side-hud'),s=r.querySelector('.side-scroll'),b=r.querySelector('.side-bottom'),box=b.getBoundingClientRect();return h.nextElementSibling===s&&s.nextElementSibling===b&&s.clientHeight>=48&&box.top>=0&&box.bottom<=innerHeight+1&&getComputedStyle(s,'::-webkit-scrollbar').width==='12px'&&getComputedStyle(s,'::-webkit-scrollbar-track').backgroundColor!=='rgba(0, 0, 0, 0)'}''')
+   check(f'{width} Home contains all essential controls',not overflow(p) and sidebar_fit and all(hit(p.locator('.unified-topbar [data-command="'+k+'"]')) for k in ('add','browse','sync')))
+   if width==1024:p.screenshot(path=str(SHOTS/'forest-sidebar-compact-1024x600.png'),animations='disabled')
    p.locator('.task-focus [data-action=choose-lectures]').click();p.wait_for_timeout(90)
    check(f'{width} Browse lectures clears the actual sticky header',p.evaluate("()=>{const r=document.querySelector('#atelier-root').shadowRoot,t=r.querySelector('#lecture-board')||r.querySelector('.library');return t.getBoundingClientRect().top>=r.querySelector('.unified-topbar').getBoundingClientRect().bottom-1}"))
    p.evaluate("document.querySelector('#atelier-root').shadowRoot.querySelector('.main').scrollTop=800")

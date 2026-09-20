@@ -4,11 +4,13 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `22d189c8aa7b86ae2458f5103daf4c86083e8861c63b66b2dc5cb5a0fc98b76f`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `debf1936050562159adb5c66b0a63c515c2f826d8064593ef2536949dfb47cae`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
 The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. The production finish now spans every screen family: Home, Library, Widgets, Tools, Card Studio, Mask Studio, Exam Studio, Practice Builder, Pip, Results, Progress, and reviewer question/answer. Panels use each world's own scene, tint, material, edge light, pattern, and elevation rather than a common flat-card treatment. Card Studio's four-step workflow stays in a single desktop grid with the editor visible below it, and the shell loads the shipped high-resolution Atelier emblem.
+
+The final sidebar uses a fixed compact shelf for Today and study scope, a separate flexible folder scroller, and a one-row Worlds/Widgets dock. At 1024×600 it retains every primary navigation action, both utility modules, the active-folder region, and the bottom dock; the folder viewport remains at least 48 pixels high. Its WebKit scrollbar is 12 pixels wide with a themed track and accent thumb styling. The same structural and computed-style assertions run at 1024×600, 1250×760, and 1725×900.
 
 The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 
