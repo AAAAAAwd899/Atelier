@@ -50,7 +50,7 @@ The expanded world-finish suite passes 266 checks. It verifies all seventeen wor
 
 ## Rendered interface evidence
 
-The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, two dedicated desktop/mobile Onigiri integration captures, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
+The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, dedicated desktop/mobile Onigiri integration captures plus the full repaired rewards panel, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
 
 - `output/playwright/visual-review-boards/forest-1440x900-all-screens.png`
 - `output/playwright/visual-review-boards/forest-390x720-all-screens.png`
