@@ -35,3 +35,21 @@ html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-wor
 html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="ember"] #qa{border-right:2px solid var(--at-accent)!important;}
 html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-world="celestial"] #qa{outline:1px solid color-mix(in srgb,var(--at-accent) 18%,transparent);outline-offset:5px;}
 html[data-atelier-screen="review-bottom"] #outer button{transform:none!important;transition:border-color .16s,background-color .16s!important;}
+
+/* The reviewer is a full Atelier surface, not a loose card on an empty canvas.
+   Card content and native answer controls retain their original DOM and events. */
+html[data-atelier-screen="review"][data-atelier-card="reading"][data-atelier-ambience="true"] body.card{
+ background-image:radial-gradient(ellipse at 14% 8%,color-mix(in srgb,var(--at-accent) 13%,transparent),transparent 42%),radial-gradient(ellipse at 88% 92%,color-mix(in srgb,var(--at-accent) 8%,transparent),transparent 48%),linear-gradient(145deg,color-mix(in srgb,var(--at-side) 44%,var(--at-bg)),var(--at-bg) 55%)!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #atelier-review-header{
+ padding:8px 12px!important;border:1px solid color-mix(in srgb,var(--at-accent) 18%,var(--at-line));border-radius:10px;
+ background:color-mix(in srgb,var(--at-panel) 78%,transparent);box-shadow:inset 0 1px 0 #ffffff0b;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{
+ min-height:clamp(180px,24vh,280px)!important;display:flex!important;flex-direction:column!important;justify-content:center!important;
+ border-color:color-mix(in srgb,var(--at-accent) 34%,var(--at-line))!important;
+ box-shadow:var(--review-shadow),inset 0 1px 0 #ffffff12,inset 0 0 70px color-mix(in srgb,var(--at-accent) 4%,transparent)!important;
+}
+html[data-atelier-screen="review"][data-atelier-card="reading"] #qa hr#answer{width:100%;}
+@media(max-height:620px){html[data-atelier-screen="review"][data-atelier-card="reading"] #qa{min-height:0!important;}}
+@media(forced-colors:active){html[data-atelier-screen="review"][data-atelier-card="reading"] :is(#atelier-review-header,#qa){background:Canvas!important;background-image:none!important;box-shadow:none!important;border-color:CanvasText!important;}}

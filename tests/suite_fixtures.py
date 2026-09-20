@@ -3,6 +3,7 @@ from fixtures import *
 from preview_071 import home071
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
+import base64
 worlds=importlib.import_module('atelier_testing.worlds')
 
 def suite_state():
@@ -17,6 +18,8 @@ def home_suite(theme='forest',owner='atelier',page='desk',with_sprout=False):
     boot['worlds']=worlds.CATALOG;boot['suite']=suite_state();boot['demo']['suite']=suite_state()
     boot['authoring']={'available':True,'projects':6,'drafts':3,'repairs':1};boot['demo']['authoring']=dict(boot['authoring'])
     boot['assetBase']='/_addons/daedalus_atelier/web'
+    mark=(ROOT/'src'/'web'/'atelier-mark-1.0.3.png').read_bytes()
+    boot['brandAsset']='data:image/png;base64,'+base64.b64encode(mark).decode('ascii')
     boot['suiteAssets']='/_addons/daedalus_atelier/sprout/web'
     boot['nativeTools']={key:True for key in ('add','browse','sync','stats','import','export','preferences','addons','note_types','profiles','help','undo','redo','check_media','check_database','filtered_deck','empty_cards','fullscreen','check_updates')}
     boot['settings'].update(theme=theme,native_surfaces=True,motion=False,ambience=True)

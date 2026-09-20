@@ -51,6 +51,7 @@ def main():
    check('No exam is automatically created',len(h.plan_requests)==1 and 'date' not in plan['setup'])
    click(f'[data-action="open-source"][data-id="{slide_source}"]')
    check('Four-step card set workflow is visible',page.locator('.creator-step').count()==4 and 'From material to study-ready cards' in page.locator('.creator-guide').inner_text())
+   check('Four-step workflow stays in one desktop grid',page.locator('.creator-steps').evaluate("e=>{const r=[...e.children].map(x=>x.getBoundingClientRect());return r.length===4&&Math.max(...r.map(x=>x.top))-Math.min(...r.map(x=>x.top))<2&&r.every(x=>x.width>180)}"))
    check('Card set selector is explicit',page.locator('.studio-set-picker').count()==1 and page.locator('.studio-set-picker select').input_value()==h.primary_project)
    check('Slide rail exposes the imported order',page.locator('.source-page-rail .page-chip').count()==4 and 'SLIDES' in page.locator('.source-page-rail').inner_text())
    click('[data-action="jump-page"][data-page="3"]')

@@ -1,4 +1,4 @@
-"""Build the compact, current-runtime review bundle without stale native captures."""
+"""Build the current-runtime review bundle without stale native captures."""
 from __future__ import annotations
 
 import datetime
@@ -25,6 +25,13 @@ def main() -> None:
     verified = json.loads((ROOT / "verification/verified.json").read_text(encoding="utf8"))
     native = json.loads((ROOT / "verification/native-install-current.json").read_text(encoding="utf8"))
     companion = json.loads((ROOT / "output/playwright/companion-family/results.json").read_text(encoding="utf8"))
+    matrix_paths = {
+        "core": ROOT / "output/playwright/final-matrix/results.json",
+        "home-workflows": ROOT / "output/playwright/final-home-workflows/results.json",
+        "planner": ROOT / "output/playwright/final-planner/results.json",
+        "card": ROOT / "output/playwright/final-card/results.json",
+    }
+    matrices = {name: json.loads(path.read_text(encoding="utf8")) for name, path in matrix_paths.items()}
     world_receipt = json.loads((ROOT / "verification/world-suite/results.json").read_text(encoding="utf8"))
     installer = dist / "Atelier-1.0.3.ankiaddon"
     source = dist / "Atelier-1.0.3-Source.zip"
@@ -32,7 +39,7 @@ def main() -> None:
     files = dist / "Atelier-1.0.3-Files.json"
 
     assert verified["runtime_sha256"] == native["runtime_sha256"] == companion["runtime_sha256"] == fingerprint
-    assert verified["python_total"] == 1902 and verified["browser_total"] == 2628
+    assert verified["python_total"] == 1902 and verified["browser_total"] == 2630
     assert verified["python_failed"] == verified["python_skipped"] == verified["browser_errors"] == 0
     assert world_receipt["count"] == verified["browser_suites"]["world-suite"] == 175
     assert not world_receipt["errors"] and not native["errors"] and all(native["checks"].values())
@@ -41,19 +48,51 @@ def main() -> None:
     assert all(row["renderer"] == "portrait" for row in companion["records"])
     assert all(min(row["contrast"][key] for key in ("bodyRatio", "strongRatio", "labelRatio")) >= 4.5 for row in companion["records"])
 
-    screenshots = sorted((ROOT / "screenshots/worlds").glob("*.png"))
-    expected = {f"{world}-{screen}.png" for world in (
-        "obsidian", "glacier", "rose", "bloom", "linen", "matcha", "midnight", "peach", "forest",
-        "tidal", "ember", "celestial", "castle", "underworld", "mythic", "cabin", "sunset-beach",
-    ) for screen in ("home", "planner", "practice")} | {"forest-tools.png"}
-    assert {path.name for path in screenshots} == expected
+    expected_matrix_counts = {"core": 510, "home-workflows": 255, "planner": 340, "card": 170}
+    overflow_keys = ("horizontal_overflow", "page_overflow")
+    for name, receipt in matrices.items():
+        assert receipt["runtime_sha256"] == fingerprint
+        assert len(receipt["records"]) == expected_matrix_counts[name]
+        assert not receipt["errors"]
+        assert all(not any(row.get(key, False) for key in overflow_keys) for row in receipt["records"])
+    matrix_render_count = sum(len(receipt["records"]) for receipt in matrices.values())
+    assert matrix_render_count == 1275
 
     archive_files: list[tuple[Path, str]] = []
     manifest: list[dict[str, object]] = []
-    for path in screenshots:
-        relative = f"worlds/{path.name}"
+    matrix_folders = {
+        "core": ROOT / "output/playwright/final-matrix",
+        "home-workflows": ROOT / "output/playwright/final-home-workflows",
+        "planner": ROOT / "output/playwright/final-planner",
+        "card": ROOT / "output/playwright/final-card",
+    }
+    selected_matrix_count = 0
+    for name, receipt in matrices.items():
+        for row in receipt["records"]:
+            if row["viewport"] not in ([1440, 900], [390, 720]):
+                continue
+            path = matrix_folders[name] / row["file"]
+            assert path.is_file() and sha(path) == row["sha256"]
+            relative = f"screens/{name}/{path.name}"
+            archive_files.append((path, "Atelier-1.0.3-Screenshots/" + relative))
+            manifest.append({
+                "file": relative,
+                "sha256": row["sha256"],
+                "bytes": path.stat().st_size,
+                "category": "current shipped interface; fictional data",
+                "world": row["world"],
+                "screen": row["screen"],
+                "viewport": row["viewport"],
+            })
+            selected_matrix_count += 1
+    assert selected_matrix_count == 510
+
+    review_boards = sorted((ROOT / "output/playwright/visual-review-boards").glob("*.png"))
+    assert len(review_boards) == 5
+    for path in review_boards:
+        relative = f"review-boards/{path.name}"
         archive_files.append((path, "Atelier-1.0.3-Screenshots/" + relative))
-        manifest.append({"file": relative, "sha256": sha(path), "bytes": path.stat().st_size, "category": "current browser render; fictional data"})
+        manifest.append({"file": relative, "sha256": sha(path), "bytes": path.stat().st_size, "category": "all-screen visual inspection board"})
     companion_folder = ROOT / "output/playwright/companion-family"
     for row in companion["records"]:
         path = companion_folder / row["file"]
@@ -68,6 +107,7 @@ def main() -> None:
         (ROOT / "verification/native-install-current.json", "receipts/native-install-current.json"),
         (ROOT / "verification/verified.json", "receipts/verified.json"),
     ]
+    receipt_files.extend((path, f"receipts/{name}.json") for name, path in matrix_paths.items())
     for path, relative in receipt_files:
         archive_files.append((path, "Atelier-1.0.3-Screenshots/" + relative))
 
@@ -76,6 +116,10 @@ def main() -> None:
         "version": "1.0.3",
         "runtime_sha256": fingerprint,
         "browser_world_checks": 175,
+        "visual_matrix_renders": matrix_render_count,
+        "visual_matrix_errors": 0,
+        "visual_matrix_overflow_failures": 0,
+        "selected_desktop_and_phone_renders": selected_matrix_count,
         "screenshots": manifest,
         "limitations": "Browser renders use fictional data. Native installer evidence uses a disposable profile and has no screenshots. Earlier native visual captures are historical and excluded from this current bundle.",
     }, indent=2) + "\n", encoding="utf8")
@@ -96,7 +140,16 @@ def main() -> None:
         "completed_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "automated": verified,
         "native_installer": native,
-        "screenshots": {"count": len(manifest), "sha256": sha(screenshot_zip), "companion_count": 6, "world_interface_count": len(screenshots)},
+        "screenshots": {
+            "count": len(manifest),
+            "sha256": sha(screenshot_zip),
+            "companion_count": 6,
+            "review_board_count": len(review_boards),
+            "selected_interface_count": selected_matrix_count,
+            "full_matrix_render_count": matrix_render_count,
+            "full_matrix_errors": 0,
+            "full_matrix_overflow_failures": 0,
+        },
         "publicly_published": False,
         "owner_accepted": False,
         "limits": "See AUDIT-1.0.3.md. Browser screenshots use fictional data; the AddonManager check used a disposable Anki profile. macOS, physical remotes, full native scaling, live GPU Pip, and uncoached-user acceptance remain unverified.",

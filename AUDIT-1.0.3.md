@@ -4,11 +4,11 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `81cb51430219630c06addb23dda8fe28d8b9474e110baaf22928f89bb8b14daa`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `d804f65f15a74502cba8debdc862a3aaa37409c564b83f40dd661aceea8d3ca5`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
-The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. Sunset Cove received an authored coastal sidebar, stronger selected navigation, layered translucent workflow and study surfaces, warm edge light, distinct repair and lecture materials, deeper elevation, and restrained coral accents. Other themes keep their own scene, shape, type, surface, and Card Studio treatment.
+The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. The production finish now spans every screen family: Home, Library, Widgets, Tools, Card Studio, Mask Studio, Exam Studio, Practice Builder, Pip, Results, Progress, and reviewer question/answer. Panels use each world's own scene, tint, material, edge light, pattern, and elevation rather than a common flat-card treatment. Card Studio's four-step workflow stays in a single desktop grid with the editor visible below it, and the shell loads the shipped high-resolution Atelier emblem.
 
 The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 
@@ -37,8 +37,8 @@ The final `verify_release.py` run completed on 2026-09-19 against the fingerprin
 | Atelier integration and preservation | 1,233 | 0 | 0 |
 | Exam engine and quiet review | 460 | 0 | 0 |
 | Card Studio importers, publishers, and routes | 209 | 0 | 0 |
-| 28 browser suites | 2,628 | 0 | 0 page errors |
-| **Total** | **4,530** | **0** | **0** |
+| 28 browser suites | 2,630 | 0 | 0 page errors |
+| **Total** | **4,532** | **0** | **0** |
 
 The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
@@ -46,13 +46,13 @@ The expanded world-finish suite passes 266 checks. It verifies all seventeen wor
 
 ## Rendered interface evidence
 
-The final shipping source was rendered in Chromium with explicitly fictional data and visually inspected at fullscreen, desktop, and phone widths:
+The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
 
-- `output/playwright/current-art/sunset-beach-home-fullscreen-1915x1000.png`
-- `output/playwright/current-art/sunset-beach-home-final-1280x800.png`
-- `output/playwright/current-art/sunset-beach-home-final-390x720.png`
-- `output/playwright/current-art/world-chooser-new-worlds-1024x768.png`
-- `output/playwright/current-art/new-worlds-contact-sheet.png`
+- `output/playwright/visual-review-boards/forest-1440x900-all-screens.png`
+- `output/playwright/visual-review-boards/forest-390x720-all-screens.png`
+- `output/playwright/visual-review-boards/sunset-beach-1440x900-all-screens.png`
+- `output/playwright/visual-review-boards/castle-1440x900-all-screens.png`
+- `output/playwright/visual-review-boards/linen-1440x900-all-screens.png`
 - `output/playwright/companion-family/cutesy-rose.png`
 - `output/playwright/companion-family/green-forest.png`
 - `output/playwright/companion-family/water-tidal.png`
@@ -60,9 +60,9 @@ The final shipping source was rendered in Chromium with explicitly fictional dat
 - `output/playwright/companion-family/ember-ember.png`
 - `output/playwright/companion-family/linen-linen.png`
 
-`output/playwright/current-art/final-responsive-evidence.json` records exact host/layout widths, equal main `scrollWidth`/`clientWidth`, and zero page errors for the three final Sunset Cove captures. `output/playwright/companion-family/results.json` records the shipped portrait file, themed stage language, portrait renderer, image hash, zero page errors, and measured text contrast for each companion family; the lowest explanatory-text result is 6.89:1. These are real browser renders of the shipped source, not native Anki screenshots.
+`output/playwright/final-matrix/results.json`, `final-home-workflows/results.json`, `final-planner/results.json`, and `final-card/results.json` record each file, world, screen, viewport, image hash, overflow result, and page errors. `output/playwright/companion-family/results.json` records the shipped portrait file, themed stage language, portrait renderer, image hash, zero page errors, and measured text contrast for each companion family; the lowest explanatory-text result is 6.89:1. These are real browser renders of the shipped source, not native Anki screenshots.
 
-The earlier 360-capture matrix remains historical evidence for the original twelve worlds and five viewport sizes. It is not claimed as a final native render of the five added worlds. Earlier rejected or stale-compositor frames remain failure evidence and are not cited as final screenshots.
+Earlier rejected, flat-art, or stale-compositor frames remain failure evidence and are not cited as final screenshots.
 
 ## Native and performance evidence boundaries
 

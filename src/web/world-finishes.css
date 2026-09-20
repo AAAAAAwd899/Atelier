@@ -116,3 +116,57 @@ html[data-atelier-world-enabled="true"] #es-app :is(.suite-session-kicker,.suite
 .theme-tile[data-theme-choice="mythic"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
 .theme-tile[data-theme-choice="cabin"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
 .theme-tile[data-theme-choice="sunset-beach"] .theme-title{font-family:Georgia, "Times New Roman", serif;}
+
+/* 1.0.3 production finish: the whole suite shares material depth while each
+   world keeps its own aperture, pattern, type and accent. Geometry and actions
+   are unchanged; these rules only finish owned surfaces. */
+:host([data-owner="atelier"]){
+ --finish-surface:linear-gradient(138deg,color-mix(in srgb,var(--accent) 7%,var(--panel)),color-mix(in srgb,var(--panel) 96%,var(--side)) 55%,var(--panel));
+ --finish-depth:0 22px 58px color-mix(in srgb,var(--shadow) 68%,transparent),inset 0 1px 0 var(--sheen);
+ --finish-depth-soft:0 12px 30px color-mix(in srgb,var(--shadow) 48%,transparent),inset 0 1px 0 var(--sheen);
+ --finish-edge:color-mix(in srgb,var(--accent) 22%,var(--line));
+}
+:host([data-owner="atelier"]) :is(.task-focus.quiet-focus,.exam-section,.deck-detail,.nw-card,.progress-chart,.widget-presets){
+ background-color:var(--panel);background-image:var(--finish-pattern),var(--finish-sheen),var(--finish-surface);
+ border-color:var(--finish-edge);box-shadow:var(--finish-depth);
+}
+:host([data-owner="atelier"]) :is(.deck-card,.revisit-column,.tool-entry,.library-row,.progress-summary>div,.nw-work-link,.resume-lecture){
+ background-color:var(--panel);background-image:var(--finish-sheen),var(--finish-surface);
+ border-color:var(--finish-edge);box-shadow:var(--finish-depth-soft);
+}
+:host([data-owner="atelier"]) :is(.deck-card,.tool-entry,.nw-card,.revisit-column,.exam-section){position:relative;isolation:isolate;}
+:host([data-owner="atelier"]) :is(.deck-card,.tool-entry,.nw-card,.revisit-column,.exam-section)::before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;inset:0 0 auto;height:1px;
+ background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.52;
+}
+:host([data-owner="atelier"]) .tool-symbol{box-shadow:inset 0 1px 0 var(--sheen),0 8px 18px color-mix(in srgb,var(--shadow) 42%,transparent);}
+:host([data-owner="atelier"]) .tool-tile:hover{background-image:linear-gradient(128deg,color-mix(in srgb,var(--accent) 10%,transparent),transparent 62%);}
+:host([data-owner="atelier"]) .nw-day>span{box-shadow:0 0 18px color-mix(in srgb,var(--accent) 24%,transparent);}
+
+html[data-atelier-world-enabled="true"] #es-app{
+ --finish-suite-surface:linear-gradient(138deg,color-mix(in srgb,var(--es-accent) 7%,var(--es-surface)),var(--es-surface) 58%,color-mix(in srgb,var(--es-surface) 94%,var(--es-soft)));
+ --finish-suite-depth:0 24px 64px #00000024,inset 0 1px 0 #ffffff12;
+ --finish-suite-depth-soft:0 14px 34px #00000018,inset 0 1px 0 #ffffff0d;
+ --finish-suite-edge:color-mix(in srgb,var(--es-accent) 24%,var(--es-line));
+}
+html[data-atelier-world-enabled="true"] #es-app :is(.es-hero,.suite-result-hero,.suite-editor-fields,.es-practice-card,.suite-session-safety,.suite-setup-summary,.pip-card){
+ background-color:var(--es-surface);background-image:var(--finish-pattern),var(--finish-sheen),var(--finish-suite-surface);
+ border-color:var(--finish-suite-edge);box-shadow:var(--finish-suite-depth);
+}
+html[data-atelier-world-enabled="true"] #es-app :is(.suite-result-table,.suite-plan,.suite-practice-summary-content,.suite-summary-content,.es-choice,.suite-question-card){
+ background-color:var(--es-surface);background-image:var(--finish-sheen),var(--finish-suite-surface);
+ border-color:var(--finish-suite-edge);box-shadow:var(--finish-suite-depth-soft);
+}
+html[data-atelier-world-enabled="true"] #es-app :is(.es-hero,.suite-result-hero,.es-practice-card,.suite-setup-summary){position:relative;isolation:isolate;overflow:hidden;}
+html[data-atelier-world-enabled="true"] #es-app :is(.es-hero,.suite-result-hero,.es-practice-card,.suite-setup-summary)::before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;inset:0 0 auto;height:1px;
+ background:linear-gradient(90deg,transparent,var(--es-accent),transparent);opacity:.56;
+}
+@media(max-width:700px){
+ :host([data-owner="atelier"]) :is(.task-focus.quiet-focus,.exam-section,.deck-detail,.nw-card,.progress-chart){box-shadow:var(--finish-depth-soft);}
+ html[data-atelier-world-enabled="true"] #es-app :is(.es-hero,.suite-result-hero,.suite-editor-fields,.es-practice-card,.suite-session-safety,.suite-setup-summary,.pip-card){box-shadow:var(--finish-suite-depth-soft);}
+}
+@media(forced-colors:active){
+ :host([data-owner="atelier"]) :is(.task-focus.quiet-focus,.exam-section,.deck-detail,.nw-card,.progress-chart,.widget-presets,.deck-card,.revisit-column,.tool-entry,.library-row,.progress-summary>div,.nw-work-link,.resume-lecture),
+ html[data-atelier-world-enabled="true"] #es-app :is(.es-hero,.suite-result-hero,.suite-editor-fields,.es-practice-card,.suite-session-safety,.suite-setup-summary,.pip-card,.suite-result-table,.suite-plan){background-image:none;box-shadow:none;border-color:CanvasText;}
+}

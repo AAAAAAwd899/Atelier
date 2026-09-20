@@ -26,6 +26,7 @@ def main():
   def shot(name):p.screenshot(path=str(SHOTS/name),full_page=True)
   try:
    p.set_content(fixture());p.locator('.authoring-hub').wait_for()
+   check('Authored Atelier mark is loaded',p.locator('img.brand-mark').evaluate('e=>e.complete&&e.naturalWidth>500&&e.naturalHeight>500'))
    check('Home has one contextual card workspace',p.locator('.authoring-hub').count()==1 and p.locator('.nav-row[data-action="authoring-open"]').count()==1)
    check('Project/draft counts project the same local data','6 source projects' in p.locator('.authoring-hub').inner_text() and '3 drafts' in p.locator('.authoring-hub').inner_text())
    p.evaluate("window.AtelierMakeover.updateAuthoring({token:'preview',authoring:{available:true,projects:7,drafts:4,repairs:2}})")

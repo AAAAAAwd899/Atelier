@@ -140,3 +140,22 @@ html[data-atelier-card-studio] #workshop .modal-heading,html[data-atelier-card-s
 #workshop #ws-destination-results{display:grid;gap:8px;margin-top:16px;max-height:48vh;overflow:auto;padding:3px}
 #workshop .ws-destination{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%;text-align:left;gap:7px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);font-size:14px}
 #workshop .ws-destination span{min-width:0;overflow-wrap:anywhere}#workshop .ws-destination small{color:var(--muted);font-size:12px}#workshop .ws-destination:hover{border-color:var(--accent)}
+
+/* 1.0.3 production finish across Card Studio and Mask Studio. */
+#workshop[data-suite-theme="true"] :is(.creator-guide,.ws-authoring-workflow,.workbench,.draft-shelf,.studio-panel,.panel,.library-note,.settings-section,.mask-dialog){
+ border-color:color-mix(in srgb,var(--accent) 24%,var(--line));
+ background-color:var(--panel);background-image:var(--studio-material),linear-gradient(138deg,color-mix(in srgb,var(--accent) 7%,var(--panel)),var(--panel) 58%,color-mix(in srgb,var(--raised) 34%,var(--panel)));
+ box-shadow:var(--studio-depth),inset 0 1px 0 color-mix(in srgb,var(--fg) 8%,transparent);
+}
+#workshop[data-suite-theme="true"] :is(.creator-guide,.ws-authoring-workflow,.workbench,.draft-shelf,.mask-dialog){position:relative;isolation:isolate;overflow:hidden;}
+#workshop[data-suite-theme="true"] :is(.creator-guide,.ws-authoring-workflow,.workbench,.draft-shelf,.mask-dialog)::before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;inset:0 0 auto;height:1px;
+ background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.58;
+}
+#workshop[data-suite-theme="true"] .creator-guide>header{background:linear-gradient(112deg,color-mix(in srgb,var(--accent) 8%,var(--raised)),transparent 64%);}
+#workshop[data-suite-theme="true"] .creator-step{background:linear-gradient(145deg,color-mix(in srgb,var(--panel) 88%,transparent),transparent);}
+#workshop[data-suite-theme="true"] .creator-step.complete{background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--panel)),transparent);}
+#workshop[data-suite-theme="true"] :is(.source-pane,.editor-pane){background-color:color-mix(in srgb,var(--panel) 94%,var(--bg));}
+#workshop[data-suite-theme="true"] .mask-image-area{border-color:color-mix(in srgb,var(--accent) 28%,var(--line));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 6%,transparent),0 18px 48px #00000024;}
+@media(max-width:700px){#workshop[data-suite-theme="true"] :is(.creator-guide,.ws-authoring-workflow,.workbench,.draft-shelf,.studio-panel,.panel,.library-note,.settings-section,.mask-dialog){box-shadow:0 12px 32px #0000001c,inset 0 1px 0 color-mix(in srgb,var(--fg) 8%,transparent);}}
+@media(forced-colors:active){#workshop[data-suite-theme="true"] :is(.creator-guide,.ws-authoring-workflow,.workbench,.draft-shelf,.studio-panel,.panel,.library-note,.settings-section,.mask-dialog){background-image:none;box-shadow:none;border-color:CanvasText;}}

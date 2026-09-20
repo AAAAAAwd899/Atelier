@@ -23,10 +23,10 @@ def main() -> None:
     assert verified["runtime_sha256"] == fingerprint
     assert python_receipt["runtime_sha256"] == fingerprint
     assert verified["python_total"] == 1902
-    assert verified["browser_total"] == 2628
+    assert verified["browser_total"] == 2630
     assert verified["python_failed"] == 0 and verified["python_skipped"] == 0
     assert verified["browser_errors"] == 0
-    for required in (fingerprint, "seventeen worlds", "1,233", "2,628", "1915"):
+    for required in (fingerprint, "seventeen worlds", "1,233", "2,630", "1,275", "1915"):
         assert required in audit, f"audit is missing current evidence: {required}"
     for stale in ("accepted twelve-world catalogue remains unchanged", "WinError 5", "1,836 total"):
         assert stale not in audit, f"audit retains stale evidence: {stale}"
