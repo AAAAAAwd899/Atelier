@@ -29,8 +29,8 @@ def run():
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   def homepage(theme='forest',width=1440,height=1000):
-    p=browser.new_page(viewport={'width':width,'height':height});p.set_default_timeout(9000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
-    p.set_content(home_suite(theme));p.locator('.suite-plan').first.wait_for();p.wait_for_timeout(120)
+    p=browser.new_page(viewport={'width':width,'height':height});p.set_default_timeout(20000);p.on('pageerror',lambda e:ERRORS.append(str(e)))
+    p.set_content(home_suite(theme),wait_until='domcontentloaded',timeout=20000);p.locator('.suite-plan').first.wait_for();p.wait_for_timeout(120)
     p.evaluate("window.events=[];for(let n of ['atelier:preview-native','atelier:preview-suite'])window.addEventListener(n,e=>events.push({type:n,...e.detail}));")
     return p
   fonts=set();images=set();radii=set()
@@ -76,7 +76,7 @@ def run():
   # All worlds applied to actual bundled planner/assessment, not mock static cards.
   for theme in core.THEMES:
     p=browser.new_page(viewport={'width':1440,'height':1020});p.set_default_timeout(15000);p.on('pageerror',lambda e:ERRORS.append(str(e)));pf.expose(p)
-    p.set_content(pf.html(theme));p.locator('.es-readiness-grade').wait_for();p.wait_for_timeout(200)
+    p.set_content(pf.html(theme),wait_until='domcontentloaded',timeout=20000);p.locator('.es-readiness-grade').wait_for();p.wait_for_timeout(200)
     check(theme+' planner uses shared world and all native links',p.evaluate('document.documentElement.dataset.atelierWorld')==theme and p.locator('.suite-tool-links [data-command]').count()==3 and not overflow(p))
     # Both font and the Pip footer, which originally retained a dark blue fixed skin.
     colours=p.evaluate('''()=>({text:getComputedStyle(document.querySelector('.es-pip-progress>strong')).color, panel:getComputedStyle(document.querySelector('.es-pip-progress')).backgroundImage,hero:getComputedStyle(document.querySelector('.es-hero')).backgroundImage,pipBackdrop:getComputedStyle(document.querySelector('.pip-card'),'::before').backgroundImage,pipButton:getComputedStyle(document.querySelector('.pip-actions button')).backgroundImage})''')

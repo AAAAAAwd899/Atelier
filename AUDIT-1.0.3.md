@@ -36,15 +36,17 @@ Checkpoint A established semantic roles, navigation hierarchy, study scope, them
 
 The final `verify_release.py` run completed on 2026-09-26 (America/Chicago) against the fingerprint above:
 
+The final browser receipt was assembled from 27 successful suites in the release run and one successful standalone rerun of `world-suite` (175 checks). Its first attempt hit a fixture page-load timeout; the rerun waited for the rendered UI and passed. `verification/verified.json` records `browser_receipts_aggregated: true` rather than implying that every suite passed in one uninterrupted invocation.
+
 | Evidence | Passed | Failed | Skipped/errors |
 |---|---:|---:|---:|
 | Atelier integration and preservation | 1,233 | 0 | 0 |
 | Exam engine and quiet review | 460 | 0 | 0 |
 | Card Studio importers, publishers, and routes | 209 | 0 | 0 |
-| 28 browser suites | 2,665 | 0 | 0 page errors |
-| **Total** | **4,567** | **0** | **0** |
+| 28 browser suites | 2,666 | 0 | 0 page errors |
+| **Total** | **4,568** | **0** | **0** |
 
-The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 131 widget-routing checks cover the compact/expanded live provider subtree on Home, a reproduced 1,160-pixel fixed provider grid, natural-height packing, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, and overflow/gap checks at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
+The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 132 widget-routing checks cover the compact/expanded live provider subtree on Home, a reproduced 1,160-pixel fixed provider grid, natural-height packing, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, loaded Ember artwork, and overflow/gap checks at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
 The owner reported one transient folder-migration popup in a real profile, without a captured error string. This was not reproduced in the disposable-profile or browser checks, so its cause and resolution are unverified. The guarded one-time local shortcut migration preserves unreadable files and retries a failed save on a later startup; exact popup text and reproduction steps remain a follow-up in `MANUAL_ACTIONS_REQUIRED.md`.
 
@@ -52,7 +54,7 @@ The expanded world-finish suite passes 266 checks. It verifies all seventeen wor
 
 ## Rendered interface evidence
 
-The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, dedicated desktop/mobile Onigiri integration captures plus the full repaired rewards panel, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
+The final shipping source was rendered in Chromium with explicitly fictional data in a complete 1,275-render matrix: seventeen worlds, fifteen screen families, and five viewport sizes. The capture harness serves the packaged raster scenes at Anki's asset paths and decodes the selected world's scene before capture. Every capture completed without a page error or horizontal-overflow failure. The delivery bundle includes all 510 desktop and phone renders, dedicated desktop/mobile Onigiri integration captures plus the full repaired rewards panel, the six companion panels, five all-screen review boards, and the full machine-readable matrix receipts. Representative inspection boards are:
 
 - `output/playwright/visual-review-boards/forest-1440x900-all-screens.png`
 - `output/playwright/visual-review-boards/forest-390x720-all-screens.png`
@@ -72,7 +74,7 @@ Earlier rejected, flat-art, or stale-compositor frames remain failure evidence a
 
 ## Native and performance evidence boundaries
 
-The final installer passed the actual Anki 26.05 AddonManager API in a fresh disposable Windows profile against the current runtime fingerprint. The check installed the verified 1.0.2 baseline, wrote synthetic preference and saved-work markers, installed the cumulative 1.0.3 add-on, and confirmed byte-equal runtime files, preserved preferences and saved work, the private add-on identity, no conflicts, and Anki's compatible flag. It did not access the owner's profile or automate the GUI file picker. The receipt is `verification/native-install-current.json`.
+The final installer passed the actual Anki 26.05 AddonManager API in a fresh disposable Windows profile against the current runtime fingerprint. The check installed the verified 1.0.2 baseline, wrote synthetic preference and saved-work markers, installed the cumulative 1.0.3 add-on, and confirmed byte-equal runtime files, preserved preferences and saved work, the private add-on identity, no conflicts, Anki's compatible flag, graceful native shutdown, and a read-only collection integrity check. The earlier Install QA corruption popup came from the test harness closing the collection before Anki's own shutdown. The corrected harness captures native warnings and completed without one. It did not access the owner's profile or automate the GUI file picker. The receipt is `verification/native-install-current.json`.
 
 Earlier native visual evidence used disposable synthetic profiles and payload equality checks. It covered six Home/Widgets captures in Midnight, Rose, and Forest; stock image-occlusion question/answer canvases and mask registration; and folder scheduling and Undo. Those visual tests did not run against the final five scenes or final emblem and are not presented as current native visual acceptance.
 

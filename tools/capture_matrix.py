@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'tests
 from suite_fixtures import home_suite,core
 from fixtures import card
 from release_tools import runtime_digest
+from artwork_fixture import install_artwork_route,with_artwork_base,wait_for_world_art
 from playwright.sync_api import sync_playwright
 OUT=ROOT/'output/playwright/final-matrix';OUT.mkdir(parents=True,exist_ok=True)
 records=[];errors=[];fingerprint=runtime_digest()
@@ -21,8 +22,9 @@ with sync_playwright() as pw:
         for theme in core.THEMES:
             for w,h in [(1440,900),(1280,720),(1024,768),(800,600),(390,720)]:
                 p=browser.new_page(viewport={'width':w,'height':h});p.set_default_timeout(10000);p.on('pageerror',lambda e:errors.append(str(e)))
+                install_artwork_route(p)
                 for screen,page in [('home','desk'),('library','library'),('widgets','widgets'),('tools','tools')]:
-                    p.set_content(home_suite(theme,page=page));p.locator('.main').wait_for();shot(p,theme,screen,w,h)
+                    p.set_content(with_artwork_base(home_suite(theme,page=page)));p.locator('.main').wait_for();wait_for_world_art(p,theme);shot(p,theme,screen,w,h)
                 # Follow Anki's actual question -> answer lifecycle in one
                 # document. page.set_content() preserves Window properties, so
                 # rebuilding the answer document would leave the frozen

@@ -3,6 +3,7 @@ Uses the shipped renderer, live-style JS bridge, actual upgrade helper, and a
 provider-shaped fixture. This is not Windows/Qt or Onigiri native execution.
 """
 from pathlib import Path
+from urllib.parse import urlparse, unquote
 import copy,json,importlib
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
@@ -15,6 +16,9 @@ SH=ROOT/'screenshots/widget-routing';SH.mkdir(parents=True,exist_ok=True)
 
 def route_fixture(owner='atelier',mode='workspace',migrate=False,onigiri=True,theme='ember',page='desk',missing=False):
  s=BeautifulSoup(native_fixture(theme,onigiri=onigiri,page=page),'html.parser')
+ # Anki serves artwork from /_addons; resolve that path in the browser fixture.
+ base=s.new_tag('base',href='http://atelier.test/')
+ s.head.insert(0,base)
  if onigiri:
   # Reproduce Onigiri's full-page dashboard placements. These explicit rows and
   # minimum height must be released only while the live subtree is embedded.
@@ -64,10 +68,17 @@ def run():
  with sync_playwright() as pw:
   b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=b.new_page(viewport={'width':1440,'height':950});p.set_default_timeout(6500);p.on('pageerror',lambda e:errors.append(str(e)))
+  def artwork(route):
+   name=Path(unquote(urlparse(route.request.url).path)).name
+   file=SRC/'web'/'world-art'/name
+   if file.is_file() and file.suffix=='.png':route.fulfill(path=str(file),content_type='image/png')
+   else:route.abort()
+  p.route('**/_addons/daedalus_atelier/web/world-art/*.png',artwork)
   def ready(html):
    p.goto('about:blank')  # New document: mirrors Anki webview replacement
    p.set_content(html)
    p.wait_for_function('window.AtelierMakeover?.diagnostics().loaded===true')
+   p.wait_for_load_state('networkidle')
    p.wait_for_timeout(80)
   def click(sel):p.locator(sel).first.click();p.wait_for_timeout(90)
   def diag():return p.evaluate('AtelierMakeover.diagnostics()')
@@ -75,6 +86,7 @@ def run():
   def provider():p.locator('.studio-rail').wait_for()
   try:
    ready(route_fixture())
+   check('Ember scenic artwork loads in the screenshot fixture',p.evaluate('''async()=>{const img=new Image();img.src='/_addons/daedalus_atelier/web/world-art/ember-1.0.3.png';await img.decode();return img.naturalWidth>1000}'''))
    p.locator('.onigiri-inline').wait_for();p.locator('#retained-input').wait_for(state='attached')
    check('Onigiri rewards are compact until opened',p.locator('.onigiri-inline').is_visible() and p.locator('.onigiri-inline-stage').get_attribute('hidden') is not None and p.locator('.onigiri-inline').evaluate('e=>e.getBoundingClientRect().height<150'))
    p.screenshot(path=str(SH/'embedded-onigiri-compact-1440.png'),animations='disabled')

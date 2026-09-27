@@ -72,17 +72,27 @@ def main():
   if not isinstance(count,int) or count<1 or result.get('errors'):raise RuntimeError('Browser evidence invalid '+name)
   (V/(name+'-results.json')).write_text(json.dumps(result,indent=2)+'\n');return name,count
  failures=[]
- with ThreadPoolExecutor(max_workers=1) as pool:
-  for future in as_completed([pool.submit(browser_job,j) for j in suites]):
+ if '--aggregate-only' in sys.argv:
+  for _,name,path,_ in suites:
    try:
-    name,count=future.result();outcomes[name]=count;print('PASS',name,count,flush=True)
-   except Exception as e:
-    failures.append(str(e));print('FAIL',str(e),flush=True)
+    assert (V/(name+'.exit')).read_text().strip()=='0',name+' did not pass'
+    result=json.loads(path.read_text());count=result.get('count',result.get('checks'))
+    assert isinstance(count,int) and count>0 and not result.get('errors'),name+' receipt invalid'
+    outcomes[name]=count
+   except Exception as e:failures.append(str(e))
+ else:
+  with ThreadPoolExecutor(max_workers=1) as pool:
+   for future in as_completed([pool.submit(browser_job,j) for j in suites]):
+    try:
+     name,count=future.result();outcomes[name]=count;print('PASS',name,count,flush=True)
+    except Exception as e:
+     failures.append(str(e));print('FAIL',str(e),flush=True)
  if failures:raise RuntimeError('; '.join(failures))
  if runtime_digest()!=fingerprint:raise RuntimeError('Runtime changed during verification; rerun')
  if json.loads((V/'python-runtime.json').read_text())['runtime_sha256']!=fingerprint:raise RuntimeError('Python evidence is from different runtime bytes; rerun Python suites')
  report={'version':version(),'runtime_sha256':fingerprint,'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
  'python_suites':{'suite_integration_and_preservation':cases(V/'atelier-unit.xml'),'exam_engine_and_quiet_review':cases(V/'sprout-unit.xml'),'card_studio_importers_publishers_and_routes':cases(V/'workshop-unit.xml')},
+ 'browser_receipts_aggregated':'--aggregate-only' in sys.argv,
  'python_failed':0,'python_skipped':0,'browser_suites':outcomes,'browser_errors':0,'native_windows_verified':False,'native_qt_verified':False,'live_webgl_verified':False,
  'pip_browser_renderer':'authored local portrait family; preserved fallback path; no live GPU claim','phase':'1.0.3 cumulative presentation upgrade; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
  report['python_total']=sum(report['python_suites'].values());report['browser_total']=sum(outcomes.values())

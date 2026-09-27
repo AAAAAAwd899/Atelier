@@ -3,6 +3,7 @@ from pathlib import Path
 import sys,json,hashlib,os
 ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'tests')]
 from release_tools import runtime_digest
+from artwork_fixture import install_artwork_route,with_artwork_base,wait_for_world_art
 from playwright.sync_api import sync_playwright
 component=sys.argv[1];OUT=ROOT/'output/playwright'/('final-'+component);OUT.mkdir(parents=True,exist_ok=True)
 records=[];errors=[];fingerprint=runtime_digest()
@@ -21,7 +22,8 @@ with sync_playwright() as pw:
             from suite_fixtures import home_suite,core
             for theme in core.THEMES:
                 p=b.new_page(viewport={'width':1440,'height':900});p.on('pageerror',lambda e:errors.append(str(e)))
-                p.set_content(home_suite(theme,page='library'));p.locator('.main').wait_for()
+                install_artwork_route(p)
+                p.set_content(with_artwork_base(home_suite(theme,page='library')));p.locator('.main').wait_for();wait_for_world_art(p,theme)
                 for view in ['grid','list']:
                     p.locator(f'[data-action="view"][data-view="{view}"]').click();shots(p,theme,'library-'+view)
                 p.locator('.nav-row[data-action="study-progress"]').click();p.locator('#progress-results .progress-summary').wait_for(state='attached',timeout=10000);shots(p,theme,'progress')
@@ -30,8 +32,9 @@ with sync_playwright() as pw:
             import test_session_slice_browser as fixture
             for theme in fixture.core.THEMES:
                 p=b.new_page(viewport={'width':1440,'height':900});p.on('pageerror',lambda e:errors.append(str(e)));fixture.expose(p)
+                install_artwork_route(p)
                 for screen,view in [('exam-setup','new'),('practice-builder','practice'),('pip','pip'),('results','overview')]:
-                    p.set_content(fixture.html(theme));p.locator('.es-hero').wait_for()
+                    p.set_content(with_artwork_base(fixture.html(theme)));p.locator('.es-hero').wait_for();wait_for_world_art(p,theme)
                     if screen=='results':fixture.show(p,fixture.result(12))
                     else:p.evaluate('(view)=>ExamSprout.event("suite-navigate",{view})',view)
                     p.wait_for_timeout(250);shots(p,theme,screen)
@@ -50,7 +53,8 @@ with sync_playwright() as pw:
             for world in h.appearance_module.CATALOG:
                 theme=world['id'];h.settings['theme']=theme
                 p=b.new_page(viewport={'width':1440,'height':900});p.on('pageerror',lambda e:errors.append(str(e)));p.expose_function('nativeBridge',h.dispatch)
-                p.set_content(h.html());p.locator('.shelf-grid').wait_for();p.locator(f'[data-action="open-project"][data-id="{h.primary_project}"]').first.click();p.locator(f'[data-action="open-source"][data-id="{source["id"]}"]').first.click()
+                install_artwork_route(p)
+                p.set_content(with_artwork_base(h.html()));p.locator('.shelf-grid').wait_for();wait_for_world_art(p,theme);p.locator(f'[data-action="open-project"][data-id="{h.primary_project}"]').first.click();p.locator(f'[data-action="open-source"][data-id="{source["id"]}"]').first.click()
                 p.locator('[data-draft="front"]').wait_for();shots(p,theme,'card-studio')
                 p.locator('[data-action="mask-source"]:not([disabled])').click();p.locator('.mask-image-area img').wait_for();p.wait_for_function('document.querySelector(".mask-image-area img").naturalWidth>0')
                 p.locator('[data-mask-action="same"]').click();area=p.locator('.mask-image-area').bounding_box()

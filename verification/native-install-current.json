@@ -1,7 +1,7 @@
 {
   "category": "actual Anki AddonManager installer API; synthetic application profile; GUI file picker not automated",
-  "runtime_sha256": "e4ffd12e81f073fa9d40dd5f3b9979a9789519af0c6610805ce33a9f42c3dc4c",
-  "installer_sha256": "08f0f4051595a49d12bb836b03e46f00078b1d8fec4f9620c7f1f2ab0038f7e9",
+  "runtime_sha256": "de7963db54a5c7c0cf2f48bc02fe4afdf91e6c7871f52879c8e35c5feecee4bb",
+  "installer_sha256": "cb94b6b196900f13748c26132eb77c169b45ae9c5250fd7f940632cad0630ad0",
   "anki": "26.05",
   "checks": {
     "baseline_install_accepted": true,
@@ -11,7 +11,9 @@
     "user_files_preserved": true,
     "profile_saved_files_preserved": true,
     "private_identity_retained": true,
-    "no_conflicting_installs": true
+    "no_conflicting_installs": true,
+    "graceful_native_shutdown": true,
+    "collection_sqlite_integrity": true
   },
   "errors": [],
   "owner_profile_accessed": false,

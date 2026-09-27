@@ -39,7 +39,7 @@ def main() -> None:
     files = dist / "Atelier-1.0.3-Files.json"
 
     assert verified["runtime_sha256"] == native["runtime_sha256"] == companion["runtime_sha256"] == fingerprint
-    assert verified["python_total"] == 1902 and verified["browser_total"] == 2665
+    assert verified["python_total"] == 1902 and verified["browser_total"] == 2666
     assert verified["python_failed"] == verified["python_skipped"] == verified["browser_errors"] == 0
     assert world_receipt["count"] == verified["browser_suites"]["world-suite"] == 175
     assert not world_receipt["errors"] and not native["errors"] and all(native["checks"].values())
