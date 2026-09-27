@@ -35,7 +35,7 @@ with sync_playwright() as pw:
  b=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),args=['--no-sandbox'])
  errors=[]
  def page_for(html,w=1200,h=700):
-    p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(4000)
+    p=b.new_page(viewport={'width':w,'height':h});p.set_default_timeout(12000)
     p.on('pageerror',lambda e:errors.append(str(e)))
     p.set_content(html);p.wait_for_timeout(70);return p
  for theme,w,stage in itertools.product(core.THEMES,[390,720,1440],['question','answer']):

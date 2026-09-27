@@ -79,7 +79,7 @@
     };
     const state = {config:{...defaults,...boot.settings},profile:normalizeProfile(boot.profile),nodes:[],map:new Map(),childMap:new Map(),
       toolsGroup:'all',page:boot.ui?.page || 'desk',location:boot.ui?.location || '0',filter:'all',query:'',limit:60,treeLimit:240,
-      expanded:new Set(),onigiriExpanded:false,sideHudExpanded:innerHeight>700,sideFocusExpanded:innerHeight>700,mobile:false,loaded:false,dialog:null,dialogData:{},busy:false,current:'0',studied:'',
+      expanded:new Set(),onigiriExpanded:false,sideHudExpanded:innerHeight>700,sideFocusExpanded:innerHeight>950,mobile:false,loaded:false,dialog:null,dialogData:{},busy:false,current:'0',studied:'',
       authoring:boot.authoring||{available:false},suite:boot.suite||{available:false,plans:[]},history:[],forward:[],recentTab:'viewed',saveStatus:'Saved',failure:'',peek:new Set(),collapsedLectures:new Set(),boardLimit:100,menu:null};
     if (state.config.mode === 'hybrid') state.config.mode = 'workspace';
     const pending = new Map(); let sequence = 0, toastTimer, uiTimer, lastKeyCapture = false;

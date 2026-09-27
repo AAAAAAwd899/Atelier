@@ -88,6 +88,8 @@ def run():
    p=page(width=width,height=height)
    sidebar_fit=p.evaluate('''()=>{if(innerWidth<=820)return true;const r=document.querySelector('#atelier-root').shadowRoot,h=r.querySelector('.side-hud'),s=r.querySelector('.side-scroll'),b=r.querySelector('.side-bottom'),box=b.getBoundingClientRect();return h.nextElementSibling===s&&s.nextElementSibling===b&&s.clientHeight>=48&&box.top>=0&&box.bottom<=innerHeight+1&&getComputedStyle(s,'::-webkit-scrollbar').width==='12px'&&getComputedStyle(s,'::-webkit-scrollbar-track').backgroundColor!=='rgba(0, 0, 0, 0)'}''')
    check(f'{width} Home contains all essential controls',not overflow(p) and sidebar_fit and all(hit(p.locator('.unified-topbar [data-command="'+k+'"]')) for k in ('add','browse','sync')))
+   if width==1725:
+    check('Laptop-height sidebar exposes folders below compact focus',p.evaluate('''()=>{const r=document.querySelector('#atelier-root').shadowRoot,s=r.querySelector('.side-scroll').getBoundingClientRect(),f=r.querySelector('.tree-row').getBoundingClientRect();return f.top>=s.top&&f.bottom<=s.bottom}'''))
    if width==1024:
     check('Short sidebar gives the folder index room',p.locator('.side-scroll').evaluate('e=>e.getBoundingClientRect().height>=145') and p.locator('.side-hud-toggle').is_visible())
     p.locator('.side-hud-toggle').click()

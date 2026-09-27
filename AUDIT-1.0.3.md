@@ -4,13 +4,13 @@ Status: implemented and verified for private owner review. This is not public-re
 
 ## Current candidate
 
-The current runtime fingerprint is `ce3064c54f26d589ab5cac1d7e865d4640cc761ba6bc6ef7337fabeac75dc3c1`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
+The current runtime fingerprint is `de7963db54a5c7c0cf2f48bc02fe4afdf91e6c7871f52879c8e35c5feecee4bb`. The cumulative installer and matching source archive are built from the committed source and their exact commit and SHA-256 values are recorded in `dist/Atelier-1.0.3-Build.json` and `dist/Atelier-1.0.3-SHA256.txt`.
 
 Atelier remains Atelier and advances only to version 1.0.3. The accepted catalogue now contains seventeen worlds. Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove use original high-resolution raster scenes generated for this release, accessible semantic palettes, and distinct materials. Six authored local companion families now match those worlds: a moon-crowned cat, leaf-cloaked Pip, tide otter, constellation owl, ember fox, and folded-paper crane. The rejected flat castle illustration is not shipped. The wordmark uses an original transparent gold architectural emblem rather than the temporary circled letter.
 
 The workspace shell now fills the actual viewport through fixed edge constraints instead of a percentage width plus forced CSS zoom. A final 1915×1000 render fills all 1915 pixels; the same source has zero horizontal overflow at 1280×800 and 390×720. The production finish now spans every screen family: Home, Library, Widgets, Tools, Card Studio, Mask Studio, Exam Studio, Practice Builder, Pip, Results, Progress, and reviewer question/answer. Panels use each world's own scene, tint, material, edge light, pattern, and elevation rather than a common flat-card treatment. Card Studio's four-step workflow stays in a single desktop grid with the editor visible below it, and the shell loads the shipped high-resolution Atelier emblem.
 
-The final sidebar uses a compact single-line folder index, full-path tooltips, a flexible folder scroller, and a one-row Worlds/Widgets dock. **Open library** enters the full scenic folder workspace. At 1024×600, Today/study scope and the active-focus list fold behind separately labelled buttons, so three folder rows are visible without scrolling; opening either restores its actions. Taller windows show the utility modules normally. The WebKit scrollbar is 12 pixels wide with a themed track and accent thumb styling. The short-window behavior, actual folder visibility, full Library route, and expansion are browser-checked.
+The final sidebar uses a compact single-line folder index, full-path tooltips, a flexible folder scroller, and a one-row Worlds/Widgets dock. **Open library** enters the full scenic folder workspace. At 1024×600, Today/study scope and the active-focus list fold behind separately labelled buttons, so three folder rows are visible without scrolling; opening either restores its actions. The focus list also starts folded at laptop heights through 950 pixels so the folder index is visible. Taller windows show the utility modules normally. The WebKit scrollbar is 12 pixels wide with a themed track and accent thumb styling. The short-window behavior, actual folder visibility, full Library route, and expansion are browser-checked.
 
 The functional upgrade preserves and extends the accepted 1.0.2 behavior:
 
@@ -41,8 +41,8 @@ The final `verify_release.py` run completed on 2026-09-26 (America/Chicago) agai
 | Atelier integration and preservation | 1,233 | 0 | 0 |
 | Exam engine and quiet review | 460 | 0 | 0 |
 | Card Studio importers, publishers, and routes | 209 | 0 | 0 |
-| 28 browser suites | 2,664 | 0 | 0 page errors |
-| **Total** | **4,566** | **0** | **0** |
+| 28 browser suites | 2,665 | 0 | 0 page errors |
+| **Total** | **4,567** | **0** | **0** |
 
 The browser total includes whole-folder shuffle, cumulative reviewer behavior, widget routing, ownership boundaries, assessment fallback, all-world switching, accessibility-oriented UI checks, Home and session polish, guided card sets, exam/Pip groups, Card Studio, advanced authoring, first-run guidance, Mask Studio, and the 1.0.3 image-occlusion view checks. The 131 widget-routing checks cover the compact/expanded live provider subtree on Home, a reproduced 1,160-pixel fixed provider grid, natural-height packing, absence behavior, handler and unfinished-input preservation, restoration for passive owners, explicit compatibility routing, and overflow/gap checks at six viewport widths. This uses a provider-shaped browser fixture; it is not claimed as a native run of the independently installed Onigiri add-on. Pure model/storage tests and browser native-API doubles are identified in their receipts; they are not relabeled as native Anki tests.
 
