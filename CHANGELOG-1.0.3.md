@@ -2,7 +2,8 @@
 
 - Places the optional live Onigiri rewards room directly on Atelier’s Study desk while preserving its node identity, artwork, progress, controls, handlers, and original-page recovery path.
 - Removes the large blank dashboard rows that Onigiri's full-page grid could retain after being embedded. Restaurant progress, four metrics, favorites, activity, and third-party widgets now pack into responsive natural-height rows from 320 to 1,725 pixels, while the original Onigiri page restores its exact markup and geometry when opened.
-- Compacts the sidebar into an always-visible Today and study-scope shelf, a dedicated folder scroller with a wider themed scrollbar, and a single-row Worlds/Widgets dock so navigation no longer consumes the folder view at common laptop heights.
+- Compacts the sidebar folder index to single-line rows with full-path tooltips and a direct **Open library** link. On short windows, Today and study scope fold into an accessible shortcut control to give folders room; expanding it restores every shortcut. The full scenic Library remains available for detailed organization.
+- Keeps the live Onigiri rewards on the Study desk but collapses their large dashboard by default. **Show rewards** expands the original live widgets in place, preserving their node identity, input, handlers and settings route across navigation.
 
 Private review candidate. The name and private package identity remain Atelier / `daedalus_atelier`.
 

@@ -37,6 +37,7 @@
       arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
       chevron:'<path d="m9 5 7 7-7 7"/>',
       down:'<path d="m5 9 7 7 7-7"/>',
+      up:'<path d="m5 15 7-7 7 7"/>',
       more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
       check:'<path d="m5 12 4 4L19 6"/>',
       close:'<path d="m6 6 12 12M6 18 18 6"/>',
@@ -78,7 +79,7 @@
     };
     const state = {config:{...defaults,...boot.settings},profile:normalizeProfile(boot.profile),nodes:[],map:new Map(),childMap:new Map(),
       toolsGroup:'all',page:boot.ui?.page || 'desk',location:boot.ui?.location || '0',filter:'all',query:'',limit:60,treeLimit:240,
-      expanded:new Set(),mobile:false,loaded:false,dialog:null,dialogData:{},busy:false,current:'0',studied:'',
+      expanded:new Set(),onigiriExpanded:false,sideHudExpanded:innerHeight>700,sideFocusExpanded:innerHeight>700,mobile:false,loaded:false,dialog:null,dialogData:{},busy:false,current:'0',studied:'',
       authoring:boot.authoring||{available:false},suite:boot.suite||{available:false,plans:[]},history:[],forward:[],recentTab:'viewed',saveStatus:'Saved',failure:'',peek:new Set(),collapsedLectures:new Set(),boardLimit:100,menu:null};
     if (state.config.mode === 'hybrid') state.config.mode = 'workspace';
     const pending = new Map(); let sequence = 0, toastTimer, uiTimer, lastKeyCapture = false;
@@ -273,13 +274,13 @@
           ${btn('study-progress','Study progress','chart','nav-row')}
           ${btn('page','Anki tools','layers',`nav-row ${state.page==='tools'?'active':''}`,'data-page="tools"')}
         </nav>
-        <div class="side-hud" aria-label="Study shortcuts">
+        <div class="side-hud ${state.sideHudExpanded?'is-expanded':''}" aria-label="Study shortcuts"><button type="button" class="side-hud-toggle" data-action="side-hud-toggle" aria-expanded="${state.sideHudExpanded}">${icon('focus',14)}<span>Today & study scope</span>${icon(state.sideHudExpanded?'up':'down',13)}</button><div class="side-hud-content">
           <div class="side-utility-card"><span class="side-card-label">TODAY</span><div class="side-utility-links">${btn('page','Due'+(badge?` <b>${badge}</b>`:''),'clock','recent-link','data-page="due"')}${btn('page','Recent','refresh','recent-link','data-page="recent"')}${btn('page','Saved','star','recent-link','data-page="favorites"')}</div></div>
           <section class="side-scope-card" aria-label="Current study scope"><header><span>${icon('focus',14)}STUDY SCOPE</span>${btn('studies','Edit','edit','side-scope-edit')}</header><strong>${esc(scopeName)}</strong><small>${scopeCount?`${scopeCount} selected ${scopeCount===1?'folder':'folders'} · ${fmt(f.totals.review)} review · ${fmt(f.totals.learn)} learning`:'Choose the exact folders you want included.'}</small><div class="side-scope-actions">${scopeCount?btn('quick-session','Study this scope','play','side-scope-study'):btn('studies','Choose folders','plus','side-scope-study')}${btn('page','Browse','folder','side-scope-browse','data-page="library"')}</div></section>
-        </div>
+        </div></div>
         <div class="side-scroll" tabindex="0" aria-label="Scrollable folders and focused studies">
-          ${state.page!=='library'&&f.enabled&&f.active.length?`<div class="side-label active-label">FOCUS FOLDERS</div><div class="side-studies">${f.active.map(s=>`<div class="side-exam"><button type="button" class="side-study" data-action="select-study" data-id="${s.id}" title="Choose lectures in ${esc(s.name)}"><span class="study-indicator"></span><span>${esc(s.name)}</span>${icon('chevron',12)}</button>${ib('finish-study','Remove '+s.name+' from active exams','close',`data-id="${s.id}"`,'side-remove')}</div>`).join('')}</div>`:''}
-          <div class="side-label"><span>${state.page==='library'?'BROWSE FOLDERS':'FOLDERS'}</span><span>${ib('collapse-all','Collapse all folders','layers')}${ib('create','New folder','plus','data-kind="folder" data-parent="0"')}</span></div>
+          ${state.page!=='library'&&f.enabled&&f.active.length?`<div class="side-label active-label"><button type="button" class="side-focus-toggle" data-action="side-focus-toggle" aria-expanded="${state.sideFocusExpanded}" aria-controls="side-focus-list">FOCUS FOLDERS <small>${f.active.length}</small>${icon(state.sideFocusExpanded?'up':'down',12)}</button></div><div class="side-studies ${state.sideFocusExpanded?'is-expanded':''}" id="side-focus-list">${f.active.map(s=>`<div class="side-exam"><button type="button" class="side-study" data-action="select-study" data-id="${s.id}" title="Choose lectures in ${esc(s.name)}"><span class="study-indicator"></span><span>${esc(s.name)}</span>${icon('chevron',12)}</button>${ib('finish-study','Remove '+s.name+' from active exams','close',`data-id="${s.id}"`,'side-remove')}</div>`).join('')}</div>`:''}
+          <div class="side-label folder-label"><span>${state.page==='library'?'BROWSE FOLDERS':'FOLDERS'}</span><span>${btn('page','Open library','arrow','folder-library-link','data-page="library"')}${ib('collapse-all','Collapse all folders','layers')}${ib('create','New folder','plus','data-kind="folder" data-parent="0"')}</span></div>
           <div class="tree" role="navigation" aria-label="Deck and folder tree">${sidebarTree()||'<p class="side-note">Your existing folders will appear here.</p>'}</div>
           ${recent.length?`<div class="side-label recent-label">PICK UP WHERE YOU LEFT OFF</div><div class="recent-links">${recent.map(n=>btn('navigate',`<span class="truncate">${esc(n.name)}</span>`,'clock','recent-link',`data-id="${n.id}" title="${esc(nicePath(n.path))}"`)).join('')}</div>`:''}
         </div>
@@ -467,7 +468,8 @@
 
     function onigiriRewards(){
       if(!boot.integrations?.onigiri)return '';
-      return `<section class="onigiri-inline" aria-labelledby="onigiri-inline-title"><header><div><span class="eyebrow">OPTIONAL ADD-ON · LIVE REWARDS</span><h2 id="onigiri-inline-title">Onigiri rewards</h2><p>Your real restaurant, progress, and reward widgets stay here on the Study desk while Onigiri is enabled.</p></div>${btn('external-layout','Onigiri settings','sliders','secondary')}</header><div class="onigiri-inline-stage"><slot name="atelier-onigiri-rewards"><div class="onigiri-inline-loading" role="status">Onigiri is enabled. Waiting for its home widgets to finish loading…</div></slot></div><p class="onigiri-inline-note">Atelier changes only placement and outer presentation. Onigiri still owns the artwork, progress, rewards, and controls.</p></section>`;
+      const open=state.onigiriExpanded;
+      return `<section class="onigiri-inline ${open?'is-expanded':''}" aria-labelledby="onigiri-inline-title"><header><div><span class="eyebrow">OPTIONAL ADD-ON · LIVE REWARDS</span><h2 id="onigiri-inline-title">Onigiri rewards</h2><p>${open?'Your restaurant and reward widgets, live on the Study desk.':'Your restaurant and rewards are ready when you want them.'}</p></div><div class="onigiri-inline-actions">${btn('onigiri-toggle',open?'Hide rewards':'Show rewards',open?'up':'down','secondary',`aria-expanded="${open}" aria-controls="onigiri-inline-stage"`)}${open?btn('external-layout','Settings','sliders','quiet'):''}</div></header><div class="onigiri-inline-stage" id="onigiri-inline-stage" ${open?'':'hidden'}><slot name="atelier-onigiri-rewards"><div class="onigiri-inline-loading" role="status">Onigiri is enabled. Waiting for its home widgets to finish loading…</div></slot></div>${open?'<p class="onigiri-inline-note">Onigiri owns these live rewards and controls.</p>':''}</section>`;
     }
 
     function quickChoices(){
@@ -781,6 +783,7 @@
         case 'home-up':case 'home-down':{const items=state.dialogData.layout.items,i=items.findIndex(x=>x.id===id),j=i+(a==='home-up'?-1:1);if(i>=0&&j>=0&&j<items.length){[items[i],items[j]]=[items[j],items[i]];renderDialog(true);}break;}
         case 'home-apply':{const draft=state.dialogData.layout;draft.enabled=true;state.busy=true;const ok=await updatePref({key:'home_layout',value:draft},false);state.busy=false;if(ok){closeDialog();render();home?.refresh();announce('Shared-home layout saved. Widgets remain in their original add-ons.');}break;}
         case 'home-reset':await updateConfig({widget_mode:'original'},true);if(await updatePref({key:'home_layout',value:{...state.profile.home_layout,enabled:false}})){home?.refresh();openDialog('home-edit');announce('Original widget layout restored.');}break;
+        case 'onigiri-toggle':state.onigiriExpanded=!state.onigiriExpanded;render();break;
         case 'external-layout':try{await request('external_layout');}catch(e){announce(e.message,true);}break;
         case 'quick-exam':await quickExam(n);break;
         case 'finish-study':await finishStudy(id);break;
@@ -799,6 +802,8 @@
         case 'expand':state.expanded.has(id)?state.expanded.delete(id):state.expanded.add(id);render();break;
         case 'collapse-all':state.expanded.clear();render();break;
         case 'tree-more':state.treeLimit+=240;render();break;
+        case 'side-hud-toggle':state.sideHudExpanded=!state.sideHudExpanded;render();break;
+        case 'side-focus-toggle':state.sideFocusExpanded=!state.sideFocusExpanded;render();break;
         case 'mobile':state.mobile=true;render();shadow.querySelector('.drawer-close')?.focus();break;
         case 'close-nav':state.mobile=false;render();shadow.querySelector('[data-action="mobile"]')?.focus();break;
         case 'filter':if(state.page==='recent')state.recentTab=el.dataset.filter;else state.filter=el.dataset.filter;state.limit=60;render();break;

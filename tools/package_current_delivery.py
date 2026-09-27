@@ -39,7 +39,7 @@ def main() -> None:
     files = dist / "Atelier-1.0.3-Files.json"
 
     assert verified["runtime_sha256"] == native["runtime_sha256"] == companion["runtime_sha256"] == fingerprint
-    assert verified["python_total"] == 1902 and verified["browser_total"] == 2656
+    assert verified["python_total"] == 1902 and verified["browser_total"] == 2664
     assert verified["python_failed"] == verified["python_skipped"] == verified["browser_errors"] == 0
     assert world_receipt["count"] == verified["browser_suites"]["world-suite"] == 175
     assert not world_receipt["errors"] and not native["errors"] and all(native["checks"].values())
@@ -103,6 +103,7 @@ def main() -> None:
 
     onigiri_folder = ROOT / "screenshots/widget-routing"
     for name, viewport in (
+        ("embedded-onigiri-compact-1440.png", [1440, 950]),
         ("embedded-onigiri-home-1440.png", [1440, 950]),
         ("embedded-onigiri-panel-1440.png", [1144, 830]),
         ("embedded-onigiri-home-390.png", [390, 760]),
@@ -162,7 +163,7 @@ def main() -> None:
             "count": len(manifest),
             "sha256": sha(screenshot_zip),
             "companion_count": 6,
-            "onigiri_integration_count": 3,
+            "onigiri_integration_count": 4,
             "review_board_count": len(review_boards),
             "selected_interface_count": selected_matrix_count,
             "full_matrix_render_count": matrix_render_count,

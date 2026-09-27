@@ -8,5 +8,6 @@
 - Approve the exact installer hash, support statement, AnkiWeb destination and staged website copy. Upload to the existing listing only after approval; do not create a new listing for each update. Users still receive updates through Anki's own add-on mechanism.
 - Choose the eventual website/domain and approve deployment. `site/` is local information prepared for that destination. No public download or fictional listing link is active.
 - Complete the unperformed physical remote, macOS, native-scale and uncoached-user checks listed in AUDIT-1.0.3.md. Do not substitute browser palettes for independent native integrations.
+- If the one-time folder/surface migration popup appears again in a real Anki profile, record its exact text and the steps just before it appeared. The current source guards shortcut-file migration and preserves unreadable files, but this transient report was not reproduced from the screenshot alone. Do not delete or overwrite the profile data to investigate it.
 
 No scheduled publication or account-age monitoring has been created. No collection, source document, profile database or credential is part of the repository or installer.

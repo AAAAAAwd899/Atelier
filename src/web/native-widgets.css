@@ -103,3 +103,12 @@
 @media(prefers-reduced-motion:reduce){.native-widgets *, .nw-on-home *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 :host([data-motion="off"]) .native-widgets *, :host([data-motion="off"]) .nw-on-home *{animation:none!important;transition:none!important}
 @media(forced-colors:active){.nw-card,.nw-catalog-item,.nw-tool,.nw-arranged,.onigiri-inline{border:1px solid CanvasText;background-image:none;box-shadow:none}.nw-day>span,.nw-dot{background:Highlight}.nw-date{color:CanvasText}}
+.onigiri-inline:not(.is-expanded){margin:14px 0 20px;}
+.onigiri-inline:not(.is-expanded)>header{align-items:center;padding:14px 20px;border-bottom:0;}
+.onigiri-inline:not(.is-expanded) h2{font-size:18px;margin:2px 0;letter-spacing:-.2px;}
+.onigiri-inline:not(.is-expanded) header p{font-size:12px;line-height:1.35;}
+.onigiri-inline:not(.is-expanded) .eyebrow{font-size:9px;}
+.onigiri-inline-actions{display:flex;gap:8px;align-items:center;flex:0 0 auto;}
+.onigiri-inline-stage[hidden]{display:none!important;}
+.onigiri-inline.is-expanded .onigiri-inline-stage{padding-top:14px;}
+@media(max-width:760px){.onigiri-inline:not(.is-expanded)>header{padding:12px 15px}.onigiri-inline-actions{width:100%;}.onigiri-inline-actions button{flex:1;}}
