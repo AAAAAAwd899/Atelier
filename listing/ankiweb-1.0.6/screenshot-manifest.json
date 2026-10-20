@@ -1,0 +1,65 @@
+[
+  {
+    "file": "screenshots/01-study-desk.png",
+    "title": "Study desk \u00b7 Forest",
+    "caption": "Actual Anki main webview with an example Biology study focus. Counts come from the example collection; no invented review history.",
+    "sha256": "8bdae99333cb90657085e8d079536b51fb4ebd896da6c0c4f0b44e7a451ec67a",
+    "bytes": 528226,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/02-library.png",
+    "title": "Your library, still organized",
+    "caption": "Actual Anki main webview. Biology, Chemistry and Geography retain separate parent folders and lecture decks.",
+    "sha256": "53df20d4e569b7988b12e0eb71bf8655eb8d0014e5d573ea3c085bdc4bcc93e8",
+    "bytes": 553708,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/03-card-studio.png",
+    "title": "Source projects and drafts",
+    "caption": "Actual native Card Studio webview showing one example project, source and local occlusion draft. No notes have been published from that draft.",
+    "sha256": "55286681dcb16667c986ba63ec91bfa5c6741cfe2d3b76ff77234ec11aac37d9",
+    "bytes": 190197,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/04-image-occlusion.png",
+    "title": "Make a mask, then review the draft",
+    "caption": "Actual native Mask Studio webview with one mask created through its pointer controls. The practice source is an Atelier-generated landscape, not a real user document or clinical diagram.",
+    "sha256": "3d0cc36374f1f39a7fe52a82383fe492452ef9437b99a3179c4484d355622025",
+    "bytes": 788453,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/05-study-clock.png",
+    "title": "A small clock for a study session",
+    "caption": "Actual native Qt study clock in Forest. The illustrated elapsed time was advanced in the isolated native test; it is not recorded Anki study history.",
+    "sha256": "e8a5bc8d127fef1a9ed990dbbb0d612d0615f345e618369b0d2d0798291f8fba",
+    "bytes": 82762,
+    "capture": "native Qt widget",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/06-combine-folders.png",
+    "title": "Two parent folders in one study",
+    "caption": "Actual Anki main webview with Biology and Chemistry selected. This is the setup before Save active study; original folders stay separate.",
+    "sha256": "05081f1bda70489a4a501b8e6bdae1fe269c1ce582c97d0d4b64bf127ea34ff3",
+    "bytes": 213449,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  },
+  {
+    "file": "screenshots/07-worlds.png",
+    "title": "Choose a world",
+    "caption": "Actual Anki appearance selector. All 17 world options remain in the scrollable selector; the screenshot shows its current visible area.",
+    "sha256": "cdc9bcea779c4d6654f0775c319c4920929e900755e07a0782fe819c1ef76503",
+    "bytes": 381619,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true
+  }
+]

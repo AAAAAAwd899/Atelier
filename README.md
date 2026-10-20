@@ -1,6 +1,6 @@
-# Atelier 1.0.5
+# Atelier 1.0.6
 
-Private review candidate. Version 1.0.5 adds an optional guided tour, declares the minimum Anki host, and updates the isolated PDF parser with resource-limit fixes. It retains the 1.0.4 Onigiri layout and recent-study ordering and the full visual and workflow upgrade. Read the [current changelog](CHANGELOG-1.0.5.md), [installation guide](INSTALL-1.0.5.md), [current audit](AUDIT-1.0.5.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [owner release actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
+Version 1.0.6 adds a small world-matched countdown/stopwatch, a 13-step optional tour, a practical Getting started guide and a prepared AnkiWeb listing kit. Read the [changelog](CHANGELOG-1.0.6.md), [installation guide](INSTALL-1.0.6.md), [audit](AUDIT-1.0.6.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [remaining publication actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,7 +14,7 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.5.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.6.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
@@ -27,12 +27,12 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_105.py
+python package_106.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.
 
-Current results and limitations: `AUDIT-1.0.5.md`. Installer verification and hashes: `dist/Atelier-1.0.5-Build.json`, `dist/Atelier-1.0.5-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
+Current results and limitations: `AUDIT-1.0.6.md`. Installer verification and hashes: `dist/Atelier-1.0.6-Build.json`, `dist/Atelier-1.0.6-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
 
 ## Privacy and licenses
 
@@ -40,4 +40,4 @@ No telemetry or automatic publication. Optional authoring-provider requests requ
 
 ## GitHub and publishing
 
-The owner-authorized private repository is https://github.com/AAAAAAwd899/Atelier. No AnkiWeb listing exists. `site/` contains unpublished information with no invented code or public download. GitHub verification cannot publish a website, release or AnkiWeb update. The future numeric listing identity and migration require verification and exact owner approval.
+Source and support: https://github.com/AAAAAAwd899/Atelier. The owner authorized public source visibility for support. Use [GitHub Issues](https://github.com/AAAAAAwd899/Atelier/issues/new/choose) without attaching private collections or source material. There is no AnkiWeb listing or numeric code yet. [Prepared listing material](listing/ankiweb-1.0.6/START-HERE.md) includes real screenshots, ready-to-paste descriptions and compatibility fields. The distributable installer is supplied separately in the owner handoff; do not install this repository as an add-on. No website deployment or public binary release is performed by these source changes. Future listing migration requires the real identity and verification.

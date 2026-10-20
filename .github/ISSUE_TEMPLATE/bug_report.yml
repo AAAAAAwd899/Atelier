@@ -1,0 +1,38 @@
+name: Report a problem
+description: Help us reproduce an Atelier issue without sharing your private study material.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Please do not upload your collection, profile folder, source documents, API keys or private study content. Remove private details from screenshots."
+  - type: input
+    id: atelier
+    attributes:
+      label: Atelier version
+      description: Find it in Tools → Atelier.
+    validations:
+      required: true
+  - type: input
+    id: anki
+    attributes:
+      label: Anki version and operating system
+      placeholder: "Example: Anki 26.09.3, Windows 11, display scaling 150%"
+    validations:
+      required: true
+  - type: input
+    id: appearance
+    attributes:
+      label: Selected world and appearance owner
+      placeholder: "Example: Forest, Atelier"
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps and result
+      description: What did you do, what happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Optional compatibility details
+      description: Relevant add-ons, and whether it also happens in a spare profile. Do not delete or reset your real collection to investigate.

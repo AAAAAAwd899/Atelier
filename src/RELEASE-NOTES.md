@@ -1,6 +1,6 @@
-# Atelier 1.0.5
+# Atelier 1.0.6
 
-This update adds an optional first-run guided tour, keyboard navigation and replay through Tools → Atelier → Guided tour. It preserves the 1.0.4 packed Onigiri layout and recent-first study picker. The native config schema includes all 17 worlds, and the installer declares Anki 25.09.5 as its minimum desktop host. See the paired 1.0.5 audit for actual current host evidence.
+This update adds an optional first-run guided tour, keyboard navigation and replay through Tools → Atelier → Guided tour. It preserves the 1.0.4 packed Onigiri layout and recent-first study picker. The native config schema includes all 17 worlds, and the installer declares Anki 25.09.5 as its minimum desktop host. See the paired 1.0.6 audit for actual current host evidence.
 
 Private review candidate. A shared design contract generates seventeen-world web/native palette adapters. Home and Widgets use more compact layouts, near-solid work panels and locally packaged landscapes. Five new premium raster worlds add Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove. Saved work and the existing engine routes remain intact.
 
@@ -92,3 +92,10 @@ Anki Sync and its collection backup do not include all local Atelier data. Optio
 Atelier has not been uploaded to AnkiWeb by this release process. The supplied installer updates the existing `daedalus_atelier` installation directly.
 
 - Added a clear-selection action to the draft inbox for safer batch organization across filtered pages.
+
+
+## 1.0.6 additions
+
+- Optional native study clock: set a countdown or run a stopwatch, pause/resume, reset, optional sound and keep-on-top. The scene and controls follow the selected world while original appearance ownership keeps native widget styling.
+- Profile-scoped clock recovery restores elapsed time paused. Closing the clock window keeps timing; closing Anki pauses it. No scheduler or study-statistics changes.
+- A 13th tour step introduces the clock; a replayable Getting started reference explains ten common workflows.

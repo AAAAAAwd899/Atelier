@@ -1,4 +1,4 @@
-# Atelier 1.0.5 — Your study space in Anki
+# Atelier 1.0.6 — Your study space in Anki
 
 Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and seventeen visual worlds. Onigiri is optional.
 
@@ -8,11 +8,11 @@ The sidebar keeps **Today** and **Study scope** visible while the folder list sc
 
 Save your work and finish any import or card-adding operation. In an active practice session, choose **Save & close**. Back up your Anki collection and the local Atelier, exam, and source data described below.
 
-In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.5.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
+In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.6.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
 
 Keep any separate **Exam Sprout** or **Workshop** add-on disabled. Their features are included here. Do not delete their data. Other add-ons, including Onigiri, can stay installed.
 
-Confirm **Tools → Atelier · 1.0.5**. The cumulative folder-order contract originated against the accepted Anki **26.08.1** target. This candidate has also been exercised in isolated synthetic profiles on Windows desktop Anki **26.05** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support scope. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
+Confirm **Tools → Atelier · 1.0.6**. The cumulative folder-order contract originated against the accepted Anki **26.08.1** target. This candidate has also been exercised in isolated synthetic profiles on Windows desktop Anki **26.05** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support scope. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
 
 ## A quick tour
 
@@ -134,3 +134,12 @@ Anki still handles learning due times, new/review mixing, limits and sibling bur
 **Keep current Anki order** opens the same folder without modifying options. It does not reverse a shuffle saved earlier. To reverse a fresh change, use Undo before answering cards. Later, change Display Order or reselect the original preset in Deck options. New/learning ratings during normal review still affect scheduling as usual.
 
 A filtered deck keeps its own selection rules. When supported settings cannot be read safely, Atelier shows an error and offers the current-order path rather than replacing the scheduler.
+
+
+## Study clock and task help
+
+Open **Tools → Atelier → Study clock**, or the clock icon on the Study desk toolbar. Choose Countdown (1–480 minutes) or Stopwatch. Start, pause/resume and reset it yourself. Reset before changing mode or length. Keep on top is optional; Sound at finish is off by default. Closing the window keeps timing; quitting Anki pauses it. Reopening Anki restores the saved elapsed time paused. Running clocks save about every 30 seconds, so an abrupt crash may lose the most recent interval. The clock does not grade cards, change schedules or contribute to Anki’s study statistics.
+
+Clock settings and elapsed time live in profile-scoped `clock-*.json` files within Atelier’s existing `user_files` folder. Include these with the rest of `user_files` in a backup. Anki Sync does not synchronize them. An unreadable or externally changed clock file is kept rather than overwritten; the current clock can still be used for that visit.
+
+The 13-step **Guided tour** gives a quick orientation. **Tools → Atelier → Getting started** or Getting started in the workspace footer opens ten task recipes: importing decks, organization, exact study scope, slideset creation, image occlusion, multi-folder exams, Pip and the clock, appearance/widgets, sharing/backups and original-interface recovery. It supplements the tour without interrupting every session.

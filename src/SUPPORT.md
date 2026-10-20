@@ -8,7 +8,7 @@ Keep separate Exam Sprout and Workshop copies disabled while using the combined 
 
 ## Send a useful report
 
-Report the issue through the channel where you received Atelier. Include the Atelier version from Tools, the exact Anki version, Windows display scaling, the selected appearance owner/world, and the shortest steps that reproduce the problem. Describe what you expected and what happened. A screenshot is useful when the issue is visual.
+Report an ordinary bug at https://github.com/AAAAAAwd899/Atelier/issues/new/choose. Include the Atelier version from Tools, the exact Anki version, Windows display scaling, the selected appearance owner/world, and the shortest steps that reproduce the problem. Describe what you expected and what happened. A screenshot is useful when the issue is visual.
 
 **Copy display diagnostics** can help identify the open screen and loaded version. Reports are not sent automatically. Read a report before sharing it, remove private paths or content, and never share an API key. Do not send your collection, original source documents, or full profile folders unless you deliberately agree to share them.
 

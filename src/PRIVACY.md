@@ -35,3 +35,6 @@ Onigiri rewards, specialist editing tools, and shared-deck services remain separ
 Normal Anki review changes scheduling. Independent rehearsal, mocks, and original-card result review do not. Pip's explicitly enabled **Introduce new cards** workflow may submit real Anki ratings for eligible new cards after reveal. Self-marks and planning/readiness indicators are not validated predictions of an exam grade.
 
 Your source text, images, teaching material, and AI suggestions are not automatically fact-checked. Keep only material you are authorized to copy and distribute.
+
+
+The voluntary study clock stores its mode, selected duration, elapsed seconds and optional sound/pin choices in a profile-scoped local `user_files/clock-*.json` file. It does not record the cards you view, send timing data, alter Anki’s statistics or start itself after an Anki restart.

@@ -37,7 +37,7 @@ def main():
             check(f'{width} background inert and keyboard captured',p.locator('#atelier-root').evaluate('e=>e.shadowRoot.querySelector(".frame").inert'))
             p.screenshot(path=str(SH/f'{theme}-welcome-{width}.png'),animations='disabled')
             p.locator('[data-action="tour-next"]').click()
-            for index in range(12):
+            for index in range(13):
                 card=p.locator('.tour-card');card.wait_for()
                 geo=card.evaluate('e=>{const r=e.getBoundingClientRect();return {fit:r.left>=14&&r.top>=14&&r.right<=innerWidth-14&&r.bottom<=innerHeight-14,overflow:e.scrollWidth>e.clientWidth+1}}')
                 if not geo['fit'] or geo['overflow']:p.screenshot(path=str(SH/f'failure-{width}-step-{index+1}.png'));print(geo)
@@ -74,7 +74,7 @@ def main():
             p.close()
         # An explicit final task opens the existing multi-parent scope editor.
         p=page();p.set_content(document());p.locator('.tour-card').wait_for()
-        for _ in range(13):p.locator('[data-action="tour-next"]').click()
+        for _ in range(14):p.locator('[data-action="tour-next"]').click()
         p.locator('[data-action="tour-task"][data-task="focus"]').click();p.locator('#study-form').wait_for()
         check('Choose study folders opens the existing multi-parent picker',p.locator('#deck-picker').is_visible())
         p.close();browser.close()

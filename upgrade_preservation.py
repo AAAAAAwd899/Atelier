@@ -34,14 +34,14 @@ def engine_bytes(name, source=ROOT/'src'):
     return raw
 
 def before_upgrade(name,data=None):
-    record=json.loads((ROOT/'patch-105-changes.json').read_text())
+    record=json.loads((ROOT/'patch-106-changes.json').read_text())
     if name in record['removed']:
         lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())
         assert name in lock['retired_baseline_modules'] and not (ROOT/'src'/name).exists()
         data=historical_text()[name].encode('utf8')
     elif data is None:data=(ROOT/'src'/name).read_bytes()
     if name in record['changed']:
-        assert hashlib.sha256(data).hexdigest()==record['changed'][name], 'Undeclared 1.0.5 bytes: '+name
+        assert hashlib.sha256(data).hexdigest()==record['changed'][name], 'Undeclared 1.0.6 bytes: '+name
         historical=historical_text()
         # Presentation files introduced or intentionally refreshed in 1.0.3
         # have no 1.0.2 byte snapshot. Their current bytes are validated by the

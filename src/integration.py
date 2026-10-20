@@ -70,6 +70,7 @@ class Atelier:
         self.busy = False
         self.operation_ticket = None
         self.capture_keys = False
+        self.study_clock = None
         self._ui_state: dict[str, Any] = {}
         from .sprout_link import SproutLink
         self.sprout_link = SproutLink(self, mw)
@@ -107,6 +108,7 @@ class Atelier:
             self.authoring_refresh()
         if hasattr(self, "review_theme"):
             self.review_theme.refresh()
+        if getattr(self, 'study_clock', None):self.study_clock.refresh()
         # A planner can change worlds while the home remains open behind it.
         # Deliver the current appearance to that same page without reloading its
         # form or deck tree. The page token rejects stale navigation callbacks.
@@ -152,6 +154,10 @@ class Atelier:
                     self._ui_state = {"page": "widgets", "location": "0", "query": "", "filter": "all"}
 
     def closed(self) -> None:
+        if getattr(self, 'study_clock', None):
+            self.study_clock.shutdown();self.study_clock=None
+        if getattr(self, '_help_window', None):
+            self._help_window.close();self._help_window=None
         self.open_tour_next = False
         self.capture_keys = False
         self.busy = False
@@ -287,6 +293,10 @@ class Atelier:
         elif action == "remote_setup":
             self.remotes.open()
             self.reply(nonce, rid, result={"opened": True})
+        elif action == "study_clock":
+            self.open_clock();self.reply(nonce,rid,result={"opened":True})
+        elif action == "getting_started":
+            self.open_help();self.reply(nonce,rid,result={"opened":True})
         elif action == "native_tool":
             from .native_tools import dispatch as native_dispatch
             native_dispatch(mw, data.get("command"))
@@ -585,6 +595,19 @@ class Atelier:
             bottom = f"body{{background:{bg};color:{fg}}}button{{background:{bg};color:{fg};border-color:{line};border-radius:8px}}" if css else ""
             mw.bottomWeb.eval("(()=>{let s=document.getElementById('atelier-bottom-chrome');if(!s){s=document.createElement('style');s.id='atelier-bottom-chrome';document.head.append(s)}s.textContent=" + json.dumps(bottom) + ";})();")
 
+    def open_clock(self) -> None:
+        if not mw.col:
+            showInfo('Open an Anki profile to use the study clock.');return
+        self.ensure_store()
+        if self.study_clock is None:
+            from .study_clock_ui import ClockWindow
+            self.study_clock=ClockWindow(self,mw,self.store.path.with_name(self.store.path.name.replace('profile-','clock-')))
+        self.study_clock.refresh();self.study_clock.show();self.study_clock.raise_();self.study_clock.activateWindow()
+
+    def open_help(self) -> None:
+        from .getting_started import open_guide
+        open_guide(self,mw)
+
     def state_changed(self, new: str, old: str) -> None:
         self.ownership.install()
         if new != "deckBrowser":
@@ -709,6 +732,8 @@ def install(module: str) -> Atelier:
         for name, callback in (("Open workspace", addon.open),
                               ("Open Atelier widgets", addon.open_widgets),
                               ("Guided tour…", addon.open_tour),
+                              ("Getting started…", addon.open_help),
+                              ("Study clock…", addon.open_clock),
                               ("Appearance & compatibility…", lambda: addon.open(appearance=True)),
                               ("Use original Anki home", addon.original),
                               ("Restore original widget layout", addon.restore_home_layout),

@@ -1,0 +1,22 @@
+{
+  "title": "Atelier",
+  "version": "1.0.6",
+  "upload_file": "Atelier-1.0.6.ankiaddon",
+  "description_file": "description.html",
+  "plain_text_alternative": "description.txt",
+  "author": "Daedalus Works",
+  "support_url": "https://github.com/AAAAAAwd899/Atelier/issues/new/choose",
+  "source_url": "https://github.com/AAAAAAwd899/Atelier",
+  "license": "MIT; bundled third-party notices retained",
+  "minimum_anki": "25.09.5",
+  "native_tested_anki": "26.09.3",
+  "native_tested_platform": "Windows",
+  "macos_linux": "Not verified",
+  "ankiweb_id": null,
+  "ankiweb_url": null,
+  "highest_supported_version": "Do not promise untested future versions; select the tested branch offered by the upload form.",
+  "upload_acceptance_verified": false,
+  "account_eligibility_verified": false,
+  "public_repository_authorized": "2026-10-20; exact existing repository above",
+  "update_channel": "Future real AnkiWeb listing; private-to-numeric identity migration remains to be verified"
+}

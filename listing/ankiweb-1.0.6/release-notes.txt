@@ -1,0 +1,7 @@
+Atelier 1.0.6
+
+Adds an optional themed study clock: choose a countdown or stopwatch, start, pause/resume and reset. Keep-on-top and a finish sound are optional. Closing the clock window keeps timing; closing Anki pauses it. Saved clocks reopen paused. Timing does not affect scheduling or Anki's study statistics.
+
+Adds a clock step to the 13-step guided tour and a replayable Getting started reference for ten common tasks, including importing decks, slideset creation, image occlusion, multi-folder exams, sharing, backups and recovery.
+
+Includes the cumulative interface, folder organization, card/exam engines, worlds and 1.0.5 PDF-parser fixes. See the source audit and test evidence for exact compatibility limits.
