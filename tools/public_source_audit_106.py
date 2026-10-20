@@ -19,6 +19,19 @@ patterns={'private_key':re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE K
  'google_key':re.compile(rb'\bAIza[A-Za-z0-9_-]{35}\b'),
  'slack_token':re.compile(rb'\bxox[baprs]-[A-Za-z0-9-]{20,}')}
 findings=[];blobs=0;text_blobs=0;text_bytes=0
+selected=[]
+for row in meta:
+    oid,kind,size=row.split();p=PurePosixPath(objects[oid])
+    if kind=='blob' and int(size)<=4_000_000 and p.suffix.lower() in ['.py','.js','.json','.md','.txt','.html','.yml','.yaml','.toml','.css','.xml','.svg']:
+        selected.append(oid)
+# One bounded batch avoids spawning a Git process for each historical text blob.
+batch=subprocess.run(['git','cat-file','--batch'],input=''.join(oid+'\n' for oid in selected).encode(),capture_output=True,check=True,cwd=ROOT).stdout
+texts={};offset=0
+for expected in selected:
+    end=batch.index(b'\n',offset);oid,kind,size=batch[offset:end].decode().split();size=int(size)
+    assert oid==expected and kind=='blob'
+    offset=end+1;texts[oid]=batch[offset:offset+size];offset+=size+1
+assert offset==len(batch)
 for row in meta:
     oid,kind,size=row.split();size=int(size)
     if kind!='blob':continue
@@ -26,7 +39,7 @@ for row in meta:
     if p.suffix.lower() in ['.anki2','.sqlite','.sqlite3','.db','.colpkg','.apkg','.pem','.key','.pfx'] or p.name.startswith('.env') and p.name!='.env.example' or 'user_files' in p.parts and p.name!='README.txt':
         findings.append({'type':'excluded_data_path','path':name,'blob':oid})
     if size<=4_000_000 and p.suffix.lower() in ['.py','.js','.json','.md','.txt','.html','.yml','.yaml','.toml','.css','.xml','.svg']:
-        data=git('cat-file','blob',oid);text_blobs+=1;text_bytes+=len(data)
+        data=texts[oid];text_blobs+=1;text_bytes+=len(data)
         for label,pattern in patterns.items():
             if pattern.search(data):findings.append({'type':label,'path':name,'blob':oid})
 report={'commit':git('rev-parse','HEAD').decode().strip(),'reachable_commits':int(git('rev-list','--all','--count')),'reachable_blobs':blobs,'text_blobs_scanned':text_blobs,'text_bytes_scanned':text_bytes,'findings':findings,'large_binary_assets':'Reviewed by source paths, current file manifests and ASSET-PROVENANCE-1.0.3 records; not a binary content malware scan.','limits':'Known-signature scan, not proof that no secret can exist. No history rewrite or remote change performed.'}

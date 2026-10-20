@@ -55,7 +55,7 @@ checks=D/'Atelier-1.0.6-Upload-SHA256.txt';checks.write_text(''.join(sha(p)+'  '
 payload.append((checks,'SHA256.txt'))
 kit=D/'Atelier-1.0.6-AnkiWeb-Listing-Kit.zip';write_archive(kit,payload)
 full=D/'Atelier-1.0.6-Full-Publish-Package.zip'
-write_archive(full,[(kit,kit.name),(D/'Atelier-1.0.6-Source.zip','Atelier-1.0.6-Source.zip'),(evidence,evidence.name),(D/'Atelier-1.0.6-Build.json','Atelier-1.0.6-Build.json'),(D/'Atelier-1.0.6-Evidence.json','Atelier-1.0.6-Evidence.json'),(D/'Atelier-1.0.6-SHA256.txt','Atelier-1.0.6-SHA256.txt'),(start,'START-HERE.txt')])
+write_archive(full,payload+[(D/'Atelier-1.0.6-Source.zip','Atelier-1.0.6-Source.zip'),(evidence,evidence.name),(D/'Atelier-1.0.6-Build.json','Atelier-1.0.6-Build.json'),(D/'Atelier-1.0.6-Evidence.json','Atelier-1.0.6-Evidence.json'),(D/'Atelier-1.0.6-SHA256.txt','Atelier-1.0.6-SHA256.txt')])
 for p in [evidence,kit,full]:
     with zipfile.ZipFile(p) as z:assert z.testzip() is None and len(z.namelist())==len(set(z.namelist()))
 with zipfile.ZipFile(kit) as z:
