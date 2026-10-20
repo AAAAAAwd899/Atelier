@@ -87,6 +87,7 @@ def main():
    # Same original consent still permits commit.
    clk('[data-action="approve-current"]');p.locator('#ws-approve-check').check();clk('#ws-dialog [data-action="confirm-modal"]');p.wait_for_timeout(250)
    check('Explicit approval publishes once via original engine',h.col.note_count()==before+1 and len([r for r in h.requests if r['action']=='commit'])==1)
+   p.locator('#ws-dialog').wait_for(state='hidden',timeout=10000)
    # The fixture has six projects; the recent sidebar intentionally shows only
    # five, ordered by update time then UUID. Use the full project library, not
    # an assumption that this particular project is one of those five shortcuts.

@@ -20,15 +20,28 @@ def route_fixture(owner='atelier',mode='workspace',migrate=False,onigiri=True,th
  base=s.new_tag('base',href='http://atelier.test/')
  s.head.insert(0,base)
  if onigiri:
+  # These are fixture-only surfaces. They stand in for the independently
+  # installed provider's content; the real restaurant and heatmap are not
+  # available to this browser test.
+  fixture_style=s.new_tag('style',id='onigiri-fixture-tile-style')
+  fixture_style.string='''
+   #atelier-root .modern-main-menu #building .onigiri-restaurant-level-widget{padding:20px;min-height:240px;display:grid;grid-template-columns:1fr auto;align-content:center;gap:14px;box-sizing:border-box}
+   #atelier-root .modern-main-menu #building .onigiri-restaurant-level-widget p{grid-column:1/-1;margin:0;color:var(--ats-muted)}
+   #atelier-root .modern-main-menu :is(#favorites-widget .onigiri-favorites-widget,#heatmap-widget #onigiri-heatmap-container){box-sizing:border-box;min-height:136px;padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+   #atelier-root .modern-main-menu :is(#favorites-widget,#heatmap-widget) h3{margin:0;font-size:14px;line-height:1.4}
+   #atelier-root .modern-main-menu :is(#favorites-widget,#heatmap-widget) p{margin:0;line-height:1.5}
+  '''
+  s.head.append(fixture_style)
   # Reproduce Onigiri's full-page dashboard placements. These explicit rows and
   # minimum height must be released only while the live subtree is embedded.
   grid=s.select_one('.modern-main-menu .unified-grid')
-  grid['style']='grid-template-rows:repeat(4,280px);min-height:1160px'
+  # Installed Onigiri emits fixed row tracks and saved grid-area coordinates.
+  grid['style']='grid-template-rows:repeat(4,320px);grid-auto-rows:320px;min-height:1160px'
   extras=BeautifulSoup('''
-   <section class="onigiri-widget-container" id="building" style="grid-column:span 2;grid-row:1/span 2;min-height:560px"><div class="onigiri-restaurant-level-widget"><h3>Restaurant level</h3><strong class="level-number">14</strong><p>675 / 1450 XP</p></div></section>
-   <section class="onigiri-widget-container" id="pace-widget" style="grid-column:3;grid-row:2"><div class="stat-card"><h3>PACE</h3><p class="stat-value">24 s/card</p></div></section>
-   <section class="onigiri-widget-container" id="favorites-widget" style="grid-column:1;grid-row:4;min-height:240px"><div class="onigiri-favorites-widget"><h3>Favorites</h3><p>No favorite decks selected.</p></div></section>
-   <section class="onigiri-widget-container" id="onigiri-heatmap-container" style="grid-column:2/span 3;grid-row:4;min-height:240px"><h3>Study activity</h3><div aria-label="Review heatmap">Activity grid</div></section>
+   <section class="onigiri-widget-container" id="building" style="grid-area:1 / 1 / span 2 / span 2;min-height:560px"><div class="onigiri-restaurant-level-widget"><h3>Restaurant level · fixture</h3><strong class="level-number">14</strong><p>675 / 1450 XP · real artwork appears only in Anki</p></div></section>
+   <section class="onigiri-widget-container" id="pace-widget" style="grid-area:2 / 3 / span 1 / span 1"><div class="stat-card"><h3>PACE</h3><p class="stat-value">24 s/card</p></div></section>
+   <section class="onigiri-widget-container" id="favorites-widget" style="grid-area:4 / 1 / span 1 / span 1;min-height:240px"><div class="onigiri-favorites-widget"><h3>Favorites</h3><p>No favorite decks selected.</p></div></section>
+   <section class="onigiri-widget-container" id="heatmap-widget" style="grid-area:4 / 2 / span 1 / span 3;min-height:240px"><div id="onigiri-heatmap-container"><h3>Study activity · fixture</h3><p aria-label="Review heatmap">The real activity grid is rendered by Onigiri in Anki.</p></div></section>
   ''','html.parser')
   for item in list(extras.contents):
    if getattr(item,'name',None):grid.append(item.extract())
@@ -96,6 +109,8 @@ def run():
    check('Duplicate Onigiri sidebar is removed inside Atelier',p.locator('.modern-main-menu>.sidebar-left').evaluate('e=>getComputedStyle(e).display')=='none')
    check('Embedded rewards release provider row reservations',p.locator('.unified-grid').evaluate('e=>e.hasAttribute("data-atelier-inline-grid")&&getComputedStyle(e).minHeight==="0px"&&e.getBoundingClientRect().height<900'))
    check('Embedded reward cards pack into natural rows',p.locator('.unified-grid').evaluate('e=>[...e.children].filter(x=>x.matches("[data-atelier-inline-item]")).every(x=>getComputedStyle(x).gridRowStart==="auto"&&x.getBoundingClientRect().height<500)'))
+   check('Favorites and activity follow metrics without a blank row',p.evaluate('''()=>{const g=document.querySelector('.unified-grid'),f=document.querySelector('#favorites-widget'),h=document.querySelector('#heatmap-widget'),m=document.querySelector('#pace-widget');const gap=f.getBoundingClientRect().top-m.getBoundingClientRect().bottom;return g.dataset.atelierInlineGrid==='4'&&gap>=0&&gap<50&&Math.abs(f.getBoundingClientRect().top-h.getBoundingClientRect().top)<2&&h.getBoundingClientRect().width>f.getBoundingClientRect().width*2.5}'''))
+   check('Fixture text stays inside padded reward tiles',p.evaluate('''()=>['#favorites-widget','#heatmap-widget'].every(sel=>{const tile=document.querySelector(sel).getBoundingClientRect(),heading=document.querySelector(sel+' h3').getBoundingClientRect();return heading.left-tile.left>=14&&heading.top-tile.top>=14&&heading.right<=tile.right-14})'''))
    p.locator('#retained-input').fill('Live embedded reward input');click('#retained-button')
    check('Embedded Onigiri controls keep their original handlers',p.locator('#retained-button').get_attribute('data-clicks')=='1' and p.locator('#retained-input').input_value()=='Live embedded reward input')
    click('.sidebar .native-link[data-action="widget-page"]');native()

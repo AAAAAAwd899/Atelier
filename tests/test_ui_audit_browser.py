@@ -24,7 +24,7 @@ def sort_doc():
  soup=BeautifulSoup(home_suite('forest'),'html.parser');tag=soup.find(id='atelier-bootstrap');boot=json.loads(tag.string)
  nodes=[{'id':'90','name':'Course','path':'Course','parent':'0','children':['91','92','99'],'depth':0,'review':9,'learn':4,'new':20,'filtered':False},
  {'id':'91','name':'Lecture 10','path':'Course::Lecture 10','parent':'90','children':[],'depth':1,'review':0,'learn':2,'new':3,'filtered':False},
- {'id':'92','name':'Lecture 2','path':'Course::Lecture 2','parent':'90','children':[],'depth':1,'review':6,'learn':0,'new':2,'filtered':False},
+ {'id':'92','name':'Lecture 2','path':'Course::Lecture 2','parent':'90','children':[],'depth':1,'review':6,'learn':0,'new':2,'filtered':False,'last_card_created':1792300000000},
  {'id':'99','name':'Seminar','path':'Course::Seminar','parent':'90','children':['991','992'],'depth':1,'review':3,'learn':2,'new':15,'filtered':False},
  {'id':'991','name':'Topic 10','path':'Course::Seminar::Topic 10','parent':'99','children':[],'depth':2,'review':0,'learn':0,'new':5,'filtered':False},
  {'id':'992','name':'Topic 2','path':'Course::Seminar::Topic 2','parent':'99','children':[],'depth':2,'review':3,'learn':2,'new':10,'filtered':False}]

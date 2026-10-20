@@ -1,4 +1,4 @@
-/* Atelier 1.0.3 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.4 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -549,9 +549,26 @@
       const source=state.map.get(exclude);
       return `<option value="0" ${selected==='0'?'selected':''}>All folders (top level)</option>`+state.nodes.filter(n=>!n.filtered&&n.id!==exclude&&(!source||!n.path.startsWith(source.path+'::'))).sort((a,b)=>Model.compareNames({...a,name:a.path},{...b,name:b.path})).map(n=>`<option value="${n.id}" ${selected===n.id?'selected':''}>${esc(nicePath(n.path))}</option>`).join('');
     }
+    function studyPickerRank(){
+      if(state.pickerRankNodes===state.nodes&&state.pickerRankRecent===state.profile.recent_added)return state.pickerRank;
+      const rank=new Map(),observed=new Map((state.profile.recent_added||[]).map(x=>[String(x.id),Date.parse(x.observed)||0]));
+      for(const n of state.nodes){
+        const value=Math.max(Number(n.last_card_created)||0,observed.get(n.id)||0);
+        if(!value)continue;
+        let current=n,seen=new Set();
+        while(current&&!seen.has(current.id)){
+          seen.add(current.id);rank.set(current.id,Math.max(rank.get(current.id)||0,value));
+          current=state.map.get(current.parent);
+        }
+      }
+      state.pickerRank=rank;state.pickerRankNodes=state.nodes;state.pickerRankRecent=state.profile.recent_added;
+      return rank;
+    }
     function studyPicker(){
       const q=String(state.dialogData.search||'').toLocaleLowerCase(),selected=new Set(state.dialogData.draft.deck_ids);
-      const rows=state.nodes.filter(n=>!q||nicePath(n.path).toLocaleLowerCase().includes(q));
+      const rank=studyPickerRank();
+      const rows=state.nodes.filter(n=>!q||nicePath(n.path).toLocaleLowerCase().includes(q))
+        .sort((a,b)=>(rank.get(b.id)||0)-(rank.get(a.id)||0)||Model.compareNames({name:a.path},{name:b.path}));
       const shown=rows.slice(0,state.dialogData.limit||80);
       return `${shown.map(n=>`<label class="picker-row ${selected.has(n.id)?'checked':''}"><input type="checkbox" data-pick-deck="${n.id}" ${selected.has(n.id)?'checked':''}><span class="picker-art tone-${tone(n)}">${folderArt(isFolder(n))}</span><span><strong>${esc(n.name)}</strong><small>${esc(n.parent==='0'?'All folders':nicePath(state.map.get(n.parent)?.path||''))}</small></span>${n.children.length?`<small>${n.children.length} inside</small>`:''}</label>`).join('')||'<p class="note">No matching folders.</p>'}${rows.length>shown.length?btn('picker-more','Show more matches','down','quiet'):''}`;
     }
@@ -645,7 +662,7 @@
         footer=btn('new-study','Add active study','plus','primary')+btn('close-dialog','Done','check');
       }else if(type==='study-edit'){
         const draft=data.draft;title=data.id?'Edit your study.':'Set an active study.';desc='An exam, a course, or anything you want to keep in focus.';wide=true;
-        body=`<form id="study-form"><div class="study-fields"><label class="field">Study name<input id="study-name" required maxlength="100" placeholder="e.g. Cardiology · Exam 3" value="${esc(draft.name)}" autocomplete="off"></label><label class="field date-field">Exam date <span class="optional">optional</span><input id="study-date" type="date" value="${esc(draft.date)}"></label></div><div class="picker-heading"><strong>Choose folders or decks — combine parents for one exam</strong><span>Each parent includes its subdecks; overlaps are counted once.</span></div><label class="picker-search">${icon('search',16)}<input id="picker-search" type="search" placeholder="Find a course, exam or deck…" value="${esc(data.search)}" autocomplete="off"></label><div class="deck-picker" id="deck-picker">${studyPicker()}</div><div id="picker-summary" class="picker-summary">${pickerSummary()}</div><div class="selected-chips" id="selected-chips">${selectedChips()}</div><p class="note">Select every parent folder or deck you want to sit together in this exam. Each selection stays in its original folder and keeps its existing schedule.</p><div class="form-error" id="form-error" role="alert"></div></form>`;
+        body=`<form id="study-form"><div class="study-fields"><label class="field">Study name<input id="study-name" required maxlength="100" placeholder="e.g. Cardiology · Exam 3" value="${esc(draft.name)}" autocomplete="off"></label><label class="field date-field">Exam date <span class="optional">optional</span><input id="study-date" type="date" value="${esc(draft.date)}"></label></div><div class="picker-heading"><strong>Choose folders or decks — combine parents for one exam</strong><span>Recent additions first · each parent includes its subdecks.</span></div><label class="picker-search">${icon('search',16)}<input id="picker-search" type="search" placeholder="Find a course, exam or deck…" value="${esc(data.search)}" autocomplete="off"></label><div class="deck-picker" id="deck-picker">${studyPicker()}</div><div id="picker-summary" class="picker-summary">${pickerSummary()}</div><div class="selected-chips" id="selected-chips">${selectedChips()}</div><p class="note">Select every parent folder or deck you want to sit together in this exam. Each selection stays in its original folder and keeps its existing schedule.</p><div class="form-error" id="form-error" role="alert"></div></form>`;
         footer=btn('close-dialog','Cancel',null)+`<button type="submit" form="study-form" class="primary">${icon('focus',16)}Save active study</button>`;
       }else if(type==='study-branch'&&n){
         title='Study this whole folder?';desc=n.name;

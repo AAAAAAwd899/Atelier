@@ -103,6 +103,12 @@
           else if(el.querySelector('.onigiri-widget-title'))role='title';
           else if(el.querySelector('.stat-card'))role='metric';
           inlineAttr(el,'data-atelier-inline-item',role);
+          // Onigiri stores user-sized tiles in grid-area. Keep their width
+          // while releasing the saved row and column coordinates in this slot.
+          const area=el.style.gridArea.split('/');
+          const spanText=area.length===4?area[3]:el.style.gridColumnEnd;
+          const span=Math.max(1,Math.min(cols,Number(spanText?.match(/span\s+(\d+)/)?.[1])||1));
+          inlineAttr(el,'data-atelier-inline-span',String(span));
         }
       }
       return true;

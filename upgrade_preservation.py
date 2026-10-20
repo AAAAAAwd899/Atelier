@@ -8,9 +8,9 @@ import hashlib,json
 ROOT=Path(__file__).resolve().parent
 def before_upgrade(name,data=None):
     if data is None:data=(ROOT/'src'/name).read_bytes()
-    record=json.loads((ROOT/'patch-103-changes.json').read_text())
+    record=json.loads((ROOT/'patch-104-changes.json').read_text())
     if name in record['changed']:
-        assert hashlib.sha256(data).hexdigest()==record['changed'][name], 'Undeclared 1.0.3 bytes: '+name
+        assert hashlib.sha256(data).hexdigest()==record['changed'][name], 'Undeclared 1.0.4 bytes: '+name
         historical=json.loads((ROOT/'tests/data/release-102-baseline.json').read_text())
         # Presentation files introduced or intentionally refreshed in 1.0.3
         # have no 1.0.2 byte snapshot. Their current bytes are validated by the

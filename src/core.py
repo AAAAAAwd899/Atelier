@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -503,10 +503,19 @@ def flatten_tree(tree: Any, names: dict[str, str]) -> list[dict[str, Any]]:
     return result
 
 def collection_snapshot(col: Any) -> dict[str, Any]:
-    """Call only inside QueryOp. Reuses Anki's own scheduler counts, no SQL."""
+    """Call only inside QueryOp. Read-only card dates aid the study picker."""
     names = {str(item.id): item.name for item in col.decks.all_names_and_ids()}
     tree = col.sched.deck_due_tree()
     nodes = flatten_tree(tree, names)
+    # One bounded result per deck. A card ID is its creation timestamp, not a
+    # promise that an imported card entered this collection at that time.
+    try:
+        newest = {str(did): int(card_id) for did, card_id in
+                  col.db.all("select did, max(id) from cards group by did") if card_id}
+    except Exception:
+        newest = {}  # Optional signal: older hosts still have a usable picker.
+    for node in nodes:
+        node["last_card_created"] = newest.get(node["id"], 0)
     top = [n for n in nodes if n["parent"] == "0"]
     return {"nodes": nodes, "current": str(col.decks.get_current_id()),
             "totals": {k: sum(n[k] for n in top) for k in ("new", "learn", "review")},
