@@ -9,7 +9,7 @@ proof=json.loads((V/'verified.json').read_text())
 build=json.loads((D/'Atelier-1.0.7-Build.json').read_text())
 assert proof['version']=='1.0.7' and proof['runtime_sha256']==runtime_digest()==build['runtime_sha256']
 assert build['full_automated_verification'] and proof['python_total']==1950 and proof['browser_total']==2893
-files=[V/n for n in ['verified.json','python-runtime.json','atelier-unit.xml','sprout-unit.xml','workshop-unit.xml','anki-addon-107.json','listing-preview-107.json','consumer-review-107.json','public-source-audit-107.json','github-public-107.json']]
+files=[V/n for n in ['verified.json','python-runtime.json','atelier-unit.xml','sprout-unit.xml','workshop-unit.xml','anki-addon-107.json','listing-preview-107.json','consumer-review-107.json','public-source-audit-107.json','github-public-107.json','browser-scope-107.json']]
 for name in proof['browser_suites']:
     files.extend(V/(name+s) for s in ['.log','.exit','-results.json'])
 files.extend(V/(name+'.log') for name in ['atelier-unit','sprout-unit','workshop-unit'])
