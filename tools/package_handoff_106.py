@@ -55,9 +55,12 @@ checks=D/'Atelier-1.0.6-Upload-SHA256.txt';checks.write_text(''.join(sha(p)+'  '
 payload.append((checks,'SHA256.txt'))
 kit=D/'Atelier-1.0.6-AnkiWeb-Listing-Kit.zip';write_archive(kit,payload)
 full=D/'Atelier-1.0.6-Full-Publish-Package.zip'
-write_archive(full,payload+[(D/'Atelier-1.0.6-Source.zip','Atelier-1.0.6-Source.zip'),(evidence,evidence.name),(D/'Atelier-1.0.6-Build.json','Atelier-1.0.6-Build.json'),(D/'Atelier-1.0.6-Evidence.json','Atelier-1.0.6-Evidence.json'),(D/'Atelier-1.0.6-SHA256.txt','Atelier-1.0.6-SHA256.txt')])
+write_archive(full,payload+[(D/'Atelier-1.0.6-Source.zip','Atelier-1.0.6-Source.zip'),(evidence,evidence.name),(D/'Atelier-1.0.6-Build.json','Atelier-1.0.6-Build.json'),(D/'Atelier-1.0.6-Evidence.json','Atelier-1.0.6-Evidence.json'),(D/'Atelier-1.0.6-SHA256.txt','Atelier-1.0.6-SHA256.txt'),(D/'Atelier-1.0.6-Files.json','Atelier-1.0.6-Files.json')])
 for p in [evidence,kit,full]:
     with zipfile.ZipFile(p) as z:assert z.testzip() is None and len(z.namelist())==len(set(z.namelist()))
+with zipfile.ZipFile(full) as z:
+    for record in z.read('Atelier-1.0.6-SHA256.txt').decode().splitlines():
+        expected,name=record.split('  ',1);assert hashlib.sha256(z.read(name)).hexdigest()==expected
 with zipfile.ZipFile(kit) as z:
     assert hashlib.sha256(z.read('Atelier-1.0.6.ankiaddon')).hexdigest()==build['installer_sha256']
 report={'version':'1.0.6','runtime_sha256':runtime_digest(),'native_checks':receipt['native_total'],'zip_crc_passed':True,'installer_source_bytes_equal':build['installer_source_bytes_equal'],'artifacts':{p.name:{'bytes':p.stat().st_size,'sha256':sha(p)} for p in [D/'Atelier-1.0.6.ankiaddon',D/'Atelier-1.0.6-Source.zip',evidence,kit,full]}}
