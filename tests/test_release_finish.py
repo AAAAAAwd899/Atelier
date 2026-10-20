@@ -7,6 +7,7 @@ from datetime import datetime,timedelta
 from concurrent.futures import ThreadPoolExecutor
 from types import SimpleNamespace as NS
 import pytest
+from upgrade_preservation import engine_bytes
 R=Path(__file__).resolve().parents[1];S=R/'src'
 pkg=types.ModuleType('finish_test');pkg.__path__=[str(S)];sys.modules[pkg.__name__]=pkg
 core=importlib.import_module('finish_test.core');fc=importlib.import_module('finish_test.focus_context');pr=importlib.import_module('finish_test.study_progress');cache=importlib.import_module('finish_test.figure_cache')
@@ -176,7 +177,7 @@ def test_publishing_and_native_rating_algorithm_files_unchanged():
  baseline=json.loads((R/'usability-baseline.json').read_text())
  for f,h in baseline.items():
   if f.startswith('sprout/') and f not in ('sprout/integration.py','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js') or f.startswith('workshop/') and f not in ('workshop/integration.py','workshop/web/app.js','workshop/web/app.css','workshop/INTEGRATION-NOTE.md'):
-   assert hashlib.sha256((S/f).read_bytes()).hexdigest()==h,f
+   assert hashlib.sha256(engine_bytes(f,S)).hexdigest()==h,f
 
 # Compile the actual changed handler, using strict host stand-ins and the original
 # real draft/session serialization. No substitute implementation of the handler.

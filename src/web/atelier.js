@@ -1,4 +1,4 @@
-/* Atelier 1.0.4 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.5 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -70,7 +70,7 @@
     const defaults = {native_surfaces:true,theme:'obsidian',mode:'workspace',density:'comfortable',motion:true,chrome:false,view:'grid',sort:'name',review_style:'adaptive',review_width:'standard',surface_revision:1,shared_theme:true,match_sprout:true,visual_owner:'ask',ambience:true,review_context:'compact',companion_shortcuts:false,acknowledged_makeovers:[]};
     const examKey = s => [...new Set(s.deck_ids)].sort().join(',');
     const normalizeProfile = p => {
-      const out={favorites:[],folders:[],colors:{},last_location:'0',last_studied:'0',studies:[],focus_enabled:false,selected_study:'all',recent_locations:[],recent_added:[],home_layout:{enabled:false,columns:3,items:[]},...p};
+      const out={favorites:[],folders:[],colors:{},last_location:'0',last_studied:'0',studies:[],focus_enabled:false,selected_study:'all',recent_locations:[],recent_added:[],onboarding:{version:0,status:'new'},home_layout:{enabled:false,columns:3,items:[]},...p};
       out.native_widgets=window.AtelierNativeWidgets?.normalize(out.native_widgets)||{items:[]};
       out.native_widget_note=typeof out.native_widget_note==='string'?out.native_widget_note:'';
       const seen=new Set();out.studies=out.studies.map(s=>{const key=examKey(s);const active=!!s.active&&!seen.has(key);if(active)seen.add(key);return {...s,active};});
@@ -122,6 +122,7 @@
     const getScroll = () => ({main:shadow.querySelector('.main')?.scrollTop||0,side:shadow.querySelector('.side-scroll')?.scrollTop||0});
     let companionSent='';
     let home=null, nativeWidgets=null; let bodyState = null, undoStudy = null; const quickPending=new Set();
+    let tour=null, tourOffered=false, tourPositionFrame=0;
     const exactExams=n=>state.profile.studies.filter(s=>s.active&&s.deck_ids.length===1&&s.deck_ids[0]===n.id);
     const inExam=n=>Model.belongs(state.nodes,Model.roots(state.nodes,state.profile.studies.filter(s=>s.active).flatMap(s=>s.deck_ids)),n.id);
     const examButton=n=>btn('quick-exam',exactExams(n).length?'Exam active':inExam(n)?'Pin as own exam':'Set as exam',exactExams(n).length?'check':'focus',`exam-pin ${exactExams(n).length?'is-active':''}`,`data-id="${n.id}" aria-pressed="${!!exactExams(n).length}" title="${exactExams(n).length?'Remove this exam from active studies':'Add this folder as an upcoming exam in one click'}"`);
@@ -151,6 +152,7 @@
       nativeWidgets?.theme();
       frame.inert=!!(state.dialog || state.mobile);
       if (state.mobile) frame.inert=false; // Drawer focus is trapped below; main is inert separately.
+      if(tour)frame.inert=true;
       const computed=getComputedStyle(host);
       window.dispatchEvent(new CustomEvent('atelier:theme-change',{detail:{theme:state.config.theme,active:workspace&&state.config.visual_owner==='atelier',tokens:Object.fromEntries(['bg','text','accent','panel','muted','line'].map(k=>[k,computed.getPropertyValue('--'+k).trim()]))}}));
     }
@@ -200,6 +202,94 @@
         state.profile=normalizeProfile(p);if(redraw)render();return true;
       }).catch(e=>{announce(e.message,true);return false;});
       prefQueue=op.then(()=>{});return op;
+    }
+    // A local, read-only walkthrough. Highlighting a control never activates it.
+    // External editors/native dialogs open only through an explicit final task.
+    const tourSteps=[
+      {page:'desk',target:'.focus-panel',title:'Your next study session starts here.',text:'The Study desk brings your current lecture, available reviews and unfinished work together. Continue a lecture for normal Anki review; its schedule still applies.',hint:'You can return here from Study desk in the sidebar.'},
+      {page:'library',target:'.library .section-heading',title:'Keep courses and lectures together.',text:'Use parent folders for a class or exam, with lecture decks inside. Open a folder to see its lectures. Creating a folder or changing its color does not move any cards by itself.',hint:'Use each folder’s menu to rename, move, export or study it.'},
+      {page:'desk',target:'.side-scope-card',title:'Choose exactly what you want to study.',text:'Choose folders in Study scope to pin one class, several courses or a single lecture. A parent includes its subfolders; overlapping selections count once. Recent additions appear first.',hint:'Your original folders stay separate. The focus selection is a shortcut.'},
+      {page:'desk',target:'.nav-group [data-action="authoring-open"]',title:'Turn a slideset into a card set.',text:'In Card Studio, import a PDF, slides or images into a project. Work through the ordered page rail, write questions beside the source, and save drafts before reviewing and adding them to an Anki deck.',hint:'For a diagram, use image occlusion to draw masks. Cloze and image cards are available too.'},
+      {page:'desk',target:'.top-actions [data-command="add"]',title:'Use Anki’s editor whenever you need it.',text:'Add cards opens Anki’s original editor. Your installed note types, specialized editor tools and other editor add-ons stay available there.',hint:'Browse opens Anki’s card browser for searching and editing existing cards.'},
+      {page:'desk',target:'.nav-group [data-view="overview"]',title:'Prepare for one exam across several folders.',text:'In Exam Studio, create a plan, choose its date and select every parent folder or deck that belongs to it. Two different courses can be part of the same exam.',hint:'An exam plan organizes preparation. It does not merge your decks.'},
+      {page:'desk',target:'.nav-group [data-view="practice"]',title:'Practice, then return to what needs work.',text:'Practice & mocks builds sessions from your chosen exam. Use its session options to choose what to include, and return here to resume saved practice.',hint:'Read the session’s grading and scheduling description before starting. Normal Anki review and practice have different controls.'},
+      {page:'desk',target:'.nav-group [data-view="pip"]',title:'Study with a little company.',text:'Pip Study gives you a focused study space. Your selected class or folder stays accessible from the Study desk’s Study with Pip action.',hint:'Pip is optional. You can always use normal Anki study instead.'},
+      {page:'desk',target:'.nav-group [data-action="study-progress"]',title:'See how your studying is going.',text:'Study progress shows your actual review history. Choose the study scope and time range to see the activity you want to follow.',hint:'Empty history is normal when you are starting. Atelier does not invent study statistics.'},
+      {page:'tools',target:'.tools-spotlight',title:'Anki’s familiar tools are close by.',text:'Find import, export, note types, media tools and preferences here. Export a deck to send an .apkg file; use Anki’s shared-deck browser to find decks others have shared.',hint:'Share only material you have permission to distribute. Local exam plans and source projects need their own backups.'},
+      {page:'widgets',target:'.nw-header',title:'Make room for your own setup.',text:'Choose the home widgets you want and arrange them to suit your routine. When Onigiri is enabled, Show rewards on the Study desk reveals its live restaurant and reward controls.',hint:'Other add-ons keep their original menus and windows. Appearance & compatibility offers the original home when an integration needs it.'},
+      {page:'desk',target:'.top-actions [data-action="appearance"]',title:'Make this space yours.',text:'Choose a world, adjust density and motion, or change appearance ownership. You can return to Anki’s original interface through Appearance & compatibility.',hint:'Replay this guide from Guided tour in the footer or Tools → Atelier → Guided tour.'}
+    ];
+    function tourSnapshot(){return {page:state.page,location:state.location,query:state.query,filter:state.filter,limit:state.limit,mobile:state.mobile,sideFocusExpanded:state.sideFocusExpanded,sideHudExpanded:state.sideHudExpanded,toolsGroup:state.toolsGroup,scroll:getScroll(),focus:shadow.activeElement};}
+    function startTour(automatic=false){
+      if(tour)return true;
+      if(!state.loaded||state.dialog||state.busy||state.config.mode==='native'||state.config.visual_owner!=='atelier'){
+        if(!automatic)announce('Choose Atelier in Appearance & compatibility and close the current dialog to start the guided tour.');return false;
+      }
+      closeMenu(false);tour={index:-1,saved:tourSnapshot(),automatic};tourOffered=true;
+      if(!state.profile.onboarding?.version)updatePref({key:'onboarding',value:{version:1,status:'offered'}},false);
+      showTourStep(-1);return true;
+    }
+    function showTourStep(index,focus=true){
+      if(!tour)return;
+      tour.index=Math.max(-1,Math.min(tourSteps.length,index));
+      const step=tourSteps[tour.index];
+      state.page=step?.page||'desk';state.location='0';state.query='';state.filter='all';state.toolsGroup='all';state.sideFocusExpanded=true;state.sideHudExpanded=true;
+      state.mobile=!!(innerWidth<=820&&step?.target?.startsWith('.nav-group')||innerWidth<=820&&step?.target==='.side-scope-card');
+      render({resetMain:true});if(focus)shadow.getElementById('tour-title')?.focus({preventScroll:true});
+    }
+    function drawTour(focus=false){
+      if(!tour)return;
+      let layer=shadow.querySelector('.tour-layer');
+      if(!layer){layer=document.createElement('div');layer.className='tour-layer';app.append(layer);}
+      const intro=tour.index<0,done=tour.index===tourSteps.length,step=tourSteps[tour.index];
+      const title=intro?'A quick look around Atelier.':done?'Ready for your next chapter.':step.title;
+      const text=intro?'Learn where to make cards, organize your classes and choose exactly what to study. The tour takes about two minutes. You can skip it or come back whenever you like.':done?'Start with the task you have in mind. This guide has only shown you around; your cards, folders and study schedule are as you left them.':step.text;
+      layer.innerHTML=`<div class="tour-shade" aria-hidden="true"></div><div class="tour-spotlight" hidden aria-hidden="true"></div><section class="tour-card" role="dialog" aria-modal="true" aria-labelledby="tour-title" aria-describedby="tour-description" tabindex="-1"><div class="tour-meta"><span>${intro?'WELCOME TO ATELIER':done?'YOUR WORKSPACE, YOUR WAY':`GUIDED TOUR · ${tour.index+1} OF ${tourSteps.length}`}</span>${ib('tour-skip','Close guided tour','close')}</div><h2 id="tour-title" tabindex="-1">${title}</h2><p id="tour-description">${text}</p>${step?`<p class="tour-hint">${icon('info',16)}<span>${step.hint}</span></p>`:''}${intro?'<p class="tour-hint">Your cards and settings stay yours. The tour does not add, move or grade anything.</p>':''}<div class="tour-progress" role="progressbar" aria-label="Tour progress" aria-valuemin="0" aria-valuemax="${tourSteps.length}" aria-valuenow="${Math.max(0,tour.index)}"><span style="width:${Math.max(0,tour.index)/tourSteps.length*100}%"></span></div>${done?`<div class="tour-tasks">${btn('tour-task','Choose study folders','focus','primary','data-task="focus"')}${state.authoring.available?btn('tour-task','Import a source','import','secondary','data-task="source"'):''}${btn('tour-task','Browse my library','folder','secondary','data-task="library"')}</div>`:''}<div class="tour-actions">${btn('tour-skip',intro?'Skip for now':'End tour',null,'quiet')}${!intro?btn('tour-back','Back',null,'secondary'):''}${btn('tour-next',intro?'Show me around':done?'Finish':'Next',intro?'arrow':done?'check':'chevron','primary')}</div></section>`;
+      setHost();syncCapture();
+      const target=step?.target&&shadow.querySelector(step.target);
+      if(target)target.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
+      positionTour();if(focus)layer.querySelector('#tour-title').focus({preventScroll:true});
+    }
+    function positionTour(){
+      if(!tour)return;
+      const layer=shadow.querySelector('.tour-layer'),card=layer?.querySelector('.tour-card');if(!card)return;
+      const target=shadow.querySelector(tourSteps[tour.index]?.target||'.tour-no-target'),spot=layer.querySelector('.tour-spotlight'),shade=layer.querySelector('.tour-shade');
+      const box=target?.getBoundingClientRect(),visible=box&&box.width>0&&box.height>0&&box.bottom>0&&box.top<innerHeight&&box.right>0&&box.left<innerWidth;
+      const pad=16,w=card.getBoundingClientRect().width,h=card.getBoundingClientRect().height;
+      let x=(innerWidth-w)/2,y=(innerHeight-h)/2;
+      spot.hidden=!visible;shade.dataset.centered=String(!visible);
+      if(visible){
+        const r={left:Math.max(6,box.left-5),top:Math.max(6,box.top-5),right:Math.min(innerWidth-6,box.right+5),bottom:Math.min(innerHeight-6,box.bottom+5)};
+        Object.assign(spot.style,{left:r.left+'px',top:r.top+'px',width:(r.right-r.left)+'px',height:(r.bottom-r.top)+'px'});
+        if(innerWidth>=700&&r.right+w+28<innerWidth){x=r.right+16;y=r.top;}
+        else if(innerWidth>=700&&r.left-w-28>0){x=r.left-w-16;y=r.top;}
+        else if(r.bottom+h+24<innerHeight){x=r.left;y=r.bottom+16;}
+        else if(r.top-h-24>0){x=r.left;y=r.top-h-16;}
+        else {x=innerWidth-w-pad;y=innerHeight-h-pad;}
+      }
+      Object.assign(card.style,{left:Math.max(pad,Math.min(innerWidth-w-pad,x))+'px',top:Math.max(pad,Math.min(innerHeight-h-pad,y))+'px'});
+    }
+    async function finishTour(status='skipped',task=''){
+      if(!tour)return;
+      const saved=tour.saved;tour=null;shadow.querySelector('.tour-layer')?.remove();
+      Object.assign(state,{page:saved.page,location:saved.location,query:saved.query,filter:saved.filter,limit:saved.limit,mobile:saved.mobile,sideFocusExpanded:saved.sideFocusExpanded,sideHudExpanded:saved.sideHudExpanded,toolsGroup:saved.toolsGroup});
+      render();const main=shadow.querySelector('.main'),side=shadow.querySelector('.side-scroll');if(main)main.scrollTop=saved.scroll.main;if(side)side.scrollTop=saved.scroll.side;
+      syncCapture();const focus=saved.focus?.isConnected?saved.focus:[...frame.querySelectorAll('[data-action]')].find(el=>saved.focus?.dataset.action&&el.dataset.action===saved.focus.dataset.action&&el.getClientRects().length)||shadow.querySelector('.owner-badge,.nw-header button');focus?.focus({preventScroll:true});
+      await updatePref({key:'onboarding',value:{version:1,status}},false);
+      if(task==='focus')openDialog('study-edit');
+      else if(task==='source')await request('authoring_open',{view:'import'});
+      else if(task==='library')go('library');
+    }
+    function tourKey(event){
+      event.stopPropagation();
+      if(event.key==='Escape'){event.preventDefault();finishTour('skipped');}
+      else if(event.key==='Tab'){
+        const items=[...shadow.querySelectorAll('.tour-card button:not(:disabled)')],first=items[0],last=items[items.length-1],active=shadow.activeElement;
+        if(event.shiftKey&&(active===first||!items.includes(active))){event.preventDefault();last?.focus();}
+        else if(!event.shiftKey&&(active===last||!items.includes(active))){event.preventDefault();first?.focus();}
+      }else if(!event.ctrlKey&&!event.altKey&&!event.metaKey&&['ArrowRight','ArrowLeft'].includes(event.key)){
+        event.preventDefault();if(event.key==='ArrowLeft')showTourStep(Math.max(-1,tour.index-1));else if(tour.index===tourSteps.length)finishTour('completed');else showTourStep(tour.index+1);
+      }
     }
     function remember() {
       clearTimeout(uiTimer);uiTimer=setTimeout(()=>request('ui',{page:state.page,location:state.location,filter:state.filter,query:state.query}).catch(()=>{}),150);
@@ -300,7 +390,7 @@
     }
     function toolsPage(){
       const found=Model.findTools(state.query,state.toolsGroup),remoteQuery=/remote|controller|bluetooth|gamepad/i.test(state.query),count=found.length+(remoteQuery?1:0);
-      return `<section class="tools-page" aria-label="Anki tools directory"><div class="tools-heading"><div class="eyebrow">EVERYTHING WITHIN REACH</div><h1>Your Anki toolkit.</h1><p>The full native tools. Grouped by what you need to do.</p></div><div class="tools-spotlight">${btn('create','New folder','folder','secondary','data-kind="folder" data-parent="0"')}${btn('create','New deck','plus','secondary','data-kind="deck" data-parent="0"')}${btn('suite-open','New exam plan','calendar','secondary','data-view="new"')}${btn('remote-open','Remote controls','controls','secondary')}${btn('appearance','Appearance & compatibility','palette','quiet')}</div><div class="tools-filter-bar"><nav class="tool-categories" aria-label="Tool categories">${[{id:'all',name:'All tools'},...Model.TOOL_GROUPS].map(g=>`<button type="button" data-action="tool-category" data-category="${g.id}" aria-pressed="${state.toolsGroup===g.id}" class="tool-category ${state.toolsGroup===g.id?'selected':''}">${esc(g.name)}</button>`).join('')}</nav><span class="tool-result-count" role="status">${count} ${count===1?'tool':'tools'}${state.query?' matching your search':''}</span></div>${count?(remoteQuery?`<section class="tools-group"><h2>Remote controls</h2><p>Connect a keyboard-mode remote, test its buttons safely, and choose optional review mappings.</p>${btn('remote-open','Set up remote controls','controls','secondary')}</section>`:'')+Model.TOOL_GROUPS.map(g=>{const items=found.filter(x=>x.group===g.id);return items.length?`<section class="tools-group"><div class="tools-group-heading"><h2>${esc(g.name)}</h2><p>${esc(g.description)}</p></div><div class="tools-grid">${items.map(x=>`<div class="tool-entry"><button type="button" class="tool-tile" data-action="native-tool" data-command="${x.id}" ${boot.nativeTools?.[x.id]===false?'disabled aria-describedby="tool-unavailable-'+x.id+'"':''}><span class="tool-symbol">${icon(x.icon,22)}</span><span><strong>${esc(x.label)}</strong><small>${esc(x.description)}</small>${x.note?`<span class="tool-note">${icon(x.group==='maintenance'?'shield':'info',12)}${esc(x.note)}</span>`:''}</span>${icon('external',14)}</button>${boot.nativeTools?.[x.id]===false?`<small class="tool-unavailable" id="tool-unavailable-${x.id}">Use Anki’s original menus for this tool on your version.</small>`:''}</div>`).join('')}</div></section>`:'';}).join(''):`<div class="empty tools-empty">${icon('search',28)}<h3>No tools match that search.</h3><p>Try “import”, “media”, “templates” or “preferences”. This search finds tools, not cards.</p>${btn('reset-tools','Clear search & filters','reload','secondary')}</div>`}<aside class="tool-safety"><span>${icon('shield',19)}</span><div><strong>Your original Anki controls stay in charge.</strong><p>Collection changes keep their native dialogs and confirmations. Sync does not include local exam plans, saved practice or Pip effort. Keep those folders backed up separately.</p></div></aside></section>`;
+      return `<section class="tools-page" aria-label="Anki tools directory"><div class="tools-heading"><div class="eyebrow">EVERYTHING WITHIN REACH</div><h1>Your Anki toolkit.</h1><p>The full native tools. Grouped by what you need to do.</p></div><div class="tools-spotlight">${btn('create','New folder','folder','secondary','data-kind="folder" data-parent="0"')}${btn('create','New deck','plus','secondary','data-kind="deck" data-parent="0"')}${btn('suite-open','New exam plan','calendar','secondary','data-view="new"')}${btn('remote-open','Remote controls','controls','secondary')}${btn('appearance','Appearance & compatibility','palette','quiet')}${btn('guided-tour','Guided tour','info','quiet')}</div><div class="tools-filter-bar"><nav class="tool-categories" aria-label="Tool categories">${[{id:'all',name:'All tools'},...Model.TOOL_GROUPS].map(g=>`<button type="button" data-action="tool-category" data-category="${g.id}" aria-pressed="${state.toolsGroup===g.id}" class="tool-category ${state.toolsGroup===g.id?'selected':''}">${esc(g.name)}</button>`).join('')}</nav><span class="tool-result-count" role="status">${count} ${count===1?'tool':'tools'}${state.query?' matching your search':''}</span></div>${count?(remoteQuery?`<section class="tools-group"><h2>Remote controls</h2><p>Connect a keyboard-mode remote, test its buttons safely, and choose optional review mappings.</p>${btn('remote-open','Set up remote controls','controls','secondary')}</section>`:'')+Model.TOOL_GROUPS.map(g=>{const items=found.filter(x=>x.group===g.id);return items.length?`<section class="tools-group"><div class="tools-group-heading"><h2>${esc(g.name)}</h2><p>${esc(g.description)}</p></div><div class="tools-grid">${items.map(x=>`<div class="tool-entry"><button type="button" class="tool-tile" data-action="native-tool" data-command="${x.id}" ${boot.nativeTools?.[x.id]===false?'disabled aria-describedby="tool-unavailable-'+x.id+'"':''}><span class="tool-symbol">${icon(x.icon,22)}</span><span><strong>${esc(x.label)}</strong><small>${esc(x.description)}</small>${x.note?`<span class="tool-note">${icon(x.group==='maintenance'?'shield':'info',12)}${esc(x.note)}</span>`:''}</span>${icon('external',14)}</button>${boot.nativeTools?.[x.id]===false?`<small class="tool-unavailable" id="tool-unavailable-${x.id}">Use Anki’s original menus for this tool on your version.</small>`:''}</div>`).join('')}</div></section>`:'';}).join(''):`<div class="empty tools-empty">${icon('search',28)}<h3>No tools match that search.</h3><p>Try “import”, “media”, “templates” or “preferences”. This search finds tools, not cards.</p>${btn('reset-tools','Clear search & filters','reload','secondary')}</div>`}<aside class="tool-safety"><span>${icon('shield',19)}</span><div><strong>Your original Anki controls stay in charge.</strong><p>Collection changes keep their native dialogs and confirmations. Sync does not include local exam plans, saved practice or Pip effort. Keep those folders backed up separately.</p></div></aside></section>`;
     }
 
     function suitePlans(){
@@ -493,7 +583,7 @@
         frame.innerHTML=`<main class="workspace-loading"><div class="loading-mark">${brand}</div><h1>${state.failure?'Your study desk is taking longer to open.':'Opening your study desk…'}</h1><p>${state.failure?esc(state.failure):'Your folders and active exams will appear here.'}</p><div>${state.failure?btn('refresh','Try again','refresh','primary'):''}${btn('native','Other add-ons / original home','external','secondary')}</div></main>`;
       }else{
         frame.style.display='';
-        frame.innerHTML=`<div class="layout" data-page="${esc(state.page)}">${sidebar()}<button type="button" class="side-scrim ${state.mobile?'open':''}" data-action="close-nav" aria-label="Dismiss navigation"></button><main class="main" tabindex="-1" ${state.mobile?'inert':''}>${topbar()}<div class="main-inner">${state.page==='widgets'?nativeWidgets.page():state.page==='tools'?toolsPage():state.page==='desk'&&!state.query?`<div class="desk-heading"><span>${esc(now().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}))}</span><span class="desk-status">${icon('check',13)}Your library, preserved</span></div><div id="atelier-workflow-inbox">${workflowInbox()}</div>${nativeWidgets?.onHome()||''}${focusPanel()}${scopeBar()}${onigiriRewards()}`:state.page==='due'?scopeBar():''}${['tools','widgets'].includes(state.page)?'':librarySection()}${state.page==='desk'&&!state.query?revisitPanel()+suitePlans()+deskTools()+'<div id="atelier-authoring-hub">'+authoringHub()+'</div>':''}<div class="extension-slot"><slot name="atelier-widgets"></slot></div><footer class="help-strip"><span>${icon('shield',14)}${scope().enabled?'Focus changes what you see, not when cards are due.':esc(state.studied||'Your decks stay in Anki’s native structure.')}</span><div>${btn('import','Import',null,'quiet')}${btn('study-progress','Study progress','chart','quiet')}${btn('stats','Statistics',null,'quiet')}${btn('widget-page','Widgets','grid','quiet')}${btn('nw-arrange','Customize home','grid','quiet')}</div></footer></div></main></div>`;
+        frame.innerHTML=`<div class="layout" data-page="${esc(state.page)}">${sidebar()}<button type="button" class="side-scrim ${state.mobile?'open':''}" data-action="close-nav" aria-label="Dismiss navigation"></button><main class="main" tabindex="-1" ${state.mobile?'inert':''}>${topbar()}<div class="main-inner">${state.page==='widgets'?nativeWidgets.page():state.page==='tools'?toolsPage():state.page==='desk'&&!state.query?`<div class="desk-heading"><span>${esc(now().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}))}</span><span class="desk-status">${icon('check',13)}Your library, preserved</span></div><div id="atelier-workflow-inbox">${workflowInbox()}</div>${nativeWidgets?.onHome()||''}${focusPanel()}${scopeBar()}${onigiriRewards()}`:state.page==='due'?scopeBar():''}${['tools','widgets'].includes(state.page)?'':librarySection()}${state.page==='desk'&&!state.query?revisitPanel()+suitePlans()+deskTools()+'<div id="atelier-authoring-hub">'+authoringHub()+'</div>':''}<div class="extension-slot"><slot name="atelier-widgets"></slot></div><footer class="help-strip"><span>${icon('shield',14)}${scope().enabled?'Focus changes what you see, not when cards are due.':esc(state.studied||'Your decks stay in Anki’s native structure.')}</span><div>${btn('import','Import',null,'quiet')}${btn('study-progress','Study progress','chart','quiet')}${btn('stats','Statistics',null,'quiet')}${btn('widget-page','Widgets','grid','quiet')}${btn('nw-arrange','Customize home','grid','quiet')}${btn('guided-tour','Guided tour','info','quiet')}</div></footer></div></main></div>`;
         const main=shadow.querySelector('.main'),side=shadow.querySelector('.side-scroll');
         main.scrollTop=options.resetMain?0:pos.main;side.scrollTop=pos.side;
         if(focus&&!options.resetMain&&!state.dialog){const target=focus.field?shadow.getElementById(focus.field):[...frame.querySelectorAll('[data-action]')].find(el=>el.dataset.action===focus.action&&el.dataset.id===focus.id&&el.dataset.view===focus.view&&el.dataset.category===focus.category&&el.dataset.filter===focus.filter&&el.dataset.page===focus.page);target?.focus({preventScroll:true});}
@@ -501,6 +591,7 @@
       const inlineOnigiri=state.config.mode!=='native'&&state.config.visual_owner==='atelier'&&!!boot.integrations?.onigiri;
       home?.embed(host,inlineOnigiri);
       setHost();updateThemeControls();syncCapture();nativeWidgets?.mount();
+      if(tour)drawTour(false);
     }
     async function load(){
       const rev=++loadRevision;
@@ -517,6 +608,8 @@
         state.loaded=true;state.failure='';render();
         if(data.notice)announce(data.notice,true);
         if(boot.openSettings){boot.openSettings=false;openDialog('appearance');}
+        else if(boot.openTour){boot.openTour=false;startTour();}
+        else if(!tourOffered&&!state.profile.onboarding?.version&&(!boot.preview||boot.showOnboarding))startTour(true);
       }catch(e){if(rev!==loadRevision)return;state.loaded=false;state.failure=e.message;closeDialog(true);render();announce(e.message,true);}
     }
     function announce(text,error=false){
@@ -760,6 +853,11 @@
       if(a.startsWith('nw-')){await nativeWidgets.handle(a,id);return;}
       if(state.dialog==='widget-tools')closeDialog();
       switch(a){
+        case 'guided-tour':startTour();break;
+        case 'tour-skip':await finishTour('skipped');break;
+        case 'tour-back':showTourStep(tour.index-1);break;
+        case 'tour-next':if(tour.index===tourSteps.length)await finishTour('completed');else showTourStep(tour.index+1);break;
+        case 'tour-task':await finishTour('completed',el.dataset.task);break;
         case 'world-filter':filterWorlds(el.dataset.filter);break;
         case 'tool-category':state.toolsGroup=el.dataset.category;render();break;
         case 'reset-tools':state.query='';state.toolsGroup='all';render();remember();shadow.getElementById('atelier-search')?.focus();break;
@@ -906,12 +1004,13 @@
     });
     function syncCapture(){
       let el=shadow.activeElement;while(el?.shadowRoot?.activeElement)el=el.shadowRoot.activeElement;
-      const capture=!!(state.config.mode!=='native'&&(state.dialog||state.mobile||state.menu||el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)));
+      const capture=!!(state.config.mode!=='native'&&(tour||state.dialog||state.mobile||state.menu||el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)));
       if(capture===lastKeyCapture)return;lastKeyCapture=capture;
       request('focus',{active:capture}).catch(()=>{lastKeyCapture=!capture;});
     }
     shadow.addEventListener('focusin',event=>{syncCapture();const el=event.target,main=shadow.querySelector('.main'),bar=shadow.querySelector('.unified-topbar');if(!state.dialog&&!state.menu&&main&&bar&&main.contains(el)&&!bar.contains(el)&&el.matches?.(':focus-visible')){const top=bar.getBoundingClientRect().bottom+10,r=el.getBoundingClientRect();if(r.top<top)main.scrollTop-=top-r.top;}});shadow.addEventListener('focusout',()=>queueMicrotask(syncCapture));
     shadow.addEventListener('keydown',event=>{
+      if(tour){tourKey(event);return;}
       const origin=event.composedPath?.()[0]||event.target;
       const editable=/^(INPUT|TEXTAREA|SELECT)$/.test(origin.tagName)||origin.isContentEditable;
       if(state.menu){
@@ -935,7 +1034,7 @@
       if(event.altKey&&event.key==='ArrowLeft'){event.preventDefault();travel(true);}
       if(event.altKey&&event.key==='ArrowUp'){event.preventDefault();go('library',state.map.get(state.location)?.parent||'0');}
     });
-    document.addEventListener('keydown',e=>{if(state.config.mode==='native'||state.dialog||e.defaultPrevented)return;if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&(document.activeElement===document.body||document.activeElement===host)){e.preventDefault();shadow.getElementById('atelier-search')?.focus();}});
+    document.addEventListener('keydown',e=>{if(tour||state.config.mode==='native'||state.dialog||e.defaultPrevented)return;if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&(document.activeElement===document.body||document.activeElement===host)){e.preventDefault();shadow.getElementById('atelier-search')?.focus();}});
     shadow.addEventListener('contextmenu',e=>{const card=e.target.closest?.('[data-node]'),n=state.map.get(card?.dataset.node);if(n){e.preventDefault();e.stopPropagation();openMenu(n,e.clientX,e.clientY,card.querySelector('button'));}});
     shadow.addEventListener('pointerdown',e=>{if(state.menu&&!e.target.closest?.('.context-menu'))closeMenu(false);});
     shadow.addEventListener('scroll',event=>{if(state.menu&&!event.target.closest?.('.context-menu'))closeMenu(false);},true);
@@ -954,6 +1053,8 @@
     });
     shadow.addEventListener('dragend',()=>{dragging='';shadow.querySelectorAll('.dragging,.drop-target').forEach(el=>el.classList.remove('dragging','drop-target'));});
     window.addEventListener('resize',()=>{closeMenu(false);if(innerWidth>820&&state.mobile){state.mobile=false;render();}});
+    window.addEventListener('resize',()=>{if(tour)showTourStep(tour.index,false);});
+    shadow.addEventListener('scroll',()=>{if(tour&&!tourPositionFrame)tourPositionFrame=requestAnimationFrame(()=>{tourPositionFrame=0;positionTour();});},true);
     // Reopen/focus never resets scroll. Appearance mutates tokens only; it does
     // not rebuild either the dialog, the library or the sidebar.
     function applyAppearance(message){
@@ -967,8 +1068,8 @@
       configSaved={...state.config};setHost();updateThemeControls();return true;
     }
     function updateAuthoring(message){if(!message||message.token!==boot.token)return false;state.authoring=message.authoring||{available:false};const region=shadow.getElementById('atelier-authoring-hub');if(region)region.innerHTML=authoringHub();const inbox=shadow.getElementById('atelier-workflow-inbox');if(inbox)inbox.innerHTML=workflowInbox();nativeWidgets?.updateWork();return true;}
-    window.AtelierMakeover=Object.freeze({receive,applyAppearance,updateAuthoring,openWidgets:message=>message?.token===boot.token?openWidgets():Promise.resolve(false),reload:load,version:boot.version,sharedDiagnostics:()=>({home:home?.diagnostics(),cohesion:window.AtelierCohesion?.diagnostics()}),openAppearance:()=>openDialog('appearance'),theme:()=>({name:state.config.theme,active:state.config.mode!=='native'}),
-      diagnostics:()=>({version:boot.version,mode:state.config.mode,theme:state.config.theme,page:state.page,location:state.location,surface:state.config.mode==='native'?'original-provider':state.page==='widgets'?'atelier-widgets':'atelier-workspace',widgetsReady:!!nativeWidgets,loaded:state.loaded,pendingSettings:configPending,focusEnabled:state.profile.focus_enabled,focusRoots:scope().roots.map(n=>n.id),activeStudies:state.profile.studies.filter(s=>s.active).map(s=>s.id),lastStudied:state.profile.last_studied})});
+    window.AtelierMakeover=Object.freeze({receive,applyAppearance,updateAuthoring,openTour:()=>startTour(),openWidgets:message=>message?.token===boot.token?openWidgets():Promise.resolve(false),reload:load,version:boot.version,sharedDiagnostics:()=>({home:home?.diagnostics(),cohesion:window.AtelierCohesion?.diagnostics()}),openAppearance:()=>openDialog('appearance'),theme:()=>({name:state.config.theme,active:state.config.mode!=='native'}),
+      diagnostics:()=>({version:boot.version,mode:state.config.mode,theme:state.config.theme,page:state.page,location:state.location,surface:state.config.mode==='native'?'original-provider':state.page==='widgets'?'atelier-widgets':'atelier-workspace',widgetsReady:!!nativeWidgets,tourStep:tour?.index??null,loaded:state.loaded,pendingSettings:configPending,focusEnabled:state.profile.focus_enabled,focusRoots:scope().roots.map(n=>n.id),activeStudies:state.profile.studies.filter(s=>s.active).map(s=>s.id),lastStudied:state.profile.last_studied})});
     // Standalone preview uses the exact shipped renderer and clearly labeled
     // sample data. Only this adapter simulates collection changes.
     let demo;
@@ -996,7 +1097,8 @@
       if(action==='settings'){d.settings={...d.settings,...data};demoSave();return {...d.settings};}
       if(action==='preference'){
         const p=d.profile;
-        if(data.key==='native_widgets'){p.native_widgets=window.AtelierNativeWidgets.normalize(data.value);}
+        if(data.key==='onboarding'){p.onboarding={version:1,status:data.value.status};}
+        else if(data.key==='native_widgets'){p.native_widgets=window.AtelierNativeWidgets.normalize(data.value);}
         else if(data.key==='native_widget_note'){if(typeof data.value!=='string'||data.value.length>4000||data.value.includes('\0'))throw new Error('Keep notes to 4,000 characters.');p.native_widget_note=data.value;}
         else if(data.key==='home_layout'){p.home_layout=JSON.parse(JSON.stringify(data.value));}
         else if(data.key==='study'){

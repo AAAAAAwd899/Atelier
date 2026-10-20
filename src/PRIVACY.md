@@ -14,6 +14,8 @@ Anki keeps your approved notes, cards, copied media, schedules, and review histo
 
 **Anki Sync does not include all of these local records.** A collection backup alone is not a complete Atelier backup. Back up the whole `exam_sprout` and `workshop` folders and Atelier's `user_files` as well as the collection. Atelier's local files are **not encrypted** by the add-on; operating-system/device protections are separate.
 
+The guided tour saves only its version and offered, skipped or completed state in these profile-local preferences. This marker does not leave your computer or authorize any provider request.
+
 ## Optional AI assistance
 
 Manual creation, search, source import, and study work without a provider. Optional chat and embedding assistance uses a compatible endpoint that you configure. No provider request is made merely by installing Atelier, importing a source, or saving a draft.

@@ -9,6 +9,7 @@ from release_tools import *
 V=ROOT/'verification';V.mkdir(exist_ok=True);DIST.mkdir(exist_ok=True)
 def verification_env():
  env={**os.environ,'PYTHONUTF8':'1'}
+ env['PYTHONPATH']=str(ROOT/'test_support')+(os.pathsep+env['PYTHONPATH'] if env.get('PYTHONPATH') else '')
  scratch=ROOT/'output/test-tmp';scratch.mkdir(parents=True,exist_ok=True)
  env.update(TMP=str(scratch),TEMP=str(scratch),TMPDIR=str(scratch))
  if os.name=='nt' and not env.get('ATELIER_TEST_BROWSER'):
@@ -35,7 +36,7 @@ def cases(path):
 def main():
  setup_vendor();fingerprint=runtime_digest()
  for p in sorted(SRC.rglob('*.js')):subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
- root_tests=['test_core.py','test_sprout_link.py','test_release.py','test_071.py','test_readiness.py','test_suite.py','test_ui_model_audit.py','test_studio_polish.py','test_home_slice_model.py','test_session_slice.py','test_world_finish.py','test_complete_integration.py','test_usability_contract.py','test_release_finish.py','test_native_widgets.py','test_widget_routing.py','test_release_one.py','test_101.py','test_102.py','test_pip_world_contract.py','test_study_picker_104.py']
+ root_tests=['test_core.py','test_sprout_link.py','test_release.py','test_071.py','test_readiness.py','test_suite.py','test_ui_model_audit.py','test_studio_polish.py','test_home_slice_model.py','test_session_slice.py','test_world_finish.py','test_complete_integration.py','test_usability_contract.py','test_release_finish.py','test_native_widgets.py','test_widget_routing.py','test_release_one.py','test_101.py','test_102.py','test_pip_world_contract.py','test_study_picker_104.py','test_onboarding.py','test_pdf_dependency_105.py']
  if '--browser-only' not in sys.argv:
   run([sys.executable,'-m','pytest',*[f'tests/{n}' for n in root_tests],'tests/test_103.py','-q','--junitxml=verification/atelier-unit.xml'],'atelier-unit')
   run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'sprout-unit.xml')],'sprout-unit',ROOT/'vendor_tests')
@@ -51,6 +52,7 @@ def main():
  ('tests/test_assessment_fallback.py','assessment-fallback',V/'assessment-fallback/ui-results.json',ROOT),
  ('tests/test_world_suite_browser.py','world-suite',V/'world-suite/results.json',ROOT),
  ('tests/test_ui_audit_browser.py','ui-audit',V/'ui-audit/results.json',ROOT),
+ ('tests/test_onboarding_browser.py','onboarding',V/'onboarding/results.json',ROOT),
  ('tests/test_study_picker_104_browser.py','study-picker-104',V/'study-picker-104/results.json',ROOT),
  ('tests/test_studio_polish_browser.py','studio-polish',V/'studio-polish/results.json',ROOT),
  ('tests/test_home_slice_browser.py','home-polish',V/'home-polish/results.json',ROOT),
@@ -98,7 +100,7 @@ def main():
  'python_suites':{'suite_integration_and_preservation':cases(V/'atelier-unit.xml'),'exam_engine_and_quiet_review':cases(V/'sprout-unit.xml'),'card_studio_importers_publishers_and_routes':cases(V/'workshop-unit.xml')},
  'browser_receipts_aggregated':'--aggregate-only' in sys.argv,
  'python_failed':0,'python_skipped':0,'browser_suites':outcomes,'browser_errors':0,'native_windows_verified':False,'native_qt_verified':False,'live_webgl_verified':False,
- 'pip_browser_renderer':'authored local portrait family; preserved fallback path; no live GPU claim','phase':'1.0.4 cumulative spacing and study-picker update; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
+ 'pip_browser_renderer':'authored local portrait family; preserved fallback path; no live GPU claim','phase':'1.0.5 cumulative onboarding and add-on package validation; native evidence is reported separately', 'owner_acceptance':False,'historical_acceptance_file':'RELEASE-ACCEPTANCE.json applies only to 1.0.2'}
  report['python_total']=sum(report['python_suites'].values());report['browser_total']=sum(outcomes.values())
  (V/'verified.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2),flush=True)
 if __name__=='__main__':main()

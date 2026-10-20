@@ -100,7 +100,8 @@ def test_engine_and_every_non_allowlisted_byte_preserved():
  allowed={'core.py','config.json','config.schema.json','manifest.json','integration.py','review_model.py','review_theme.py','web/reviewer.js','web/reviewer.css','web/atelier.js','USER-GUIDE.md','RELEASE-NOTES.md','config.md','SUPPORT.md','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','workshop/web/app.js','workshop/web/app.css'}
  changed=[]
  for rel,sha in baseline.items():
-  assert (SRC/rel).is_file()
+  retired=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())['retired_baseline_modules']
+  assert (SRC/rel).is_file() or rel in retired
   if hashlib.sha256(before_upgrade(rel)).hexdigest()!=sha:changed.append(rel)
  assert set(changed)<=allowed,changed
  allowed={'sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','workshop/web/app.js','workshop/web/app.css'}

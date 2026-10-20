@@ -4,6 +4,7 @@ import hashlib,importlib,json,sys,types
 from pathlib import Path
 from types import SimpleNamespace as NS
 import pytest
+from upgrade_preservation import engine_bytes
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src'
 pkg=types.ModuleType('usability_contract');pkg.__path__=[str(SRC)];sys.modules[pkg.__name__]=pkg
 core=importlib.import_module('usability_contract.core')
@@ -53,16 +54,16 @@ def test_visible_new_routes_keep_host_lifecycle_guards(routes,state):
 def test_every_bundled_exam_file_matches_actual_rc2_installer():
  for n,h in BASE.items():
   if n.startswith('sprout/') and n not in ('sprout/integration.py','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'):
-   assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
+   assert hashlib.sha256(engine_bytes(n,SRC)).hexdigest()==h,n
 
 def test_card_importers_approval_storage_and_masks_remain_original_rc2():
  for n,h in BASE.items():
   if n.startswith('workshop/') and n not in ('workshop/web/app.js','workshop/web/app.css','workshop/integration.py','workshop/INTEGRATION-NOTE.md'):
-   assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
+   assert hashlib.sha256(engine_bytes(n,SRC)).hexdigest()==h,n
 
 def test_old_byte_boundaries_are_not_hidden_by_version_bump():
  inputs=json.loads((ROOT/'integration-baselines.json').read_text())
- changed=[n for n,h in inputs['incoming'].items() if n.startswith('workshop/') and hashlib.sha256((SRC/n).read_bytes()).hexdigest()!=h]
+ changed=[n for n,h in inputs['incoming'].items() if n.startswith('workshop/') and hashlib.sha256(engine_bytes(n,SRC)).hexdigest()!=h]
  assert set(changed)=={'workshop/integration.py','workshop/web/app.js','workshop/web/app.css'}
 
 def test_original_review_session_native_tools_ownership_and_store_contracts_unchanged():

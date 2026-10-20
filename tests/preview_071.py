@@ -11,6 +11,8 @@ def home071(owner='atelier',onigiri=True,others=None,mixed=False,layout=False,sh
     boot['settings']=cfg;boot['demo']['settings']=dict(cfg)
     for profile in [boot['profile'],boot['demo']['profile']]:
         profile['home_layout']={'enabled':layout,'columns':1,'items':[]}
+        # Existing workflow fixtures deliberately start after the welcome offer.
+        profile['onboarding']={'version':1,'status':'offered'}
     soup.find(id='atelier-bootstrap').string=json.dumps(boot)
     soup.find(id='atelier-shared-style').decompose()
     soup.find(id='atelier-style').find('style').string=asset('atelier.css')

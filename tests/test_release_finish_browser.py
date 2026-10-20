@@ -93,6 +93,11 @@ def run():
    h=UnifiedHost();st=h.store;raw=figure_bytes();blob=st.save_blob(raw,'png')
    ss=st.add_source(h.primary_project,'Figure loading benchmark','pptx',[{'text':'Read this page before inspecting its figures.','assets':[{'blob':blob,'label':'Original diagram '+str(i+1)} for i in range(30)]},{'text':'Page two'}])['source']
    p=b.new_page(viewport={'width':1440,'height':980});p.set_default_timeout(8000);p.on('pageerror',lambda e:ERRORS.append(str(e)));p.expose_function('nativeBridge',h.dispatch);p.set_content(h.html());p.locator('.shelf-grid').wait_for();click('[data-action="open-project"][data-id="'+h.primary_project+'"]');click('[data-action="open-source"][data-id="'+ss['id']+'"]');p.locator('.figure-tile').first.wait_for();p.wait_for_timeout(200)
+   # IntersectionObserver delivery is asynchronous, especially under native QA
+   # load. Wait for its first request; retain the lazy-loading upper bound.
+   for _ in range(160):
+    if any(r['action']=='figure_preview' for r in h.requests):break
+    p.wait_for_timeout(50)
    preview_calls=[r for r in h.requests if r['action']=='figure_preview'];check('Only visible/nearby figures requested initially',0<len(preview_calls)<30)
    check('Figure metadata appears before all image requests finish',p.locator('.figure-tile').count()==30)
    p.locator('.figure-tile img').first.wait_for();p.wait_for_function('document.querySelector(".figure-tile img").complete && document.querySelector(".figure-tile img").naturalWidth>0')

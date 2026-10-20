@@ -1,3 +1,4 @@
+# Atelier vendor adjustment: package imports are relative for namespace isolation.
 # Copyright (c) 2023, exiledkingcc
 # All rights reserved.
 #
@@ -39,15 +40,9 @@ try:
         rc4_decrypt,
         rc4_encrypt,
     )
-    from .._utils import Version
-
-    if Version(crypt_provider[1]) <= Version("3.0"):
-        # This is due to the backend parameter being required back then:
-        # https://cryptography.io/en/latest/changelog/#v3-1
-        raise ImportError("cryptography<=3.0 is not supported")  # pragma: no cover
 except ImportError:
     try:
-        from .._crypt_providers._pycryptodome import (  # type: ignore
+        from .._crypt_providers._pycryptodome import (  # type: ignore[assignment]
             CryptAES,
             CryptRC4,
             aes_cbc_decrypt,
@@ -59,7 +54,7 @@ except ImportError:
             rc4_encrypt,
         )
     except ImportError:
-        from .._crypt_providers._fallback import (  # type: ignore
+        from .._crypt_providers._fallback import (  # type: ignore[assignment]
             CryptAES,
             CryptRC4,
             aes_cbc_decrypt,

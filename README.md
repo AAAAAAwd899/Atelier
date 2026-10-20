@@ -1,6 +1,6 @@
-# Atelier 1.0.4
+# Atelier 1.0.5
 
-Private review candidate. Version 1.0.4 tightens the optional Onigiri rewards layout and makes the active-study folder picker show recent additions first. It includes the full 1.0.3 visual and workflow upgrade. Read the [current changelog](CHANGELOG-1.0.4.md), [installation guide](INSTALL-1.0.4.md), [current audit](AUDIT-1.0.4.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [owner release actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
+Private review candidate. Version 1.0.5 adds an optional guided tour, declares the minimum Anki host, and updates the isolated PDF parser with resource-limit fixes. It retains the 1.0.4 Onigiri layout and recent-study ordering and the full visual and workflow upgrade. Read the [current changelog](CHANGELOG-1.0.5.md), [installation guide](INSTALL-1.0.5.md), [current audit](AUDIT-1.0.5.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [owner release actions](MANUAL_ACTIONS_REQUIRED.md). Historical reports are not current acceptance evidence.
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,11 +14,11 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.4.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.5.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
-The preserved folder-order contract originated against the accepted Anki 26.08.1 target. This candidate has actual Windows Anki 26.05 Home/Widgets, stock image-occlusion, native folder scheduling and AddonManager update tests in isolated synthetic profiles. These limited tests are not full host acceptance. macOS, physical remotes, every card/media template and live GPU Pip remain unverified. See the current audit for the exact coverage and display-scale limitations.
+Current Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. See the current audit for exact coverage and display/capture limitations.
 
 ## Development and verification
 
@@ -27,12 +27,12 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_104.py
+python package_105.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.
 
-Current results and limitations: `AUDIT-1.0.4.md`. Installer verification and hashes: `dist/Atelier-1.0.4-Build.json`, `dist/Atelier-1.0.4-Files.json`, and the paired checksum record. The 1.0.4 suite is current; earlier release reports remain historical.
+Current results and limitations: `AUDIT-1.0.5.md`. Installer verification and hashes: `dist/Atelier-1.0.5-Build.json`, `dist/Atelier-1.0.5-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
 
 ## Privacy and licenses
 

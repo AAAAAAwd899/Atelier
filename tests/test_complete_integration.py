@@ -5,6 +5,7 @@ import ast,copy,hashlib,importlib,json,sys,types
 from pathlib import Path
 from types import SimpleNamespace as NS
 import pytest
+from upgrade_preservation import engine_bytes
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src'
 pkg=types.ModuleType('complete_contract');pkg.__path__=[str(SRC)];sys.modules[pkg.__name__]=pkg
 studio=importlib.import_module('complete_contract.card_studio')
@@ -15,11 +16,11 @@ BASE=json.loads((ROOT/'integration-baselines.json').read_text())
 
 @pytest.mark.parametrize('name',[n for n in BASE['incoming'] if n.startswith('workshop/') and n not in ('workshop/integration.py','workshop/web/app.js','workshop/web/app.css')])
 def test_incoming_card_engine_importers_mask_model_and_art_preserved(name):
- assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['incoming'][name]
+ assert hashlib.sha256(engine_bytes(name,SRC)).hexdigest()==BASE['incoming'][name]
 
 @pytest.mark.parametrize('name',[n for n in BASE['rc6'] if n.startswith('sprout/') and n not in ('sprout/runner.py','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','sprout/integration.py')])
 def test_latest_exam_engine_results_assets_preserved(name):
- assert hashlib.sha256((SRC/name).read_bytes()).hexdigest()==BASE['rc6'][name]
+ assert hashlib.sha256(engine_bytes(name,SRC)).hexdigest()==BASE['rc6'][name]
 
 @pytest.mark.parametrize('name',['web/world-finishes.css','web/interaction-finish.css','web/review-finish.css','web/studio-shell.css','web/session-shell.css','web/model.js','session_model.py','lifecycle.py','ownership.py'])
 def test_latest_graphics_session_and_home_contracts_survive(name):

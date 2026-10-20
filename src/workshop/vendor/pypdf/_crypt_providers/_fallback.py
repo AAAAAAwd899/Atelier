@@ -1,3 +1,4 @@
+# Atelier vendor adjustment: package imports are relative for namespace isolation.
 # Copyright (c) 2023, exiledkingcc
 # All rights reserved.
 #
@@ -54,7 +55,7 @@ class CryptRC4(CryptBase):
             out[k] = data[k] ^ x
         return bytes(out)
 
-    def decrypt(self, data: bytes) -> bytes:
+    def decrypt(self, data: bytes, *, strict: bool = True) -> bytes:
         return self.encrypt(data)
 
 
@@ -65,7 +66,7 @@ class CryptAES(CryptBase):
     def encrypt(self, data: bytes) -> bytes:
         raise DependencyError(_DEPENDENCY_ERROR_STR)
 
-    def decrypt(self, data: bytes) -> bytes:
+    def decrypt(self, data: bytes, *, strict: bool = True) -> bytes:
         raise DependencyError(_DEPENDENCY_ERROR_STR)
 
 

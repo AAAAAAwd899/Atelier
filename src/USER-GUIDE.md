@@ -1,4 +1,4 @@
-# Atelier 1.0.3 — Your study space in Anki
+# Atelier 1.0.5 — Your study space in Anki
 
 Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and seventeen visual worlds. Onigiri is optional.
 
@@ -8,11 +8,17 @@ The sidebar keeps **Today** and **Study scope** visible while the folder list sc
 
 Save your work and finish any import or card-adding operation. In an active practice session, choose **Save & close**. Back up your Anki collection and the local Atelier, exam, and source data described below.
 
-In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.3.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
+In Anki, open **Tools → Add-ons → Install from file**, choose **Atelier-1.0.5.ankiaddon**, and restart Anki completely. Keep the file intact; do not unzip it. Install over your existing Atelier rather than deleting it. Your current appearance, widgets, groups, and saved work are retained.
 
 Keep any separate **Exam Sprout** or **Workshop** add-on disabled. Their features are included here. Do not delete their data. Other add-ons, including Onigiri, can stay installed.
 
-Confirm **Tools → Atelier · 1.0.3**. The cumulative folder-order contract originated against the accepted Anki **26.08.1** target. This candidate has also been exercised in isolated synthetic profiles on Windows desktop Anki **26.05** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support scope. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
+Confirm **Tools → Atelier · 1.0.5**. The cumulative folder-order contract originated against the accepted Anki **26.08.1** target. This candidate has also been exercised in isolated synthetic profiles on Windows desktop Anki **26.05** with the standard editor. Experimental editors, Anki beta releases, macOS, Linux, and specialized add-on combinations are not part of the verified support scope. This desktop add-on does not install on AnkiMobile, AnkiDroid, or AnkiWeb. Cards added to Anki can sync normally; your device still needs to support their card template and media.
+
+## A quick tour
+
+When Atelier first opens in a profile, choose **Show me around** for a guided introduction or **Skip for now** to get straight to your work. The guide highlights real controls and explains each workspace. Use **Back**, **Next** or Escape; it does not add, move or grade cards. At the end, choose your study folders, import a source into Card Studio, or browse your library.
+
+Replay it through **Tools → Atelier → Guided tour**, **Anki tools → Guided tour**, or **Guided tour** in the workspace footer. In original/other-addon appearance mode, choose Atelier in Appearance & compatibility before starting its workspace tour. Your ordinary Anki menus remain available.
 
 ## Start with what you need today
 

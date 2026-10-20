@@ -1,10 +1,11 @@
 {
   "package": "daedalus_atelier",
   "name": "Atelier",
-  "human_version": "1.0.4",
+  "human_version": "1.0.5",
   "author": "Daedalus Works",
   "conflicts": [
     "exam_sprout",
     "daedalus_workshop"
-  ]
+  ],
+  "min_point_version": 250905
 }

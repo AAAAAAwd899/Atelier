@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.4"
+VERSION = "1.0.5"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -37,6 +37,7 @@ DEFAULT_PROFILE = {
     "home_layout": {"enabled": False, "columns": 3, "items": []},
     "native_widgets": copy.deepcopy(DEFAULT_WIDGETS), "native_widget_note": "",
     "widget_route_version": 0,
+    "onboarding": {"version": 0, "status": "new"},
 }
 COLORS = ("violet", "blue", "rose", "green", "amber", "cyan")
 
@@ -195,7 +196,21 @@ def profile_settings(value: Any) -> dict[str, Any]:
         out["widget_route_version"] = max(0, min(1, value["widget_route_version"]))
     out["native_widgets"] = widget_layout(value.get("native_widgets"))
     out["native_widget_note"] = widget_note(value.get("native_widget_note", ""))
+    try:
+        out["onboarding"] = onboarding_state(value.get("onboarding"))
+    except ValidationError:
+        pass
     return unique_active_studies(out)
+
+
+def onboarding_state(value: Any) -> dict[str, Any]:
+    """Local help preference only; never changes decks, scheduling or consent."""
+    if not isinstance(value, dict) or type(value.get("version")) is not int:
+        raise ValidationError("Choose a valid tour preference.")
+    version, status = value["version"], value.get("status")
+    if (version, status) != (0, "new") and not (version == 1 and status in ("offered", "skipped", "completed")):
+        raise ValidationError("Choose a valid tour preference.")
+    return {"version": version, "status": status}
 
 
 def study_signature(study: dict) -> tuple[str, ...]:

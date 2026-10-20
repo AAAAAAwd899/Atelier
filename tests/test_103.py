@@ -6,14 +6,16 @@ from fixtures import ROOT,SRC
 
 def test_exact_upgrade_declaration_and_protected_engines():
     old=json.loads((ROOT/'baseline-1.0.2.json').read_text())
-    patch=json.loads((ROOT/'patch-104-changes.json').read_text())
+    patch=json.loads((ROOT/'patch-105-changes.json').read_text())
     actual={p.relative_to(SRC).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in SRC.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in ('.pyc','.pyo')}
     assert {n:h for n,h in actual.items() if n in old and h!=old[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in old}==patch['added']
-    assert set(old)<=set(actual) and not patch['removed']
+    parser=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())
+    assert sorted(set(old)-set(actual))==patch['removed']==parser['retired_baseline_modules']
+    assert {n:h for n,h in actual.items() if n.startswith('workshop/vendor/pypdf/')}==parser['files']
     protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')
     allowed_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
-    assert not any(n.startswith(protected) and n not in allowed_presentation for n in patch['changed'])
+    assert not any(n.startswith(protected) and n not in allowed_presentation and n not in parser['files'] for n in patch['changed'])
 
 def test_generated_adapters_are_reproducible():
     subprocess.run([sys.executable,str(ROOT/'tools/generate_design.py'),'--check'],check=True)

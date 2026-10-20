@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Optional, Tuple, Union
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, Any, Optional, Union
 
 from ..generic._base import (
     BooleanObject,
@@ -16,8 +17,8 @@ class Link(AnnotationDictionary):
     def __init__(
         self,
         *,
-        rect: Union[RectangleObject, Tuple[float, float, float, float]],
-        border: Optional[ArrayObject] = None,
+        rect: Union[RectangleObject, tuple[float, float, float, float]],
+        border: Optional[Sequence[Any]] = None,
         url: Optional[str] = None,
         target_page_index: Optional[int] = None,
         fit: Fit = DEFAULT_FIT,
@@ -80,7 +81,7 @@ class Popup(AnnotationDictionary):
     def __init__(
         self,
         *,
-        rect: Union[RectangleObject, Tuple[float, float, float, float]],
+        rect: Union[RectangleObject, tuple[float, float, float, float]],
         parent: Optional[DictionaryObject] = None,
         open: bool = False,
         **kwargs: Any,
@@ -102,5 +103,5 @@ class Popup(AnnotationDictionary):
 
                 logger_warning(
                     "Unregistered Parent object : No Parent field set",
-                    __name__,
+                    source=__name__,
                 )

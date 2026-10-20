@@ -8,6 +8,7 @@ from types import SimpleNamespace as NS
 from pathlib import Path
 
 import pytest
+from upgrade_preservation import engine_bytes
 from google.protobuf import descriptor_pb2, descriptor_pool, message_factory
 from fixtures import SRC, ROOT, core
 from test_release import app, onigiri  # retained real integration / explicit host doubles
@@ -237,7 +238,7 @@ def test_no_engine_reviewer_or_remote_bytes_changed():
     baseline=json.loads((ROOT/'baseline-1.0.1.json').read_text())
     for n,h in baseline.items():
         if (n.startswith(('sprout/','workshop/')) and n not in ('sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','workshop/web/app.js','workshop/web/app.css')) or n in ['review_model.py','remote_model.py','remotes.py','web/reviewer.css','web/remote-input.js','web/worlds.css']:
-            assert hashlib.sha256((SRC/n).read_bytes()).hexdigest()==h,n
+            assert hashlib.sha256(engine_bytes(n,SRC)).hexdigest()==h,n
 
 
 def test_reviewer_uses_actual_home_deck_not_selected_folder(app):

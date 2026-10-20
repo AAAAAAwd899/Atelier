@@ -1,7 +1,7 @@
 name: Verify Atelier candidate
 on:
   push:
-    branches: [atelier-1.0.3, main]
+    branches: ['atelier-*', main]
   pull_request:
   workflow_dispatch:
 permissions:

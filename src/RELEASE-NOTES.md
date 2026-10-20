@@ -1,4 +1,6 @@
-# Atelier 1.0.3
+# Atelier 1.0.5
+
+This update adds an optional first-run guided tour, keyboard navigation and replay through Tools → Atelier → Guided tour. It preserves the 1.0.4 packed Onigiri layout and recent-first study picker. The native config schema includes all 17 worlds, and the installer declares Anki 25.09.5 as its minimum desktop host. See the paired 1.0.5 audit for actual current host evidence.
 
 Private review candidate. A shared design contract generates seventeen-world web/native palette adapters. Home and Widgets use more compact layouts, near-solid work panels and locally packaged landscapes. Five new premium raster worlds add Moonlit Castle, Underworld, Mythic, Lakeside Cabin, and Sunset Cove. Saved work and the existing engine routes remain intact.
 

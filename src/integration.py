@@ -64,6 +64,7 @@ class Atelier:
         self.package = mw.addonManager.addonFromModule(module)
         self.nonce = ""
         self.open_settings_next = False
+        self.open_tour_next = False
         self.store: ProfileStore | None = None
         self.profile: dict[str, Any] = profile_settings({})
         self.busy = False
@@ -151,6 +152,7 @@ class Atelier:
                     self._ui_state = {"page": "widgets", "location": "0", "query": "", "filter": "all"}
 
     def closed(self) -> None:
+        self.open_tour_next = False
         self.capture_keys = False
         self.busy = False
         self.nonce = ""
@@ -184,7 +186,7 @@ class Atelier:
             from .native_tools import capabilities
             boot = {"version": VERSION, "token": nonce, "settings": config,
                     "profile": self.profile, "ui": self._ui_state,
-                    "openSettings": self.open_settings_next, "preview": False,
+                    "openSettings": self.open_settings_next, "openTour": self.open_tour_next, "preview": False,
                     "worlds": CATALOG, "authoring": self.authoring_summary() if hasattr(self, "authoring_summary") else {}, "suite": self.sprout_link.summary(), "nativeTools": capabilities(mw), "assetBase": f"/_addons/{self.package}/web", "suiteAssets": f"/_addons/{self.package}/sprout/web",
                     "integrations": {"bundled": True, "exam_sprout": self.sprout_link.available(), "onigiri": self.ownership.available(), **self.ownership.report()}}
             # Read CSS as text and mount it *inside* a shadow root. Other add-ons'
@@ -209,6 +211,7 @@ class Atelier:
             self.capture_keys = False
             self.nonce = nonce
             self.open_settings_next = False
+            self.open_tour_next = False
         except Exception:
             log.exception("Atelier could not render; keeping the original home screen")
 
@@ -382,6 +385,9 @@ class Atelier:
                 updated[key] = (widget_layout if key == "native_widgets" else widget_note)(data.get("value"), strict=True)
             elif key == "home_layout":
                 updated[key] = home_layout(data.get("value"), strict=True)
+            elif key == "onboarding":
+                from .core import onboarding_state
+                updated[key] = onboarding_state(data.get("value"))
             elif key == "study":
                 updated = upsert_study(updated, data.get("value"), fresh_catalog(mw.col))
             elif key == "quick_study":
@@ -606,6 +612,18 @@ class Atelier:
         self._ui_state = {"page": "widgets", "location": "0", "query": "", "filter": "all"}
         self.open()
 
+    def open_tour(self) -> None:
+        """Replay local help through the owned home, including from native mode."""
+        if not mw.col:
+            showInfo("Open an Anki profile first.")
+            return
+        config = self.get_config()
+        if self.nonce and self.current_state() == "deckBrowser" and config["mode"] != "native":
+            mw.web.eval("window.AtelierMakeover?.openTour();")
+            return
+        self.open_tour_next = True
+        self.open()
+
     def restore_home_layout(self) -> None:
         if not mw.col:
             return
@@ -690,6 +708,7 @@ def install(module: str) -> Atelier:
         registration.cleanup(remove_menu)
         for name, callback in (("Open workspace", addon.open),
                               ("Open Atelier widgets", addon.open_widgets),
+                              ("Guided tour…", addon.open_tour),
                               ("Appearance & compatibility…", lambda: addon.open(appearance=True)),
                               ("Use original Anki home", addon.original),
                               ("Restore original widget layout", addon.restore_home_layout),

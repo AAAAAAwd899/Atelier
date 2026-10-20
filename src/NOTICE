@@ -3,6 +3,9 @@ Root Atelier code uses its supplied MIT license. This combined distribution reta
 Exam Sprout 0.10.1 under sprout/LICENSE and embedded Card Studio / Workshop under
 workshop/LICENSE, with integration changes described by the current source kit.
 The bundled PDF text parser retains its license at workshop/vendor/pypdf/LICENSE.
+This release uses pypdf 6.21.1, with package imports adjusted only for namespace
+isolation. Adobe Core 14 metric-data permission is retained in the parser's
+_codecs/core_font_metrics.py notice; no font binaries are distributed.
 
 Anki, Qt, Chromium, Onigiri, IO Enhanced, HyperTTS, Contanki and shared-deck services
 remain separate software. Their binaries, fonts, configuration and user data are not

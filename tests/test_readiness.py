@@ -320,7 +320,7 @@ def test_installer_reproducible_and_free_of_private_files(tmp_path):
         assert '__init__.py' in z.namelist() and z.testzip() is None
         assert {n for n in z.namelist() if n.startswith('user_files/')}=={'user_files/README.txt'}
         assert not any('__pycache__' in n or n.endswith(('.pyc','.ttf','.woff','.woff2','.otf')) or n=='meta.json' for n in z.namelist())
-        assert 'min_point_version' not in json.loads(z.read('manifest.json'))  # no unverified native minimum asserted
+        assert json.loads(z.read('manifest.json'))['min_point_version']==250905  # documented minimum desktop API requirement
 
 
 def test_local_update_filesystem_simulation_preserves_preferences(tmp_path):
