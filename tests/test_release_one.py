@@ -11,7 +11,7 @@ RUNTIME={'.py','.js','.css','.json','.svg','.png','.webp'}
 @pytest.mark.parametrize('name',list(COPY))
 def test_reviewed_copy_can_be_reconstructed_exactly(name):
     if name in ('sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js','workshop/web/app.js','workshop/web/app.css'):
-        patch=json.loads((R/'patch-106-changes.json').read_text())['changed']
+        patch=json.loads((R/'patch-107-changes.json').read_text())['changed']
         assert hashlib.sha256((S/name).read_bytes()).hexdigest()==patch[name]
         return
     assert hashlib.sha256(before_release_copy(name)).hexdigest()==BASE[name]
@@ -28,10 +28,10 @@ def test_final_layout_icons_and_scene_art_unchanged():
     assert all(hashlib.sha256(before_release_copy(n)).hexdigest()==BASE[n] for n in paths)
 
 def test_version_identity_and_default_preferences():
-    manifest=json.loads((S/'manifest.json').read_text());assert manifest['human_version']=='1.0.6'
+    manifest=json.loads((S/'manifest.json').read_text());assert manifest['human_version']=='1.0.7'
     assert manifest['package']=='daedalus_atelier'
     tree=ast.parse((S/'core.py').read_text())
-    assert next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in n.targets))=='1.0.6'
+    assert next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in n.targets))=='1.0.7'
     for n in ['config.json','config.schema.json','native_widgets.py','figure_cache.py','focus_context.py','study_progress.py','quiet_navigation.py','ownership.py','native_tools.py','suite.py','card_studio.py']:
         assert hashlib.sha256(before_release_copy(n)).hexdigest()==BASE[n],n
 

@@ -1,3 +1,7 @@
+# Atelier 1.0.7
+
+Adds a searchable Add-on tools window using original Tools and added top-level menu actions. Disabled actions, submenu context, check states, shortcuts and original dialogs are preserved. No add-on is installed, imported, copied or reconfigured. Open it from Anki tools or Tools → Atelier. Editor-only and reviewer-only controls remain in their own windows.
+
 # Atelier 1.0.6
 
 This update adds an optional first-run guided tour, keyboard navigation and replay through Tools → Atelier → Guided tour. It preserves the 1.0.4 packed Onigiri layout and recent-first study picker. The native config schema includes all 17 worlds, and the installer declares Anki 25.09.5 as its minimum desktop host. See the paired 1.0.6 audit for actual current host evidence.

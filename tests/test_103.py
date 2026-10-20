@@ -6,7 +6,7 @@ from fixtures import ROOT,SRC
 
 def test_exact_upgrade_declaration_and_protected_engines():
     old=json.loads((ROOT/'baseline-1.0.2.json').read_text())
-    patch=json.loads((ROOT/'patch-106-changes.json').read_text())
+    patch=json.loads((ROOT/'patch-107-changes.json').read_text())
     actual={p.relative_to(SRC).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in SRC.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in ('.pyc','.pyo')}
     assert {n:h for n,h in actual.items() if n in old and h!=old[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in old}==patch['added']

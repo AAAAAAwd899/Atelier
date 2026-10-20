@@ -154,6 +154,8 @@ class Atelier:
                     self._ui_state = {"page": "widgets", "location": "0", "query": "", "filter": "all"}
 
     def closed(self) -> None:
+        if getattr(self, "_addon_tools_window", None):
+            self._addon_tools_window.close();self._addon_tools_window=None
         if getattr(self, 'study_clock', None):
             self.study_clock.shutdown();self.study_clock=None
         if getattr(self, '_help_window', None):
@@ -293,6 +295,8 @@ class Atelier:
         elif action == "remote_setup":
             self.remotes.open()
             self.reply(nonce, rid, result={"opened": True})
+        elif action == "addon_tools":
+            self.open_addon_tools();self.reply(nonce,rid,result={"opened":True})
         elif action == "study_clock":
             self.open_clock();self.reply(nonce,rid,result={"opened":True})
         elif action == "getting_started":
@@ -604,6 +608,10 @@ class Atelier:
             self.study_clock=ClockWindow(self,mw,self.store.path.with_name(self.store.path.name.replace('profile-','clock-')))
         self.study_clock.refresh();self.study_clock.show();self.study_clock.raise_();self.study_clock.activateWindow()
 
+    def open_addon_tools(self) -> None:
+        from .addon_tools import open_tools
+        open_tools(mw,self)
+
     def open_help(self) -> None:
         from .getting_started import open_guide
         open_guide(self,mw)
@@ -734,6 +742,7 @@ def install(module: str) -> Atelier:
                               ("Guided tour…", addon.open_tour),
                               ("Getting started…", addon.open_help),
                               ("Study clock…", addon.open_clock),
+                              ("Add-on tools…", addon.open_addon_tools),
                               ("Appearance & compatibility…", lambda: addon.open(appearance=True)),
                               ("Use original Anki home", addon.original),
                               ("Restore original widget layout", addon.restore_home_layout),

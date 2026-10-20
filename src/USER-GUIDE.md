@@ -143,3 +143,7 @@ Open **Tools → Atelier → Study clock**, or the clock icon on the Study desk 
 Clock settings and elapsed time live in profile-scoped `clock-*.json` files within Atelier’s existing `user_files` folder. Include these with the rest of `user_files` in a backup. Anki Sync does not synchronize them. An unreadable or externally changed clock file is kept rather than overwritten; the current clock can still be used for that visit.
 
 The 13-step **Guided tour** gives a quick orientation. **Tools → Atelier → Getting started** or Getting started in the workspace footer opens ten task recipes: importing decks, organization, exact study scope, slideset creation, image occlusion, multi-folder exams, Pip and the clock, appearance/widgets, sharing/backups and original-interface recovery. It supplements the tour without interrupting every session.
+
+## Find your other add-ons
+
+Open **Anki tools → Add-on tools** or **Tools → Atelier → Add-on tools**. Search the original commands from Tools and added top-level menus, choose one and Open selected. Disabled commands stay unavailable. This runs the original action without changing its shortcut, settings or confirmation dialogs. Some commands appear only after their original menu opens; open it once and Refresh. Controls inside editors/reviewers stay there. No third-party add-ons are bundled or automatically installed.
