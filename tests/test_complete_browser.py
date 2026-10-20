@@ -94,7 +94,11 @@ def main():
    check('No unrequested provider generation',not any(r['action'] in ('provider_generate','provider_test') for r in h.requests))
    check('No uncaught browser exceptions',not errors)
   except Exception:
-   shot('failure.png');(OUT/'failure-state.txt').write_text(page.locator('body').inner_text());raise
+   try:
+    shot('failure.png');(OUT/'failure-state.txt').write_text(page.locator('body').inner_text())
+   except Exception as capture_error:
+    print('Failure capture unavailable:',type(capture_error).__name__)
+   raise
   finally:
    (OUT/'results.json').write_text(json.dumps({'count':len(results),'cases':results,'errors':errors,'native_windows':False},indent=2));browser.close()
  print('TOTAL',len(results))
