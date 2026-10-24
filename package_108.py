@@ -45,15 +45,19 @@ def main():
     finally:
         repeat_installer.unlink(missing_ok=True)
     assert runtime_digest(extracted)==fingerprint
-    # Exercise the new workflow from the extracted installer, not just src/.
-    from verify_release import verification_env
-    env=verification_env();env['ATELIER_FIXTURE_SRC']=str(extracted)
-    log=ROOT/'verification/folder-move-108-extracted.log'
-    with log.open('w') as stream:
-        subprocess.run([__import__('sys').executable,str(ROOT/'tests/test_folder_move_108_browser.py')],cwd=ROOT,env=env,stdout=stream,stderr=subprocess.STDOUT,check=True,timeout=240)
-    extracted_proof=json.loads((ROOT/'verification/folder-move-108/results.json').read_text())
-    assert extracted_proof['count']==54 and not extracted_proof['errors']
-    (ROOT/'verification/installer-extracted-108.json').write_text(json.dumps({'runtime_sha256':fingerprint,'installer_sha256':sha(installer),'checks':54,'category':'shipped frontend loaded from actual extracted installer; Chromium synthetic collection, not native Anki','errors':[]},indent=2)+'\n')
+    # Reuse only the exact installer's completed browser proof when rebuilding
+    # documentation/source archives; changing any runtime byte forces the run.
+    extracted_receipt=ROOT/'verification/installer-extracted-108.json'
+    cached=json.loads(extracted_receipt.read_text()) if extracted_receipt.exists() else {}
+    if not (cached.get('runtime_sha256')==fingerprint and cached.get('installer_sha256')==sha(installer) and cached.get('checks')==54 and cached.get('errors')==[]):
+        from verify_release import verification_env
+        env=verification_env();env['ATELIER_FIXTURE_SRC']=str(extracted)
+        log=ROOT/'verification/folder-move-108-extracted.log'
+        with log.open('w') as stream:
+            subprocess.run([__import__('sys').executable,str(ROOT/'tests/test_folder_move_108_browser.py')],cwd=ROOT,env=env,stdout=stream,stderr=subprocess.STDOUT,check=True,timeout=240)
+        extracted_proof=json.loads((ROOT/'verification/folder-move-108/results.json').read_text())
+        assert extracted_proof['count']==54 and not extracted_proof['errors']
+        (ROOT/'verification/installer-extracted-108.json').write_text(json.dumps({'runtime_sha256':fingerprint,'installer_sha256':sha(installer),'checks':54,'category':'shipped frontend loaded from actual extracted installer; Chromium synthetic collection, not native Anki','errors':[]},indent=2)+'\n')
     # The extracted tree is only a verification scratch copy. Keep its hash
     # receipt and the 1.0.3 rollback artifacts, not another full runtime copy.
     assert extracted.resolve().is_relative_to(ROOT.resolve()) and extracted.name=='extracted-1.0.8'

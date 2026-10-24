@@ -35,3 +35,11 @@ Source artwork provenance: `ASSET-PROVENANCE-1.0.3.md`. Exact image hashes are i
 ## Your add-on commands, within reach
 
 `08-addon-tools-page.png` — Actual Anki tools page with the Add-on tools entry. This is the Atelier directory, not a screenshot of an installed third-party add-on. The native command index has separate QA evidence using explicitly labelled example menu providers.
+
+## Move a folder · Atelier 1.0.8
+
+`09-move-folder.png` — Actual Windows Anki 26.09.3, showing the original Biology path and chosen Chemistry destination before confirming.
+
+`10-organized-library.png` — The moved deck appears in Chemistry with its original cards. Native Undo was then verified.
+
+The first eight images are retained 1.0.7 captures of unchanged views; the final two are fresh 1.0.8 native captures. The per-image version and hashes are recorded in screenshot-manifest.json.

@@ -1,9 +1,7 @@
-Adds searchable original add-on menu commands through Add-on tools. Preserves their original slots, context and shortcuts. No universal third-party compatibility claim.
-
 Atelier 1.0.8
 
-Adds an optional themed study clock: choose a countdown or stopwatch, start, pause/resume and reset. Keep-on-top and a finish sound are optional. Closing the clock window keeps timing; closing Anki pauses it. Saved clocks reopen paused. Timing does not affect scheduling or Anki's study statistics.
+Folder reorganization now uses a searchable destination browser. Browse one level at a time, use the path to go back, or choose All folders to move out of nesting. Check From and To before confirming. Folder contents move together; cards and their review history stay intact.
 
-Adds a clock step to the 13-step guided tour and a replayable Getting started reference for ten common tasks, including importing decks, slideset creation, image occlusion, multi-folder exams, sharing, backups and recovery.
+Move is available directly in the right-click menu and through the existing Organize menu. Drag-and-drop still asks for confirmation. Duplicate names and unchanged destinations receive a clear explanation. After a move, the destination opens reliably through Anki's redraw. Use Anki's native Edit > Undo to reverse the move.
 
-Includes the cumulative interface, folder organization, card/exam engines, worlds and 1.0.5 PDF-parser fixes. See the source audit and test evidence for exact compatibility limits.
+This cumulative update retains original add-on menu tools, the themed clock and stopwatch, guided tour, task help, all seventeen worlds, image occlusion and specialized native editor access, multi-parent exams, source projects, masks, saved sessions, remotes and optional widgets. No universal third-party compatibility or untested-platform claim is made.
