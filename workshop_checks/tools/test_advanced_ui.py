@@ -61,7 +61,7 @@ with sync_playwright() as pw:
  # Manual repair of an overpacked question: new drafts, no inherited learning.
  click(p,'.note-row [data-action="open-note"]');click(p,'[data-action="split-note"]');native_count=h.col.note_count();draft_count=len(h.store.list('draft'))
  for i in (1,2):p.locator('[data-split="q'+str(i)+'"]').fill('Separate target '+str(i)+'?');p.locator('[data-split="a'+str(i)+'"]').fill('Its separate supported answer.')
- click(p,'[data-action="confirm-modal"]');check('Split creates two drafts and no learned/duplicate notes',len(h.store.list('draft'))==draft_count+2 and h.col.note_count()==native_count)
+ click(p,'[data-action="confirm-modal"]');p.locator('#ws-dialog').wait_for(state='hidden');check('Split creates two drafts and no learned/duplicate notes',len(h.store.list('draft'))==draft_count+2 and h.col.note_count()==native_count)
  # Empty source state and denied native actions stay recoverable, no app-wide exception.
  click(p,'[data-action="nav"][data-view="improve"]');click(p,'[data-action="repair-resolve"]');check('Repair resolution persists',any(r['status']=='resolved' for r in h.store.list('repair')))
  click(p,'[data-action="repair-tab"][data-value="resolved"]');click(p,'[data-action="repair-reopen"]');check('A resolved repair can be reopened',all(r['status']=='open' for r in h.store.list('repair')))

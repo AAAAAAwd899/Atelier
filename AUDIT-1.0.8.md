@@ -15,3 +15,5 @@ Storage budget: under 4 GiB peak incremental QA/package allocation against more 
 Publication: source updates only to the exact previously approved public AAAAAAwd899/Atelier repository. No AnkiWeb upload, website deployment or public binary release is performed. Owner visual acceptance, listing eligibility, numeric identity migration and untested-platform evidence remain separate gates in MANUAL_ACTIONS_REQUIRED.md.
 
 The initial sequential browser run began before the final source freeze. `verification/browser-cutover-108.json` records the final digest and the in-flight suite boundary. Every suite through that boundary is rerun on final bytes; later jobs began after the freeze. Complete aggregation still requires all suites to pass. No old-release browser receipt is used as a new pass.
+
+An advanced Card Studio browser attempt inspected asynchronous note-split saves after a fixed 65 ms delay. The test now waits for the actual split dialog to close after both saves, then retains the exact two-drafts/no-native-note-change assertion. Its first failure log is preserved in evidence. No engine code or assertion was weakened.
