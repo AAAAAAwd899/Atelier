@@ -34,7 +34,7 @@ def engine_bytes(name, source=ROOT/'src'):
     return raw
 
 def before_upgrade(name,data=None):
-    record=json.loads((ROOT/'patch-107-changes.json').read_text())
+    record=json.loads((ROOT/'patch-108-changes.json').read_text())
     if name in record['removed']:
         lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())
         assert name in lock['retired_baseline_modules'] and not (ROOT/'src'/name).exists()

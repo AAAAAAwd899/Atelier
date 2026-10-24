@@ -545,6 +545,12 @@ class Atelier:
         def success(out: Any) -> None:
             if self.operation_ticket is ticket:
                 self.operation_ticket, self.busy = None, False
+            # CollectionOp refreshes Deck Browser after success. Keep the chosen
+            # destination in the same profile's ephemeral navigation before that
+            # redraw, rather than relying on an asynchronous JavaScript reply.
+            if action == "move" and self.store is store and mw.col is collection and self.nonce == nonce:
+                self._ui_state = {"page": "library", "location": deck_id(data.get("parent", "0"), root=True),
+                                  "query": "", "filter": "all"}
             warning = None
             if action == "create" and data["kind"] == "folder" and store:
                 try:

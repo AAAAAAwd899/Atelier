@@ -25,7 +25,7 @@ def test_layout_assets_shipped_with_each_world(theme):
 def test_no_new_assessment_schema_or_network_dependency():
  manifest=json.loads((SRC/'manifest.json').read_text())
  assert manifest['package']=='daedalus_atelier'
- assert manifest['human_version']=='1.0.7'
+ assert manifest['human_version']=='1.0.8'
  css=(SRC/'web/studio-shell.css').read_text()
  assert 'http://' not in css and 'https://' not in css
  assert '#qa' not in css and 'ease1' not in css

@@ -71,6 +71,7 @@ def main():
  ('tools/test_first_run.py','card-first-run',ROOT/'workshop_checks/docs/first-run-results.json',ROOT/'workshop_checks'),
  ('tools/test_mask_ui.py','mask-studio',ROOT/'workshop_checks/docs/authoring-110/results.json',ROOT/'workshop_checks')]
  outcomes={}
+ suites.append(('tests/test_folder_move_108_browser.py','folder-move-108',V/'folder-move-108/results.json',ROOT))
  suites.append(('tests/test_103_browser.py','reviewer-103',ROOT/'output/playwright/reviewer-103/results.json',ROOT))
  def browser_job(job):
   script,name,path,cwd=job;run([sys.executable,script],name,cwd)

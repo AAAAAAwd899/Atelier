@@ -133,7 +133,7 @@
       if(config.screen!=='review-bottom'||config.style==='off'||!stockFooter())return null;
       const outer=document.getElementById('outer'),r=outer.getBoundingClientRect();
       const height=Math.ceil(Math.max(r.height,outer.scrollHeight)+Math.max(0,r.top)+2);
-      return {token:config.layoutToken,height,width:root.clientWidth,version:config.version||'1.0.7'};
+      return {token:config.layoutToken,height,width:root.clientWidth,version:config.version||'1.0.8'};
     }
     function requestFooterFit(force=false){
       if(config.screen!=='review-bottom')return;

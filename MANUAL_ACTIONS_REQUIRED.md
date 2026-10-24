@@ -1,6 +1,6 @@
 # Atelier owner decisions and external actions
 
-- Review the cumulative 1.0.7 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
+- Review the cumulative 1.0.8 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
 - During that review, switch through the original and five added worlds, inspect the theme-specific Pip companion treatments, and create an exam containing two parent folders to confirm the combined scope and overlap wording are clear.
 - The owner explicitly authorized making https://github.com/AAAAAAwd899/Atelier public for GitHub Issues support on October 20, 2026. Verify the final visibility and support links in the handoff receipt. Website deployment, a public binary release and AnkiWeb upload remain separate, unperformed actions.
 - When AnkiWeb permits the owner account to share an add-on, create/identify the exact listing and record its numeric code. Verify the then-current upload rules. Account eligibility has not been verified and no eligibility date is promised.

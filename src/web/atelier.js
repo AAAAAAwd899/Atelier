@@ -1,4 +1,4 @@
-/* Atelier 1.0.7 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.8 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -643,6 +643,36 @@
       const source=state.map.get(exclude);
       return `<option value="0" ${selected==='0'?'selected':''}>All folders (top level)</option>`+state.nodes.filter(n=>!n.filtered&&n.id!==exclude&&(!source||!n.path.startsWith(source.path+'::'))).sort((a,b)=>Model.compareNames({...a,name:a.path},{...b,name:b.path})).map(n=>`<option value="${n.id}" ${selected===n.id?'selected':''}>${esc(nicePath(n.path))}</option>`).join('');
     }
+    // Browsing a destination never writes to Anki; only the final form submit does.
+    function moveCandidates(){
+      const source=state.map.get(state.dialogData.id),prefix=(source?.path||'').toLocaleLowerCase();
+      return state.nodes.filter(n=>!n.filtered&&n.id!==source?.id&&!n.path.toLocaleLowerCase().startsWith(prefix+'::'));
+    }
+    function moveProblem(){
+      const data=state.dialogData,n=state.map.get(data.id),parent=data.destination||'0';
+      if(!n)return 'This folder is no longer available. Close this window and refresh your library.';
+      if(parent===n.parent)return 'Already here. Choose a different destination.';
+      if(parent!=='0'&&!moveCandidates().some(x=>x.id===parent))return 'Choose an available destination.';
+      const path=(state.map.get(parent)?.path?state.map.get(parent).path+'::':'')+n.name;
+      if(state.nodes.some(x=>x.id!==n.id&&x.path.toLocaleLowerCase()===path.toLocaleLowerCase()))return 'A folder or deck with this name is already there. Rename it first or choose another destination.';
+      return '';
+    }
+    const moveSearchText=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+    function moveBrowser(){
+      const data=state.dialogData,parent=data.destination||'0',q=moveSearchText(data.moveSearch||''),allowed=moveCandidates();
+      const chain=[];let current=state.map.get(parent);const seen=new Set();
+      while(current&&!seen.has(current.id)){seen.add(current.id);chain.unshift(current);current=state.map.get(current.parent);}
+      const crumb=(id,label)=>btn('move-destination',label,null,'quiet',`data-id="${id}" ${id===parent?'aria-current="location"':''}`);
+      const rows=allowed.filter(n=>q?moveSearchText(n.path.replaceAll('::',' ')).includes(q):n.parent===parent)
+        .sort((a,b)=>Number(isFolder(b))-Number(isFolder(a))||Model.compareNames(a,b));
+      const limit=data.moveLimit||60;
+      return `<nav class="move-crumbs" aria-label="Destination path">${crumb('0','All folders')}${chain.map(n=>`${icon('chevron',12)}${crumb(n.id,n.name)}`).join('')}</nav><div class="move-list" aria-label="Destination folders">${rows.slice(0,limit).map(n=>`<button type="button" class="move-folder" data-action="move-destination" data-id="${n.id}">${icon('folder',20)}<span><strong>${esc(n.name)}</strong><small>${esc(q?nicePath(n.path):(n.children.length?n.children.length+' inside':'Can hold cards and subfolders'))}</small></span>${icon('arrow',16)}</button>`).join('')||`<p class="move-empty">${q?'No matching folders. Try a shorter name.':'No subfolders here. You can move here or use the path above to go back.'}</p>`}${rows.length>limit?btn('move-more','Show more destinations','down','quiet'):''}</div><p class="note move-count" role="status">${q?rows.length+' matching destinations':'Choose a folder to look inside. The path above is your destination.'}</p>`;
+    }
+    function refreshMoveBrowser(){
+      shadow.getElementById('move-browser').innerHTML=moveBrowser();
+      shadow.getElementById('entry-parent').value=state.dialogData.destination||'0';
+      updatePath();
+    }
     function studyPickerRank(){
       if(state.pickerRankNodes===state.nodes&&state.pickerRankRecent===state.profile.recent_added)return state.pickerRank;
       const rank=new Map(),observed=new Map((state.profile.recent_added||[]).map(x=>[String(x.id),Date.parse(x.observed)||0]));
@@ -681,6 +711,7 @@
       if(state.busy)return;
       if(!state.dialog)focusBeforeDialog=shadow.activeElement;
       state.mobile=false;state.dialog=type;state.dialogData={...data};
+      if(type==='move'){state.dialogData.destination=data.parent||state.map.get(data.id)?.parent||'0';state.dialogData.expected=state.map.get(data.id)?.path;state.dialogData.moveSearch='';}
       if(type==='study-edit'){
         const saved=state.profile.studies.find(s=>s.id===data.id);
         state.dialogData.draft=saved?JSON.parse(JSON.stringify(saved)):{id:'study_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),name:'',date:'',deck_ids:data.deck?[data.deck]:[],active:true};
@@ -766,9 +797,9 @@
         const study=state.profile.studies.find(s=>s.id===data.id);title='Remove this study shortcut?';desc=study?.name||'';body='<p class="note">This removes only the local Atelier study setup. It does not delete folders, decks, notes or cards.</p>';footer=btn('close-dialog','Cancel',null)+btn('confirm-remove','Remove shortcut','close','primary',`data-id="${data.id}"`);
       }else if(type==='create'||type==='rename'||type==='move'){
         const moving=type==='move',renaming=type==='rename',kind=data.kind||'deck',parent=data.parent||(moving?n?.parent:state.location)||'0';
-        title=moving?'Move to a folder.':renaming?'A clearer name.':kind==='folder'?'Create a folder.':'Create a deck.';
+        title=moving?'Choose a new home.':renaming?'A clearer name.':kind==='folder'?'Create a folder.':'Create a deck.';
         desc=moving?`Move “${n?.name||''}” and its subfolders together.`:renaming?'Keep the contents. Change the name.':'Choose where it belongs. No special naming syntax needed.';
-        body=`<form id="organize-form">${!moving?`<label class="field">${kind==='folder'?'Folder':'Deck'} name<input id="entry-name" required maxlength="120" value="${esc(renaming?n?.name:'')}" placeholder="${kind==='folder'?'e.g. Exam 3':'e.g. Bradycardia'}" autocomplete="off"></label>`:''}${!renaming?`<label class="field">${moving?'Move into':'Create inside'}<select id="entry-parent">${parentOptions(parent,moving?data.id:'')}</select></label>`:''}<div class="path-preview">${icon('folder',18)}<span id="path-preview"></span></div><p class="note">${moving?'This moves the folder in Anki. Its new parent’s daily limits may affect which cards are offered. You can undo the move in Anki.':renaming?'Subfolders follow the new parent name. Your cards and review history stay intact.':'A folder is a normal Anki parent deck. It can hold cards and other decks, so your structure still works without Atelier.'}</p><div id="form-error" class="form-error" role="alert"></div></form>`;
+        body=`<form id="organize-form">${!moving?`<label class="field">${kind==='folder'?'Folder':'Deck'} name<input id="entry-name" required maxlength="120" value="${esc(renaming?n?.name:'')}" placeholder="${kind==='folder'?'e.g. Exam 3':'e.g. Bradycardia'}" autocomplete="off"></label>`:''}${moving?`<input type="hidden" id="entry-parent" value="${esc(data.destination)}"><label class="picker-search move-search">${icon('search',16)}<input id="move-search" type="search" aria-label="Find a destination folder" placeholder="Find a destination anywhere…" autocomplete="off"></label><div id="move-browser">${moveBrowser()}</div><div class="move-from"><small>FROM</small><span>${esc(nicePath(n?.path||''))}</span></div>`:!renaming?`<label class="field">Create inside<select id="entry-parent">${parentOptions(parent)}</select></label>`:''}<div class="path-preview">${icon('folder',18)}<span id="path-preview" aria-live="polite"></span></div><p class="note">${moving?'This moves the folder in Anki. Its new parent’s daily limits may affect which cards are offered. You can undo the move in Anki.':renaming?'Subfolders follow the new parent name. Your cards and review history stay intact.':'A folder is a normal Anki parent deck. It can hold cards and other decks, so your structure still works without Atelier.'}</p><p id="move-feedback" class="note" role="status"></p><div id="form-error" class="form-error" role="alert"></div></form>`;
         footer=btn('close-dialog','Cancel',null)+`<button type="submit" form="organize-form" class="primary">${moving?'Move here':renaming?'Save name':'Create '+kind}${icon('arrow',16)}</button>`;
       }else if(type==='organize'&&n){
         title=n.name;desc=nicePath(n.path);
@@ -797,9 +828,10 @@
       const target=shadow.getElementById('path-preview');if(!target)return;
       const n=state.map.get(state.dialogData.id),name=shadow.getElementById('entry-name')?.value||n?.name||'New '+(state.dialogData.kind||'deck');
       const parent=shadow.getElementById('entry-parent')?.value||n?.parent||state.location;
-      target.textContent='All folders › '+(state.map.has(parent)?nicePath(state.map.get(parent).path)+' › ':'')+name;
+      target.textContent=(state.dialog==='move'?'TO · ':'')+'All folders › '+(state.map.has(parent)?nicePath(state.map.get(parent).path)+' › ':'')+name;
+      if(state.dialog==='move'){const problem=moveProblem();shadow.getElementById('move-feedback').textContent=problem||'Ready to move. The contents stay together.';shadow.querySelector('[form=organize-form]').disabled=state.busy||!!problem;}
     }
-    function busyDialog(value){state.busy=value;shadow.querySelectorAll('.dialog button,.dialog input,.dialog select').forEach(el=>el.disabled=value);}
+    function busyDialog(value){state.busy=value;shadow.querySelectorAll('.dialog button,.dialog input,.dialog select').forEach(el=>el.disabled=value);if(state.dialog==='move')updatePath();}
     async function submitStudy(){
       if(state.busy)return;
       const draft={...state.dialogData.draft,name:shadow.getElementById('study-name').value.trim(),date:shadow.getElementById('study-date').value},error=shadow.getElementById('form-error');
@@ -816,9 +848,10 @@
       const type=state.dialog,data=state.dialogData,n=state.map.get(data.id),error=shadow.getElementById('form-error');
       const name=shadow.getElementById('entry-name')?.value.trim(),parent=shadow.getElementById('entry-parent')?.value||'0';
       if(type!=='move'&&(!name||name.includes('::')||/[<>\x00-\x1f]/.test(name)||name.startsWith(':')||name.endsWith(':'))){error.textContent='Enter a plain name. Choose the location below instead of typing ::.';return;}
-      const payload=type==='create'?{kind:data.kind||'deck',name,parent}:{id:data.id,expected:n?.path,...(type==='move'?{parent}:{name})};
+      if(type==='move'&&moveProblem()){error.textContent=moveProblem();return;}
+      const payload=type==='create'?{kind:data.kind||'deck',name,parent}:{id:data.id,expected:type==='move'?data.expected:n?.path,...(type==='move'?{parent}:{name})};
       busyDialog(true);
-      try{const out=await request(type,payload);busyDialog(false);closeDialog();await load();if(type==='create'&&out.id)go('library',parent);announce(out.warning|| (type==='create'?'Created. Open it to add decks or cards.':'Updated. Undo is available in Anki’s Edit menu.'));}
+      try{const out=await request(type,payload);busyDialog(false);closeDialog();await load();if(type==='create'&&out.id||type==='move')go('library',parent);announce(out.warning|| (type==='create'?'Created. Open it to add decks or cards.':type==='move'?`Moved “${n.name}” to ${state.map.get(parent)?.name||'All folders'}. Undo is available in Anki’s Edit menu.`:'Updated. Undo is available in Anki’s Edit menu.'));}
       catch(e){busyDialog(false);error.textContent=e.message;}
     }
     function closeMenu(restore=true){
@@ -828,7 +861,7 @@
     function openMenu(n,x,y,anchor,originalTarget=null){
       closeMenu(false);state.menu={id:n.id,anchor,originalTarget,x,y};
       const menu=document.createElement('div');menu.className='context-menu';menu.setAttribute('role','menu');menu.setAttribute('aria-label','Folder actions');
-      menu.innerHTML=`<div class="context-label">${esc(n.name)}</div>${btn('quick-exam',exactExams(n).length?'Remove from active exams':'Set as upcoming exam',exactExams(n).length?'close':'focus','context-action',`data-id="${n.id}" role="menuitem"`)}${btn(originalTarget?'shared-navigate':'navigate','Browse contents','folder','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('study',children(n.id).length?'Study entire folder…':'Study this lecture','play','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('export-deck','Export / share…','export','context-action',`data-id="${n.id}" role="menuitem"`)}<div class="context-divider"></div>${btn('create','New subfolder','plus','context-action',`data-kind="folder" data-parent="${n.id}" role="menuitem"`)}${btn('rename','Rename','edit','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('organize','More options…','more','context-action',`data-id="${n.id}" role="menuitem"`)}`;
+      menu.innerHTML=`<div class="context-label">${esc(n.name)}</div>${btn('quick-exam',exactExams(n).length?'Remove from active exams':'Set as upcoming exam',exactExams(n).length?'close':'focus','context-action',`data-id="${n.id}" role="menuitem"`)}${btn(originalTarget?'shared-navigate':'navigate','Browse contents','folder','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('study',children(n.id).length?'Study entire folder…':'Study this lecture','play','context-action',`data-id="${n.id}" role="menuitem"`)}${btn('export-deck','Export / share…','export','context-action',`data-id="${n.id}" role="menuitem"`)}<div class="context-divider"></div>${btn('create','New subfolder','plus','context-action',`data-kind="folder" data-parent="${n.id}" role="menuitem"`)}${btn('rename','Rename','edit','context-action',`data-id="${n.id}" role="menuitem"`)}${!n.filtered?btn('move','Move…','move','context-action',`data-id="${n.id}" role="menuitem"`):''}${btn('organize','More options…','more','context-action',`data-id="${n.id}" role="menuitem"`)}`;
       if(originalTarget)menu.insertAdjacentHTML('beforeend',`<div class="context-divider"></div>${btn('original-menu','Original folder menu…','external','context-action','role="menuitem"')}<p class="context-tip">Shift + right-click also keeps the original menu.</p>`);
       app.append(menu);const r=menu.getBoundingClientRect();menu.style.left=Math.max(8,Math.min(x,innerWidth-r.width-8))+'px';menu.style.top=Math.max(8,Math.min(y,innerHeight-r.height-8))+'px';menu.querySelector('button')?.focus({preventScroll:true});syncCapture();
     }
@@ -953,6 +986,8 @@
         case 'organize':if(n)openDialog('organize',{id});break;
         case 'rename':if(n)openDialog('rename',{id,kind:isFolder(n)?'folder':'deck'});break;
         case 'move':if(n)openDialog('move',{id});break;
+        case 'move-destination':{state.dialogData.destination=id;state.dialogData.moveSearch='';state.dialogData.moveLimit=60;shadow.getElementById('move-search').value='';refreshMoveBrowser();shadow.querySelector('.move-crumbs [aria-current]')?.focus({preventScroll:true});break;}
+        case 'move-more':state.dialogData.moveLimit=(state.dialogData.moveLimit||60)+60;refreshMoveBrowser();shadow.querySelector('[data-action=move-more]')?.focus({preventScroll:true});break;
         case 'close-dialog':closeDialog();break;
         case 'refresh':await load();break;
         case 'native':case 'provider-home':await openProvider();break;
@@ -981,6 +1016,7 @@
         const value=event.target.value,start=event.target.selectionStart;
         state.query=value;state.limit=60;render();const input=shadow.getElementById(id);input?.focus({preventScroll:true});try{input.setSelectionRange(start,start);}catch(_){}remember();
       }else if(id==='export-search'){state.dialogData.exportQuery=event.target.value;state.dialogData.exportLimit=50;shadow.getElementById('export-results').innerHTML=exportRows();}
+      else if(id==='move-search'){state.dialogData.moveSearch=event.target.value;state.dialogData.moveLimit=60;refreshMoveBrowser();}
       else if(id==='entry-name')updatePath();
       else if(id==='picker-search'){state.dialogData.search=event.target.value;state.dialogData.limit=80;shadow.getElementById('deck-picker').innerHTML=studyPicker();}
       else if(id==='study-name')state.dialogData.draft.name=event.target.value;
@@ -1025,6 +1061,7 @@
       if(!editable&&(event.key==='ContextMenu'||event.shiftKey&&event.key==='F10')){const node=event.target.closest?.('[data-node]'),n=state.map.get(node?.dataset.node);if(n){event.preventDefault();const r=event.target.getBoundingClientRect();openMenu(n,r.left,r.bottom,event.target);return;}}
       if(state.dialog||state.mobile){
         event.stopPropagation();
+        if(origin.id==='move-search'&&event.key==='Enter'){event.preventDefault();shadow.querySelector('.move-folder')?.focus();return;}
         if(event.key==='Escape'){event.preventDefault();if(state.dialog)closeDialog();else{state.mobile=false;render();shadow.querySelector('[data-action="mobile"]')?.focus();}return;}
         if(event.key==='Tab'){
           const container=shadow.querySelector(state.dialog?'.dialog':'.sidebar'),items=[...container.querySelectorAll('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled),summary,a[href],[tabindex="0"]')].filter(el=>el.getClientRects().length&&el.tabIndex>=0);

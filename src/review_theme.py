@@ -37,7 +37,7 @@ class ReviewTheme:
 
     def options(self, screen: str) -> dict:
         cfg = self.owner.get_config()
-        return {"version": "1.0.7", "theme": cfg["theme"], "style": cfg["review_style"] if cfg.get("visual_owner", "atelier") == "atelier" else "off",
+        return {"version": "1.0.8", "theme": cfg["theme"], "style": cfg["review_style"] if cfg.get("visual_owner", "atelier") == "atelier" else "off",
                 "width": cfg["review_width"], "motion": cfg["motion"], "ambience": cfg.get("ambience", True), "context": cfg.get("review_context", "compact"),
                 "screen": screen, "layoutToken": self.layout_token if screen == "review-bottom" else ""}
 
@@ -62,7 +62,7 @@ class ReviewTheme:
             from .worlds import reviewer_css
             addition = boot + tokens + '<style id="atelier-review-css">' + (ROOT/'web'/'reviewer.css').read_text(encoding='utf8') + '\n' + reviewer_css() + '</style>' + early
             content.head += addition
-            content.js.append(f"/_addons/{self.owner.package}/web/reviewer.js?v=1.0.7")
+            content.js.append(f"/_addons/{self.owner.package}/web/reviewer.js?v=1.0.8")
         except Exception:
             log.exception("Reviewer styling skipped; native card rendering preserved")
 
@@ -204,7 +204,7 @@ class ReviewTheme:
         from aqt.qt import QApplication
         from aqt.utils import tooltip
         import platform
-        report = {"atelier":"1.0.7", "os":platform.system(), "screen":mw.state,
+        report = {"atelier":"1.0.8", "os":platform.system(), "screen":mw.state,
                   "settings":self.owner.get_config(), "ownership":self.owner.ownership.diagnostics(), "webviews":{}}
         try:
             import anki

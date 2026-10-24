@@ -1,0 +1,102 @@
+[
+  {
+    "file": "screenshots/01-study-desk.png",
+    "title": "Study desk \u00b7 Forest",
+    "caption": "Actual Anki main webview with an example Biology study focus. Counts come from the example collection; no invented review history. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "b6281f52cff46b39327a6532d2c423dea3fe1c0a0f9280f15aa51a2c3d6d0694",
+    "bytes": 528210,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/02-library.png",
+    "title": "Your library, still organized",
+    "caption": "Actual Anki main webview. Biology, Chemistry and Geography retain separate parent folders and lecture decks. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "0c3e736d4c3465820b3fe8938772b6839ddc2df90a3abc4fe43ebbfd3b729df4",
+    "bytes": 553698,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/03-card-studio.png",
+    "title": "Source projects and drafts",
+    "caption": "Actual native Card Studio webview showing one example project, source and local occlusion draft. No notes have been published from that draft. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "f6c9b1cbc30ef8a85330e029a9d19ce8a49f5c52ec810c3ef3b1bc288022aed9",
+    "bytes": 190196,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/04-image-occlusion.png",
+    "title": "Make a mask, then review the draft",
+    "caption": "Actual native Mask Studio webview with one mask created through its pointer controls. The practice source is an Atelier-generated landscape, not a real user document or clinical diagram. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "3d0cc36374f1f39a7fe52a82383fe492452ef9437b99a3179c4484d355622025",
+    "bytes": 788453,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/05-study-clock.png",
+    "title": "A small clock for a study session",
+    "caption": "Actual native Qt study clock in Forest. The illustrated elapsed time was advanced in the isolated native test; it is not recorded Anki study history. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "d5a76a79e20f44da0244c1bf8835b1f9219193f10c80197aaf11b08015006eed",
+    "bytes": 82759,
+    "capture": "native Qt widget",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/06-combine-folders.png",
+    "title": "Two parent folders in one study",
+    "caption": "Actual Anki main webview with Biology and Chemistry selected. This is the setup before Save active study; original folders stay separate. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "bcadb50fedd65bf63c0712afa32db29cd789fdc5b5b0b8b963bf38de14d790cf",
+    "bytes": 215128,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/07-worlds.png",
+    "title": "Choose a world",
+    "caption": "Actual Anki appearance selector. All 17 world options remain in the scrollable selector; the screenshot shows its current visible area. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "sha256": "514de93f54417603e4126e405b1a8eafb91f9a58d769a4af7ce9f19347e3f810",
+    "bytes": 381549,
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/08-addon-tools-page.png",
+    "title": "Your add-ons, within reach",
+    "caption": "Actual current Anki tools page with Add-on tools; other add-ons retain their original actions and windows. Retained capture from 1.0.7; this view is unchanged apart from the version and folder-menu improvements.",
+    "capture": "actual native Anki Qt webview via local CDP; outer native chrome excluded",
+    "example_data": true,
+    "sha256": "3a2b7d635bbb13ff635ff0e1f84a144be526e4e1e99bad32696d82f0b5c47160",
+    "bytes": 573433,
+    "atelier_version": "1.0.7"
+  },
+  {
+    "file": "screenshots/09-move-folder.png",
+    "title": "Choose a destination",
+    "caption": "Actual Atelier 1.0.8 in Windows Anki 26.09.3; example unsynced collection. Outer window chrome excluded.",
+    "sha256": "3e5d2b0b5cba49f25d80ae37b1efd44c8750c7b052f0db45423f2032267f5a7c",
+    "bytes": 242098,
+    "capture": "actual native Anki Qt webview via local CDP",
+    "example_data": true,
+    "atelier_version": "1.0.8"
+  },
+  {
+    "file": "screenshots/10-organized-library.png",
+    "title": "See the moved deck in its destination",
+    "caption": "Actual Atelier 1.0.8 in Windows Anki 26.09.3; example unsynced collection. Outer window chrome excluded.",
+    "sha256": "94d86f4251b9a429f6bff07968be0c070b8e4071753cb0dde29543305bee46ab",
+    "bytes": 658920,
+    "capture": "actual native Anki Qt webview via local CDP",
+    "example_data": true,
+    "atelier_version": "1.0.8"
+  }
+]
