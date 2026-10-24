@@ -45,6 +45,15 @@ def main():
     finally:
         repeat_installer.unlink(missing_ok=True)
     assert runtime_digest(extracted)==fingerprint
+    # Exercise the new workflow from the extracted installer, not just src/.
+    from verify_release import verification_env
+    env=verification_env();env['ATELIER_FIXTURE_SRC']=str(extracted)
+    log=ROOT/'verification/folder-move-108-extracted.log'
+    with log.open('w') as stream:
+        subprocess.run([__import__('sys').executable,str(ROOT/'tests/test_folder_move_108_browser.py')],cwd=ROOT,env=env,stdout=stream,stderr=subprocess.STDOUT,check=True,timeout=240)
+    extracted_proof=json.loads((ROOT/'verification/folder-move-108/results.json').read_text())
+    assert extracted_proof['count']==54 and not extracted_proof['errors']
+    (ROOT/'verification/installer-extracted-108.json').write_text(json.dumps({'runtime_sha256':fingerprint,'installer_sha256':sha(installer),'checks':54,'category':'shipped frontend loaded from actual extracted installer; Chromium synthetic collection, not native Anki','errors':[]},indent=2)+'\n')
     # The extracted tree is only a verification scratch copy. Keep its hash
     # receipt and the 1.0.3 rollback artifacts, not another full runtime copy.
     assert extracted.resolve().is_relative_to(ROOT.resolve()) and extracted.name=='extracted-1.0.8'
@@ -62,7 +71,7 @@ def main():
     with zipfile.ZipFile(source) as z:
         assert all(z.read('Atelier-1.0.8/src/'+n)==p.read_bytes() for p,n in assets)
     filemap=DIST/'Atelier-1.0.8-Files.json';filemap.write_text(json.dumps({'runtime_sha256':fingerprint,'files':actual},indent=2)+'\n')
-    record={'name':'Atelier','version':version(),'package':'daedalus_atelier','channel':'owner handoff; AnkiWeb unpublished','owner_accepted':False,'publicly_published':False,'runtime_sha256':fingerprint,'installer_sha256':sha(installer),'source_sha256':sha(source),'runtime_file_count':len(assets),'original_files_unchanged':len(baseline)-len(patch['changed'])-len(patch['removed']),'changed':len(patch['changed']),'added':len(patch['added']),'removed':len(patch['removed']),'installer_source_bytes_equal':True,'zip_crc_passed':True,'repeat_installer_equal':True,'repeat_source_equal':True,'full_automated_verification':verified,'verification':proof if verified else {'status':'incomplete; see AUDIT-1.0.8.md and individual logs'},'native_evidence':'separate synthetic-profile evidence; not universal host acceptance','git_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip()}
+    record={'name':'Atelier','version':version(),'package':'daedalus_atelier','channel':'owner handoff; AnkiWeb unpublished','owner_accepted':False,'publicly_published':False,'runtime_sha256':fingerprint,'installer_sha256':sha(installer),'source_sha256':sha(source),'runtime_file_count':len(assets),'original_files_unchanged':len(baseline)-len(patch['changed'])-len(patch['removed']),'changed':len(patch['changed']),'added':len(patch['added']),'removed':len(patch['removed']),'installer_source_bytes_equal':True,'zip_crc_passed':True,'repeat_installer_equal':True,'repeat_source_equal':True,'extracted_installer_browser_checks':54,'full_automated_verification':verified,'verification':proof if verified else {'status':'incomplete; see AUDIT-1.0.8.md and individual logs'},'native_evidence':'separate synthetic-profile evidence; not universal host acceptance','git_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip()}
     build=DIST/'Atelier-1.0.8-Build.json';build.write_text(json.dumps(record,indent=2)+'\n')
     (DIST/'Atelier-1.0.8-SHA256.txt').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in [installer,source,build,filemap]))
     print(json.dumps(record,indent=2))

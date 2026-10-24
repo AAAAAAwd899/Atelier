@@ -9,7 +9,7 @@ proof=json.loads((V/'verified.json').read_text())
 build=json.loads((D/'Atelier-1.0.8-Build.json').read_text())
 assert proof['version']=='1.0.8' and proof['runtime_sha256']==runtime_digest()==build['runtime_sha256']
 assert build['full_automated_verification'] and proof['python_total']==1950 and proof['browser_total']==2947
-files=[V/n for n in ['verified.json','python-runtime.json','atelier-unit.xml','sprout-unit.xml','workshop-unit.xml','anki-addon-108.json','listing-preview-108.json','consumer-review-108.json','public-source-audit-108.json','github-public-108.json','browser-cutover-108.json','folder-move-108-freeze.json','native-summary-108.json','qa-profile-cleanup-108.json','card-advanced-first-attempt-108.log']]
+files=[V/n for n in ['verified.json','python-runtime.json','atelier-unit.xml','sprout-unit.xml','workshop-unit.xml','anki-addon-108.json','listing-preview-108.json','consumer-review-108.json','public-source-audit-108.json','github-public-108.json','browser-cutover-108.json','folder-move-108-freeze.json','native-summary-108.json','qa-profile-cleanup-108.json','card-advanced-first-attempt-108.log','installer-extracted-108.json','folder-move-108-extracted.log']]
 for name in proof['browser_suites']:
     files.extend(V/(name+s) for s in ['.log','.exit','-results.json'])
 files.extend(V/(name+'.log') for name in ['atelier-unit','sprout-unit','workshop-unit'])
