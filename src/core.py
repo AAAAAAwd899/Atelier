@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.9"
+VERSION = "1.0.10"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -29,7 +29,7 @@ DEFAULTS = {
     "acknowledged_makeovers": [], "remote": {"enabled": False, "bindings": {}},
 }
 DEFAULT_PROFILE = {
-    "favorites": [], "folders": [], "colors": {}, "folder_icons": {}, "last_location": "0",
+    "favorites": [], "folders": [], "colors": {}, "folder_icons": {}, "folder_order": {}, "last_location": "0",
     "studies": [], "focus_enabled": False, "selected_study": "all",
     "recent_locations": [], "last_studied": "0",
     "seen_decks": [], "seen_initialized": False, "recent_added": [],
@@ -97,7 +97,7 @@ def settings(value: Any) -> dict[str, Any]:
         return out
     choices = {"widget_mode": ("balanced","original"), "visual_owner": ("ask", "atelier", "onigiri", "external"), "theme": THEMES, "mode": ("workspace", "hybrid", "native"),
                "density": ("comfortable", "compact"), "view": ("grid", "list", "outline"),
-               "sort": ("name", "due", "recent"),
+               "sort": ("name", "due", "recent", "custom"),
                "review_style": ("adaptive", "controls", "off"),
                "review_width": ("standard", "wide"), "review_context": ("compact", "full", "hidden")}
     for key, options in choices.items():
@@ -142,6 +142,28 @@ def profile_settings(value: Any) -> dict[str, Any]:
                 if val in COLORS:
                     out["colors"][deck_id(key)] = val
             except (ValidationError, TypeError):
+                pass
+    if isinstance(value.get("folder_order"), dict):
+        remaining = 20000
+        for parent, items in list(value["folder_order"].items())[:5000]:
+            if remaining <= 0:
+                break
+            try:
+                parent = deck_id(parent, root=True)
+                if not isinstance(items, list):
+                    continue
+                seen = set(); order = []
+                for raw in items[:remaining]:
+                    try:
+                        did = deck_id(raw)
+                        if did != parent and did not in seen:
+                            seen.add(did); order.append(did)
+                    except ValidationError:
+                        pass
+                if order:
+                    out["folder_order"][parent] = order
+                    remaining -= min(len(items), remaining)
+            except ValidationError:
                 pass
     if isinstance(value.get("folder_icons"), dict):
         for key, val in list(value["folder_icons"].items())[:20000]:
@@ -560,6 +582,30 @@ def _unique(catalog: dict, name: str, excluding: str | None = None) -> None:
     if any(key != excluding and unicodedata.normalize("NFC", val["name"]).casefold() == canonical
            for key, val in catalog.items()):
         raise ValidationError("A deck with that name already exists in this location. Choose a different name; Atelier never merges decks automatically.")
+
+def folder_order_catalog(col: Any) -> dict[str, dict[str, Any]]:
+    """Match Anki's visible tree, including its empty-Default hiding rule."""
+    catalog = fresh_catalog(col)
+    tree = col.decks.deck_tree()
+    stack = list(tree.children); visible = set()
+    while stack:
+        node = stack.pop(); visible.add(str(node.deck_id)); stack.extend(node.children)
+    return {did: entry for did, entry in catalog.items() if did in visible}
+
+
+def validate_folder_order(catalog: dict, parent: Any, value: Any) -> tuple[str, list[str]]:
+    """Display order only. Recheck exact current siblings; never rename/reparent."""
+    parent = deck_id(parent, root=True)
+    prefix = "" if parent == "0" else _entry(catalog, parent)["name"] + "::"
+    expected = {did for did, entry in catalog.items()
+                if entry["name"].startswith(prefix) and "::" not in entry["name"][len(prefix):]}
+    if not isinstance(value, list) or len(value) > 20000:
+        raise ValidationError("Arrange up to 20,000 folders or decks at a time.")
+    order = [deck_id(did) for did in value]
+    if len(order) != len(set(order)) or set(order) != expected:
+        raise ValidationError("This folder changed while you were arranging it. Reopen Arrange order to include its current contents.")
+    return parent, order
+
 
 def creation_path(catalog: dict, name: Any, parent: Any) -> str:
     label = clean_label(name)

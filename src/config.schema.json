@@ -59,7 +59,8 @@
       "enum": [
         "name",
         "due",
-        "recent"
+        "recent",
+        "custom"
       ]
     },
     "review_style": {

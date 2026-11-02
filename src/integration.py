@@ -21,7 +21,7 @@ from aqt.utils import showInfo
 
 from .core import (VERSION, COLORS, FOLDER_ICONS, ProfileStore, ValidationError, collection_snapshot,
                    creation_path, deck_id, fresh_catalog, json_for_html, profile_settings,
-                   rename_path, settings, validate_move, validate_study, observe_decks, quick_study, set_study_active, exam_label, home_layout, upsert_study, canonical_profile)
+                   rename_path, settings, folder_order_catalog, validate_folder_order, validate_move, validate_study, observe_decks, quick_study, set_study_active, exam_label, home_layout, upsert_study, canonical_profile)
 
 log = logging.getLogger("atelier")
 ROOT = Path(__file__).resolve().parent
@@ -374,6 +374,15 @@ class Atelier:
                 updated[key] = [x for x in updated[key] if x != did]
                 if selected:
                     updated[key].append(did)
+            elif key == "folder_order":
+                parent, order = validate_folder_order(folder_order_catalog(mw.col), data.get("parent", "0"), data.get("value"))
+                existing = updated["folder_order"]
+                if (parent not in existing and len(existing) >= 5000) or sum(len(ids) for key, ids in existing.items() if key != parent) + len(order) > 20000:
+                    raise ValidationError("Saved folder ordering is full. Restore name order in an unused folder first.")
+                updated["folder_order"][parent] = order
+            elif key == "reset_folder_order":
+                parent = deck_id(data.get("parent", "0"), root=True)
+                updated["folder_order"].pop(parent, None)
             elif key == "folder_icon":
                 did = deck_id(data.get("id"))
                 value = data.get("value")

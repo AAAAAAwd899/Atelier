@@ -1,6 +1,6 @@
-# Atelier 1.0.9
+# Atelier 1.0.10
 
-Version 1.0.9 adds a complete Anki action bar, an optional expandable Folder tree, local folder icons and stationary theme choices. It retains the searchable destination browser, native add-on tools, clock, guided tour and all existing study/card workflows. Read the [changelog](CHANGELOG-1.0.9.md), [installation guide](INSTALL-1.0.9.md), [audit](AUDIT-1.0.9.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [remaining publication actions](MANUAL_ACTIONS_REQUIRED.md).
+Version 1.0.10 adds direct Set exam actions and Arrange order for the main library and each folder. Move items up, down or to the top, then save; My order restores that arrangement. New items appear after the saved items. It also retains the complete Anki action bar, expandable Folder tree, local icons and stationary theme choices. It retains the searchable destination browser, native add-on tools, clock, guided tour and all existing study/card workflows. Read the [changelog](CHANGELOG-1.0.10.md), [installation guide](INSTALL-1.0.10.md), [audit](AUDIT-1.0.10.md), [asset provenance](ASSET-PROVENANCE-1.0.3.md) and [remaining publication actions](MANUAL_ACTIONS_REQUIRED.md).
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,11 +14,11 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.9.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.10.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
-Current Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. See the current audit for exact coverage and display/capture limitations.
+Historical 1.0.9 Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. Version 1.0.10 also has eight fresh checks against the actual Anki backend for visible-tree ordering, preference persistence and collection preservation. See the current audit for exact coverage and display/capture limitations.
 
 ## Development and verification
 
@@ -27,12 +27,12 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_107.py
+python package_110.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.
 
-Current results and limitations: `AUDIT-1.0.9.md`. Installer verification and hashes: `dist/Atelier-1.0.9-Build.json`, `dist/Atelier-1.0.9-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
+Current results and limitations: `AUDIT-1.0.10.md`. Installer verification and hashes: `dist/Atelier-1.0.10-Build.json`, `dist/Atelier-1.0.10-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
 
 ## Privacy and licenses
 
@@ -40,4 +40,4 @@ No telemetry or automatic publication. Optional authoring-provider requests requ
 
 ## GitHub and publishing
 
-Source and support: https://github.com/AAAAAAwd899/Atelier. The owner authorized public source visibility for support. Use [GitHub Issues](https://github.com/AAAAAAwd899/Atelier/issues/new/choose) without attaching private collections or source material. There is no AnkiWeb listing or numeric code yet. [Prepared listing material](listing/ankiweb-1.0.9/START-HERE.md) includes real screenshots, ready-to-paste descriptions and compatibility fields. The distributable installer is supplied separately in the owner handoff; do not install this repository as an add-on. No website deployment or public binary release is performed by these source changes. Future listing migration requires the real identity and verification.
+Source and support: https://github.com/AAAAAAwd899/Atelier. The owner authorized public source visibility for support. Use [GitHub Issues](https://github.com/AAAAAAwd899/Atelier/issues/new/choose) without attaching private collections or source material. There is no AnkiWeb listing or numeric code yet. [Prepared listing material](listing/ankiweb-1.0.10/START-HERE.md) includes real screenshots, ready-to-paste descriptions and compatibility fields. The distributable installer is supplied separately in the owner handoff; do not install this repository as an add-on. No website deployment or public binary release is performed by these source changes. Future listing migration requires the real identity and verification.
