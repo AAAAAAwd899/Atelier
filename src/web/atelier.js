@@ -1,4 +1,4 @@
-/* Atelier 1.0.12 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.13 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();

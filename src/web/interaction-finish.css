@@ -73,3 +73,34 @@ html[data-atelier-world-enabled="true"][data-atelier-scenery="false"] #es-app :i
 :host .toast-dismiss{display:grid;place-items:center;flex:0 0 26px;width:26px;min-height:26px;border-radius:6px;color:var(--muted);margin-left:auto;}
 :host .toast-dismiss:hover{background:var(--raised);color:var(--text);}
 :host .toast>span{flex:1;}
+
+/* 1.0.13 — an open collection of objects, with motion inside stable controls. */
+:host .folder-icon-picker{border:0;border-radius:0;padding:0;margin:24px 0 18px;}
+:host .folder-icon-picker legend{padding:0;font-size:12px;color:var(--muted);}
+:host .folder-icon-picker p{margin:10px 0 14px;max-width:42ch;}
+:host .folder-icon-options{gap:8px 6px;}
+:host .folder-icon-options button{position:relative;min-height:84px;border:1px solid transparent;background:transparent;box-shadow:none;border-radius:16px;gap:6px;transform:none!important;}
+:host .folder-icon-options button:hover,:host .folder-icon-options button:focus-visible{background:color-mix(in srgb,var(--accent) 8%,transparent);border-color:transparent;box-shadow:none;}
+:host .folder-icon-options button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 15%,transparent);border-color:transparent;box-shadow:none;color:var(--text);}
+:host .folder-icon-options button[aria-pressed="true"]::after{content:"✓";position:absolute;top:5px;right:7px;color:var(--accent-strong);font:600 11px/1 sans-serif;}
+:host .folder-icon-options :is(.picker-symbol,.folder-symbol){width:48px;height:48px;}
+:host .folder-icon-options .picker-symbol{transform-origin:50% 80%;}
+:host .folder-icon-options small{line-height:1.3;}
+:host .folder-personalization{padding:12px 0 16px;border:0;border-radius:0;background:none;box-shadow:none;gap:18px;}
+:host .personalization-art{flex-basis:70px;width:70px;height:70px;border:0;background:none;border-radius:0;}
+:host .personalization-art .folder-symbol{width:70px;height:70px;transform-origin:50% 85%;}
+:host .personalization-art .custom-folder-icon::after{width:7px;height:7px;right:0;bottom:0;}
+:host .color-option{border-color:transparent;box-shadow:none;}
+:host .color-option.selected{outline:2px solid var(--accent-strong);outline-offset:3px;}
+:host([data-motion="on"]) .folder-icon-options button:is(:hover,:focus-visible) .picker-symbol{animation:atelier-object-sway 900ms cubic-bezier(.3,.1,.2,1) 2;}
+:host([data-motion="on"]) .folder-icon-options button[data-icon="star"]:is(:hover,:focus-visible) .picker-symbol,
+:host([data-motion="on"]) .folder-icon-options button[data-icon="physics"]:is(:hover,:focus-visible) .picker-symbol{animation-name:atelier-object-orbit;}
+:host([data-motion="on"]) .folder-icon-options button[data-icon="cat"]:is(:hover,:focus-visible) .picker-symbol,
+:host([data-motion="on"]) .folder-icon-options button[data-icon="dragon"]:is(:hover,:focus-visible) .picker-symbol{animation-name:atelier-object-peek;}
+:host([data-motion="on"]) .personalization-art .folder-symbol{animation:atelier-object-greet 760ms cubic-bezier(.2,.7,.2,1) 1;}
+@keyframes atelier-object-sway{0%,100%{transform:rotate(0) translateY(0)}25%{transform:rotate(-9deg) translateY(-3px)}65%{transform:rotate(7deg) translateY(-2px)}}
+@keyframes atelier-object-orbit{0%,100%{transform:rotate(0) scale(1)}35%{transform:rotate(-17deg) scale(1.1)}75%{transform:rotate(12deg) scale(1.04)}}
+@keyframes atelier-object-peek{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-5px) rotate(-7deg)}65%{transform:translateY(-2px) rotate(5deg)}}
+@keyframes atelier-object-greet{0%,100%{transform:rotate(0) scale(1)}28%{transform:rotate(-10deg) scale(1.1)}60%{transform:rotate(6deg) scale(1.03)}}
+@media(prefers-reduced-motion:reduce){:host .folder-icon-options .picker-symbol,:host .personalization-art .folder-symbol{animation:none!important;transform:none!important;}}
+@media(forced-colors:active){:host .folder-icon-options button[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-2px;}:host .folder-icon-options button:focus-visible{outline:2px solid Highlight;}}

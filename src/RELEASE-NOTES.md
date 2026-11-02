@@ -1,3 +1,10 @@
+# Atelier 1.0.13
+
+- Open folder-icon collection without repeated tile, fieldset or preview borders.
+- Short sway, peek and orbital artwork motion on hover/keyboard focus, plus a saved-preview flourish.
+- Stable controls and labels; finite animations; static reduced-motion and motion-off presentation.
+- Existing artwork, 25 icon choices, six colors and all organization/study/authoring features retained.
+
 # Atelier 1.0.12
 
 - Open full library is available above the sidebar folders. It opens the spacious folder tree in the main workspace.
