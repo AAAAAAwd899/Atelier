@@ -1,6 +1,6 @@
-# Atelier 1.0.11
+# Atelier 1.0.12
 
-Version 1.0.11 fixes native dropdown readability and simplifies library wording. It retains the complete Anki action bar, direct Set exam actions, independently saved course/lecture order, folder icons and stationary theme choices. Read the [changelog](CHANGELOG-1.0.11.md), [installation guide](INSTALL-1.0.11.md), [audit](AUDIT-1.0.11.md) and [publication actions](MANUAL_ACTIONS_REQUIRED.md).
+Version 1.0.12 adds a spacious full library with one-click course-branch expansion, independent sidebar shortcuts, clearer folder hierarchy and live saved icon/color previews. It retains the complete Anki action bar, direct Set exam actions, independently saved course/lecture order and stationary theme choices. Folder artwork now offers 24 cohesive raster symbols, with automatic folder/deck art and visible saved color choices. Read the [changelog](CHANGELOG-1.0.12.md), [installation guide](INSTALL-1.0.12.md), [audit](AUDIT-1.0.12.md) and [publication actions](MANUAL_ACTIONS_REQUIRED.md).
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,11 +14,11 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.11.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.12.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
-Historical 1.0.9 Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. Version 1.0.11 has eight fresh Anki backend checks for ordering and preservation, plus 27 actual Anki/Onigiri offscreen checks covering the complete action bar with the stock toolbar hidden, original study controls, XP and native Undo. See the current audit for exact coverage and display/capture limitations.
+Historical 1.0.9 Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. Version 1.0.12 has eight fresh Anki backend checks for ordering and preservation, plus 27 actual Anki/Onigiri offscreen checks covering the complete action bar with the stock toolbar hidden, original study controls, XP and native Undo. See the current audit for exact coverage and display/capture limitations.
 
 ## Development and verification
 
@@ -27,12 +27,12 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_111.py
+python package_112.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.
 
-Current results and limitations: `AUDIT-1.0.11.md`. Installer verification and hashes: `dist/Atelier-1.0.11-Build.json`, `dist/Atelier-1.0.11-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
+Current results and limitations: `AUDIT-1.0.12.md`. Installer verification and hashes: `dist/Atelier-1.0.12-Build.json`, `dist/Atelier-1.0.12-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
 
 ## Privacy and licenses
 
@@ -40,4 +40,4 @@ No telemetry or automatic publication. Optional authoring-provider requests requ
 
 ## GitHub and publishing
 
-Source and support: https://github.com/AAAAAAwd899/Atelier. The owner authorized public source visibility for support. Use [GitHub Issues](https://github.com/AAAAAAwd899/Atelier/issues/new/choose) without attaching private collections or source material. There is no AnkiWeb listing or numeric code yet. [Prepared listing material](listing/ankiweb-1.0.11/START-HERE.md) includes real screenshots, ready-to-paste descriptions and compatibility fields. The distributable installer is supplied separately in the owner handoff; do not install this repository as an add-on. No website deployment or public binary release is performed by these source changes. Future listing migration requires the real identity and verification.
+Source and support: https://github.com/AAAAAAwd899/Atelier. The owner authorized public source visibility for support. Use [GitHub Issues](https://github.com/AAAAAAwd899/Atelier/issues/new/choose) without attaching private collections or source material. There is no AnkiWeb listing or numeric code yet. [Prepared listing material](listing/ankiweb-1.0.12/START-HERE.md) includes real screenshots, ready-to-paste descriptions and compatibility fields. The distributable installer is supplied separately in the owner handoff; do not install this repository as an add-on. No website deployment or public binary release is performed by these source changes. Future listing migration requires the real identity and verification.

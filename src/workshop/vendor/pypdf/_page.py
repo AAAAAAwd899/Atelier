@@ -1451,10 +1451,9 @@ class PageObject(DictionaryObject):
                 if "/QuadPoints" in a:
                     q = cast(ArrayObject, a["/QuadPoints"])
                     aa[NameObject("/QuadPoints")] = ArrayObject(
-                        trsf.apply_on((q[0], q[1]), True)
-                        + trsf.apply_on((q[2], q[3]), True)
-                        + trsf.apply_on((q[4], q[5]), True)
-                        + trsf.apply_on((q[6], q[7]), True)
+                        value
+                        for i in range(0, len(q), 2)
+                        for value in trsf.apply_on((q[i], q[i + 1]), True)
                     )
                 # The /Rect update above only repositions and resizes the
                 # annotation's bounding box; it does not touch the
@@ -1848,6 +1847,8 @@ class PageObject(DictionaryObject):
                         "/Encoding"
                     ].__repr__()
                     out += enc_repr + "\n"
+                except MemoryError:  # pragma: no cover  # TODO: BLE001
+                    raise
                 except Exception:
                     pass
                 try:
@@ -1859,6 +1860,8 @@ class PageObject(DictionaryObject):
                         .decode()
                         + "\n"
                     )
+                except MemoryError:  # pragma: no cover  # TODO: BLE001
+                    raise
                 except Exception:
                     pass
 
@@ -1958,7 +1961,9 @@ class PageObject(DictionaryObject):
                         ):
                             extractor.process_operation(b"Tj", [" "])
             elif operator == b"TD" and len(operands) >= 2:
-                extractor.process_operation(b"TL", [-operands[1]])
+                # a non-numeric ty leaves the leading unchanged, like a non-numeric TL
+                if isinstance(operands[1], (int, float)):
+                    extractor.process_operation(b"TL", [-operands[1]])
                 extractor.process_operation(b"Td", operands)
             elif operator == b"Do" and operands:
                 extractor.output += extractor.text
@@ -2001,6 +2006,8 @@ class PageObject(DictionaryObject):
                         # Nothing else to do: each text piece inside the form has
                         # already been reported via visitor_text while the form was
                         # being extracted recursively (issue #4079).
+                except MemoryError:  # pragma: no cover  # TODO: BLE001
+                    raise
                 except Exception as exception:
                     logger_warning(
                         "Impossible to decode XFormObject %(operand)s: %(exception)s",
@@ -2560,6 +2567,8 @@ class _VirtualList(Sequence[PageObject]):
                 try:
                     assert ind is not None
                     del ind.pdf.flattened_pages[index]  # case of page in a Reader
+                except MemoryError:  # pragma: no cover  # TODO: BLE001
+                    raise
                 except Exception:  # pragma: no cover
                     pass
                 if "/Count" in parent:

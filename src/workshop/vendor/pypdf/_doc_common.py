@@ -44,7 +44,7 @@ from typing import (
 from ._configuration import get_configuration
 from ._encryption import Encryption
 from ._page import PageObject, _VirtualList
-from ._page_labels import index2label as page_index2page_label
+from ._page_labels import index2labels
 from ._utils import (
     _TraversalState,
     deprecate_no_replacement,
@@ -316,7 +316,7 @@ class PdfDocCommon(ABC):
         ...  # pragma: no cover
 
     @abstractmethod
-    def _replace_object(self, indirect: IndirectObject, obj: PdfObject) -> PdfObject:
+    def _replace_object(self, indirect_reference: IndirectObject, obj: PdfObject) -> PdfObject:
         ...  # pragma: no cover
 
     @property
@@ -377,10 +377,12 @@ class PdfDocCommon(ABC):
             PdfReadError: If restrictions prevent this action.
 
         """
-        # Flattened pages will not work on an encrypted PDF;
-        # the PDF file's page count is used in this case. Otherwise,
-        # the original method (flattened page count) is used.
-        if self.is_encrypted:
+        # The page tree cannot be walked while the document is still encrypted;
+        # the PDF file's page count is used in this case. Once the document has
+        # been decrypted (or if it is not encrypted at all), the flattened page
+        # tree is used instead, as the /Count value might be wrong.
+        encryption = self._encryption
+        if self.is_encrypted and (encryption is None or not encryption.is_decrypted()):
             return self.root_object["/Pages"]["/Count"]  # type: ignore[no-any-return, index]
         if self.flattened_pages is None:
             self._flatten(self._readonly)
@@ -1273,7 +1275,7 @@ class PdfDocCommon(ABC):
 
         The returned object supports indexing, slicing, ``len()``, iteration and
         (for PdfWriter) ``del``, but it is not a :class:`list` - pages are looked
-        up on demand rather than materialised up front, so list-only operations
+        up on demand rather than materialized up front, so list-only operations
         such as ``append()`` or concatenation with ``+`` are not available.
 
         Note:
@@ -1295,7 +1297,7 @@ class PdfDocCommon(ABC):
         This property is read-only. The labels are in the order that the pages
         appear in the document.
         """
-        return [page_index2page_label(self, i) for i in range(len(self.pages))]
+        return index2labels(self, len(self.pages))
 
     @property
     def page_layout(self) -> Optional[str]:
@@ -1387,6 +1389,7 @@ class PdfDocCommon(ABC):
 
         flattened_pages: list[PageObject] = []
         traversal_state = _TraversalState()
+        remaining_page_entries = _TraversalState(entry_count=configuration.page_tree_maximum_page_entries)
         # id() values of the nodes on the path from the root to the current node.
         # Detects multi-hop cycles such as A→B→C→A that the single-parent check misses.
         ancestor_ids: set[int] = set()
@@ -1419,7 +1422,11 @@ class PdfDocCommon(ABC):
                 ancestor_ids.add(id(node))
                 stack.append(self._enter_page_tree_node(item))
             elif node_type == "/Page":
-                flattened_pages.append(self._flatten_leaf_page(item, list_only))
+                flattened_pages.append(
+                    self._flatten_leaf_page(
+                        item=item, list_only=list_only, remaining_page_entries=remaining_page_entries
+                    )
+                )
 
             item = self._pop_next_page_tree_kid(stack, ancestor_ids, traversal_state)
 
@@ -1497,7 +1504,9 @@ class PdfDocCommon(ABC):
             ancestor_ids.discard(id(parent.node))
         return None
 
-    def _flatten_leaf_page(self, item: _PageTreeItem, list_only: bool) -> PageObject:
+    def _flatten_leaf_page(
+            self, *, item: _PageTreeItem, list_only: bool, remaining_page_entries: _TraversalState
+    ) -> PageObject:
         """
         Build the :class:`PageObject` for a leaf ``/Page`` node.
 
@@ -1506,15 +1515,34 @@ class PdfDocCommon(ABC):
         :class:`PageObject` has already copied those entries in its constructor,
         so the flag only matters for inline ``/Kids`` dictionaries.
         """
-        page_obj = PageObject(self, item.indirect_reference)
-        if not list_only:
-            page_obj.update(item.node)
-        for attr, value in item.inherit.items():
-            # if the page has its own value, it does not inherit the parent's value
-            if attr not in page_obj:
-                page_obj[attr] = value
+        node = item.node
 
-        return page_obj
+        # Indirect PageObjects are populated by the constructor even when
+        # list_only=True. Inline dictionaries are copied only when list_only=False.
+        entry_count = (
+            len(node)
+            if item.indirect_reference is not None or not list_only
+            else 0
+        )
+
+        # Inherited attributes are inserted only when missing from the page.
+        entry_count += sum(
+            attribute not in node for attribute in item.inherit
+        )
+
+        remaining_page_entries.entry_count -= entry_count
+        if remaining_page_entries.entry_count < 0:
+            raise LimitReachedError("Maximum page tree page entry limit exceeded!")
+
+        page = PageObject(self, item.indirect_reference)
+        if not list_only:
+            page.update(node)
+        for attribute, value in item.inherit.items():
+            # If the page has its own value, it does not inherit the parent's value.
+            if attribute not in page:
+                page[attribute] = value
+
+        return page
 
     def remove_page(
         self,

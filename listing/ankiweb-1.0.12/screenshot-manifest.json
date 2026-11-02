@@ -1,0 +1,44 @@
+[
+  {
+    "file": "screenshots/01-study-desk.png",
+    "source": "screenshots/polish-112/forest-home.png",
+    "caption": "Study desk \u2014 Forest",
+    "sha256": "55f4687cb449cc66ac68e57e9dbc6dec18a45eff59f6c0a172829681f1ec9abe",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  },
+  {
+    "file": "screenshots/02-full-library.png",
+    "source": "screenshots/polish-112/forest-library.png",
+    "caption": "Full course and lecture hierarchy",
+    "sha256": "8fbe4ef211cb94532fb833fbd67177a03bb60f8e75f89186e0b78aa3b360504a",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  },
+  {
+    "file": "screenshots/03-personalize.png",
+    "source": "screenshots/polish-112/rose-personalization.png",
+    "caption": "Twenty-four illustrated folder symbols and six colors",
+    "sha256": "726549348094d70bd820defe588edaea9cbebb33cf09422d3f69d210db5762f9",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  },
+  {
+    "file": "screenshots/04-card-studio.png",
+    "source": "screenshots/complete/forest-sources.png",
+    "caption": "Card Studio \u2014 sources and projects",
+    "sha256": "74aed657fd662ca5344bf6aef1589fe47733fd59259518d40daecf24af4f082a",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  },
+  {
+    "file": "screenshots/05-mask-studio.png",
+    "source": "workshop_checks/docs/authoring-110/Atelier_Mask_Studio.png",
+    "caption": "Mask Studio \u2014 grouped occlusion questions",
+    "sha256": "88b83621f88adba3573a89b34d5bbdbca105af92c3cd9ee5746a798ebc51846c",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  },
+  {
+    "file": "screenshots/06-widgets.png",
+    "source": "screenshots/polish-112/obsidian-widgets.png",
+    "caption": "Built-in activity, active study and exam widgets",
+    "sha256": "0bc1c5baff52d78f81d125fd2479de669cea8c208ce356213bb60638e8f93780",
+    "capture": "Chromium, shipped Atelier 1.0.12 interface with sample records and host doubles; not a native Windows photograph or promotional mockup"
+  }
+]

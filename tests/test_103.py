@@ -6,11 +6,11 @@ from fixtures import ROOT,SRC
 
 def test_exact_upgrade_declaration_and_protected_engines():
     old=json.loads((ROOT/'baseline-1.0.2.json').read_text())
-    patch=json.loads((ROOT/'patch-111-changes.json').read_text())
+    patch=json.loads((ROOT/'patch-112-changes.json').read_text())
     actual={p.relative_to(SRC).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in SRC.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in ('.pyc','.pyo')}
     assert {n:h for n,h in actual.items() if n in old and h!=old[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in old}==patch['added']
-    parser=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())
+    parser=json.loads((ROOT/'PYPDF-VENDOR-6.21.4.json').read_text())
     assert sorted(set(old)-set(actual))==patch['removed']==parser['retired_baseline_modules']
     assert {n:h for n,h in actual.items() if n.startswith('workshop/vendor/pypdf/')}==parser['files']
     protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')

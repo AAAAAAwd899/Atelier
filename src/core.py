@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.11"
+VERSION = "1.0.12"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -39,7 +39,7 @@ DEFAULT_PROFILE = {
     "widget_route_version": 0,
     "onboarding": {"version": 0, "status": "new"},
 }
-FOLDER_ICONS = ("books", "course", "brain", "science", "medicine", "dna", "pills", "notes", "microscope", "art", "code", "star", "leaf", "flower", "bow", "castle", "cat", "dragon")
+FOLDER_ICONS = ("books", "course", "brain", "science", "medicine", "dna", "pills", "notes", "microscope", "art", "code", "star", "leaf", "flower", "bow", "castle", "cat", "dragon", "physics", "music", "history", "language", "math", "coffee")
 COLORS = ("violet", "blue", "rose", "green", "amber", "cyan")
 
 class ValidationError(ValueError):

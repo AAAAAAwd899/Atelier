@@ -1,0 +1,20 @@
+{
+  "title": "Atelier",
+  "version": "1.0.12",
+  "upload_file": "Atelier-1.0.12.ankiaddon",
+  "description_file": "description.html",
+  "plain_text_alternative": "description.txt",
+  "support_url": "https://github.com/AAAAAAwd899/Atelier/issues",
+  "source_url": "https://github.com/AAAAAAwd899/Atelier",
+  "license": "MIT; all bundled third-party notices retained",
+  "minimum_declared_anki": "25.09.5",
+  "native_functional_test_anki": "26.09.3",
+  "native_test_scope": "Windows Qt offscreen, synthetic profile; no physical Windows screenshot claim",
+  "macos_linux": "Not verified",
+  "ankiweb_id": null,
+  "ankiweb_url": null,
+  "upload_acceptance_verified": false,
+  "account_eligibility_verified": false,
+  "update_channel": "Future real AnkiWeb listing; numeric identity migration remains to be verified",
+  "website_deployed": false
+}

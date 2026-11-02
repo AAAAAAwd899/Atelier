@@ -1,0 +1,19 @@
+# Atelier 1.0.12 audit
+
+Local-first desktop Anki add-on; cumulative accepted 1.0.11 source with protected 1.0.2 behavior. BRIEF-1.0.12.md records the audience, task and art direction. No public binary, AnkiWeb listing, site deployment, new dependency, data migration, private profile access or third-party add-on modification.
+
+The full library is explicitly reachable above the sidebar tree. Its main hierarchy opens one branch or all folders independently of sidebar expansion. Names, nested context, counts, direct exam actions, sibling custom order and per-row study/menu controls remain available. Rendering stays bounded at 60 rows initially and continues through Show more folders; large-library checks use 5,000 synthetic decks. Library spacing and root breadcrumbs were tightened without removing navigation.
+
+Personalization retains twenty-four authored raster symbols, automatic folder/deck artwork and six colors. The saved preview and selected controls update without replacing the chooser. Named hues remain distinct in all seventeen worlds, with separate light-theme variants. A custom symbol retains a small color marker. The symbols use a cohesive generated raster atlas with documented provenance; they are static artwork with responsive controls, not animated companions. Accepted scenery and companion assets are preserved exactly.
+
+Shared paint/focus feedback is stationary and short across owned workspace, planner/session and integrated Card Studio. Primary press retains its readable fill. Reduced motion and high-contrast defaults remain supported. No broad reset or styling of arbitrary third-party card contents was added.
+
+Technical results must be read from the matching verification/verified.json, the actual extracted-installer receipts, verification/polish-112/results.json and the separately bound native evidence. Earlier preflight failures and their repairs are documented in verification/preflight-112-notes.json. Interrupted or prior-runtime results are not final evidence.
+
+The actual Anki/Onigiri checks use an isolated, unsynced Qt-offscreen profile with synthetic test rewards/settings. No native desktop windows are opened. Actual review/answer/rating controls, reward XP, native Undo, action-bar hit testing and integrity are exercised. Offscreen grab images can show stale frames and remain diagnostic only. Render-review screenshots use shipped interfaces, synthetic data and resolved packaged scenery; they are not native Windows screenshots or human usability studies.
+
+Known limitation: Onigiri's intermittent injector.js:31 startup error was independently reproduced with Atelier absent in the earlier control. No installed Onigiri file is patched. Physical Windows display/GPU, macOS/Linux, hardware remotes, every third-party configuration and owner visual acceptance are not universally certified. See COMPATIBILITY-ONIGIRI-2026-11-02.md and MANUAL_ACTIONS_REQUIRED.md. Technical handoff is separate from public launch approval.
+
+Final frozen-runtime evidence: 1,964 Python checks, 3,091 browser checks across 34 suites, 148 asset-resolved render checks with 48 captures, 33 actual Anki 26.09.3/Onigiri 2.0.2-Bento offscreen checks, eight actual backend folder-order checks, and two motion checks. Installer extraction is verified separately. The Mask Studio test fixture now uses the real integrated host assembly; its two additional presentation assertions account for the final browser total.
+
+Security maintenance (explicit exception to parser-byte preservation): namespaced bundled pypdf updated from 6.21.1 to 6.21.4, with exact upstream wheel/hash manifest. GitHub reviewed advisories include malformed-file denial-of-service fixes. No matching reviewed advisory was returned for 6.21.4 at this check; this is not a complete security guarantee. Card workflows remain unchanged.

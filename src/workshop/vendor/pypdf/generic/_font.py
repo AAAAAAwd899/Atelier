@@ -239,7 +239,7 @@ class Font:
                 Font.__check_entry_count(entry_count)
                 current_widths.update(
                     {
-                        chr(_cidx): _width
+                        chr(_cidx): _width.get_object()
                         for _cidx, _width in zip(
                             range(start_idx, stop_idx, 1),
                             width_list,
@@ -516,7 +516,6 @@ class Font:
                     table_name=table_name
                 )
                 return None
-            return table
         except Exception as exception:
             if is_critical:
                 raise PdfReadError(
@@ -529,6 +528,7 @@ class Font:
                 exception=exception
             )
             return None
+        return table
 
     @staticmethod
     def _get_font_flags_from_truetype_font_tables(
@@ -749,6 +749,8 @@ class Font:
         ):
             try:
                 tt_font_object = TTFont(BytesIO(font_file_data))
+            except MemoryError:  # pragma: no cover  # TODO: BLE001
+                raise
             except Exception as exception:  # Font file data is corrupt.
                 logger_warning("Could not open font file: %(exception)s", source=__name__, exception=exception)
             else:

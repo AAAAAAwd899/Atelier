@@ -482,15 +482,18 @@ def _apply_decode(
 def _get_mode_and_invert_color(
     x_object: dict[str, Any], colors: int, color_space: Union[str, list[Any], Any]
 ) -> tuple[ImageMode, bool]:
+    bits = x_object.get("/BitsPerComponent", 8)
     if (
         ImageAttributes.COLOR_SPACE in x_object
         and x_object[ImageAttributes.COLOR_SPACE] == ColorSpaces.DEVICE_RGB
+        and bits >= 8
     ):
-        # https://pillow.readthedocs.io/en/stable/handbook/concepts.html#modes
-        mode: ImageMode = "RGB"
-    if x_object.get("/BitsPerComponent", 8) < 8:
+        # Full-width /DeviceRGB samples are RGB. Narrower samples stay on
+        # the low-bit path so they can be expanded (#3367).
+        return "RGB", False
+    if bits < 8:
         mode, invert_color = _get_image_mode(
-            f"{x_object.get('/BitsPerComponent', 8)}bit", 0, ""
+            f"{bits}bit", 0, ""
         )
     else:
         mode, invert_color = _get_image_mode(
@@ -569,11 +572,6 @@ def _xobj_to_image(
         visited: Optional[set[int]] = None,
 ) -> tuple[Optional[str], bytes, Any]:
     """
-    Users need to have the pillow package installed.
-
-    It's unclear if pypdf will keep this function here, hence it's private.
-    It might get removed at any point.
-
     Args:
         x_object:
         pillow_parameters: parameters provided to Pillow Image.save() method,
@@ -724,6 +722,8 @@ def _xobj_to_image(
 
     try:  # temporary try/except until other fixes of images
         img = Image.open(BytesIO(data))
+    except MemoryError:  # pragma: no cover  # TODO: BLE001
+        raise
     except Exception as exception:
         logger_warning("Failed loading image: %(exception)s", source=__name__, exception=exception)
         img = None  # type: ignore[assignment,unused-ignore]  # TODO: Remove unused-ignore on Python 3.10

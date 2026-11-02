@@ -65,10 +65,10 @@ try:
   browser=pw.chromium.launch(executable_path=__import__('os').environ.get('ATELIER_TEST_BROWSER','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
   p=browser.new_page(viewport={'width':1440,'height':960},device_scale_factor=1)
   p.set_default_timeout(7000);p.on('pageerror',lambda e:errors.append(str(e)));p.on('request',lambda r:requests.append(r.url));p.expose_function('nativeBridge',host.dispatch)
-  html=HTML
-  for css in ('app.css','mask-editor.css'):html=html.replace('<link rel="stylesheet" href="/web/'+css+'">','<style>'+(ROOT/'addon/web'/css).read_text()+'</style>')
-  for js in ('icons.js','art.js','mask-editor.js','app.js'):html=html.replace('<script src="/web/'+js+'"></script>','<script>'+(ROOT/'addon/web'/js).read_text()+'</script>')
+  html=host.html()  # Same presentation assembly as the installed Card Studio.
   p.set_content(html);p.wait_for_selector('.shelf-grid')
+  check('Installed Card Studio stylesheet is present',p.locator('#atelier-card-studio-shell').count()==1)
+  check('Native-shaped editor header keeps world choice compact',p.locator('.suite-world select').bounding_box()['width']<=200)
   check('Integrated header includes return to study desk',p.locator('[data-action="study-desk"]').count()==1)
   check('Atelier palette is read without replacing the library',p.locator('#workshop').evaluate('(e)=>getComputedStyle(e).getPropertyValue("--accent").trim()')==host.appearance_module.PALETTES['forest']['accent'])
   shot(p,'Atelier_Living_Library.png')

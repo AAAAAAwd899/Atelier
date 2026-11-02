@@ -1,0 +1,31 @@
+{
+  "release": "Atelier 1.0.12",
+  "tool": "built-in image_gen",
+  "selected_asset": "src/web/folder-icons-1.0.12.png",
+  "sha256": "053b1ced810e5df222e49e8c3e4ee8659867aa03c7ea1bcc04246411fa70e87b",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "grid": [
+    6,
+    4
+  ],
+  "symbols": 24,
+  "generated_source": "exec-e0bc65bd-a26a-47f7-ab9b-060aaddb3aa0.png",
+  "prompts": {
+    "first": "24 isolated sculptural study symbols in a 1536x1024 6x4 atlas; books, course, brain, chemistry, stethoscope, DNA, capsules, notes, microscope, art, laptop, star, leaves, blossom, bow, castle, cat, dragon, atom, headphones, compass, globe, geometric solids, coffee; transparent background; no text; consistent tactile ceramic/paper/brass materials and studio lighting.",
+    "refinement": "Preserve subjects, exact identities, positions, scale, colors and material detail. Remove broad floor/background/haze; true transparent background with small local shadows; opaque object interiors; no panels, text, new subjects or position changes."
+  },
+  "origin": "Generated for this project with built-in image generation; not copied from Onigiri or branded icon libraries",
+  "rights_limits": "No claim of exclusive copyright or trademark clearance; no embedded third-party brand marks requested. Review is scoped to app symbols, not medical illustrations.",
+  "alpha_validation": {
+    "mode": "RGBA",
+    "extrema": [
+      0,
+      254
+    ],
+    "fraction_alpha_below_10": 0.6396268208821615
+  },
+  "inspection": "Dark-panel pilot rendered in actual folder picker; no opaque tile backgrounds observed; recognisable silhouettes and preserved old token mappings."
+}

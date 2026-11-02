@@ -135,6 +135,8 @@ class ArrayObject(list[Any], PdfObject):
         try:
             if self.indirect_reference.pdf == pdf_dest and not force_duplicate:  # type: ignore[union-attr]
                 return self
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
         arr = cast(
@@ -334,6 +336,8 @@ class DictionaryObject(dict[Any, Any], PdfObject):
         try:
             if self.indirect_reference.pdf == pdf_dest and not force_duplicate:  # type: ignore[union-attr]
                 return self
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
 
@@ -416,6 +420,7 @@ class DictionaryObject(dict[Any, Any], PdfObject):
                         )
                         prev_obj: Optional[DictionaryObject] = self
                         while cur_obj is not None:
+                            source_reference = cur_obj.indirect_reference
                             clon = cast(
                                 "DictionaryObject",
                                 cur_obj._reference_clone(
@@ -423,13 +428,13 @@ class DictionaryObject(dict[Any, Any], PdfObject):
                                 ),
                             )
                             # Check to see if we've previously processed our item
-                            if clon.indirect_reference is not None:
-                                idnum = clon.indirect_reference.idnum
-                                generation = clon.indirect_reference.generation
-                                if (idnum, generation) in visited:
+                            if source_reference is not None:
+                                source_idnum = source_reference.idnum
+                                source_generation = source_reference.generation
+                                if (source_idnum, source_generation) in visited:
                                     cur_obj = None
                                     break
-                                visited.add((idnum, generation))
+                                visited.add((source_idnum, source_generation))
                             objs.append((cur_obj, clon))
                             assert prev_obj is not None
                             prev_obj[NameObject(k)] = clon.indirect_reference
@@ -439,6 +444,8 @@ class DictionaryObject(dict[Any, Any], PdfObject):
                                     cur_obj = None
                                 else:
                                     cur_obj = cast("DictionaryObject", cur_obj[k])
+                            except MemoryError:  # pragma: no cover  # TODO: BLE001
+                                raise
                             except Exception:
                                 cur_obj = None
                         for s, c in objs:
@@ -509,10 +516,12 @@ class DictionaryObject(dict[Any, Any], PdfObject):
                 return default
 
             # Walk upward
-            current = cast(
-                "DictionaryObject",
-                current["/Parent"].get_object(),
-            )
+            parent = current["/Parent"].get_object()
+            if not isinstance(parent, DictionaryObject):
+                # A malformed /Parent that does not resolve to a dictionary
+                # terminates the inheritance walk (the key was not found).
+                return default
+            current = parent
 
     def __setitem__(self, key: Any, value: Any) -> Any:
         if not isinstance(key, PdfObject):
@@ -632,8 +641,6 @@ class DictionaryObject(dict[Any, Any], PdfObject):
         remaining_count = get_configuration().dictionary_maximum_element_count
         while True:
             tok = read_non_whitespace(stream)
-            if tok == b"\x00":
-                continue
             if tok == b"%":
                 stream.seek(-1, 1)
                 skip_over_comment(stream)
@@ -674,12 +681,12 @@ class DictionaryObject(dict[Any, Any], PdfObject):
             except LimitReachedError:
                 # Always propagate security issues.
                 raise
-            except RecursionError as exc:
-                raise PdfReadError(exc.__repr__()) from exc
+            except (MemoryError, RecursionError) as exc:
+                raise PdfReadError("Error reading PDF file.") from exc
             except Exception as exc:
                 if pdf is not None and pdf.strict:
-                    raise PdfReadError(exc.__repr__()) from exc
-                logger_warning("%(exception)r", source=__name__, exception=exc)
+                    raise PdfReadError("Error reading PDF file.") from exc
+                logger_warning("%(exception)s", source=__name__, exception=repr(exc)[:500])
                 retval = DictionaryObject()
                 retval.update(data)
                 return retval  # return partial data
@@ -904,6 +911,8 @@ class TreeObject(DictionaryObject):
             assert isinstance(prev["/Prev"], DictionaryObject)
             prev["/Prev"][NameObject("/Next")] = child_reference
             child_obj[NameObject("/Prev")] = prev["/Prev"]
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:  # it means we are inserting in first position
             child_obj.pop("/Next", None)
         child_obj[NameObject("/Next")] = prev
@@ -1061,6 +1070,8 @@ class StreamObject(DictionaryObject):
                 self.decoded_self = cast(
                     "DecodedStreamObject", decoded_self.replicate(pdf_dest)
                 )
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
         for k, v in self.items():
@@ -1097,6 +1108,8 @@ class StreamObject(DictionaryObject):
                     "DecodedStreamObject",
                     decoded_self.clone(pdf_dest, force_duplicate, ignore_fields),
                 )
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
         super()._clone(src, pdf_dest, force_duplicate, ignore_fields, visited)
@@ -1364,6 +1377,8 @@ class ContentStream(DecodedStreamObject):
                 self.decoded_self = cast(
                     "DecodedStreamObject", decoded_self.replicate(pdf_dest)
                 )
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
         for k, v in self.items():
@@ -1398,6 +1413,8 @@ class ContentStream(DecodedStreamObject):
         try:
             if self.indirect_reference.pdf == pdf_dest and not force_duplicate:  # type: ignore[union-attr]
                 return self
+        except MemoryError:  # pragma: no cover  # TODO: BLE001
+            raise
         except Exception:
             pass
 
@@ -1914,11 +1931,15 @@ class Destination(TreeObject):
         elif typ in [TF.FIT_H, TF.FIT_BH]:
             try:  # Prefer to be more robust not only to null parameters
                 (self[NameObject(TA.TOP)],) = args
+            except MemoryError:  # pragma: no cover  # TODO: BLE001
+                raise
             except Exception:
                 (self[NameObject(TA.TOP)],) = (NullObject(),)
         elif typ in [TF.FIT_V, TF.FIT_BV]:
             try:  # Prefer to be more robust not only to null parameters
                 (self[NameObject(TA.LEFT)],) = args
+            except MemoryError:  # pragma: no cover  # TODO: BLE001
+                raise
             except Exception:
                 (self[NameObject(TA.LEFT)],) = (NullObject(),)
         elif typ in [TF.FIT, TF.FIT_B]:

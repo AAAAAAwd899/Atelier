@@ -24,6 +24,12 @@ html[data-atelier-card-studio="true"],html[data-atelier-card-studio="true"] body
 #workshop[data-suite-theme="true"] .studio-panel,#workshop[data-suite-theme="true"] .panel,#workshop[data-suite-theme="true"] .library-note,#workshop[data-suite-theme="true"] .settings-section{border-radius:var(--world-radius,18px);border-color:var(--line);}
 #workshop[data-integrated="true"] button{font-family:"Segoe UI",system-ui,sans-serif;}
 #workshop[data-integrated="true"] button:hover{transform:none;}
+#workshop[data-integrated="true"] button{transition:background-color 140ms ease,border-color 140ms ease,box-shadow 140ms ease;}
+#workshop[data-integrated="true"] button:active{transform:none;box-shadow:inset 0 0 0 1px var(--accent);}
+#workshop[data-integrated="true"] :is(button,input,select,textarea):focus-visible{outline:2px solid var(--accent);outline-offset:3px;scroll-margin-block:14px;}
+@media(prefers-reduced-motion:reduce){#workshop[data-integrated="true"] *,#workshop[data-integrated="true"] *::before,#workshop[data-integrated="true"] *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important;}}
+html[data-atelier-world-motion="false"] #workshop[data-integrated="true"] *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
+
 #workshop[data-integrated="true"] button:focus-visible,#workshop[data-integrated="true"] input:focus-visible,#workshop[data-integrated="true"] select:focus-visible,#workshop[data-integrated="true"] textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 #workshop[data-integrated="true"] .shared-world-note{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;line-height:1.7;margin:16px 0;}
 #workshop[data-integrated="true"] .shared-world-note strong{color:var(--fg);}

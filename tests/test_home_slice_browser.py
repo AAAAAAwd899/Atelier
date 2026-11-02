@@ -86,7 +86,7 @@ def run():
   # Actual hit testing after main scroll and short/narrow viewport.
   for width,height in [(320,540),(390,650),(620,700),(820,740),(1024,600),(1250,760),(1725,900)]:
    p=page(width=width,height=height)
-   sidebar_fit=p.evaluate('''()=>{if(innerWidth<=820)return true;const r=document.querySelector('#atelier-root').shadowRoot,h=r.querySelector('.side-hud'),s=r.querySelector('.side-scroll'),b=r.querySelector('.side-bottom'),box=b.getBoundingClientRect();return h.nextElementSibling===s&&s.nextElementSibling===b&&s.clientHeight>=48&&box.top>=0&&box.bottom<=innerHeight+1&&getComputedStyle(s,'::-webkit-scrollbar').width==='12px'&&getComputedStyle(s,'::-webkit-scrollbar-track').backgroundColor!=='rgba(0, 0, 0, 0)'}''')
+   sidebar_fit=p.evaluate('''()=>{if(innerWidth<=820)return true;const r=document.querySelector('#atelier-root').shadowRoot,h=r.querySelector('.side-hud'),s=r.querySelector('.side-scroll'),b=r.querySelector('.side-bottom'),box=b.getBoundingClientRect();return h.nextElementSibling===r.querySelector('.folder-explorer-launch')&&h.nextElementSibling.nextElementSibling===s&&h.nextElementSibling.getBoundingClientRect().height>=28&&s.nextElementSibling===b&&s.clientHeight>=48&&box.top>=0&&box.bottom<=innerHeight+1&&getComputedStyle(s,'::-webkit-scrollbar').width==='12px'&&getComputedStyle(s,'::-webkit-scrollbar-track').backgroundColor!=='rgba(0, 0, 0, 0)'}''')
    check(f'{width} Home contains all essential controls',not overflow(p) and sidebar_fit and all(hit(p.locator('.unified-topbar [data-command="'+k+'"]')) for k in ('add','browse','sync')))
    if width==1725:
     check('Laptop-height sidebar exposes folders below compact focus',p.evaluate('''()=>{const r=document.querySelector('#atelier-root').shadowRoot,s=r.querySelector('.side-scroll').getBoundingClientRect(),f=r.querySelector('.tree-row').getBoundingClientRect();return f.top>=s.top&&f.bottom<=s.bottom}'''))
@@ -100,7 +100,7 @@ def run():
     check('Short sidebar can expand focused folders',p.locator('.side-studies .side-exam').first.is_visible())
     p.locator('.side-focus-toggle').click()
     check('Sidebar folder index is compact and retains full path hints',p.locator('.sidebar .tree-row').count()>0 and p.locator('.sidebar .tree-row').first.evaluate('e=>e.getBoundingClientRect().height<=38') and bool(p.locator('.sidebar .tree-open').first.get_attribute('title')))
-    p.locator('.sidebar .folder-library-link').click()
+    p.locator('.sidebar .folder-explorer-launch').click()
     check('Compact folder index opens the full Library workspace',p.evaluate('AtelierMakeover.diagnostics().page')=='library' and p.locator('.library').is_visible())
     p.locator('.sidebar .nav-group [data-action="home"]').click()
    if width==1024:p.screenshot(path=str(SHOTS/'forest-sidebar-compact-1024x600.png'),animations='disabled')

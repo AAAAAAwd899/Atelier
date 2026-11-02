@@ -33,10 +33,13 @@ _predefined_cmap: dict[str, str] = {
     "/ETen-B5-V": "cp950",
     "/ETenms-B5-H": "cp950",
     "/ETenms-B5-V": "cp950",
+    # Unicode-based CMaps: character codes are UTF-16BE, see
+    # ISO 32000-2:2020, 9.7.5.2, Note 1 and Table 116.
+    # (UniGB covers the GB18030-2000 character set but is not GB18030-encoded.)
     "/UniCNS-UTF16-H": "utf-16-be",
     "/UniCNS-UTF16-V": "utf-16-be",
-    "/UniGB-UTF16-H": "gb18030",
-    "/UniGB-UTF16-V": "gb18030",
+    "/UniGB-UTF16-H": "utf-16-be",
+    "/UniGB-UTF16-V": "utf-16-be",
     # Japanese CMaps (PDF Reference 1.7, Appendix H)
     "/90ms-RKSJ-H": "cp932",  # Shift-JIS (JIS X 0208-1990), horizontal
     "/90ms-RKSJ-V": "cp932",  # Shift-JIS (JIS X 0208-1990), vertical
@@ -97,8 +100,8 @@ def _parse_encoding(
             elif "-UCS2-" in enc:
                 encoding = "utf-16-be"
             else:
-                raise Exception("not found")
-        except Exception:
+                raise KeyError("not found")
+        except KeyError:
             encoding = (
                 "utf-16-be" if ft.get("/Subtype", "") == "/Type0" else charset_encoding["/StandardEncoding"].copy()
             )
@@ -111,7 +114,7 @@ def _parse_encoding(
     elif isinstance(enc, DictionaryObject) and "/BaseEncoding" in enc:
         try:
             encoding = charset_encoding[cast(str, enc["/BaseEncoding"])].copy()
-        except Exception:
+        except KeyError:
             logger_error(
                 "Advanced encoding %(encoding)s not implemented yet",
                 source=__name__, encoding=encoding
@@ -136,7 +139,9 @@ def _parse_encoding(
             else:  # isinstance(o, str):
                 try:
                     if x < len(encoding):
-                        encoding[x] = adobe_glyphs[o]  # type: ignore[index]
+                        encoding[x] = _glyph_name_to_unicode(o) or o  # type: ignore[index]
+                except MemoryError:  # pragma: no cover  # TODO: BLE001
+                    raise
                 except Exception:
                     encoding[x] = o  # type: ignore[index]
                 x += 1
@@ -375,6 +380,10 @@ def parse_bfrange(
         _check_token_length(lst[1], limit=MAX_CMAP_CODE_BYTES_LIMIT)
         a = int(lst[0], 16)
         b = int(lst[1], 16)
+        if a < 0 or b < 0:
+            # int(token, 16) accepts a leading "-"; negative range bounds
+            # would leak an OverflowError from the to_bytes encoding below.
+            raise ValueError(f"Negative bfrange source range: {lst[0]!r} {lst[1]!r}")
         nbi = max(len(lst[0]), len(lst[1]))
         map_dict[-1] = (nbi + 1) // 2
         if lst[2] == b"[":
@@ -422,9 +431,9 @@ def parse_bfchar(line: bytes, map_dict: dict[Any, Any], int_entry: list[int]) ->
     _check_mapping_size(len(int_entry) + new_count)  # This can be checked beforehand.
     map_dict[-1] = len(lst[0]) // 2
 
-    while len(lst) > 1:
-        source = lst[0]
-        destination = lst[1]
+    for index in range(0, lst_length - 1, 2):
+        source = lst[index]
+        destination = lst[index + 1]
 
         _check_token_length(source, limit=MAX_CMAP_CODE_BYTES_LIMIT)
 
@@ -449,17 +458,20 @@ def parse_bfchar(line: bytes, map_dict: dict[Any, Any], int_entry: list[int]) ->
             )
         ] = map_to
         int_entry.append(int(source, 16))
-        lst = lst[2:]
 
 
 def _glyph_name_to_unicode(glyph_name: str) -> Union[str, None]:
     try:
         return adobe_glyphs[glyph_name]
     except KeyError:
-        if not glyph_name.startswith("/uni"):
+        if glyph_name.startswith("/uni"):
+            code_point = glyph_name[4:]
+        elif glyph_name.startswith("/u"):
+            code_point = glyph_name[2:]
+        else:
             return None
         try:
-            return chr(int(glyph_name[4:], 16))
+            return chr(int(code_point, 16))
         except ValueError:  # pragma: no cover
             return None
 
@@ -511,9 +523,11 @@ def _derive_character_map_from_cff_type1_font_file(
             if unipoint := _glyph_name_to_unicode(f"/{glyph_name}"):
                 map_dict[chr(i)] = unipoint
                 int_entry.append(i)
-        return map_dict, int_entry
-
+    except MemoryError:  # pragma: no cover  # TODO: BLE001
+        raise
     except Exception:
+        return map_dict, int_entry
+    else:
         return map_dict, int_entry
 
 

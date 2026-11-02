@@ -6,9 +6,9 @@ from reportlab.pdfgen import canvas
 from fixtures import ROOT,SRC
 
 def test_namespaced_parser_matches_every_pinned_upstream_byte():
-    lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.1.json').read_text())
+    lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.4.json').read_text())
     files={p.relative_to(SRC).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (SRC/'workshop/vendor/pypdf').rglob('*') if p.is_file() and '__pycache__' not in p.parts}
-    assert files==lock['files'] and lock['version']=='6.21.1'
+    assert files==lock['files'] and lock['version']=='6.21.4'
     old=json.loads((ROOT/'baseline-1.0.2.json').read_text())
     historic=json.loads((ROOT/'tests/data/pypdf-590-baseline.json').read_text())
     assert all(hashlib.sha256(text.encode('utf8')).hexdigest()==old[n] for n,text in historic.items())
@@ -17,7 +17,7 @@ def test_namespaced_parser_matches_every_pinned_upstream_byte():
 def test_real_pdf_text_and_page_order_survive_parser_upgrade():
     original=sys.modules.get('pypdf')
     pdf=importlib.import_module('atelier_testing.workshop.vendor.pypdf')
-    assert pdf.__version__=='6.21.1' and sys.modules.get('pypdf') is original
+    assert pdf.__version__=='6.21.4' and sys.modules.get('pypdf') is original
     stream=BytesIO();c=canvas.Canvas(stream)
     c.drawString(40,700,'Slide 1: atrial anatomy');c.showPage()
     c.drawString(40,700,'Slide 2: treatment choices');c.save()

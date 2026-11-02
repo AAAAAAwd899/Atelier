@@ -31,6 +31,7 @@ __author_email__ = "biziqe@mathieu.fenniak.net"
 
 import functools
 import logging
+import os
 import re
 import sys
 import warnings
@@ -45,6 +46,7 @@ from typing import (
     NoReturn,
     Optional,
     Union,
+    cast,
 )
 
 if sys.version_info[:2] >= (3, 10):
@@ -585,6 +587,30 @@ def _human_readable_bytes(bytes: int) -> str:
     return f"{bytes / 10**9:.1f} GB"
 
 
+def get_stream_size(stream: StreamType) -> int:
+    if hasattr(stream, "getbuffer"):
+        with stream.getbuffer() as view:
+            return cast(int, view.nbytes)
+
+    position = stream.tell()
+    stream.seek(0, os.SEEK_END)
+    size = stream.tell()
+    stream.seek(position)
+    return size
+
+
+def get_stream_data(stream: StreamType) -> bytes:
+    if hasattr(stream, "getbuffer"):
+        with stream.getbuffer() as view:
+            return bytes(view)
+
+    position = stream.tell()
+    stream.seek(0, os.SEEK_SET)
+    data = stream.read(-1)
+    stream.seek(position)
+    return cast(bytes, data)
+
+
 # The following class has been copied from Django:
 # https://github.com/django/django/blob/adae619426b6f50046b3daaa744db52989c9d6db/django/utils/functional.py#L51-L65
 # It received some modifications to comply with our own coding standards.
@@ -679,8 +705,6 @@ class Version:
                 continue
             integer_prefix = match.group(1)
             suffix = match.group(2)
-            if integer_prefix is None:
-                integer_prefix = 0
             parsed_components.append((int(integer_prefix), suffix))
         return parsed_components
 

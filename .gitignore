@@ -23,3 +23,6 @@ __pycache__/
 /workshop_checks/docs/
 *.log
 
+
+# Local immutable recovery deltas; never a third editable checkout.
+.recovery/
