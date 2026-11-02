@@ -19,11 +19,16 @@ for n in ['output/native-install-109/results.json','output/native-onboarding-109
     p=ROOT/n;r=json.loads(p.read_text());assert r['runtime_sha256']==runtime_digest() and r['anki']=='26.09.3' and not r['errors'] and all(r['checks'].values());
     if r.get('platform')=='offscreen':assert r.get('completed') is True
     files.append(p);native.append({'receipt':n,'checks':len(r['checks'])})
+summary=json.loads((V/'native-summary-109.json').read_text())
+assert summary['runtime_sha256']==runtime_digest() and summary['native_total']==sum(x['checks'] for x in native)==134
+assert summary['windows_native_checks']==98 and summary['offscreen_anki_qt_checks']==36
+files.append(V/'whitespace-109.json')
+files.extend((V/'qa-diagnostics-109').glob('*'))
 for folder in ['screenshots/native-navigation-109','screenshots/navigation-109','screenshots/native-clock-109','screenshots/native-compat-109','screenshots/listing-review-109','screenshots/native-onboarding-109']:
     files.extend((ROOT/folder).glob('*.png'))
 files.extend(F.rglob('*'))
 files=sorted(set(p for p in files if p.is_file()))
-assert all(p.suffix in ['.json','.xml','.md','.log','.exit','.png','.html','.txt'] and 'private-backup' not in p.parts for p in files)
+assert all(p.suffix in ['.json','.xml','.md','.log','.exit','.png','.html','.txt','.js','.css'] and 'private-backup' not in p.parts for p in files)
 evidence=D/'Atelier-1.0.9-Evidence.zip'
 write_archive(evidence,[(p,'Atelier-1.0.9-Evidence/'+p.relative_to(ROOT).as_posix()) for p in files])
 receipt={'runtime_sha256':runtime_digest(),'files':len(files),'bytes':evidence.stat().st_size,'sha256':sha(evidence),'native':native,'native_total':sum(x['checks'] for x in native),'profiles_or_owner_data_included':False}
