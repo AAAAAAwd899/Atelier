@@ -40,7 +40,7 @@ def run():
     fonts.add(meta['font']);images.add(meta['art']);radii.add(meta['radius'])
     expected_font=next(w['font'] for w in worlds.CATALOG if w['id']==theme)
     check(theme+' heading uses the canonical local font stack',meta['font']==expected_font)
-    check(theme+' home world renders real art, native controls, canonical plans',meta['art']!='none' and p.locator('.unified-topbar [data-command]').count()==3 and p.locator('.suite-plan').count()==2 and not home_overflow(p))
+    check(theme+' home world renders real art, native controls, canonical plans',meta['art']!='none' and set(p.locator('.unified-topbar [data-command]').evaluate_all('xs=>xs.map(e=>e.dataset.command)'))=={'add','browse','stats','sync'} and p.locator('.suite-plan').count()==2 and not home_overflow(p))
     # The graphic theme truly acts on the shadow host, not dead :host:not syntax.
     if theme in ('forest','linen','rose'):check(theme+' custom heading font applied','Georgia' in meta['font'])
     capture(p,SHOTS/f'{theme}-home.png')

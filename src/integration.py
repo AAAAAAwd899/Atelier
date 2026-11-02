@@ -19,7 +19,7 @@ from aqt.operations import CollectionOp, QueryOp
 from aqt.qt import QAction, QApplication, QEvent, QObject, Qt, QWidget
 from aqt.utils import showInfo
 
-from .core import (VERSION, COLORS, ProfileStore, ValidationError, collection_snapshot,
+from .core import (VERSION, COLORS, FOLDER_ICONS, ProfileStore, ValidationError, collection_snapshot,
                    creation_path, deck_id, fresh_catalog, json_for_html, profile_settings,
                    rename_path, settings, validate_move, validate_study, observe_decks, quick_study, set_study_active, exam_label, home_layout, upsert_study, canonical_profile)
 
@@ -374,6 +374,15 @@ class Atelier:
                 updated[key] = [x for x in updated[key] if x != did]
                 if selected:
                     updated[key].append(did)
+            elif key == "folder_icon":
+                did = deck_id(data.get("id"))
+                value = data.get("value")
+                if not isinstance(value, str) or value not in ("default", *FOLDER_ICONS):
+                    raise ValidationError("Choose an icon from the folder collection.")
+                if value == "default":
+                    updated["folder_icons"].pop(did, None)
+                else:
+                    updated["folder_icons"][did] = value
             elif key == "color":
                 did = deck_id(data.get("id"))
                 value = data.get("value")

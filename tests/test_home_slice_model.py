@@ -63,6 +63,8 @@ def test_engine_and_native_behaviour_preserved_from_rc3(file):
 
 def test_new_styles_are_home_only_and_loaded():
     css=(S/'web/home-shell.css').read_text()
-    assert '#qa' not in css and '#es-app' not in css and 'body' not in css
+    assert '#qa' not in css and '#es-app' not in css
+    import re
+    assert not re.search(r'(?<![-\w])body(?![-\w])',css)  # .dialog-body is scoped; a body selector is not.
     assert 'forced-colors:active' in css and 'prefers-reduced-motion:reduce' in css
     assert 'home-shell.css' in (S/'worlds.py').read_text()

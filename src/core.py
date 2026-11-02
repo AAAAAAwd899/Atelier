@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.8"
+VERSION = "1.0.9"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -29,7 +29,7 @@ DEFAULTS = {
     "acknowledged_makeovers": [], "remote": {"enabled": False, "bindings": {}},
 }
 DEFAULT_PROFILE = {
-    "favorites": [], "folders": [], "colors": {}, "last_location": "0",
+    "favorites": [], "folders": [], "colors": {}, "folder_icons": {}, "last_location": "0",
     "studies": [], "focus_enabled": False, "selected_study": "all",
     "recent_locations": [], "last_studied": "0",
     "seen_decks": [], "seen_initialized": False, "recent_added": [],
@@ -39,6 +39,7 @@ DEFAULT_PROFILE = {
     "widget_route_version": 0,
     "onboarding": {"version": 0, "status": "new"},
 }
+FOLDER_ICONS = ("books", "course", "brain", "science", "medicine", "dna", "pills", "notes", "microscope", "art", "code", "star", "leaf", "flower", "bow", "castle", "cat", "dragon")
 COLORS = ("violet", "blue", "rose", "green", "amber", "cyan")
 
 class ValidationError(ValueError):
@@ -95,7 +96,7 @@ def settings(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         return out
     choices = {"widget_mode": ("balanced","original"), "visual_owner": ("ask", "atelier", "onigiri", "external"), "theme": THEMES, "mode": ("workspace", "hybrid", "native"),
-               "density": ("comfortable", "compact"), "view": ("grid", "list"),
+               "density": ("comfortable", "compact"), "view": ("grid", "list", "outline"),
                "sort": ("name", "due", "recent"),
                "review_style": ("adaptive", "controls", "off"),
                "review_width": ("standard", "wide"), "review_context": ("compact", "full", "hidden")}
@@ -141,6 +142,13 @@ def profile_settings(value: Any) -> dict[str, Any]:
                 if val in COLORS:
                     out["colors"][deck_id(key)] = val
             except (ValidationError, TypeError):
+                pass
+    if isinstance(value.get("folder_icons"), dict):
+        for key, val in list(value["folder_icons"].items())[:20000]:
+            try:
+                if isinstance(val, str) and val in FOLDER_ICONS:
+                    out["folder_icons"][deck_id(key)] = val
+            except ValidationError:
                 pass
     try:
         out["last_location"] = deck_id(value.get("last_location", "0"), root=True)
