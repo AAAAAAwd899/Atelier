@@ -1,3 +1,7 @@
+# Atelier 1.0.11
+
+Library labels are simpler. Native dropdown options use each world's panel and text colors, including accessible high-contrast defaults. The complete Decks, Add cards, Browse, Statistics, Sync and Add-on tools bar remains available in Atelier. Course and lecture ordering, direct Set exam actions and all existing engines are preserved.
+
 # Atelier 1.0.7
 
 Adds a searchable Add-on tools window using original Tools and added top-level menu actions. Disabled actions, submenu context, check states, shortcuts and original dialogs are preserved. No add-on is installed, imported, copied or reconfigured. Open it from Anki tools or Tools → Atelier. Editor-only and reviewer-only controls remain in their own windows.

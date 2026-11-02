@@ -1,0 +1,11 @@
+# Atelier 1.0.11 audit
+
+Local Anki desktop add-on; cumulative upgrade of verified 1.0.10 and protected 1.0.2. Shared Daedalus standards apply. BRIEF-1.0.11.md records the scoped consumer wording and visual direction.
+
+The dropdown correction is confined to Atelier's shadow-root CSS: explicit option/optgroup backgrounds and text, disabled-state distinction and system high-contrast colors. Native semantics and keyboard behavior remain intact. All seventeen worlds were checked with a deliberately light browser color scheme; minimum computed option contrast was 5.57:1. Actual dark/light open-menu screenshots were inspected. Native system selection highlight remains unchanged. Consumer library text is simplified; all navigation controls remain.
+
+The complete six-action bar is retained. Browser tests cover desktop, compact and narrow layouts. The installed Anki 26.09.3 and Onigiri 2.0.2-Bento are additionally loaded in an isolated unsynced Qt-offscreen profile, deliberately hiding Anki's stock toolbar and dismissing first-run UI through its own buttons. Exact native assertions and completion are in verification/native-onigiri-111.json. Offscreen Qt grab can show a stale composited frame and is not accepted visual evidence.
+
+Fresh full Python and headless browser results are runtime-bound in verification/verified.json. Installer extraction, byte equality, safe ZIP contents, CRC and deterministic rebuilding are required by package_111.py. The extracted new ordering UI is exercised independently. Native functional checks use actual study/answer/rating buttons, original hooks, grading and native Undo, including Onigiri XP. Owner profiles, add-on settings and data are never opened or modified. Test-only reward settings are explicit.
+
+An intermittent Onigiri sidebar injector startup error was also observed without Atelier; it remains an upstream limitation, not a universal compatibility pass. No installed Onigiri source was patched. See COMPATIBILITY-ONIGIRI-2026-11-02.md. macOS/Linux, physical remotes, live GPU and every personalized third-party configuration remain unverified. Owner acceptance is distinct from technical checks. AnkiWeb and public binary publication remain unperformed; only source may be pushed to the previously approved GitHub destination.

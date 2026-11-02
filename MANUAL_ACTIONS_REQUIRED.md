@@ -1,6 +1,6 @@
 # Atelier owner decisions and external actions
 
-- Review the cumulative 1.0.10 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
+- Review the cumulative 1.0.11 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
 - During that review, switch through the original and five added worlds, inspect the theme-specific Pip companion treatments, and create an exam containing two parent folders to confirm the combined scope and overlap wording are clear.
 - The owner explicitly authorized making https://github.com/AAAAAAwd899/Atelier public for GitHub Issues support on October 20, 2026. Verify the final visibility and support links in the handoff receipt. Website deployment, a public binary release and AnkiWeb upload remain separate, unperformed actions.
 - When AnkiWeb permits the owner account to share an add-on, create/identify the exact listing and record its numeric code. Verify the then-current upload rules. Account eligibility has not been verified and no eligibility date is promised.
@@ -12,4 +12,6 @@
 
 No scheduled publication or account-age monitoring has been created. No owner collection, private source document, profile database or credential is part of the repository or installer. Listing images use generated example records.
 
-- The owner requested browser-only remaining work after native QA windows appeared on their desktop. The finished Windows native checks remain valid for their exact runtime; do not launch more desktop QA without renewed permission. Installed-Onigiri coexistence, other named add-on combinations, macOS/Linux and uncoached novice acceptance remain unverified.
+- The owner requested no more desktop QA windows. Keep native QA offscreen. Installed-Onigiri coexistence has now been checked offscreen for the documented synthetic study, rewards, Undo and action-bar paths; other add-on combinations, macOS/Linux, personalized settings combinations and uncoached novice acceptance remain unverified.
+
+- November 2 Onigiri coexistence audit: installed Onigiri 2.0.2-Bento intermittently raises a sidebar `insertBefore` error in `web/injector.js:31`, also observed with Atelier absent in a disposable profile. Track with upstream Onigiri before claiming complete startup compatibility. Native study, rewards and Undo were exercised separately; see COMPATIBILITY-ONIGIRI-2026-11-02.md. Owner add-on code and settings were not modified.

@@ -1,0 +1,13 @@
+# Onigiri coexistence review — November 2, 2026
+
+The profile badge, level/XP and deck progress in the study overview belong to Onigiri. Atelier deliberately retains those elements while styling its own supported surfaces. Personalized Onigiri typography and colors can remain visible. No broad reset, reward-hook removal, third-party source patch or owner preference change was introduced.
+
+Actual installed Anki 26.09.3 and installed Onigiri 2.0.2-Bento were loaded together in an isolated unsynced profile using Qt's offscreen platform. The test copies code and assets only, excluding owner preferences, layouts and stores. Synthetic Nook Level rewards were enabled with notifications off. No desktop Anki windows were created.
+
+The combined run passed 27 checks: all six home actions visible/hit-testable while the stock toolbar is hidden, Decks navigation, retained profile/progress, visible and hit-testable Study Now, Show Answer and Good buttons, original overview action presence, no horizontal overflow, original question/answer content, one context header, native grading, intact reward hooks, native Undo and collection integrity. Good earned exactly 5 XP; the completed native Undo restored XP to 0 together with the original card and review history. Switching presentation ownership released Atelier's visual gates. The control run uses the same installed Onigiri code without Atelier.
+
+Receipts are in verification/native-onigiri-111.json and output/onigiri-alone/results.json. Their runtime hash binds the current working source. The reviewer/ownership files are separately compared byte-for-byte with the shipped 1.0.11 installer in verification/onigiri-coexistence-111.json. The pending library wording change is unrelated to these reviewer files.
+
+An intermittent Onigiri sidebar startup error was observed in both combined and Onigiri-only runs: web/injector.js:31 calls insertBefore with a reference node outside the expected parent. This was not attributed to Atelier and no installed Onigiri file was patched. The observed control error and injector source hash are retained in output/onigiri-alone/observed-startup-errors.json. Track this upstream; the functional pass does not declare all Onigiri startup behavior error-free.
+
+Limits: offscreen functional/DOM geometry evidence, not physical Windows-display, macOS/Linux, hardware or every personalized settings combination. Qt grab images showed stale composited frames and are diagnostic only; they are not accepted visual screenshots. First-run overlay dismissal and asynchronous native Undo completion are explicit in the test. This release includes a local 1.0.11 installer. No AnkiWeb upload or public binary release was performed.

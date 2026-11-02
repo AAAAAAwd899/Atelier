@@ -488,3 +488,14 @@
 /* Explicit exam actions and reversible display ordering. */
 .library-row-actions .exam-pin,.outline-exam .exam-pin{display:inline-flex;min-height:34px;padding:6px 10px;white-space:nowrap;font-size:11px;border:1px solid var(--line);background:var(--raised);border-radius:9px;gap:5px;margin:0}.outline-exam .is-active{color:var(--accent);background:var(--accent-soft)}.arrange-order{min-height:34px;font-size:11px;padding:6px 10px;white-space:nowrap}.arrange-list{max-height:360px;overflow:auto;border:1px solid var(--line);border-radius:13px;overscroll-behavior:contain}.arrange-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line-soft);min-height:63px}.arrange-row:last-child{border-bottom:0}.arrange-position{width:22px;color:var(--quiet);font-size:11px;flex-shrink:0}.arrange-art{width:27px;height:30px;flex-shrink:0;color:var(--tone)}.arrange-art svg{width:100%;height:100%}.arrange-row>strong{min-width:0;flex:1;overflow-wrap:anywhere;font-size:13px}.arrange-row>div{display:flex;gap:4px;flex-shrink:0}.arrange-row .icon-button{width:30px;height:34px}.arrange-row button:disabled{opacity:.3}
 @media(max-width:620px){.outline-exam{flex-basis:100%;display:flex;justify-content:flex-end;padding-top:3px}.outline-exam .exam-pin{min-height:30px;font-size:10px}.library .view-tools{flex-wrap:wrap}.arrange-row{gap:6px;padding:9px}.arrange-row>strong{font-size:12px}.arrange-row .icon-button{width:27px}.arrange-position{width:18px}.arrange-art{display:none}}
+
+/* Keep native select popups readable when Anki or another add-on sets light menus. */
+select{color-scheme:var(--scheme,dark);}
+select option,select optgroup{background-color:var(--panel);color:var(--text);}
+select option:checked{background-color:var(--accent);color:var(--on-accent);}
+select option:disabled:not(:checked),select optgroup:disabled{color:var(--muted);}
+@media(forced-colors:active){
+ select option,select optgroup{background-color:Canvas;color:CanvasText;forced-color-adjust:auto;}
+ select option:checked{background-color:Highlight;color:HighlightText;}
+ select option:disabled,select optgroup:disabled{color:GrayText;}
+}
