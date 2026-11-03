@@ -795,6 +795,7 @@ def install(module: str) -> Atelier:
             registration.hook(gui_hooks.state_will_change, addon.review_theme.before_state)
         registration.hook(gui_hooks.state_did_change, addon.review_theme.after_state)
         addon.review_theme.install(register=registration.hook)
+        registration.hook(gui_hooks.deck_browser_did_render, lambda *_args: mw.progress.single_shot(0, addon.restore_native_toolbar))
         registration.hook(gui_hooks.top_toolbar_did_redraw, lambda toolbar: (addon.apply_chrome(), addon.review_theme._top_surface(mw.state)))
         addon.input_guard = InputShortcutGuard(addon)
         app = QApplication.instance()
