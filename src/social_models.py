@@ -3,7 +3,7 @@ from __future__ import annotations
 import re,uuid
 from .core import ValidationError,deck_id
 KEEPSAKES=(
- {'id':'journal','name':'The journal nook','reviews':10,'days':1,'description':'A cozy writing nook and your private reflection journal.'},
+ {'id':'journal','name':'The journal nook','reviews':10,'days':1,'description':'A cozy writing nook and a journal for your thoughts.'},
  {'id':'observatory','name':'The observatory','reviews':50,'days':3,'description':'An astronomer outfit, brass telescope and your study constellation.'},
  {'id':'greenhouse','name':'The greenhouse','reviews':150,'days':7,'description':'A gardening outfit and glasshouse with your current study focus.'},
 )

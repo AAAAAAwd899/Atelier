@@ -124,13 +124,13 @@ def claimed(_):
 def equipped(_):
  try:
   check('Scene choice reaches the existing planner presentation config',owner.sprout_config().get('companion_scene')=='journal')
-  owner.friends.window.web.eval('(()=>{const t=document.querySelector("textarea[name=value]");t.value="A native, local reflection.";t.form.requestSubmit();})()')
-  dom('window.AtelierSocial.getState().journey.saved.reflection==="A native, local reflection."',reflected)
+  owner.friends.window.web.eval('(()=>{const t=document.querySelector("textarea[name=value]");t.value="A little progress today.";t.form.requestSubmit();})()')
+  dom('window.AtelierSocial.getState().journey.saved.reflection==="A little progress today."',reflected)
  except Exception:fail()
 
 def reflected(_):
  try:
-  check('Private reflection persists without any service account',owner.profile['journey']['reflection']=='A native, local reflection.' and owner.friends.client.session is None)
+  check('Private reflection persists without any service account',owner.profile['journey']['reflection']=='A little progress today.' and owner.friends.client.session is None)
   check('Keepsake preferences leave native cards and review history unchanged',(aqt.mw.col.db.all('select * from cards order by id'),aqt.mw.col.db.all('select * from revlog order by id'))==before)
   owner.friends.window.web.eval('document.querySelector("[data-op=tab][data-tab=shared]").click()')
   owner.friends.window.close()
@@ -147,7 +147,7 @@ def open_planner():
   from datetime import datetime,timedelta
   if owner.exam_engine.store is None:owner.exam_engine.profile_open()
   deck=aqt.mw.col.decks.by_name('Companion QA::Lecture')
-  owner.exam_engine.store.save_exam({'id':'native-journey-qa','name':'Companion QA exam','due':(datetime.now()+timedelta(days=7)).isoformat(timespec='minutes'),'scopes':[{'deck_id':deck['id'],'name':deck['name']}]})
+  owner.exam_engine.store.save_exam({'id':'native-journey-qa','name':'Biology final','due':(datetime.now()+timedelta(days=7)).isoformat(timespec='minutes'),'scopes':[{'deck_id':deck['id'],'name':deck['name']}]})
   owner.sprout_link.open_target('overview','native-journey-qa')
   owner.exam_engine.dialog.showNormal();owner.exam_engine.dialog.resize(1400,1000)
   planner_ready()

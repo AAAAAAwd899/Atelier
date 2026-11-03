@@ -21,7 +21,7 @@ function sync(s){if(!s.root.isConnected)return;
  }
  else fallback(s);
  const b=s.root.querySelector('.pip-pause');if(b){b.setAttribute('aria-pressed',String(s.userPaused));const text=s.userPaused?'Resume motion':'Pause motion';if(b.textContent!==text)b.textContent=text;}
- s.root.dataset.pipPaused=String(pause);const mode=s.root.querySelector('.pip-mode'),text=s.portrait?'Illustrated companion · Local only':s.scene?'Live 3D · Local only':'Low-power animation · Local only';if(mode&&mode.textContent!==text)mode.textContent=text;
+ s.root.dataset.pipPaused=String(pause);
 }
 function mount(){if(disposed||mutating)return;mutating=true;
  for(const [root,s]of live){if(!root.isConnected){stopTimer(s);intersection.unobserve(root);s.scene?.dispose();live.delete(root);}}

@@ -284,7 +284,7 @@ class FriendsController:
             from .companion_journey import change
             self.save('journey', change(self.owner.profile, 'equip' if op.endswith('equip') else 'reflection', data.get('value')))
             self.owner.sprout_link.refresh()
-            self.notice = 'Scene chosen.' if op.endswith('equip') else 'Reflection saved on this device.'
+            self.notice = 'Scene chosen.' if op.endswith('equip') else 'Journal saved.'
             self.refresh()
         elif op == 'focus_open':
             self.owner.open()

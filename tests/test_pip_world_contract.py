@@ -25,7 +25,9 @@ def test_pip_worlds_keep_shared_growth_and_use_authored_portraits():
     assert "data-pip-portrait" in APP and "pipPortrait(base,world.kind)" in APP
     assert "companion-${kind}-${kind==='green'?'1.0.15':'1.0.3'}.png" in APP
     assert "keepsake-${scene}-1.0.15.png" in APP
-    assert "Illustrated companion · Local only" in PIP
+    assert "Illustrated companion · Local only" not in PIP
+    assert 'class="pip-mode"' not in APP
+    assert "Local & private" not in APP
     assert "s.portrait" in PIP and "pip-portrait-greet" in CSS
     assert "data-pip-stage" in APP and "data-pip-animate" in APP
     assert "function pipStageLabel(kind, stage)" in APP

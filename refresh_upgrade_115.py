@@ -9,7 +9,7 @@ patch={'baseline':'Verified Atelier 1.0.2; cumulative reviewed upgrade through 1
 old=json.loads((ROOT/'dist/Atelier-1.0.14-Files.json').read_text())['files']
 changed=[n for n in files if n in old and files[n]!=old[n]];added=[n for n in files if n not in old]
 assert not set(old)-set(files),'An accepted runtime file was removed'
-protected=[n for n in old if n.startswith(('sprout/','workshop/')) and n not in ('sprout/web/app.js',)]
+protected=[n for n in old if n.startswith(('sprout/','workshop/')) and n not in ('sprout/web/app.js','sprout/web/pip.js')]
 assert all(old[n]==files[n] for n in protected),'A protected exam/card engine or original asset changed'
 for n in ['folder_study.py','native_widgets.py','ownership.py','remotes.py','remote_model.py','figure_cache.py','focus_context.py','study_progress.py','quiet_navigation.py']:
  assert old[n]==files[n],n
