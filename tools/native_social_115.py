@@ -93,7 +93,7 @@ def locked(_):
 
 def activity():
  def make(col):
-  did=col.decks.id('Companion QA::Lecture')
+  did=col.decks.id('Biology::Cell structure')
   for i in range(10):
    note=col.new_note(col.models.by_name('Basic'));note['Front']='Native question '+str(i);note['Back']='Native answer';col.add_note(note,did)
   col.decks.select(did)
@@ -146,7 +146,7 @@ def open_planner():
  try:
   from datetime import datetime,timedelta
   if owner.exam_engine.store is None:owner.exam_engine.profile_open()
-  deck=aqt.mw.col.decks.by_name('Companion QA::Lecture')
+  deck=aqt.mw.col.decks.by_name('Biology::Cell structure')
   owner.exam_engine.store.save_exam({'id':'native-journey-qa','name':'Biology final','due':(datetime.now()+timedelta(days=7)).isoformat(timespec='minutes'),'scopes':[{'deck_id':deck['id'],'name':deck['name']}]})
   owner.sprout_link.open_target('overview','native-journey-qa')
   owner.exam_engine.dialog.showNormal();owner.exam_engine.dialog.resize(1400,1000)
