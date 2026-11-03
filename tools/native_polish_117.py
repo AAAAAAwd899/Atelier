@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from release_tools import production_files,runtime_digest
 ALONE='--onigiri-only' in sys.argv
 OUT=ROOT/('output/onigiri-alone-117' if ALONE else 'output/onigiri-coexistence-117');OUT.mkdir(parents=True,exist_ok=True)
+(OUT/'captured-question.flag').unlink(missing_ok=True)
 BASE=OUT/('profile-'+str(time.time_ns()));BASE.mkdir()
 foreign=Path.home()/'AppData/Roaming/Anki2/addons21/1011095603'
 assert shutil.disk_usage(ROOT).free>50*1024**3+450_000_000
@@ -18,6 +19,10 @@ def ignore(folder,names):return {n for n in names if n in excluded or n.startswi
 shutil.copytree(foreign,BASE/'addons21/1011095603',ignore=ignore)
 (BASE/'addons21/1011095603/config.json').write_text('{}',encoding='utf8')
 os.environ.update(QT_QPA_PLATFORM='offscreen',QTWEBENGINE_CHROMIUM_FLAGS='--disable-gpu --no-sandbox --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling',ANKI_SOFTWAREOPENGL='1',QTWEBENGINE_DISABLE_SANDBOX='1')
+import socket
+sock=socket.socket();sock.bind(('127.0.0.1',0));debug_port=sock.getsockname()[1];sock.close()
+os.environ['QTWEBENGINE_REMOTE_DEBUGGING']='127.0.0.1:'+str(debug_port)
+(OUT/'cdp.json').write_text(json.dumps({'port':debug_port,'ready':False}))
 import anki.lang
 from anki import buildinfo
 anki.lang.set_lang('en_US')
@@ -123,7 +128,7 @@ def opened_branch():
 def icon_choice():
     def result(v):
         try:
-            check('native_picker_has_30_symbols_and_automatic',v==31)
+            check('native_picker_has_36_symbols_and_automatic',v==37)
             aqt.mw.web.eval("document.getElementById('atelier-root').shadowRoot.querySelector('[data-action=folder-icon][data-icon=music]').click()")
             later(icon_saved,600)
         except Exception:fail()
@@ -134,6 +139,7 @@ def icon_saved():
         try:
             check('new_symbol_saves_through_real_native_bridge',v.get('symbol')=='music' and v.get('pressed')=='true')
             aqt.mw.web.eval("document.getElementById('atelier-root').shadowRoot.querySelector('.dialog-header [data-action=close-dialog]').click()")
+            cfg=owner.get_config();cfg['native_toolbar']=True;aqt.mw.addonManager.writeConfig(owner.module,cfg)
             aqt.mw.onOverview();later(overview)
         except Exception:fail()
     aqt.mw.web.evalWithCallback("(()=>{const s=document.getElementById('atelier-root').shadowRoot;return {symbol:s.querySelector('.personalization-art [data-folder-symbol]')?.dataset.folderSymbol,pressed:s.querySelector('[data-action=folder-icon][data-icon=music]')?.getAttribute('aria-pressed')}})()",result)
@@ -148,7 +154,9 @@ def overview(attempt=0):
                 aqt.mw.web.eval("document.querySelector('#onigiri-welcome-overlay .btn-continue')?.click()");later(lambda:overview(attempt+1),700);return
             report['overview']=v
             aqt.mw.grab().save(str(OUT/'overview.png'))
-            if not ALONE:check('native_overview_is_atelier_scoped',v.get('screen')=='overview')
+            if not ALONE:
+                check('native_overview_is_atelier_scoped',v.get('screen')=='overview')
+                check('native_overview_top_toolbar_visible',not aqt.mw.toolbarWeb.isHidden())
             check('onigiri_profile_and_progress_retained',v['profile'] and v['progress'])
             check('study_control_visible_and_hit_testable',v['studyHit'])
             check('overview_has_no_horizontal_overflow',v['fits'])
@@ -166,8 +174,20 @@ def question():
 def question_result(v):
     try:
         check('question_and_single_context_header_preserved','Synthetic companion question' in v['text'] and v['headers']<=1)
-        footer_click('ans','show_answer_button',answer)
+        if owner:
+            check('native_reviewer_top_toolbar_visible',not aqt.mw.toolbarWeb.isHidden())
+            (OUT/'cdp.json').write_text(json.dumps({'port':debug_port,'ready':True,'phase':'reviewer-question'}))
+            import subprocess
+            with (OUT/'reviewer-capture.log').open('w') as capture_log:
+                subprocess.Popen(['node',str(ROOT/'tools/capture_native_reviewer_117.mjs')],cwd=ROOT,stdin=subprocess.DEVNULL,stdout=capture_log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
+            wait_question_capture()
+        else:footer_click('ans','show_answer_button',answer)
     except Exception:fail()
+def wait_question_capture(attempt=0):
+    if (OUT/'captured-question.flag').exists():footer_click('ans','show_answer_button',answer);return
+    if attempt>=90:report['errors'].append('Native reviewer capture did not finish');finish();return
+    later(lambda:wait_question_capture(attempt+1),500)
+
 def footer_click(command,key,next_step):
     def result(v):
         try:
@@ -209,12 +229,66 @@ def verify_undo():
         from aqt import gui_hooks
         report['onigiri_answer_hooks_after']=[getattr(fn,'__module__','')+'.'+getattr(fn,'__name__','') for fn in gui_hooks.reviewer_did_answer_card._hooks if getattr(fn,'__module__','').startswith('1011095603')]
         check('reward_hooks_still_installed',bool(report['onigiri_answer_hooks_before']) and report['onigiri_answer_hooks_before']==report['onigiri_answer_hooks_after'])
+        if owner:toolbar_routes();return
+        complete_routes()
+    except Exception:fail()
+def toolbar_routes(index=0):
+    # Exercise real native windows. Sync dispatch uses a controlled boundary so
+    # this disposable profile never contacts an account/server.
+    global original_sync
+    names=['browse','add','stats','sync','decks']
+    if index==0:
+        report['native_toolbar_registered_routes']=list(aqt.mw.toolbar.link_handlers)
+        check('native_standard_routes_registered',all(callable(aqt.mw.toolbar.link_handlers.get(n)) for n in names))
+        original_sync=aqt.mw.toolbar.link_handlers['sync']
+        report['controlled_sync_calls']=0
+        def sync_probe():report['controlled_sync_calls']+=1
+        aqt.mw.toolbar.link_handlers['sync']=sync_probe
+    if index==len(names):
+        aqt.mw.toolbar.link_handlers['sync']=original_sync
+        check('original_sync_route_restored_after_probe',aqt.mw.toolbar.link_handlers['sync'] is original_sync)
+        check('toolbar_navigation_preserves_cards_and_review_history',aqt.mw.col.db.all('select * from cards order by id')==before and aqt.mw.col.db.all('select * from revlog')==history)
+        complete_routes();return
+    name=names[index]
+    code="(()=>{const n=NAME;const b=[...document.querySelectorAll('a,button')].find(e=>e.textContent.trim().toLowerCase()===n);const r=b?.getBoundingClientRect();const hit=!!r&&r.width>0&&r.height>0&&r.y>=0&&r.bottom<=innerHeight+1&&b.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));if(hit)b.click();return {hit,clicked:hit}})()".replace('NAME',json.dumps(name))
+    def clicked(value):
+        try:
+            check('native_toolbar_'+name+'_hit_testable_and_clicked',bool(value and value.get('clicked')))
+            later(verify,900)
+        except Exception:fail()
+    def verify():
+        try:
+            if name=='add':
+                routes=aqt.mw._atelier_authoring_routes
+                window=routes.controller.window
+                check('native_toolbar_add_opens_card_studio',bool(window and window.isVisible()))
+                window.close()
+                native=routes.original_add()
+                check('original_anki_add_editor_remains_accessible',bool(native and native.isVisible()))
+                native.close()
+            elif name in ['browse','stats']:
+                from aqt import dialogs
+                keys={'browse':['Browser'],'add':['AddCards','NewAddCards'],'stats':['DeckStats','NewDeckStats']}
+                opened=[dialogs._dialogs[k][1] for k in keys[name] if k in dialogs._dialogs and dialogs._dialogs[k][1] is not None]
+                check('native_toolbar_'+name+'_opens_real_anki_window',bool(opened))
+                for window in opened:window.close()
+            elif name=='sync':check('native_toolbar_sync_reaches_controlled_boundary',report['controlled_sync_calls']==1)
+            else:
+                check('native_toolbar_decks_returns_to_home',aqt.mw.state=='deckBrowser')
+                check('native_home_top_toolbar_visible_after_review',not aqt.mw.toolbarWeb.isHidden())
+            later(lambda:toolbar_routes(index+1),500)
+        except Exception:fail()
+    aqt.mw.toolbarWeb.evalWithCallback(code,clicked)
+
+def complete_routes():
+    try:
         if owner:
             cfg=owner.get_config();cfg['visual_owner']='onigiri';aqt.mw.addonManager.writeConfig(owner.module,cfg);owner.ownership.install()
             check('switching_owner_releases_presentation_gates',not owner.ownership._wrapped)
-        check('database_integrity',c.db.scalar('pragma integrity_check')=='ok')
+        check('database_integrity',aqt.mw.col.db.scalar('pragma integrity_check')=='ok')
         report['completed']=True;finish()
     except Exception:fail()
+
 later(start,3000);later(finish,180000)
 code=app.exec();report['graceful_shutdown']=code==0
 (OUT/'results.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')

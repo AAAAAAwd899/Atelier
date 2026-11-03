@@ -11,14 +11,14 @@ def main():
   receipt=json.loads((ROOT/'verification'/(name+'-results.json')).read_text());assert not receipt.get('errors') and receipt.get('count',receipt.get('checks'))==count
   assert (ROOT/'verification'/(name+'.exit')).read_text().strip()=='0'
  native=[]
- for rel in ['output/native-install-117/results.json','output/onigiri-coexistence-117/results.json','output/listing-native-117-onigiri/host-report.json']:
+ for rel in ['output/native-install-117/results.json','output/onigiri-coexistence-117/results.json','output/listing-native-117-onigiri/host-report.json','output/native-social-117/results.json']:
   r=json.loads((ROOT/rel).read_text());assert r['runtime_sha256']==digest and not r['errors'] and all(r['checks'].values()),rel;native.append(r)
- assert native[-1]['checks']['actual_anki_update_action_reached'] and native[-1]['checks']['native_toolbar_restored'] and native[-1]['graceful_shutdown']
+ assert native[2]['checks']['actual_anki_update_action_reached'] and native[2]['checks']['native_toolbar_restored'] and native[2]['graceful_shutdown']
  ui=json.loads((ROOT/'output/listing-native-117-onigiri/layout-check.json').read_text());assert ui['width']>300 and ui['bodyUnderHeader'] and not ui['overflow']
  assets=production_files();actual={n:sha(p) for p,n in assets};base=json.loads((ROOT/'baseline-1.0.2.json').read_text());patch=json.loads((ROOT/'patch-117-changes.json').read_text())
  assert {n:h for n,h in actual.items() if n in base and h!=base[n]}==patch['changed']
  assert {n:h for n,h in actual.items() if n not in base}==patch['added'] and sorted(set(base)-set(actual))==patch['removed']
- installer=DIST/'Atelier-1.0.17.ankiaddon';build_installer(installer);assert sha(installer)==native[0]['installer_sha256']==native[-1]['installer_sha256']
+ installer=DIST/'Atelier-1.0.17.ankiaddon';build_installer(installer);assert sha(installer)==native[0]['installer_sha256']==native[2]['installer_sha256']
  repeat=DIST/'.Atelier-1.0.17-repeat.ankiaddon';build_installer(repeat);assert sha(repeat)==sha(installer);repeat.unlink()
  subprocess.run([sys.executable,'tools/check_anki_addon.py',str(installer),'--report','verification/onigiri-toolbar-117/package-format.json'],check=True)
  scratch=ROOT/'output/extracted-1.0.17';scratch.mkdir(exist_ok=True)

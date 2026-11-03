@@ -631,18 +631,21 @@ class Atelier:
                 f"#decks{{color:{accent}}}")
 
     def restore_native_toolbar(self) -> None:
-        """Expose real Anki/add-on actions while Atelier owns the home screen.
+        """Expose real Anki/add-on actions while Atelier owns home and review.
 
-        Do not write another add-on's settings or override fullscreen/reviewer
-        choices. A single deferred call runs after other state-change hooks.
+        Do not write another add-on's settings or override fullscreen or
+        original-appearance choices. A single deferred call runs after other state-change hooks.
         """
         cfg = self.get_config()
-        if (mw.state != "deckBrowser" or cfg.get("visual_owner") != "atelier"
-                or cfg.get("mode") == "native" or not cfg.get("native_toolbar", True)
+        if (mw.state not in ("deckBrowser", "overview", "review") or cfg.get("visual_owner") != "atelier"
+                or (mw.state == "deckBrowser" and cfg.get("mode") == "native") or not cfg.get("native_toolbar", True)
                 or getattr(mw, "fullscreen", False)):
             return
         web = getattr(mw, "toolbarWeb", None)
-        if web is not None and web.isHidden():
+        if web is not None and (web.isHidden() or getattr(web, "hidden", False)):
+            # ToolbarWebView.show() clears Anki’s pending hide flag; Qt
+            # visibility is separate. Both are needed when a makeover hid it.
+            web.show()
             web.setVisible(True)
 
     def apply_chrome(self) -> None:
@@ -683,7 +686,7 @@ class Atelier:
 
     def state_changed(self, new: str, old: str) -> None:
         self.ownership.install()
-        if new == "deckBrowser":
+        if new in ("deckBrowser", "overview", "review"):
             mw.progress.single_shot(0, self.restore_native_toolbar)
         if new != "deckBrowser":
             self.capture_keys = False
@@ -795,6 +798,8 @@ def install(module: str) -> Atelier:
             registration.hook(gui_hooks.state_will_change, addon.review_theme.before_state)
         registration.hook(gui_hooks.state_did_change, addon.review_theme.after_state)
         addon.review_theme.install(register=registration.hook)
+        registration.hook(gui_hooks.reviewer_did_show_question, lambda *_args: mw.progress.single_shot(0, addon.restore_native_toolbar))
+        registration.hook(gui_hooks.reviewer_did_show_answer, lambda *_args: mw.progress.single_shot(0, addon.restore_native_toolbar))
         if hasattr(gui_hooks, "deck_browser_did_render"):
             registration.hook(gui_hooks.deck_browser_did_render, lambda *_args: mw.progress.single_shot(0, addon.restore_native_toolbar))
         registration.hook(gui_hooks.top_toolbar_did_redraw, lambda toolbar: (addon.apply_chrome(), addon.review_theme._top_surface(mw.state)))

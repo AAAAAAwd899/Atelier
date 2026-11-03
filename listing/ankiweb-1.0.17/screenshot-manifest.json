@@ -1,0 +1,74 @@
+{
+  "runtime_sha256": "78d81fe2d62fa3af63f147298c1d9ac764f932c2bef5d90fa2aac0ed3bf95f16",
+  "installer_sha256": "5667dffa335855a9b82847939b15001c3e5adafcf8c1809a9a9bd9ece1b02f25",
+  "capture": "Actual Anki 26.09.3 Qt offscreen webviews, synthetic example collections; native outer chrome excluded. Separate native toolbar frame included. No owner profile accessed.",
+  "public_1_0_17_urls_verified": false,
+  "images": [
+    {
+      "file": "screenshots/01-study-desk.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "d707b9d691a4f7b930cfd1433a329aa31880928e6981b2590c96d7d59d1c1e1c"
+    },
+    {
+      "file": "screenshots/02-library.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "8f71afad882bd6f43e41e149ad52a56f99dfea44beb33420e1954db1686e1566"
+    },
+    {
+      "file": "screenshots/03-card-studio.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "836dfa195a9725a6586c730007c30acd63faf86fc0d85a0e02d17fd1dd810e9f"
+    },
+    {
+      "file": "screenshots/04-image-occlusion.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "bbc84a422c5d33f608e4f435741c5dd6c2e938bae996f1c9d1840f085ac730c1"
+    },
+    {
+      "file": "screenshots/05-combine-folders.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "add0246ae8bda9d804efa19df6faeb44a5b77894dfaafda36df16ba838d4698d"
+    },
+    {
+      "file": "screenshots/06-companion-journey.png",
+      "width": 1080,
+      "height": 790,
+      "sha256": "ce40744f816aa4866935eadb9c1b74df751ec2a4b7fb661a001ef6824ac9a26d"
+    },
+    {
+      "file": "screenshots/07-exam-studio.png",
+      "width": 1400,
+      "height": 966,
+      "sha256": "1232445b8b5e1acf66af227968cc87a51b020738e1da145007adbec6bb5be0b9"
+    },
+    {
+      "file": "screenshots/08-folder-icons.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "132c672cfff4c1a1b40ef18b647925220d2beddf98b962ad90e6bbcbe8778095"
+    },
+    {
+      "file": "screenshots/09-card-creation-guide.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "b9790c351db52b6b21fce8a4e6d9541db6ce4010899030dec800c4e5a41cfafa"
+    },
+    {
+      "file": "screenshots/10-onigiri-rewards.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "11b41d3a3b014dd3c71694b17383e2e6264e2e2a6e12ad09244a9910355fbbc3"
+    },
+    {
+      "file": "screenshots/11-native-reviewer-toolbar.png",
+      "width": 1280,
+      "height": 37,
+      "sha256": "b6bd853f9b07eb35768b4ad022543da0637af4a7f8fea34361539ee71c915851"
+    }
+  ]
+}

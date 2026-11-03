@@ -153,7 +153,7 @@
     "native_toolbar": {
       "type": "boolean",
       "default": true,
-      "description": "Show Anki and add-on toolbar buttons above the Atelier workspace."
+      "description": "Keep native Anki and add-on buttons visible on the home screen and reviewer."
     }
   },
   "additionalProperties": true

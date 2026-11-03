@@ -16,5 +16,27 @@
     "moon",
     "cloud"
   ],
-  "prompt": "Create a production raster icon sprite sheet for the Atelier Anki add-on, not a UI mockup. Landscape 1536 by 1024 canvas, EXACTLY three equal columns and two equal rows: six 512-by-512 cells with one isolated icon centered in each cell. Reading order: top left a sweet cream plush bunny with a small dusty rose ribbon; top center a honey-colored sewn teddy bear; top right a delicate strawberry cupcake in a rose wrapper; bottom left one ripe strawberry with fresh green leaves; bottom center a sleepy ivory crescent moon with a tiny blush face; bottom right a soft fluffy cloud with a small rainbow. All six must be meaningfully different and recognizable at 32 pixels. Authored premium miniature collectible style: tactile sculpted fabric/porcelain/soft fur details, dimensional soft studio lighting, restrained ivory, muted rose, sage and warm gold accents; coherent light direction and scale. Polished detailed three dimensional illustration rather than flat SVG, emoji, geometric canvas drawing or thick outlined cartoon. Each object fills roughly 70 percent of its square with generous transparent padding; no object or shadow crosses a cell boundary. TRUE transparent background throughout, no color backdrop, no tile frames, no checkerboard painted into image, no grid lines, no typography, no labels, no text, no watermark. The six objects are the only content. New companion icon atlas; do not modify or replace the existing folder icons."
+  "prompt": "Create a production raster icon sprite sheet for the Atelier Anki add-on, not a UI mockup. Landscape 1536 by 1024 canvas, EXACTLY three equal columns and two equal rows: six 512-by-512 cells with one isolated icon centered in each cell. Reading order: top left a sweet cream plush bunny with a small dusty rose ribbon; top center a honey-colored sewn teddy bear; top right a delicate strawberry cupcake in a rose wrapper; bottom left one ripe strawberry with fresh green leaves; bottom center a sleepy ivory crescent moon with a tiny blush face; bottom right a soft fluffy cloud with a small rainbow. All six must be meaningfully different and recognizable at 32 pixels. Authored premium miniature collectible style: tactile sculpted fabric/porcelain/soft fur details, dimensional soft studio lighting, restrained ivory, muted rose, sage and warm gold accents; coherent light direction and scale. Polished detailed three dimensional illustration rather than flat SVG, emoji, geometric canvas drawing or thick outlined cartoon. Each object fills roughly 70 percent of its square with generous transparent padding; no object or shadow crosses a cell boundary. TRUE transparent background throughout, no color backdrop, no tile frames, no checkerboard painted into image, no grid lines, no typography, no labels, no text, no watermark. The six objects are the only content. New companion icon atlas; do not modify or replace the existing folder icons.",
+  "additional_asset": {
+    "asset": "src/web/folder-icons-cute-extra-1.0.17.png",
+    "sha256": "f5b664e98509fea1df9131ec6074cd37693fc8741aaa43974aee61e0f27a3b20",
+    "tool": "built-in image_gen",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "alpha_range": [
+      0,
+      253
+    ],
+    "subjects": [
+      "fox",
+      "frog",
+      "penguin",
+      "mushroom",
+      "potion",
+      "heart"
+    ],
+    "prompt_summary": "Six isolated premium miniature raster icons in exact 3x2 grid on 1536x1024 transparent canvas: curled fox with green scarf, sage frog, penguin with rose scarf, red cream-spotted mushroom, lavender potion bottle and embroidered rose heart. Sculpted tactile plush/ceramic detail, warm soft lighting, recognizable silhouettes at 32px, generous padding, no frames, UI, labels or text. Additional options; existing icons retained."
+  }
 }

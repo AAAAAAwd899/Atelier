@@ -39,7 +39,7 @@ DEFAULT_PROFILE = {
     "widget_route_version": 0,
     "onboarding": {"version": 0, "status": "new"},
 }
-FOLDER_ICONS = ("books", "course", "brain", "science", "medicine", "dna", "pills", "notes", "microscope", "art", "code", "star", "leaf", "flower", "bow", "castle", "cat", "dragon", "physics", "music", "history", "language", "math", "coffee", "bunny", "teddy", "cupcake", "strawberry", "moon", "cloud")
+FOLDER_ICONS = ("books", "course", "brain", "science", "medicine", "dna", "pills", "notes", "microscope", "art", "code", "star", "leaf", "flower", "bow", "castle", "cat", "dragon", "physics", "music", "history", "language", "math", "coffee", "bunny", "teddy", "cupcake", "strawberry", "moon", "cloud", "fox", "frog", "penguin", "mushroom", "potion", "heart")
 COLORS = ("violet", "blue", "rose", "green", "amber", "cyan")
 
 class ValidationError(ValueError):

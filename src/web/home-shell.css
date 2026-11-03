@@ -484,6 +484,9 @@
 :host([data-folder-art="ready"]) .folder-symbol[data-symbol-pack="classic"] .symbol-fallback{opacity:0}
 :host([data-folder-cute-art="ready"]) .folder-symbol[data-symbol-pack="cute"]{background-image:var(--folder-cute-sheet);background-size:300% 200%}
 :host([data-folder-cute-art="ready"]) .folder-symbol[data-symbol-pack="cute"] .symbol-fallback{opacity:0}
+:host([data-folder-cute-extra-art="ready"]) .folder-symbol[data-symbol-pack="cute-extra"]{background-image:var(--folder-cute-extra-sheet);background-size:300% 200%}
+:host([data-folder-cute-extra-art="ready"]) .folder-symbol[data-symbol-pack="cute-extra"] .symbol-fallback{opacity:0}
+.folder-icon-filters{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.folder-icon-filters button{padding:6px 10px;min-height:32px;border:0;border-radius:9px;background:transparent;color:var(--muted)}.folder-icon-filters button[aria-pressed="true"]{background:var(--accent-soft);color:var(--text)}.folder-icon-options button[hidden]{display:none!important}
 .folder-icon-options .picker-symbol{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;font-size:26px}
 .folder-icon-options .folder-symbol{width:42px;height:42px}
 .folder-icon-options button{min-height:76px}

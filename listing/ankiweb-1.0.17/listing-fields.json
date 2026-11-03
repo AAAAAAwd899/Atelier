@@ -1,0 +1,62 @@
+{
+  "title": "Atelier",
+  "author": "Daedalus Works",
+  "version": "1.0.17",
+  "upload_file": "Atelier-1.0.17.ankiaddon",
+  "description_file": "description.md",
+  "plain_text_alternative": "description.txt",
+  "html_alternative": "description.html",
+  "support_url": "https://github.com/AAAAAAwd899/Atelier/issues",
+  "source_url": "https://github.com/AAAAAAwd899/Atelier",
+  "license": "MIT for Atelier; retained third-party notices",
+  "minimum_declared_anki": "25.09.5",
+  "native_functional_test_anki": "26.09.3",
+  "native_scope": "Windows Qt offscreen, isolated example profiles",
+  "macos_linux_native": "not verified",
+  "ankiweb_id": null,
+  "ankiweb_url": null,
+  "account_eligibility_verified": false,
+  "upload_acceptance_verified": false,
+  "hosted_friends_active": false,
+  "website_deployed": false,
+  "binary_publication_performed": false,
+  "screenshots": [
+    {
+      "file": "screenshots/01-study-desk.png",
+      "caption": "Study desk with example Biology lectures.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/02-library.png",
+      "caption": "Courses and lectures in the full library.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/03-card-studio.png",
+      "caption": "Source material and a card draft in Card Studio.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/04-image-occlusion.png",
+      "caption": "An actual image-occlusion mask in Mask Studio.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/05-combine-folders.png",
+      "caption": "Two parent courses selected for one study.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/06-companion-journey.png",
+      "caption": "A collected journal keepsake in the companion journey.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/07-exam-studio.png",
+      "caption": "Exam Studio and Pip with an example exam.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    }
+  ],
+  "public_screenshot_urls_verified": false,
+  "github_push_pending_exact_approval": true
+}

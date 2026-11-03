@@ -10,7 +10,7 @@ from release_tools import runtime_digest,production_files
 WITH_ONIGIRI='--with-onigiri' in sys.argv
 OUT=ROOT/('output/listing-native-117-onigiri' if WITH_ONIGIRI else 'output/listing-native-117');OUT.mkdir(parents=True,exist_ok=True)
 SH=ROOT/'screenshots/listing-native-117';SH.mkdir(parents=True,exist_ok=True)
-previous=json.loads((OUT/'cdp.json').read_text()) if '--reuse' in sys.argv else None
+previous=json.loads((OUT/'cdp.json').read_text()) if '--reuse' in sys.argv and any(OUT.glob('profile-*')) else None
 
 for flag in ['stop.flag','verify-updates.flag','verify-cute.flag']:(OUT/flag).unlink(missing_ok=True)
 BASE=sorted(OUT.glob('profile-*'))[-1] if previous else OUT/('profile-'+str(time.time_ns()))
@@ -93,12 +93,14 @@ def start(attempt=0):
             for front,back in notes:
                 n=c.new_note(basic);n['Front']=front;n['Back']=back;c.add_note(n,did)
         parent=c.decks.id('Biology 101');chem=c.decks.id('Chemistry 101')
+        report['cute_parent_id']=str(parent)
+        report['cards_before_metadata_sha256']=hashlib.sha256(repr(c.db.all('select * from cards order by id')).encode()).hexdigest()
         a.ensure_store()
         profile=dict(a.profile,onboarding={'version':1,'status':'offered'},focus_enabled=True,selected_study='biology',studies=[{'id':'biology','name':'Biology 101','date':'2026-11-06','deck_ids':[str(parent)],'active':True}],favorites=[str(parent)],last_studied=str(c.decks.id('Biology 101::Week 1 · Cells')))
         a.store.write(profile);a.profile=a.store.read()
         import importlib
         rewards=importlib.import_module('1011095603.gamification.nook_level').manager
-        foreign_config=importlib.import_module('1011095603.core.config');ng=foreign_config.get_config();ng.setdefault('restaurant_level',{}).update(enabled=True,notifications_enabled=False);foreign_config.write_config(ng);rewards.set_enabled(True)
+        foreign_config=importlib.import_module('1011095603.core.config');ng=foreign_config.get_config();ng.setdefault('restaurant_level',{}).update(enabled=True,notifications_enabled=False);ng.setdefault('onigiriWidgetLayout',{}).setdefault('grid',{})['restaurant_level']={'pos':4,'row':2,'col':2};foreign_config.write_config(ng);rewards.set_enabled(True)
         cfg=a.get_config();cfg.update(visual_owner='atelier',mode='workspace',theme='forest',motion=False,surface_revision=1);mw.addonManager.writeConfig(a.module,cfg)
         controller=mw._atelier_authoring_routes.controller
         if controller.store is None:controller.profile_open()
@@ -110,7 +112,7 @@ def start(attempt=0):
         mw.resize(1440,900);mw.toolbarWeb.hide();mw.deckBrowser.refresh()
         report['native_toolbar_forced_hidden_in_qa']=True
         QTimer.singleShot(250,lambda:report['checks'].update(native_toolbar_restored=not mw.toolbarWeb.isHidden()))
-        (OUT/'cdp.json').write_text(json.dumps({'port':port,'ready':True,'project':project['id'],'source':source['id'],'move_source':report['move_source'],'move_target':report['move_target']}))
+        (OUT/'cdp.json').write_text(json.dumps({'port':port,'ready':True,'project':project['id'],'source':source['id'],'parent':str(parent),'move_source':report['move_source'],'move_target':report['move_target']}))
         QTimer.singleShot(500,poll)
     except Exception:report['errors'].append(traceback.format_exc());finish()
 def poll():
@@ -140,7 +142,7 @@ def poll():
         if (OUT/'verify-cute.flag').exists() and not report.get('cute_checked'):
             report['cute_checked']=True
             a=aqt.mw._daedalus_atelier_runtime
-            report['checks']['cute_icon_saved_in_profile']=a.store.read()['folder_icons'].get(report['cute_parent_id'])=='bunny'
+            report['checks']['cute_icon_saved_in_profile']=a.store.read()['folder_icons'].get(report['cute_parent_id'])=='fox'
             report['checks']['folder_personalization_preserves_card_schedule']=hashlib.sha256(repr(aqt.mw.col.db.all('select * from cards order by id')).encode()).hexdigest()==report['cards_before_metadata_sha256']
             (OUT/'cute-verified.json').write_text(json.dumps({'runtime_sha256':runtime_digest(),'checks':report['checks']},indent=2))
         if (OUT/'stop.flag').exists():finish();return
