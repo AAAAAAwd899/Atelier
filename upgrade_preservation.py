@@ -22,6 +22,16 @@ def engine_bytes(name, source=ROOT/'src'):
     the exact reviewed 6.21.4 lock (or its four explicitly retired modules), then
     their verified 5.9.0 originals are returned for historical comparisons.
     """
+    if name == 'workshop/web/mask-editor.js':
+        # Only the reviewed singular/plural status caption may differ. All
+        # coordinate, grouping, interaction and serialization bytes stay exact.
+        original=json.loads((ROOT/'tests/data/release-115-mask-caption-baseline.json').read_text(encoding='utf8'))[name]
+        old="q('.mask-count').textContent=`${state.masks.length} masks · ${gs.length} cards`;"
+        new="q('.mask-count').textContent=`${state.masks.length} ${state.masks.length===1?'mask':'masks'} · ${gs.length} ${gs.length===1?'card':'cards'}`;"
+        assert original.count(old)==1
+        assert (source/name).read_bytes()==original.replace(old,new).encode('utf8')
+        assert hashlib.sha256(original.encode('utf8')).hexdigest()==json.loads((ROOT/'integration-baselines.json').read_text())['incoming'][name]
+        return original.encode('utf8')
     if not name.startswith('workshop/vendor/pypdf/'):
         return (source/name).read_bytes()
     lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.4.json').read_text())

@@ -14,7 +14,9 @@ def test_exact_upgrade_declaration_and_protected_engines():
     assert sorted(set(old)-set(actual))==patch['removed']==parser['retired_baseline_modules']
     assert {n:h for n,h in actual.items() if n.startswith('workshop/vendor/pypdf/')}==parser['files']
     protected=('sprout/','workshop/','folder_study.py','remote_model.py','remotes.py','web/remote-input.js','figure_cache.py','native_widgets.py','ownership.py','focus_context.py','study_progress.py')
-    allowed_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
+    allowed_presentation={'workshop/web/mask-editor.js','workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
+    from upgrade_preservation import engine_bytes
+    assert hashlib.sha256(engine_bytes('workshop/web/mask-editor.js',SRC)).hexdigest()==old['workshop/web/mask-editor.js']
     assert not any(n.startswith(protected) and n not in allowed_presentation and n not in parser['files'] for n in patch['changed'])
 
 def test_generated_adapters_are_reproducible():
