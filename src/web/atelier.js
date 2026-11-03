@@ -393,7 +393,7 @@
       return btn('native-tool',label,ico,cls,`data-command="${command}" ${!supported?'disabled title="Use Anki’s File or Tools menu for this version"':''} ${extra}`);
     }
     function commandBar(){
-      return `<nav class="top-actions anki-commandbar" aria-label="Anki actions">${btn('page','Decks','folder','secondary decks-top','data-page="library"')}${nativeBtn('add','Add cards','plus','primary add-cards-top')}${nativeBtn('browse','Browse','browse','secondary browse-top')}${nativeBtn('stats','Statistics','chart','secondary stats-top')}${nativeBtn('sync','Sync','sync','secondary sync-top')}<span class="commandbar-divider" aria-hidden="true"></span>${btn('addon-tools','Add-on tools','layers','secondary addon-tools-top')}</nav>`;
+      return `<nav class="top-actions anki-commandbar" aria-label="Anki actions">${btn('page','Decks','folder','secondary decks-top','data-page="library"')}${nativeBtn('add','Add cards','plus','primary add-cards-top')}${nativeBtn('browse','Browse','browse','secondary browse-top')}${nativeBtn('stats','Statistics','chart','secondary stats-top')}${nativeBtn('sync','Sync','sync','secondary sync-top')}${nativeBtn('check_updates','Anki updates','updates','secondary updates-top')}<span class="commandbar-divider" aria-hidden="true"></span>${btn('addon-tools','Add-on tools','layers','secondary addon-tools-top')}</nav>`;
     }
     function topbar(){
       if(state.page==='widgets'&&nativeWidgets)return nativeWidgets.header().replace('unified-topbar','unified-topbar workspace-topbar').replace('</header>',commandBar()+'</header>');

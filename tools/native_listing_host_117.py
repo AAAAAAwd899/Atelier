@@ -64,6 +64,12 @@ def start(attempt=0):
         if not mw.col or not a:
             if attempt<60:QTimer.singleShot(500,lambda:start(attempt+1));return
             raise RuntimeError('Native listing host failed to start')
+        import aqt.update
+        mw._qa_update_calls=[]
+        class ControlledUpdate:
+            def with_progress(self):return self
+            def run_in_background(self):mw._qa_update_calls.append('native-check')
+        aqt.update.get_latest_release_op=lambda **kwargs:ControlledUpdate()
         if previous:
             import importlib
             foreign_config=importlib.import_module('1011095603.core.config');ng=foreign_config.get_config();ng.setdefault('restaurant_level',{}).update(enabled=True,notifications_enabled=False);ng.setdefault('onigiriWidgetLayout',{}).setdefault('grid',{})['restaurant_level']={'pos':4,'row':2,'col':2};foreign_config.write_config(ng)
@@ -123,6 +129,10 @@ def poll():
             report['checks']['icons_do_not_change_cards']=aqt.mw.col.db.all('select id,nid,did,type,queue,due,ivl,factor,reps,lapses from cards order by id')==report.get('cards_before_move')
             report.pop('cards_before_move',None)
             (OUT/'icons-verified.json').write_text(json.dumps({'checks':report['checks'],'onigiri_loaded':report.get('onigiri_loaded',False)},indent=2))
+        if (OUT/'verify-updates.flag').exists() and not report.get('updates_checked'):
+            report['updates_checked']=True
+            report['checks']['actual_anki_update_action_reached']=bool(getattr(aqt.mw,'_qa_update_calls',[]))
+            (OUT/'updates-verified.json').write_text(json.dumps({'checks':report['checks'],'runtime_sha256':runtime_digest(),'category':'real update QAction and native Anki handler with controlled release-query boundary; no network/download/install'},indent=2))
         if (OUT/'stop.flag').exists():finish();return
         QTimer.singleShot(500,poll)
     except Exception:report['errors'].append(traceback.format_exc());finish()

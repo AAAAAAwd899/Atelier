@@ -24,7 +24,7 @@ def inspect(path):
             assert (info.external_attr>>16)&0o170000!=0o120000,'Symlink member'
         manifest=json.loads(z.read('manifest.json'))
         assert manifest['package']=='daedalus_atelier' and manifest['name']=='Atelier'
-        assert manifest['human_version'] in ('1.0.5','1.0.6','1.0.7','1.0.8','1.0.9','1.0.10','1.0.11','1.0.12','1.0.13','1.0.14','1.0.15','1.0.16') and manifest['min_point_version']==250905
+        assert manifest['human_version'] in ('1.0.5','1.0.6','1.0.7','1.0.8','1.0.9','1.0.10','1.0.11','1.0.12','1.0.13','1.0.14','1.0.15','1.0.16','1.0.17') and manifest['min_point_version']==250905
         assert isinstance(manifest.get('conflicts'),list) and set(manifest['conflicts'])=={'exam_sprout','daedalus_workshop'}
         assert all(b'Permission is hereby granted' in z.read(n) for n in ['LICENSE','sprout/LICENSE','workshop/LICENSE'])
         assert b'Redistribution and use' in z.read('workshop/vendor/pypdf/LICENSE')
