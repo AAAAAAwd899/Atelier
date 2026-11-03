@@ -52,6 +52,7 @@ def capture(phase,then,attempt=0):
  request=OUT/'capture-request.json'
  request.write_text(json.dumps({'phase':phase,'port':61315,'title':'Atelier Friends','selector':'#es-app' if phase=='pip' else '#atelier-social'})+'\n')
  ack=OUT/(phase+'-captured.json')
+ if attempt==0:ack.unlink(missing_ok=True)
  def poll():
   if ack.exists():then()
   elif attempt<240:later(lambda:capture(phase,then,attempt+1),250)

@@ -15,6 +15,8 @@ for folder,patterns in [(V/'social-115',['*.json','*.xml']), (V/'retention-115',
 for name in ['atelier-unit','sprout-unit','workshop-unit','package-115','library-polish-115-extracted','folder-order-115-extracted','social-115-extracted']:
     files.append(V/(name+'.log'))
 files.extend((ROOT/'output/native-social-115').glob('*-captured.json'))
+files.extend(V.glob('*interrupted-115.log'))
+files.extend(V/n for n in ['qa-final-cleanup-115.json','qa-repeat-cleanup-115.json','native-install-115-stale-input-diagnosis.json','github-ci-115.log','github-ci-115-preflight.log','full-115.log','native-sharing-115.log','native-social-115.log','native-onigiri-115.log','native-install-115.log'])
 assert all(p.is_file() for p in files),[str(p) for p in files if not p.is_file()]
 dest=D/'Atelier-1.0.15-Evidence.zip'
 write_archive(dest,[(p,'Atelier-1.0.15-Evidence/'+p.relative_to(ROOT).as_posix()) for p in sorted(set(files))])
