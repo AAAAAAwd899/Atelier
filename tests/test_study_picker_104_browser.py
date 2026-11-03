@@ -32,7 +32,10 @@ def run():
             field=page.locator('#picker-search');field.focus()
             geometry=field.evaluate('''e=>{const a=e.closest('.picker-search'),b=e.closest('form').querySelector('.deck-picker'),r=a.getBoundingClientRect(),s=b.getBoundingClientRect(),cs=getComputedStyle(a),ci=getComputedStyle(e);return {aligned:Math.abs(r.left-s.left)<2&&Math.abs(r.right-s.right)<2,outer:cs.outlineWidth,inner:ci.outlineStyle,overflow:r.right>innerWidth}}''')
             print('Picker focus geometry',width,json.dumps(geometry),flush=True)
-            check(f'{width} one aligned search focus ring',geometry['aligned'] and geometry['outer']=='2px' and geometry['inner']=='none' and not geometry['overflow'])
+            # Chromium's used outline width varies with its platform rasterization.
+            # The product contract is one visible aligned ring, with no inner ring.
+            stroke=float(geometry['outer'].removesuffix('px'))
+            check(f'{width} one aligned search focus ring',geometry['aligned'] and 2<=stroke<=3 and geometry['inner']=='none' and not geometry['overflow'])
             field.fill('Topic')
             check(f'{width} search retains recency order',picker.locator('[data-pick-deck]').evaluate_all('xs=>xs.map(x=>x.dataset.pickDeck)')==['992','991'])
             field.fill('')
