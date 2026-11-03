@@ -110,7 +110,10 @@ def run():
    check(f'{width} sticky header remains clickable after scrolling',all(hit(p.locator('.unified-topbar [data-command="'+k+'"]')) for k in ('add','browse','sync')))
    # Menu / nav drawer on small windows is opened explicitly.
    if width<=820:p.locator('[data-action=mobile]').click()
-   p.locator('.nav-group [data-page=library]').click();p.locator('[data-action=view][data-view=list]').click();p.wait_for_timeout(80)
+   p.locator('.nav-group [data-page=library]').click();p.locator('[data-action=view][data-view=list]').click();p.locator('.library-row').first.wait_for(state='visible')
+   if overflow(p):
+    print('Library overflow diagnostics',json.dumps(p.evaluate('''()=>{const r=document.querySelector('#atelier-root').shadowRoot,m=r.querySelector('.main'),b=m.getBoundingClientRect();return {width:innerWidth,main:[m.clientWidth,m.scrollWidth],outside:[...m.querySelectorAll('*')].filter(e=>{const x=e.getBoundingClientRect();return x.width&&x.right>b.right+1}).slice(0,24).map(e=>({tag:e.tagName,cls:e.className,width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right,text:e.textContent.slice(0,70)}))}}''')),flush=True)
+    p.screenshot(path=str(SHOTS/f'library-overflow-{width}.png'),animations='disabled')
    check(f'{width} list is contained and keeps every per-row action',not overflow(p) and p.locator('.library-row-actions [data-action=study]').count()==p.locator('.library-row').count())
    if width<=820:p.locator('[data-action=mobile]').click()
    p.locator('.nav-group [data-page=tools]').click();p.locator('#atelier-search').fill('import')
