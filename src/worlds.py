@@ -11,7 +11,8 @@ CATALOG = json.loads((ROOT / 'worlds.json').read_text(encoding='utf8'))
 
 def runtime_config(config: dict) -> dict:
     return {'theme':config['theme'], 'enabled':config.get('match_sprout',True) and config.get('visual_owner')=='atelier',
-            'ambience':config.get('ambience',True), 'motion':config.get('motion',True)}
+            'ambience':config.get('ambience',True), 'motion':config.get('motion',True),
+            'companion_scene': config.get('companion_scene', '') if config.get('companion_scene') in ('journal','observatory','greenhouse') else ''}
 
 def scene_urls(css: str, package: str | None = None) -> str:
     """Native assets use Anki's actual install identity; fixtures embed local bytes."""

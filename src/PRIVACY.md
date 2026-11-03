@@ -38,3 +38,16 @@ Your source text, images, teaching material, and AI suggestions are not automati
 
 
 The voluntary study clock stores its mode, selected duration, elapsed seconds and optional sound/pin choices in a profile-scoped local `user_files/clock-*.json` file. It does not record the cards you view, send timing data, alter Anki’s statistics or start itself after an Anki restart.
+
+
+## Optional Friends and shared folders
+
+The Friends client ships **unconfigured**. Installing Atelier, opening its window, using the local companion journey or exporting an offline package makes no Friends request. Connecting the optional prepared service is a separate administrator/owner decision. Online sharing uses a configured HTTPS Auth/PostgreSQL/private-object service; the operator must publish its actual privacy/retention terms before activation. No hosted project, accounts or email delivery were created by this release work.
+
+After connection, your explicitly requested sign-in sends the invited email/code to that service. It is separate from AnkiWeb and never asks for your AnkiWeb password. Access tokens stay in native memory for that profile session, not JavaScript or intentionally on disk; sign in again after restarting Anki. Display names, friend connections, hashed one-use invitation codes, recipient selections, version metadata and published packages are stored by the service. The operator can access them; private storage is **not end-to-end encryption**. Infrastructure providers can also process connection/account metadata according to their policies.
+
+Publishing sends selected native course/deck content, note types, tags and referenced media, without scheduling or review history. **Automatic publishing** separately authorizes future content changes within the attached parents while signed in. Check those folders and recipients before opting in. Original source documents/projects, saved practice answers, local journal reflections and companion history are not part of these Anki deck packages. Source material embedded in the approved cards is still shared card content.
+
+Recipients explicitly download and review a native import. A downloaded package and its later copies are outside revocation's control. Removing a friend, changing recipients or stopping a share blocks future authorized downloads; it cannot erase saved packages, backups or bytes already in flight. No public directory, contact upload, chat or automatic message to a friend is implemented. The prepared service's operator/security/backup/deletion requirements are in the matching source's `services/friends` documentation. The installer does not claim that these hosted obligations are already fulfilled.
+
+Companion keepsakes, the chosen scene and private reflection are local profile preferences. Real native study activity is read to determine optional local eligibility; it is not uploaded for a leaderboard or used to manipulate ratings or scheduling. No competitive anti-cheat or permanent online activity record is claimed.

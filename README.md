@@ -1,6 +1,9 @@
-# Atelier 1.0.14
+# Atelier 1.0.15
 
-Version 1.0.14 gives all seventeen world choices reactive artwork: short canopy, tide, starlight and dawn responses, a light sweep and a selected checkmark flourish. The tiles and labels stay still. Motion settles after two cycles, and reduced motion or Atelier motion-off keeps a static view. The open icon picker, complete library, study engines, native actions, custom ordering and all protected features remain intact. Read the [changelog](CHANGELOG-1.0.14.md), [installation guide](INSTALL-1.0.14.md) and [audit](AUDIT-1.0.14.md).
+Version 1.0.15 adds a local companion journey with distinct authored keepsakes and a Friends & shared folders window that also works with Atelier visuals off. Native offline export is available without an account. The invite-only online service/client is **prepared and unconfigured**, with versioned attached folders and optional automatic publishing; no host, accounts, email service or online sharing is active. Read the [changelog](CHANGELOG-1.0.15.md), [installation guide](INSTALL-1.0.15.md), [audit](AUDIT-1.0.15.md) and [hosting requirements](services/friends/HOSTING-REQUIREMENTS.md).
+
+The seventeen reactive worlds, authored icon choices, full course/lecture tree, custom ordering and all exam/card/occlusion/widget/remote features remain cumulative. The name and private install identity stay Atelier / `daedalus_atelier`. Public GitHub source/support is distinct from a public binary release, website deployment or AnkiWeb upload.
+
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,7 +17,7 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.14.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.15.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 

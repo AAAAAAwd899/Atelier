@@ -26,7 +26,10 @@ GUIDE='''<h1>Start with what you want to do.</h1>
 <h2>9. Share and protect your work</h2>
 <p>Export a chosen deck from its menu or Anki tools to create an <b>.apkg</b> file. Source projects, masks, exam plans and local preferences need separate backups; they are not all included in a deck export or Anki Sync. Read the included USER-GUIDE for the exact folders before moving to a new computer.</p>
 <h2>10. Return to familiar Anki controls</h2>
-<p><b>Tools → Atelier → Use original Anki home</b> restores the original home. The same menu has reviewer and shortcut recovery controls. For a compatibility problem, save your work, disable Atelier in Tools → Add-ons and restart. Disable instead of deleting it to keep local data. Never delete or reset your collection to troubleshoot a theme.</p>'''
+<p><b>Tools → Atelier → Use original Anki home</b> restores the original home. The same menu has reviewer and shortcut recovery controls. For a compatibility problem, save your work, disable Atelier in Tools → Add-ons and restart. Disable instead of deleting it to keep local data. Never delete or reset your collection to troubleshoot a theme.</p><h2>Friends and companion keepsakes</h2>
+<p><b>Tools → Atelier → Friends &amp; shared folders</b> also works when Atelier visuals are off. Offline export uses Anki’s normal exporter. Online Friends needs an approved, connected private service and an invited account; this installer ships unconfigured. Attach selected parent folders, choose friends and publish versions. Automatic publishing is a separate opt-in. Recipients explicitly review Anki’s import options; removing a published card does not automatically delete an imported copy.</p>
+<p><b>Tools → Atelier → Companion journey</b> is local and needs no account. Collect a journal nook, observatory or greenhouse from ordinary native review activity. Their reflection, activity view and current-focus shortcut have different uses. Collected scenes stay yours; Follow my world restores the world’s original companion.</p>
+'''
 
 def open_guide(owner,parent):
     old=getattr(owner,'_help_window',None)

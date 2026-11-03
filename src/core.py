@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.14"
+VERSION = "1.0.15"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -119,6 +119,12 @@ def settings(value: Any) -> dict[str, Any]:
         out["mode"] = "workspace"
     from .remote_model import settings as remote_settings
     out["remote"] = remote_settings(value.get("remote"))
+    if isinstance(value, dict) and any(k in value for k in ("friends_url", "friends_public_key")):
+        from .social_models import service_settings
+        try:
+            out.update(service_settings(value))
+        except (ValidationError, ValueError):
+            out.update(friends_url="", friends_public_key="")
     return out
 
 def profile_settings(value: Any) -> dict[str, Any]:
@@ -230,6 +236,14 @@ def profile_settings(value: Any) -> dict[str, Any]:
         out["onboarding"] = onboarding_state(value.get("onboarding"))
     except ValidationError:
         pass
+    # Optional feature preferences share this existing atomic profile store.
+    # Absent fields stay absent, preserving every prior profile/default shape.
+    if isinstance(value.get("journey"), dict):
+        from .social_models import journey_settings
+        out["journey"] = journey_settings(value["journey"])
+    if isinstance(value.get("sharing"), dict):
+        from .social_models import sharing_settings
+        out["sharing"] = sharing_settings(value["sharing"])
     return unique_active_studies(out)
 
 

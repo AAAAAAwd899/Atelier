@@ -208,7 +208,7 @@ class SproutLink:
         if web is not None:
             try:
                 from .worlds import runtime_config
-                web.eval("window.AtelierWorlds&&window.AtelierWorlds.configure("+json_for_html(runtime_config(cfg))+ ");")
+                web.eval("window.AtelierWorlds&&window.AtelierWorlds.configure("+json_for_html(runtime_config(cfg))+ ");window.ExamSprout?.suiteWorld("+json_for_html(cfg["theme"])+");")
                 web.eval("(()=>{const s=document.getElementById('atelier-sprout-tokens');"
                          "if(s)s.textContent=" + json_for_html(tokens_css(cfg)) + ';'
                          'document.documentElement.dataset.atelierSprout='

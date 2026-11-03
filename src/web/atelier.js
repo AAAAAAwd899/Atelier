@@ -1,4 +1,4 @@
-/* Atelier 1.0.14 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.15 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -595,7 +595,7 @@
       const last=Model.lastFolder(state.nodes,state.profile,state.location);
       const heading=state.query?'Search results':state.page==='desk'?(f.enabled?'Choose a lecture':'Your folders'):state.page==='recent'?'Pick up where you left off':state.page==='favorites'?'Within reach':state.page==='due'?(f.enabled?'Reviews in your active studies':'Available reviews'):here?here.name:'All folders';
       return `<section class="library" aria-label="Folders and decks">${state.page==='library'&&!state.query?breadcrumb():''}${state.page==='library'?`<div class="library-orientation"><span>${icon('folder',14)}${state.location==='0'?(boot.preview?'Sample library':'Your library'):'Folder contents'}</span>${last?btn('navigate','Return to last folder','clock','quiet',`data-id="${last.id}" title="Return to ${esc(nicePath(last.path))}"`):''}</div>`:''}
-        <div class="section-heading"><div><h2 tabindex="-1">${esc(heading)}</h2>${state.page==='library'?'<p>Open a folder or unfold its lectures. Choose a deck to study.</p>':state.page==='desk'&&f.enabled?'<p>Open a branch, or study one lecture at a time.</p>':''}</div><div class="library-actions">${state.page==='library'&&!here?nativeBtn('import','Import','import','quiet'):''}${here?examButton(here):''}${here?btn('study',children(here.id).length?'Study entire folder':'Study deck','play','secondary',`data-id="${here.id}"`):''}${btn('create','New deck','plus','quiet','data-kind="deck"')}${btn('create','New folder','folder','secondary','data-kind="folder"')}</div></div>
+        <div class="section-heading"><div><h2 tabindex="-1">${esc(heading)}</h2>${state.page==='library'?'<p>Open a folder or unfold its lectures. Choose a deck to study.</p>':state.page==='desk'&&f.enabled?'<p>Open a branch, or study one lecture at a time.</p>':''}</div><div class="library-actions">${state.page==='library'?btn('friends-open','Friends & sharing','external','quiet'):''}${state.page==='library'&&!here?nativeBtn('import','Import','import','quiet'):''}${here?examButton(here):''}${here?btn('study',children(here.id).length?'Study entire folder':'Study deck','play','secondary',`data-id="${here.id}"`):''}${btn('create','New deck','plus','quiet','data-kind="deck"')}${btn('create','New folder','folder','secondary','data-kind="folder"')}</div></div>
         <div class="library-controls ${!state.query&&['desk','due'].includes(state.page)&&f.enabled?'board-controls':''}"><div class="tabs" role="group" aria-label="Filter folders">${(state.page==='recent'?[['viewed','Recently opened'],['added','Recently added']]:[['all','All items'],['folders','Folders'],['decks','Decks']]).map(([id,label])=>`<button type="button" class="tab ${(state.page==='recent'?state.recentTab:state.filter)===id?'active':''}" data-action="filter" data-filter="${id}" aria-pressed="${(state.page==='recent'?state.recentTab:state.filter)===id}">${label}</button>`).join('')}</div><div class="view-tools">${state.page==='library'&&!state.query?btn('arrange-order','Arrange order','move','secondary arrange-order'): ''}${state.page==='recent'&&!state.query?'<span class="recent-order" aria-label="Sort order">Newest first</span>':`<select id="atelier-sort" aria-label="Sort folders" title="Sort siblings only; folder hierarchy is preserved"><option value="custom" ${state.config.sort==='custom'?'selected':''}>My order</option><option value="name" ${state.config.sort==='name'?'selected':''}>Name · folders first</option><option value="due" ${state.config.sort==='due'?'selected':''}>Review + learning</option><option value="recent" ${state.config.sort==='recent'?'selected':''}>Recently opened</option></select>`}<div class="view-switch">${btn('view','Folder tree','layers',`quiet ${state.config.view==='outline'?'active':''}`,`data-view="outline" aria-pressed="${state.config.view==='outline'}"`)}${ib('view','Grid view','grid',`data-view="grid" aria-pressed="${state.config.view==='grid'}"`,state.config.view==='grid'?'active':'')}${ib('view','List view','list',`data-view="list" aria-pressed="${state.config.view==='list'}"`,state.config.view==='list'?'active':'')}</div></div></div><div id="library-results" aria-live="polite">${results()}</div></section>`;
     }
 
@@ -941,6 +941,7 @@
       if(state.dialog==='widget-tools')closeDialog();
       switch(a){
         case 'guided-tour':startTour();break;
+        case 'friends-open':await request('friends_open',{tab:'shared'});break;
         case 'study-clock':await request('study_clock',{});break;
         case 'getting-started':await request('getting_started',{});break;
         case 'tour-skip':await finishTour('skipped');break;
@@ -1187,6 +1188,7 @@
       const d=demoData();
       if(boot.demoDelay&&action==='settings')await new Promise(r=>setTimeout(r,boot.demoDelay));
       if(action==='load')return JSON.parse(JSON.stringify(d));
+      if(action==='friends_open')return {opened:true};
       if(action==='focus'||action==='ui'||action==='companion_palette')return true;
       if(action==='rescan_makeovers')return boot.integrations||{};
       if(action==='visual_owner'){d.settings={...d.settings,visual_owner:data.owner,mode:data.owner==='atelier'?'workspace':'native'};demoSave();return {...d.settings};}

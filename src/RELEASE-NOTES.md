@@ -1,3 +1,11 @@
+# Atelier 1.0.15
+
+- Friends & shared folders opens from Tools even with Atelier visuals off. Native offline export remains available without an account.
+- Prepared invite-only service and desktop client for attaching multiple parent folders, versioned updates, explicit recipient imports and optional automatic publishing. No hosted endpoint or member accounts are active in this installer.
+- Optional local companion journey: permanent journal, observatory and greenhouse keepsakes from actual native review activity, with distinct authored scenes and uses.
+- Higher-resolution green Pip artwork, with the original companion/world families retained and an explicit Follow my world choice.
+- Profile-bound memory-only sign-in, bounded native export, stream integrity checks, private service authorization/quotas and prepared hosting/operations review gates.
+
 # Atelier 1.0.14
 
 - All seventeen world choices respond with finite scene motion, lighting and selection feedback.

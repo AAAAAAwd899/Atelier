@@ -1,0 +1,4 @@
+project_id = "atelier-friends-unconfigured"
+[functions.atelier-friends]
+# The handler validates each bearer with Auth /user.
+verify_jwt = false

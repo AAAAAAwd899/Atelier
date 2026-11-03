@@ -39,7 +39,7 @@
   }
   window.ExamSprout = {
     suiteReady(){return !!S.data;},
-    suiteRequest(action,payload={}){if(!S.data?.suite||!["suite_theme","suite_focus","suite_native"].includes(action))return Promise.reject(new Error("Unavailable suite action"));return request(action,payload);},
+    suiteRequest(action,payload={}){if(!S.data?.suite||!["suite_theme","suite_focus","suite_native","suite_journey"].includes(action))return Promise.reject(new Error("Unavailable suite action"));return request(action,payload);},
     suiteWorld(theme){if(!S.data)return;S.data.state.settings.theme=String(theme||'');updateCompanionWorld(theme);},
     receive(message) {
       const p = pending.get(message.id);
@@ -108,9 +108,10 @@
     const stages=pipStages(kind),index=Math.max(0,Math.min(stages.length-1,Number(stage||1)-1));
     return `${stages[index]} stage`;
   }
+  function pipPortrait(base,kind){const scene=window.AtelierWorlds?.getConfig?.().companion_scene;return scene&&["journal","observatory","greenhouse"].includes(scene)?`${base}/keepsake-${scene}-1.0.15.png`:`${base}/companion-${kind}-${kind==='green'?'1.0.15':'1.0.3'}.png`;}
   function updateCompanionWorld(theme) {
     const card=root?.querySelector('.pip-card');if(!card)return;
-    const world=pipWorld(theme),base=card.dataset.pipBase,portrait=`${base}/companion-${world.kind}-1.0.3.png`;
+    const world=pipWorld(theme),base=card.dataset.pipBase,portrait=pipPortrait(base,world.kind);
     [...card.classList].filter(name=>name.startsWith('pip-world-')).forEach(name=>card.classList.remove(name));
     card.classList.add(`pip-world-${world.kind}`);card.dataset.pipWorld=world.kind;card.dataset.pipWorldLabel=world.label;card.dataset.pipPortrait=portrait;
     const image=card.querySelector('.pip-image');if(image){image.src=portrait;image.alt=world.label;}
@@ -236,8 +237,8 @@
     const base=E((S.data.asset_base||'/_addons/exam_sprout/web')+'/pip');
     const animate=S.data.state.settings.animate_pip!==false;
     const world=pipWorld(S.data?.state?.settings?.theme);
-    const portrait=`${base}/companion-${world.kind}-1.0.3.png`, actions=pipActions(world.kind), stages=pipStages(world.kind);
-    return `<aside class="es-companion-panel" aria-label="Pip companion"><section class="pip-card pip-world-${world.kind}" data-pip-world="${world.kind}" data-pip-world-label="${E(world.label)}" data-pip-base="${base}" data-pip-portrait="${portrait}" data-pip-key="profile-companion" data-pip-stage="${growth.stage}" data-pip-animate="${animate}"><span class="pip-kicker">A LITTLE LIFE BESIDE YOUR STUDY</span><button class="pip-touch" data-pip-action="greet" aria-label="Greet ${E(world.label)}"><span class="pip-world-aura" aria-hidden="true"><span class="pip-world-emblem">${pipWorldMark(world.kind)}</span></span><img class="pip-image" src="${portrait}" alt="${E(world.label)}" draggable="false"><canvas class="pip-canvas" aria-hidden="true" hidden></canvas></button><strong class="pip-name">Meet Pip</strong><span class="pip-world-label">${E(world.label)}</span><span class="pip-speech" aria-live="polite">Quiet company. No distractions.</span><div class="pip-actions"><button data-pip-action="pet">${actions[0]}</button><button data-pip-action="water">${actions[1]}</button></div><button class="pip-pause" data-pip-action="pause">Pause motion</button><span class="pip-mode">Loading your companion…</span></section><div class="es-pip-progress"><span class="es-pip-stage-label">${E(pipStageLabel(world.kind,growth.stage))}</span><strong>${growth.score}<small>%</small></strong><div class="es-growth-bar" role="meter" aria-label="Effort progress toward Pip’s next stage, not readiness" aria-valuenow="${growth.score}" aria-valuemin="0" aria-valuemax="100"><span style="width:${growth.score}%"></span></div><div class="es-growth-steps" aria-label="Pip growth">${stages.map((name,i)=>`<span aria-current="${i+1===growth.stage?'step':'false'}">${name}</span>`).join('')}</div><p><strong>${growth.points||0} effort points</strong>${growth.next?` · ${growth.next} for the next stage`:" · Lifetime growth"}. One point per studied note per day, across exams. Incorrect effort counts too. Exam readiness is separate; companion interactions add no points.</p><button class="es-small es-full-width" data-action="pip-study">Study with Pip</button></div></aside>`;
+    const portrait=pipPortrait(base,world.kind), actions=pipActions(world.kind), stages=pipStages(world.kind);
+    return `<aside class="es-companion-panel" aria-label="Pip companion"><section class="pip-card pip-world-${world.kind}" data-pip-world="${world.kind}" data-pip-world-label="${E(world.label)}" data-pip-base="${base}" data-pip-portrait="${portrait}" data-pip-key="profile-companion" data-pip-stage="${growth.stage}" data-pip-animate="${animate}"><span class="pip-kicker">A LITTLE LIFE BESIDE YOUR STUDY</span><button class="pip-touch" data-pip-action="greet" aria-label="Greet ${E(world.label)}"><span class="pip-world-aura" aria-hidden="true"><span class="pip-world-emblem">${pipWorldMark(world.kind)}</span></span><img class="pip-image" src="${portrait}" alt="${E(world.label)}" draggable="false"><canvas class="pip-canvas" aria-hidden="true" hidden></canvas></button><strong class="pip-name">Meet Pip</strong>${S.data?.suite?'<button class="es-small" data-action="companion-journey">Companion journey</button>':''}<span class="pip-world-label">${E(world.label)}</span><span class="pip-speech" aria-live="polite">Quiet company. No distractions.</span><div class="pip-actions"><button data-pip-action="pet">${actions[0]}</button><button data-pip-action="water">${actions[1]}</button></div><button class="pip-pause" data-pip-action="pause">Pause motion</button><span class="pip-mode">Loading your companion…</span></section><div class="es-pip-progress"><span class="es-pip-stage-label">${E(pipStageLabel(world.kind,growth.stage))}</span><strong>${growth.score}<small>%</small></strong><div class="es-growth-bar" role="meter" aria-label="Effort progress toward Pip’s next stage, not readiness" aria-valuenow="${growth.score}" aria-valuemin="0" aria-valuemax="100"><span style="width:${growth.score}%"></span></div><div class="es-growth-steps" aria-label="Pip growth">${stages.map((name,i)=>`<span aria-current="${i+1===growth.stage?'step':'false'}">${name}</span>`).join('')}</div><p><strong>${growth.points||0} effort points</strong>${growth.next?` · ${growth.next} for the next stage`:" · Lifetime growth"}. One point per studied note per day, across exams. Incorrect effort counts too. Exam readiness is separate; companion interactions add no points.</p><button class="es-small es-full-width" data-action="pip-study">Study with Pip</button></div></aside>`;
   }
 
   function renderFocusRow(r,i){
@@ -486,6 +487,7 @@
     if(a==='discard-draft'){confirmModal('Discard this saved exam?','The local saved session and its written responses will be removed. Your finished results and Anki cards stay unchanged.',async()=>{await request('discard_draft');S.data.draft=null;render();});return;}
     if(a==='export-result'){const r=await request('export_result',{result_id:button.dataset.id});if(r.saved)toast('Result exported without written answers.');return;}
     if(a==='review-all'){const r=await request('review_misses',{id:button.dataset.exam||S.selected,result_id:button.dataset.id,filter:'all'});if(r.empty)toast(r.message);else closeModal();return;}
+    if(a==='companion-journey')return window.ExamSprout.suiteRequest('suite_journey',{});
     if(a==='pip-study'){
       let groups=[];if(S.data.suite)groups=await request('suite_groups');
       const plans=S.data.state.exams.filter(e=>!e.archived);

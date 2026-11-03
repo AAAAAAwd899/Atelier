@@ -22,7 +22,9 @@ def test_pip_worlds_keep_shared_growth_and_use_authored_portraits():
         assert data.startswith(b"\x89PNG\r\n\x1a\n")
         assert struct.unpack(">II", data[16:24]) == (512, 512)
     assert "pipWorldMark(world.kind)" in APP
-    assert "data-pip-portrait" in APP and "companion-${world.kind}-1.0.3.png" in APP
+    assert "data-pip-portrait" in APP and "pipPortrait(base,world.kind)" in APP
+    assert "companion-${kind}-${kind==='green'?'1.0.15':'1.0.3'}.png" in APP
+    assert "keepsake-${scene}-1.0.15.png" in APP
     assert "Illustrated companion · Local only" in PIP
     assert "s.portrait" in PIP and "pip-portrait-greet" in CSS
     assert "data-pip-stage" in APP and "data-pip-animate" in APP

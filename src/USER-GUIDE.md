@@ -1,4 +1,4 @@
-# Atelier 1.0.6 — Your study space in Anki
+# Atelier 1.0.15 — Your study space in Anki
 
 Organize your classes, build cards from your sources, prepare for exams, and make Anki feel like your own space. Atelier includes Card Studio, Exam Studio, Pip, and seventeen visual worlds. Onigiri is optional.
 
@@ -147,3 +147,26 @@ The 13-step **Guided tour** gives a quick orientation. **Tools → Atelier → G
 ## Find your other add-ons
 
 Open **Anki tools → Add-on tools** or **Tools → Atelier → Add-on tools**. Search the original commands from Tools and added top-level menus, choose one and Open selected. Disabled commands stay unavailable. This runs the original action without changing its shortcut, settings or confirmation dialogs. Some commands appear only after their original menu opens; open it once and Refresh. Controls inside editors/reviewers stay there. No third-party add-ons are bundled or automatically installed.
+
+
+## Friends, attached folders and versions
+
+Open **Library → Friends & sharing** or **Tools → Atelier → Friends & shared folders**. The Tools entry works with Atelier visuals off and with the original home. **Export Anki package** opens Anki's normal exporter without an account.
+
+The optional online service is prepared but **not connected in this installer**. After an approved operator connects it and invites your account, use the invited email to request a code. This is separate from AnkiWeb. Sign in after each restart; tokens stay in memory for the profile session. Exchange a one-use friendship code with someone on that same service, check their name and explicitly accept.
+
+On **Shared folders**, attach the parent courses and/or lecture decks you want to publish together, choose friends, and publish a version. Overlapping roots count once; originals remain in their folders. Packages include card content, note types, tags and referenced media without your review history or scheduling. Only share material you have permission to distribute. The private pilot limits a course to 50,000 cards, 64 MiB local source/media and a 40 MiB compressed package.
+
+**Publish folder changes automatically** is opt-in. While signed in, native collection changes are debounced and inspected at the deck browser; content changes publish another version, normal reviews do not. Future cards added anywhere within the attached parents are included. For images changed outside Anki, use **Publish now**. A failed publication pauses that course; refresh, cancel an unfinished upload if shown, then publish again. Signing out/profile closure stops automatic publication. Shared course attachments are bound to that profile, service origin and signed-in account.
+
+Friends receive an **Updates** entry. **Download & review in Anki** verifies the package, saves it to your chosen location, and opens Anki's importer. Review the native update choices before importing. There is no silent import, two-way editing or automatic deletion of cards absent from the publisher's latest folder. Anki controls note matching, note-type updates, scheduling retention and edit conflicts. A recorded download does not prove you imported it. **Choose friends** changes future access; **Stop sharing** revokes future downloads. Previously saved copies remain with recipients.
+
+## Companion journey
+
+Open **Tools → Atelier → Companion journey**, or the companion's **Companion journey** button in Pip. It needs no account, provider or visuals. Its three optional keepsakes use ordinary native review activity over the last 30 study days. Every answer rating counts equally; no tool, theme or core feature is locked behind them.
+
+- **The journal nook:** 10 reviews on at least one study day. A warm reading scene/outfit and a private reflection saved on this computer.
+- **The observatory:** 50 reviews across at least three study days. An astronomer outfit/telescope scene and a constellation of the actual daily review aggregates.
+- **The greenhouse:** 150 reviews across at least seven study days. A gardening scene/outfit and a shortcut to your current active study focus.
+
+Collect an eligible keepsake explicitly. It stays collected after old reviews leave the 30-day window. **Choose this companion scene** changes Pip's portrait; **Follow my world** restores the existing world-specific companion family. Journal text, earned keepsakes and scene choice live in the existing profile preference file in Atelier's `user_files`; include it in backups. They are not uploaded to Friends or synchronized by Anki Sync. Companion interactions and claiming keepsakes do not rate cards or change Anki schedules. As with the progress view, deleted cards/manual rescheduling/independent practice are excluded from these native review aggregates.

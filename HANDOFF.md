@@ -1,13 +1,9 @@
-# Atelier 1.0.0 — frozen release handoff
+# Atelier 1.0.15 handoff
 
-Use this source kit, not any earlier divergent 0.8/0.9 shell. The input was the delivered 0.9.0-rc6 installer and matching source; every input byte matched before edits. The owner accepted visual and primary testing and requested a consumer-facing version 1 release.
+Install **dist/Atelier-1.0.15.ankiaddon** through Anki's Add-ons → Install from file. That one file is all a recipient needs. Matching editable source, screenshots/tests and SHA/build manifests are separate owner handoff artifacts. See INSTALL-1.0.15.md, AUDIT-1.0.15.md and the current Build JSON for exact evidence and hashes.
 
-The accepted design, navigation, independent Widgets route, visual-owner boundaries, figure caching, exports, progress, Pip groups, source approval, and practice behavior are frozen. Do not turn this finish into a new redesign. Embedded Sprout/Workshop version strings still identify their original upstream components; do not relabel them or overwrite their retained provenance documentation.
+New local Companion journey has three authored scenes/uses. Friends & shared folders is available through Tools with visuals off, and offline native export works without an account. The optional invite-only online client/service is **prepared and unconfigured**; no server/accounts/email service are active. Review services/friends/HOSTING-REQUIREMENTS.md before approving an exact destination/budget and activation. Recipients explicitly review native imports; shared versions do not silently mirror deletions or overwrite all edits.
 
-All code/version copy changes are in `release-copy-changes.json`. `tests/data/release-rc6-copy-baseline.json` and `release_copy.py` verify exact forward replay. Anything outside that list must fail the freeze tests. Runtime data schemas, provider consent, algorithms, CSS, icons, scenery, masks, defaults, and storage locations remain unchanged.
+The approved public source/support destination is https://github.com/AAAAAAwd899/Atelier. GitHub source delivery is distinct from AnkiWeb/site/public binary publication. No numeric AnkiWeb ID or account-eligibility date is invented. Current local source/installer is 1.0.15; retain tested 1.0.14 as rollback, with separate backups of current preferences/source projects/saved practice before downgrade.
 
-The integrated authoring/assessment frontend namespace must be tested in separate Python processes. Both historical harnesses import a test package called `addon`; combining them in one process causes a test-fixture namespace collision, not a production controller collision. The cumulative verifier already separates them.
-
-Run `verify_release.py`, current render scripts, and `package_release.py`. Never reuse an old runtime fingerprint or screenshot proof. Generated proof totals count executed checks, not distinct native integrations. Exact-installer reruns are repeat checks and must not inflate totals.
-
-Read `RELEASE-ACCEPTANCE.json`, `AUDIT-REPORT.md`, `RELEASE-GATES.md`, `MIGRATION.md`, and `src/USER-GUIDE.md`. The public listing is not uploaded. No code/asset fonts or private profile files belong in output archives. User-reported native acceptance and unperformed independent native QA must remain separate in release descriptions.
+The retained canonical editable folder remains the working/Atelier-1.0.2 path from the implementation kit; its runtime version is 1.0.15. Historical docs/receipts remain provenance, not current compatibility claims. Protected Git/recovery chains and unique accepted artwork/saves are not deleted. Generated successful QA copies and independently reconstructed superseded transport payloads are retired with scoped receipts.

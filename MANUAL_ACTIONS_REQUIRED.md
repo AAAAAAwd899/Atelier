@@ -1,6 +1,6 @@
 # Atelier owner decisions and external actions
 
-- Review the cumulative 1.0.11 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
+- Review the cumulative 1.0.15 interfaces and the outstanding native/usability evidence before approving public release. The first flat Forest and castle concept renders remain rejected evidence; only the later final runtime captures are cited by the current audit.
 - During that review, switch through the original and five added worlds, inspect the theme-specific Pip companion treatments, and create an exam containing two parent folders to confirm the combined scope and overlap wording are clear.
 - The owner explicitly authorized making https://github.com/AAAAAAwd899/Atelier public for GitHub Issues support on October 20, 2026. Verify the final visibility and support links in the handoff receipt. Website deployment, a public binary release and AnkiWeb upload remain separate, unperformed actions.
 - When AnkiWeb permits the owner account to share an add-on, create/identify the exact listing and record its numeric code. Verify the then-current upload rules. Account eligibility has not been verified and no eligibility date is promised.
@@ -19,3 +19,9 @@ No scheduled publication or account-age monitoring has been created. No owner co
 ## Hosted Linux layout gate — 1.0.14
 
 The prior Ubuntu CI run failed the 320px Library containment/per-row-action assertion in test_home_slice_browser.py. The complete local Windows regression and separately labelled native offscreen checks are distinct evidence. Inspect and fix that hosted edge case, then rerun before claiming Linux support. This release does not certify Linux/native macOS or every third-party configuration. New hosted CI status is recorded with the handoff; no success is inferred from a pending run.
+
+## 1.0.15 private Friends preparation
+
+- No Friends service, provider project, SMTP sender, member accounts or paid resources are live. Before activation, approve the exact dedicated project/account/region, budget, operator/support contact and privacy/retention terms. Complete services/friends/HOSTING-REQUIREMENTS.md, including actual managed Auth/RLS/Storage/Deno, two-account native flow, concurrent revoke/upload/cleanup, abuse/cost and matched database/object restore evidence.
+- Do not distribute a secret/service-role key or enable public signup. The installer has no endpoint by default. Local companion keepsakes and offline sharing remain usable without this service or Atelier visuals.
+- Automatic folder publication is opt-in and session-bound. Native APKG imports do not mirror deletions or silently resolve recipients' edits. Media changed outside Anki needs Publish now. Do not advertise simultaneous collaboration, end-to-end encryption, unlimited hosting, universal add-on compatibility or completed hosted tests.

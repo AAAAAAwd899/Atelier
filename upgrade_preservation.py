@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parent
 @lru_cache(maxsize=1)
 def historical_text():
     out={}
-    for name in ('release-102-baseline.json','release-102-onboarding-baseline.json','pypdf-590-baseline.json','release-112-presentation-baseline.json'):
+    for name in ('release-102-baseline.json','release-102-onboarding-baseline.json','pypdf-590-baseline.json','release-112-presentation-baseline.json','release-114-navigation-baseline.json'):
         out.update(json.loads((ROOT/'tests/data'/name).read_text(encoding='utf8')))
     return out
 
@@ -34,7 +34,7 @@ def engine_bytes(name, source=ROOT/'src'):
     return raw
 
 def before_upgrade(name,data=None):
-    record=json.loads((ROOT/'patch-114-changes.json').read_text())
+    record=json.loads((ROOT/'patch-115-changes.json').read_text())
     if name in record['removed']:
         lock=json.loads((ROOT/'PYPDF-VENDOR-6.21.4.json').read_text())
         assert name in lock['retired_baseline_modules'] and not (ROOT/'src'/name).exists()

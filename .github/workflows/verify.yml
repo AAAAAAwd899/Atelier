@@ -35,6 +35,11 @@ jobs:
           with sync_playwright() as p:
               print("ATELIER_TEST_BROWSER=" + p.chromium.executable_path)
           PY
+      - name: Prepared private Friends service checks
+        run: |
+          npm ci --prefix services/friends --ignore-scripts --no-fund
+          npm test --prefix services/friends
+          npm run check --prefix services/friends
       - name: Original engines, current contracts and browser workflows
         run: python verify_release.py
       - name: Keep evidence even when a gate fails

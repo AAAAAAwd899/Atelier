@@ -139,6 +139,16 @@
         }
       },
       "additionalProperties": false
+    },
+    "friends_url": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Optional approved private Friends service HTTPS origin. Empty/unset disables online sharing."
+    },
+    "friends_public_key": {
+      "type": "string",
+      "maxLength": 2048,
+      "description": "Public publishable/anon project key only. Never a service-role or secret key."
     }
   },
   "additionalProperties": true

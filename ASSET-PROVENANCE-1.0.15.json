@@ -1,0 +1,52 @@
+{
+  "assets": [
+    {
+      "path": "src/sprout/web/pip/companion-green-1.0.15.png",
+      "bytes": 2572747,
+      "sha256": "168d8cdb39002f9b47f24e6c1ce17c33fd277349170d05771d8de689159f8fdc",
+      "source": "C:\\Users\\lukoo\\.codex\\generated_images\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\exec-634904ab-b266-49e7-bc61-b9da3012e2e1.png",
+      "method": "Built-in image generation; preserved Atelier green companion identity",
+      "purpose": "In-product companion scene; not evidence of runtime behavior",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "src/sprout/web/pip/keepsake-journal-1.0.15.png",
+      "bytes": 3066664,
+      "sha256": "99835e7ef7f4f6289f303eec87fcdcdf8d2f9aa66c4184fa55292f46472d8177",
+      "source": "C:\\Users\\lukoo\\.codex\\generated_images\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\exec-01a9936d-1a90-4c95-8308-519a81a96d76.png",
+      "method": "Built-in image generation; preserved Atelier green companion identity",
+      "purpose": "In-product companion scene; not evidence of runtime behavior",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "src/sprout/web/pip/keepsake-observatory-1.0.15.png",
+      "bytes": 3081315,
+      "sha256": "eb4cbbe349ba7f2103bd5e7af27f188652c85d694c2159da201a38e7da4ab94a",
+      "source": "C:\\Users\\lukoo\\.codex\\generated_images\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\exec-b0400e08-4e10-4054-bc34-9cdeba52a4b8.png",
+      "method": "Built-in image generation; preserved Atelier green companion identity",
+      "purpose": "In-product companion scene; not evidence of runtime behavior",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "src/sprout/web/pip/keepsake-greenhouse-1.0.15.png",
+      "bytes": 2996241,
+      "sha256": "9f7f6279dbdd4ed996878c3c9d662abfbcda44fe1b7330b05a558f384f85cce6",
+      "source": "C:\\Users\\lukoo\\.codex\\generated_images\\01a09929-dedf-7ae3-8c5a-980a79e53c35\\exec-cce73f49-4a0b-4b6e-8244-f6f0c10fbcc8.png",
+      "method": "Built-in image generation; preserved Atelier green companion identity",
+      "purpose": "In-product companion scene; not evidence of runtime behavior",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    }
+  ]
+}

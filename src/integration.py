@@ -1,7 +1,8 @@
 """Public Anki hooks, context-restricted bridge and undo-aware deck operations.
 
 No scheduler patches, SQL writes, card-template modifications,
-network requests, card-template edits, or global Qt stylesheets.
+card-template edits, or global Qt stylesheets. Friends networking is isolated
+in the explicit, opt-in friends_ui/friends_client modules.
 """
 from __future__ import annotations
 
@@ -89,6 +90,8 @@ class Atelier:
 
     def sprout_config(self) -> dict:
         cfg = self.get_config()
+        from .social_models import journey_settings
+        cfg["companion_scene"] = journey_settings(self.profile.get("journey"))["equipped"]
         if cfg['visual_owner'] != 'atelier':
             # Native ownership means native Sprout appearance too. Companion
             # colors are used ONLY in our own shadow-root organizer/launcher.
@@ -154,6 +157,8 @@ class Atelier:
                     self._ui_state = {"page": "widgets", "location": "0", "query": "", "filter": "all"}
 
     def closed(self) -> None:
+        if getattr(self, "friends", None):
+            self.friends.shutdown();self.friends=None
         if getattr(self, "_addon_tools_window", None):
             self._addon_tools_window.close();self._addon_tools_window=None
         if getattr(self, 'study_clock', None):
@@ -230,6 +235,20 @@ class Atelier:
         mw.web.eval("window.AtelierMakeover && window.AtelierMakeover.receive(" + json_for_html(payload) + ");")
 
     def receive(self, handled: tuple[bool, Any], message: str, context: Any) -> tuple[bool, Any]:
+        # A presentation-only adapter for the existing planner request channel.
+        # Exact live dialog/profile identity is required; no engine logic changes.
+        if not handled[0] and message.startswith("exam-sprout:") and "suite_journey" in message and len(message) <= 4096:
+            from .sprout_link import is_planner
+            if is_planner(context, mw) and context.valid() and getattr(context.controller, "suite", None) is self:
+                try:
+                    value = json.loads(message[len("exam-sprout:"):])
+                    rid = value.get("id", "")
+                    if value.get("action") == "suite_journey" and isinstance(rid, str) and re.fullmatch(r"[A-Za-z0-9_-]{1,64}", rid) and value.get("payload", {}) == {}:
+                        self.open_friends("journey")
+                        context.send(rid, {"opened": True})
+                        return (True, None)
+                except (ValueError, TypeError, AttributeError):
+                    return handled
         if handled[0] or not message.startswith("atelier:v1:"):
             return handled
         # Messages from a reviewer, editor, different page, or old profile are ignored.
@@ -297,6 +316,8 @@ class Atelier:
             self.reply(nonce, rid, result={"opened": True})
         elif action == "addon_tools":
             self.open_addon_tools();self.reply(nonce,rid,result={"opened":True})
+        elif action == "friends_open":
+            self.open_friends(data.get("tab", "shared"));self.reply(nonce,rid,result={"opened":True})
         elif action == "study_clock":
             self.open_clock();self.reply(nonce,rid,result={"opened":True})
         elif action == "getting_started":
@@ -623,6 +644,10 @@ class Atelier:
             bottom = f"body{{background:{bg};color:{fg}}}button{{background:{bg};color:{fg};border-color:{line};border-radius:8px}}" if css else ""
             mw.bottomWeb.eval("(()=>{let s=document.getElementById('atelier-bottom-chrome');if(!s){s=document.createElement('style');s.id='atelier-bottom-chrome';document.head.append(s)}s.textContent=" + json.dumps(bottom) + ";})();")
 
+    def open_friends(self, tab="shared") -> None:
+        from .friends_ui import open_friends
+        open_friends(self, mw, tab if tab in ("shared", "friends", "inbox", "journey") else "shared")
+
     def open_clock(self) -> None:
         if not mw.col:
             showInfo('Open an Anki profile to use the study clock.');return
@@ -745,6 +770,9 @@ def install(module: str) -> Atelier:
         registration.hook(gui_hooks.webview_did_receive_js_message, addon.receive)
         registration.hook(gui_hooks.state_did_change, addon.state_changed)
         registration.hook(gui_hooks.profile_will_close, addon.closed)
+        if hasattr(gui_hooks, "operation_did_execute"):
+            registration.hook(gui_hooks.operation_did_execute, lambda *args: getattr(addon, "friends", None) and addon.friends.changed(*args))
+        registration.cleanup(lambda: getattr(addon, "friends", None) and addon.friends.shutdown())
         if hasattr(gui_hooks, "state_will_change"):
             registration.hook(gui_hooks.state_will_change, addon.review_theme.before_state)
         registration.hook(gui_hooks.state_did_change, addon.review_theme.after_state)
@@ -766,6 +794,8 @@ def install(module: str) -> Atelier:
                               ("Guided tour…", addon.open_tour),
                               ("Getting started…", addon.open_help),
                               ("Study clock…", addon.open_clock),
+                              ("Friends & shared folders…", addon.open_friends),
+                              ("Companion journey…", lambda: addon.open_friends("journey")),
                               ("Add-on tools…", addon.open_addon_tools),
                               ("Appearance & compatibility…", lambda: addon.open(appearance=True)),
                               ("Use original Anki home", addon.original),

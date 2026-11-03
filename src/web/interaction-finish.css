@@ -105,7 +105,7 @@ html[data-atelier-world-enabled="true"][data-atelier-scenery="false"] #es-app :i
 @media(prefers-reduced-motion:reduce){:host .folder-icon-options .picker-symbol,:host .personalization-art .folder-symbol{animation:none!important;transform:none!important;}}
 @media(forced-colors:active){:host .folder-icon-options button[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-2px;}:host .folder-icon-options button:focus-visible{outline:2px solid Highlight;}}
 
-/* 1.0.14 — reactive world dioramas inside stationary, readable choices. */
+/* 1.0.15 — reactive world dioramas inside stationary, readable choices. */
 :host .theme-tile{border-color:transparent;background:transparent;}
 :host .theme-tile:is(:hover,:focus-visible){border-color:transparent;background:color-mix(in srgb,var(--accent) 9%,transparent);}
 :host .theme-tile.selected{background:color-mix(in srgb,var(--accent) 12%,transparent);}
