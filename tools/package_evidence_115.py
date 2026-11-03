@@ -16,6 +16,8 @@ for name in ['atelier-unit','sprout-unit','workshop-unit','package-115','library
     files.append(V/(name+'.log'))
 files.extend((ROOT/'output/native-social-115').glob('*-captured.json'))
 files.extend(V.glob('*interrupted-115.log'))
+files.extend(V/n for n in ['hosted-current-115.json','github-ci-final-115.log'])
+files.append(V/'hosted-ci-115/verified.json')
 files.extend(V/n for n in ['hosted-world-finish-115.json','github-ci-115-corrected.log','github-ci-115-picker.log','github-study-picker-115.log','aggregate-115.log'])
 files.extend(V/n for n in ['qa-final-cleanup-115.json','qa-repeat-cleanup-115.json','native-install-115-stale-input-diagnosis.json','github-ci-115.log','github-ci-115-preflight.log','full-115.log','native-sharing-115.log','native-social-115.log','native-onigiri-115.log','native-install-115.log'])
 assert all(p.is_file() for p in files),[str(p) for p in files if not p.is_file()]
