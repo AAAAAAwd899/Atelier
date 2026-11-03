@@ -50,6 +50,11 @@
       "file": "screenshots/06-companion-journey.png",
       "caption": "A collected journal keepsake in the companion journey.",
       "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
+    },
+    {
+      "file": "screenshots/07-exam-studio.png",
+      "caption": "Exam Studio and Pip with an example exam.",
+      "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
     }
   ]
 }

@@ -14,7 +14,7 @@ Organize slides, PDFs, images and notes into source projects. Create questions, 
 
 ## Prepare, practise and pick up where you left off
 
-Exam Studio includes practice and mock sessions, saved unfinished work, self-marking and results. Readiness indicators are planning estimates, not predictions of an exam grade.
+Exam Studio includes practice and mock sessions, saved unfinished work, self-marking and results. Readiness indicators are planning estimates, not predictions of an exam grade. Pip’s optional Introduce new cards mode can submit real Anki ratings; its setup identifies this before you start.
 
 ## A space that feels like yours
 
@@ -51,6 +51,8 @@ Actual Anki/Qt webviews with example data. Captured offscreen; native window bor
 ![Two parent courses selected for one study.](https://raw.githubusercontent.com/AAAAAAwd899/Atelier/main/listing/ankiweb-1.0.16/screenshots/05-combine-folders.png)
 
 ![A collected journal keepsake in the companion journey.](https://raw.githubusercontent.com/AAAAAAwd899/Atelier/main/listing/ankiweb-1.0.16/screenshots/06-companion-journey.png)
+
+![Exam Studio and Pip with an example exam.](https://raw.githubusercontent.com/AAAAAAwd899/Atelier/main/listing/ankiweb-1.0.16/screenshots/07-exam-studio.png)
 
 ## Support and source
 

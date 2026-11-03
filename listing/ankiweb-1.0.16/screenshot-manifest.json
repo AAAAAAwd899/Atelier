@@ -1,0 +1,55 @@
+{
+  "runtime_sha256": "128cb7f79bbc897041435d15f489dcb41d7b79262a78c25876967783aaee7981",
+  "installer_sha256": "3b17cd69e6ac36756700b03b24f9e42de9e9d62635c412fdd89aea3dedf91cdc",
+  "capture": "Actual Anki 26.09.3 Qt offscreen webviews, example collections; outer native chrome excluded",
+  "images": [
+    {
+      "file": "screenshots/01-study-desk.png",
+      "width": 1440,
+      "height": 784,
+      "sha256": "bd422f4c3b21eb2350046fa4513e0b1310a1754644cc96d2573d329696205f39"
+    },
+    {
+      "file": "screenshots/02-library.png",
+      "width": 1440,
+      "height": 784,
+      "sha256": "6d753e9fa1636f1555feb25614988fed834757c4848c7516d733bd003f86aeb6"
+    },
+    {
+      "file": "screenshots/03-card-studio.png",
+      "width": 1360,
+      "height": 924,
+      "sha256": "67d68b779050eda692f7b425c3fcec51f02e28e694f80a711604d96263b32be2"
+    },
+    {
+      "file": "screenshots/04-image-occlusion.png",
+      "width": 1360,
+      "height": 924,
+      "sha256": "95cc9022771edf4472a526c4ce3962529f1ec6f8887733df33849c88d080521a"
+    },
+    {
+      "file": "screenshots/05-combine-folders.png",
+      "width": 1440,
+      "height": 784,
+      "sha256": "31df0f10776ead37592df17c078a55d143a3231e13056a1913b11f77538fcd7b"
+    },
+    {
+      "file": "screenshots/06-companion-journey.png",
+      "width": 1080,
+      "height": 790,
+      "sha256": "ce40744f816aa4866935eadb9c1b74df751ec2a4b7fb661a001ef6824ac9a26d"
+    },
+    {
+      "file": "screenshots/07-exam-studio.png",
+      "width": 1400,
+      "height": 966,
+      "sha256": "2c74fcd32fb00939a20a6aa1224e426589adee88b7d90bb5e0556873fc4ffe23"
+    },
+    {
+      "file": "screenshots/09-card-creation-guide.png",
+      "width": 1360,
+      "height": 924,
+      "sha256": "70ffc85f4e430e93039aefe5613481e4c093a426cf3a9415ee41291acb8452fa"
+    }
+  ]
+}

@@ -30,7 +30,7 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_114.py
+python package_116.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.

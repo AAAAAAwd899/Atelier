@@ -8,4 +8,4 @@ Open **Tools → Atelier → Companion journey** for the new local keepsakes, or
 
 Native evidence is labelled by actual Anki version/profile and Qt-offscreen scope in AUDIT-1.0.16.md; do not infer macOS/Linux, every third-party add-on, physical remote or hardware-GPU certification. Installation/publication on a future numeric AnkiWeb listing still requires its real listing ID and migration test. This file is not an AnkiWeb publication or automatic-update activation.
 
-Before downgrading to 1.0.15, separately retain the 1.0.16 profile preference file: 1.0.15 does not understand the new journey/sharing metadata and may drop it when saving. Existing card/exam/source records use their preserved formats; keeping a rollback installer is not a substitute for a data backup.
+The tested rollback is 1.0.15, which understands the same saved-data formats. Keep normal collection/project/settings backups; rolling back restores the older greenhouse-focus and Friends-reopening behavior. Do not remove saved work to change versions.
