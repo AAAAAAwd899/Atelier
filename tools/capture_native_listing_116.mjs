@@ -14,8 +14,8 @@ async function connect(target){
  const evaluate=async expression=>{const r=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
  return {call,evaluate,close:()=>socket.close()};
 }
-const list=await targets();const matches=list.filter(t=>t.title==='main webview');
-if(matches.length!==1)throw new Error('Expected one actual native main webview');
+let matches=[];for(let i=0;i<75;i++){matches=(await targets()).filter(t=>t.title==='main webview');if(matches.length===1)break;await new Promise(r=>setTimeout(r,200));}
+if(matches.length!==1)throw new Error('Expected one actual native main webview after startup settled');
 const page=await connect(matches[0]);await page.call('Page.enable');
 
 const dest=path.join(root,'listing/ankiweb-1.0.16/screenshots');await fs.mkdir(dest,{recursive:true});
@@ -35,7 +35,8 @@ await click(cards,'[data-action="open-project"][data-id="'+info.project+'"]');
 await click(cards,'[data-action="open-source"][data-id="'+info.source+'"]');
 await wait(cards,'Boolean(document.querySelector(".figure-tile img"))');
 await wait(cards,'(()=>{const i=document.querySelector(".figure-tile img");return i?.complete&&i.naturalWidth>0})()');
-await capture('03-card-studio.png',cards);
+await capture('09-card-creation-guide.png',cards);
+await cards.evaluate('document.getElementById("ws-source-body").scrollIntoView({block:"center"})');await capture('03-card-studio.png',cards);
 await click(cards,'[data-action="mask-asset"][data-index="0"]');
 await wait(cards,'Boolean(document.querySelector(".mask-studio"))');
 await capture('04-image-occlusion.png',cards);
