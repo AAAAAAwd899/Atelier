@@ -43,7 +43,7 @@ def main():
   run([sys.executable,'-m','pytest','tests','-q','--junitxml='+str(V/'workshop-unit.xml')],'workshop-unit',ROOT/'workshop_checks')
   (V/'python-runtime.json').write_text(json.dumps({'runtime_sha256':fingerprint}))
  if '--python-only' in sys.argv:return
- suites=[('tests/test_102_browser.py','folder-shuffle',V/'1.0.2/browser-results.json',ROOT),('tests/test_101_browser.py','review-101',V/'1.0.1/browser-results.json',ROOT),('tests/test_release_one_card_browser.py','release-one-card',V/'release-one-card/results.json',ROOT),
+ suites=[('tests/test_cute_icons_117_browser.py','cute-icons-117',V/'cute-icons-117/results.json',ROOT),('tests/test_102_browser.py','folder-shuffle',V/'1.0.2/browser-results.json',ROOT),('tests/test_101_browser.py','review-101',V/'1.0.1/browser-results.json',ROOT),('tests/test_release_one_card_browser.py','release-one-card',V/'release-one-card/results.json',ROOT),
  ('tests/test_release_one_browser.py','release-one',V/'release-one/results.json',ROOT),
  ('tests/test_widget_routing_browser.py','widget-routing',V/'widget-routing/results.json',ROOT),
  ('tests/test_native_widgets_browser.py','native-widgets',V/'native-widgets/results.json',ROOT),

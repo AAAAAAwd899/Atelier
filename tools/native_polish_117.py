@@ -123,7 +123,7 @@ def opened_branch():
 def icon_choice():
     def result(v):
         try:
-            check('native_picker_has_24_symbols_and_automatic',v==25)
+            check('native_picker_has_30_symbols_and_automatic',v==31)
             aqt.mw.web.eval("document.getElementById('atelier-root').shadowRoot.querySelector('[data-action=folder-icon][data-icon=music]').click()")
             later(icon_saved,600)
         except Exception:fail()

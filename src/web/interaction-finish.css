@@ -95,6 +95,7 @@ html[data-atelier-world-enabled="true"][data-atelier-scenery="false"] #es-app :i
 :host([data-motion="on"]) .folder-icon-options button:is(:hover,:focus-visible) .picker-symbol{animation:atelier-object-sway 900ms cubic-bezier(.3,.1,.2,1) 2;}
 :host([data-motion="on"]) .folder-icon-options button[data-icon="star"]:is(:hover,:focus-visible) .picker-symbol,
 :host([data-motion="on"]) .folder-icon-options button[data-icon="physics"]:is(:hover,:focus-visible) .picker-symbol{animation-name:atelier-object-orbit;}
+:host([data-motion="on"]) .folder-icon-options button:is([data-icon="bunny"],[data-icon="teddy"],[data-icon="cloud"]):is(:hover,:focus-visible) .picker-symbol,
 :host([data-motion="on"]) .folder-icon-options button[data-icon="cat"]:is(:hover,:focus-visible) .picker-symbol,
 :host([data-motion="on"]) .folder-icon-options button[data-icon="dragon"]:is(:hover,:focus-visible) .picker-symbol{animation-name:atelier-object-peek;}
 :host([data-motion="on"]) .personalization-art .folder-symbol{animation:atelier-object-greet 760ms cubic-bezier(.2,.7,.2,1) 1;}

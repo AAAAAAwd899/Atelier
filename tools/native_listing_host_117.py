@@ -11,7 +11,8 @@ WITH_ONIGIRI='--with-onigiri' in sys.argv
 OUT=ROOT/('output/listing-native-117-onigiri' if WITH_ONIGIRI else 'output/listing-native-117');OUT.mkdir(parents=True,exist_ok=True)
 SH=ROOT/'screenshots/listing-native-117';SH.mkdir(parents=True,exist_ok=True)
 previous=json.loads((OUT/'cdp.json').read_text()) if '--reuse' in sys.argv else None
-(OUT/'stop.flag').unlink(missing_ok=True)
+
+for flag in ['stop.flag','verify-updates.flag','verify-cute.flag']:(OUT/flag).unlink(missing_ok=True)
 BASE=sorted(OUT.glob('profile-*'))[-1] if previous else OUT/('profile-'+str(time.time_ns()))
 BASE.mkdir(exist_ok=True)
 assert BASE.resolve().is_relative_to(ROOT.resolve())
@@ -66,6 +67,9 @@ def start(attempt=0):
             raise RuntimeError('Native listing host failed to start')
         from aqt import update as anki_update
         mw._qa_update_calls=[]
+        parent_deck=mw.col.decks.by_name('Biology 101')
+        report['cute_parent_id']=str(parent_deck['id']) if parent_deck else ''
+        report['cards_before_metadata_sha256']=hashlib.sha256(repr(mw.col.db.all('select * from cards order by id')).encode()).hexdigest()
         class ControlledUpdate:
             def with_progress(self):return self
             def run_in_background(self):mw._qa_update_calls.append('native-check')
@@ -80,7 +84,7 @@ def start(attempt=0):
                 report['checks']['native_toolbar_restored']=not report['toolbar_diagnostic']['before_hidden']
                 (OUT/'toolbar-diagnostic.json').write_text(json.dumps(report['toolbar_diagnostic'],indent=2))
             QTimer.singleShot(500,inspect_toolbar)
-            (OUT/'cdp.json').write_text(json.dumps(dict(previous,port=port,ready=True)))
+            (OUT/'cdp.json').write_text(json.dumps(dict(previous,port=port,ready=True,parent=report['cute_parent_id'])))
             QTimer.singleShot(500,poll);return
         c=mw.col;basic=c.models.by_name('Basic')
         examples=[('Biology 101::Week 1 · Cells',[('What controls entry into and exit from a cell?','The plasma membrane.'),('Where is most genetic material stored in a eukaryotic cell?','The nucleus.'),('Which organelle makes most ATP during aerobic respiration?','Mitochondria.')]),('Biology 101::Week 2 · Photosynthesis',[('What gas do plants take in for photosynthesis?','Carbon dioxide.'),('What organelle carries out photosynthesis?','The chloroplast.')]),('Chemistry 101::Week 1 · Atoms',[('What does the atomic number represent?','The number of protons.'),('What charge does an electron have?','Negative.')]),('Geography::Landscapes',[('What is a drainage basin?','The area of land drained by a river and its tributaries.')])]
@@ -133,6 +137,12 @@ def poll():
             report['updates_checked']=True
             report['checks']['actual_anki_update_action_reached']=bool(getattr(aqt.mw,'_qa_update_calls',[]))
             (OUT/'updates-verified.json').write_text(json.dumps({'checks':report['checks'],'runtime_sha256':runtime_digest(),'category':'real update QAction and native Anki handler with controlled release-query boundary; no network/download/install'},indent=2))
+        if (OUT/'verify-cute.flag').exists() and not report.get('cute_checked'):
+            report['cute_checked']=True
+            a=aqt.mw._daedalus_atelier_runtime
+            report['checks']['cute_icon_saved_in_profile']=a.store.read()['folder_icons'].get(report['cute_parent_id'])=='bunny'
+            report['checks']['folder_personalization_preserves_card_schedule']=hashlib.sha256(repr(aqt.mw.col.db.all('select * from cards order by id')).encode()).hexdigest()==report['cards_before_metadata_sha256']
+            (OUT/'cute-verified.json').write_text(json.dumps({'runtime_sha256':runtime_digest(),'checks':report['checks']},indent=2))
         if (OUT/'stop.flag').exists():finish();return
         QTimer.singleShot(500,poll)
     except Exception:report['errors'].append(traceback.format_exc());finish()
