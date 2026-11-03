@@ -1,6 +1,6 @@
 # Atelier release retention and recovery
 
-Keep the current 1.0.13 installer/source and tested 1.0.12 rollback locally. The untouched 1.0.2 implementation kit remains a required baseline. No third editable checkout is needed.
+Keep the current 1.0.14 installer/source and tested 1.0.13 rollback locally. The untouched 1.0.2 implementation kit remains a required baseline. No third editable checkout is needed.
 
 Older installer, source and publication containers have project-local recovery manifests in `verification/retention-112`. Each eligible archive was rebuilt independently from retained Git blobs, immutable small metadata deltas and named evidence leaves. The rebuilt ZIP SHA-256 had to equal the original exactly before eligibility. The manifests retain original member hashes and ZIP metadata. Audit is non-destructive; retirement additionally requires current and rollback build/installer/source checksums to pass.
 
@@ -11,3 +11,5 @@ The current evidence package includes compact recovery manifests and metadata de
 Logical retired bytes and measured free space before/after are separately recorded in `verification/retention-112/removal.json`. Concurrent writes and filesystem allocation can make those measures differ. A successful temporary restore is removed after its durable manifest and results are saved.
 
 The incremental 1.0.13 retention proof in verification/retention-113 covers retirement of the former 1.0.11 installer/source, after exact reconstruction from retained Git objects. Earlier retention-112 manifests and deltas remain required recovery dependencies.
+
+The 1.0.14 increment uses verification/retention-114 for exact Git-backed reconstruction and retirement of 1.0.12 installer/source payloads. Existing retention-112 and retention-113 chain records remain protected.

@@ -104,3 +104,29 @@ html[data-atelier-world-enabled="true"][data-atelier-scenery="false"] #es-app :i
 @keyframes atelier-object-greet{0%,100%{transform:rotate(0) scale(1)}28%{transform:rotate(-10deg) scale(1.1)}60%{transform:rotate(6deg) scale(1.03)}}
 @media(prefers-reduced-motion:reduce){:host .folder-icon-options .picker-symbol,:host .personalization-art .folder-symbol{animation:none!important;transform:none!important;}}
 @media(forced-colors:active){:host .folder-icon-options button[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-2px;}:host .folder-icon-options button:focus-visible{outline:2px solid Highlight;}}
+
+/* 1.0.14 — reactive world dioramas inside stationary, readable choices. */
+:host .theme-tile{border-color:transparent;background:transparent;}
+:host .theme-tile:is(:hover,:focus-visible){border-color:transparent;background:color-mix(in srgb,var(--accent) 9%,transparent);}
+:host .theme-tile.selected{background:color-mix(in srgb,var(--accent) 12%,transparent);}
+:host .theme-tile .mini-screen{border-color:transparent;}
+:host .theme-tile .mini-screen::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:inherit;background-size:inherit;background-position:inherit;border-radius:inherit;transform:scale(1.025);transform-origin:center;}
+:host .theme-tile .mini-screen::after{content:""!important;position:absolute;inset:-30% -70%;z-index:0;pointer-events:none;background:linear-gradient(115deg,transparent 38%,color-mix(in srgb,var(--accent) 28%,transparent) 50%,transparent 62%);opacity:0;transform:translateX(-25%);}
+:host .theme-tile :is(.theme-light,.theme-material-sample){z-index:1;}
+:host .theme-tile .theme-check{transform-origin:center;}
+:host .theme-tile{--world-response:atelier-world-dawn;}
+:host .theme-tile:is([data-theme-choice="forest"],[data-theme-choice="bloom"],[data-theme-choice="matcha"],[data-theme-choice="cabin"]){--world-response:atelier-world-canopy;}
+:host .theme-tile:is([data-theme-choice="tidal"],[data-theme-choice="sunset-beach"],[data-theme-choice="glacier"]){--world-response:atelier-world-tide;}
+:host .theme-tile:is([data-theme-choice="celestial"],[data-theme-choice="mythic"],[data-theme-choice="obsidian"],[data-theme-choice="underworld"],[data-theme-choice="midnight"]){--world-response:atelier-world-starlight;}
+:host([data-motion="on"]) .theme-tile:is(:hover,:focus-visible) .mini-screen::before{animation:var(--world-response) 1100ms ease-in-out 2;filter:brightness(1.06) saturate(1.05);}
+:host([data-motion="on"]) .theme-tile:is(:hover,:focus-visible) .mini-screen::after{animation:atelier-world-glint 900ms ease-out 1;}
+:host([data-motion="on"]) .theme-tile.selected .theme-check{animation:atelier-world-chosen 650ms cubic-bezier(.2,.7,.2,1) 1;}
+@keyframes atelier-world-canopy{0%,100%{transform:scale(1.025) translateX(0) rotate(0)}35%{transform:scale(1.055) translateX(-2px) rotate(-.7deg)}70%{transform:scale(1.045) translateX(1px) rotate(.4deg)}}
+@keyframes atelier-world-tide{0%,100%{transform:scale(1.025) translate(0)}35%{transform:scale(1.055) translate(2px,-1px)}75%{transform:scale(1.04) translate(-2px,1px)}}
+@keyframes atelier-world-starlight{0%,100%{transform:scale(1.025) translateY(0);filter:brightness(1.06) saturate(1.05)}45%{transform:scale(1.055) translateY(-2px);filter:brightness(1.18) saturate(1.09)}75%{transform:scale(1.04) translateY(1px);filter:brightness(1.1) saturate(1.06)}}
+@keyframes atelier-world-dawn{0%,100%{transform:scale(1.025) rotate(0)}40%{transform:scale(1.065) rotate(.6deg)}75%{transform:scale(1.045) rotate(-.3deg)}}
+@keyframes atelier-world-glint{0%{opacity:0;transform:translateX(-25%)}25%{opacity:.6}100%{opacity:0;transform:translateX(25%)}}
+@keyframes atelier-world-chosen{0%{transform:scale(.7) rotate(-18deg);opacity:.5}45%{transform:scale(1.25) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){:host .theme-tile .mini-screen::before{animation:none!important;transform:none!important;filter:none!important;}:host .theme-tile .mini-screen::after{animation:none!important;opacity:0!important;}:host .theme-tile .theme-check{animation:none!important;transform:none!important;}}
+:host([data-motion="off"]) .theme-tile .mini-screen::before{transform:none!important;filter:none!important;}
+:host([data-motion="off"]) .theme-tile .mini-screen::after{opacity:0!important;}

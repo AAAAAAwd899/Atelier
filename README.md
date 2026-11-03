@@ -1,6 +1,6 @@
-# Atelier 1.0.13
+# Atelier 1.0.14
 
-Version 1.0.13 opens up the folder-icon picker: fewer frames, larger authored objects and short sway, peek and orbital motion. Selected icons greet in the live preview; controls stay still, and reduced-motion or Atelier motion-off disables decoration. It retains the spacious full library, complete Anki action bar, direct Set exam actions, custom course/lecture order, 24 illustrated symbols plus Automatic, and six folder colors. Read the [changelog](CHANGELOG-1.0.13.md), [installation guide](INSTALL-1.0.13.md), [audit](AUDIT-1.0.13.md) and [publication actions](MANUAL_ACTIONS_REQUIRED.md).
+Version 1.0.14 gives all seventeen world choices reactive artwork: short canopy, tide, starlight and dawn responses, a light sweep and a selected checkmark flourish. The tiles and labels stay still. Motion settles after two cycles, and reduced motion or Atelier motion-off keeps a static view. The open icon picker, complete library, study engines, native actions, custom ordering and all protected features remain intact. Read the [changelog](CHANGELOG-1.0.14.md), [installation guide](INSTALL-1.0.14.md) and [audit](AUDIT-1.0.14.md).
 
 Organize, create, and study in Anki. Atelier includes a focused library, Card Studio, Exam Studio, customizable home widgets, seventeen visual worlds, six world-matched companion families, and a quieter reviewer.
 
@@ -14,11 +14,11 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.13.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.14.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
-Historical 1.0.9 Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. Version 1.0.13 has 33 fresh actual Anki/Onigiri offscreen checks covering the complete action bar with the stock toolbar hidden, original study controls, XP and native Undo. See the current audit for exact coverage and display/capture limitations.
+Historical 1.0.9 Windows tests used Anki 26.09.3: actual AddonManager update/preservation, all tour steps, native folder scheduling/Undo and stock image-occlusion rendering/grading/Undo in isolated synthetic profiles. These bounded checks do not establish universal add-on compatibility, macOS support, physical remotes or live GPU Pip. Version 1.0.14 has 33 fresh actual Anki/Onigiri offscreen checks covering the complete action bar with the stock toolbar hidden, original study controls, XP and native Undo. See the current audit for exact coverage and display/capture limitations.
 
 ## Development and verification
 
@@ -27,12 +27,12 @@ This source kit includes the exact runtime, original separately hardened assessm
 ```sh
 python verify_release.py
 python tools/generate_design.py --check
-python package_113.py
+python package_114.py
 ```
 
 Install `requirements-dev.txt` and Playwright Chromium; set `PYTHONPATH` to this repository's `test_support` directory. `ATELIER_TEST_BROWSER` can select an installed Chromium executable. The portable adapter resolves fixture scenery locally. Keep a temporary directory supporting fsync. Original native-interface tests use explicit stand-ins; separately labelled native tools run only isolated generated profiles. Screenshots contain synthetic records.
 
-Current results and limitations: `AUDIT-1.0.13.md`. Installer verification and hashes: `dist/Atelier-1.0.13-Build.json`, `dist/Atelier-1.0.13-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
+Current results and limitations: `AUDIT-1.0.14.md`. Installer verification and hashes: `dist/Atelier-1.0.14-Build.json`, `dist/Atelier-1.0.14-Files.json`, and the paired checksum record. Use the version-matched build receipt for current counts; earlier release reports remain historical.
 
 ## Privacy and licenses
 

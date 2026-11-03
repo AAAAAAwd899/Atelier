@@ -15,3 +15,7 @@ No scheduled publication or account-age monitoring has been created. No owner co
 - The owner requested no more desktop QA windows. Keep native QA offscreen. Installed-Onigiri coexistence has now been checked offscreen for the documented synthetic study, rewards, Undo and action-bar paths; other add-on combinations, macOS/Linux, personalized settings combinations and uncoached novice acceptance remain unverified.
 
 - November 2 Onigiri coexistence audit: installed Onigiri 2.0.2-Bento intermittently raises a sidebar `insertBefore` error in `web/injector.js:31`, also observed with Atelier absent in a disposable profile. Track with upstream Onigiri before claiming complete startup compatibility. Native study, rewards and Undo were exercised separately; see COMPATIBILITY-ONIGIRI-2026-11-02.md. Owner add-on code and settings were not modified.
+
+## Hosted Linux layout gate — 1.0.14
+
+The prior Ubuntu CI run failed the 320px Library containment/per-row-action assertion in test_home_slice_browser.py. The complete local Windows regression and separately labelled native offscreen checks are distinct evidence. Inspect and fix that hosted edge case, then rerun before claiming Linux support. This release does not certify Linux/native macOS or every third-party configuration. New hosted CI status is recorded with the handoff; no success is inferred from a pending run.

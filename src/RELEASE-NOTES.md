@@ -1,3 +1,9 @@
+# Atelier 1.0.14
+
+- All seventeen world choices respond with finite scene motion, lighting and selection feedback.
+- Canopy, tide, night-glow and dawn profiles; stationary labels and controls.
+- Static reduced-motion and motion-off alternatives; accepted world artwork preserved.
+
 # Atelier 1.0.13
 
 - Open folder-icon collection without repeated tile, fieldset or preview borders.
