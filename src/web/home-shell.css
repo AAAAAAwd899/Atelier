@@ -299,6 +299,8 @@
  .library-orientation{gap:6px;}
  .library-orientation>span{font-size:13px;}
  .library-orientation>span>svg{display:none;}
+ .library-controls>.view-tools{flex-basis:100%;}
+ .library-controls .arrange-order{flex-shrink:0;}
  .row-counts{padding-left:0;justify-content:space-between;gap:6px;}
 }
 :host([data-density="compact"]) .cards.list .library-row-main{padding-block:9px;}
