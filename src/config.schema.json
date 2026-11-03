@@ -149,6 +149,11 @@
       "type": "string",
       "maxLength": 2048,
       "description": "Public publishable/anon project key only. Never a service-role or secret key."
+    },
+    "native_toolbar": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show Anki and add-on toolbar buttons above the Atelier workspace."
     }
   },
   "additionalProperties": true

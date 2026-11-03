@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from .native_widgets import DEFAULT_WIDGETS, widget_layout, widget_note
 
-VERSION = "1.0.16"
+VERSION = "1.0.17"
 THEMES = (
     "obsidian", "glacier", "rose", "bloom", "linen", "matcha",
     "midnight", "peach", "forest", "tidal", "ember", "celestial",
@@ -22,7 +22,7 @@ THEMES = (
 )
 DEFAULTS = {
     "theme": "obsidian", "mode": "workspace", "density": "comfortable",
-    "motion": True, "chrome": False, "view": "grid", "sort": "name",
+    "motion": True, "chrome": False, "native_toolbar": True, "view": "grid", "sort": "name",
     "review_style": "adaptive", "review_width": "standard", "surface_revision": 1,
     "shared_theme": True, "match_sprout": True, "native_surfaces": True, "visual_owner": "ask", "ambience": True,
     "review_context": "compact", "companion_shortcuts": False, "widget_mode": "balanced",
@@ -103,7 +103,7 @@ def settings(value: Any) -> dict[str, Any]:
     for key, options in choices.items():
         if isinstance(value.get(key), str) and value[key] in options:
             out[key] = value[key]
-    for key in ("motion", "chrome", "shared_theme", "match_sprout", "native_surfaces", "ambience", "companion_shortcuts"):
+    for key in ("motion", "chrome", "native_toolbar", "shared_theme", "match_sprout", "native_surfaces", "ambience", "companion_shortcuts"):
         if type(value.get(key)) is bool:
             out[key] = value[key]
     if isinstance(value.get("acknowledged_makeovers"), list):

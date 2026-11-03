@@ -21,5 +21,6 @@
   "remote": {
     "enabled": false,
     "bindings": {}
-  }
+  },
+  "native_toolbar": true
 }

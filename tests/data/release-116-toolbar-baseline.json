@@ -1,0 +1,3 @@
+{
+  "config.json": "{\n  \"theme\": \"obsidian\",\n  \"mode\": \"workspace\",\n  \"density\": \"comfortable\",\n  \"motion\": true,\n  \"chrome\": false,\n  \"view\": \"grid\",\n  \"sort\": \"name\",\n  \"review_style\": \"adaptive\",\n  \"review_width\": \"standard\",\n  \"surface_revision\": 1,\n  \"shared_theme\": true,\n  \"match_sprout\": true,\n  \"visual_owner\": \"ask\",\n  \"ambience\": true,\n  \"review_context\": \"compact\",\n  \"companion_shortcuts\": false,\n  \"acknowledged_makeovers\": [],\n  \"native_surfaces\": true,\n  \"widget_mode\": \"balanced\",\n  \"remote\": {\n    \"enabled\": false,\n    \"bindings\": {}\n  }\n}\n"
+}

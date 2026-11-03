@@ -630,9 +630,25 @@ class Atelier:
                 f".hitem:hover{{color:{accent};background:{line}}}"
                 f"#decks{{color:{accent}}}")
 
+    def restore_native_toolbar(self) -> None:
+        """Expose real Anki/add-on actions while Atelier owns the home screen.
+
+        Do not write another add-on's settings or override fullscreen/reviewer
+        choices. A single deferred call runs after other state-change hooks.
+        """
+        cfg = self.get_config()
+        if (mw.state != "deckBrowser" or cfg.get("visual_owner") != "atelier"
+                or cfg.get("mode") == "native" or not cfg.get("native_toolbar", True)
+                or getattr(mw, "fullscreen", False)):
+            return
+        web = getattr(mw, "toolbarWeb", None)
+        if web is not None and web.isHidden():
+            web.show()
+
     def apply_chrome(self) -> None:
         if not getattr(mw, "toolbarWeb", None):
             return
+        self.restore_native_toolbar()
         css = self.chrome_css()
         js = ("(()=>{let s=document.getElementById('atelier-toolbar-chrome');"
               + ("if(!s){s=document.createElement('style');s.id='atelier-toolbar-chrome';document.head.append(s)}s.textContent=" + json.dumps(css) + ";" if css else "if(s)s.remove();") + "})();")
@@ -667,6 +683,8 @@ class Atelier:
 
     def state_changed(self, new: str, old: str) -> None:
         self.ownership.install()
+        if new == "deckBrowser":
+            mw.progress.single_shot(0, self.restore_native_toolbar)
         if new != "deckBrowser":
             self.capture_keys = False
             self.nonce = ""  # Late responses cannot write into a review page.
