@@ -42,6 +42,8 @@ jobs:
           npm run check --prefix services/friends
       - name: Responsive Home and Library preflight
         run: python tests/test_home_slice_browser.py
+      - name: Study picker focus preflight
+        run: python tests/test_study_picker_104_browser.py
       - name: Original engines, current contracts and browser workflows
         run: python verify_release.py
       - name: Keep evidence even when a gate fails
