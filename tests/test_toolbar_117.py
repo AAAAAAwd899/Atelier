@@ -17,7 +17,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def test_native_toolbar_recovery_scope(state,owner,mode,enabled,fullscreen,hidden,shows):
  tree=ast.parse((ROOT/'src/integration.py').read_text())
  fn=next(n for n in ast.walk(tree) if isinstance(n,ast.FunctionDef) and n.name=='restore_native_toolbar')
- calls=[];web=SimpleNamespace(isHidden=lambda:hidden,show=lambda:calls.append('show'))
+ calls=[];web=SimpleNamespace(isHidden=lambda:hidden,setVisible=lambda value:calls.append(value))
  mw=SimpleNamespace(state=state,fullscreen=fullscreen,toolbarWeb=web)
  cfg={'visual_owner':owner,'mode':mode,'native_toolbar':enabled}
  namespace={'mw':mw};exec(compile(ast.Module(body=[fn],type_ignores=[]),'toolbar-policy','exec'),namespace)

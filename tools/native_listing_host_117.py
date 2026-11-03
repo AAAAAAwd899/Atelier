@@ -69,7 +69,11 @@ def start(attempt=0):
             foreign_config=importlib.import_module('1011095603.core.config');ng=foreign_config.get_config();ng.setdefault('restaurant_level',{}).update(enabled=True,notifications_enabled=False);ng.setdefault('onigiriWidgetLayout',{}).setdefault('grid',{})['restaurant_level']={'pos':4,'row':2,'col':2};foreign_config.write_config(ng)
             rewards=importlib.import_module('1011095603.gamification.nook_level').manager;rewards.set_enabled(True)
             mw.resize(1440,900);mw.deckBrowser.refresh()
-            QTimer.singleShot(500,lambda:report['checks'].update(native_toolbar_restored=not mw.toolbarWeb.isHidden()))
+            def inspect_toolbar():
+                report['toolbar_diagnostic']={'state':mw.state,'config':{k:a.get_config().get(k) for k in ['visual_owner','mode','native_toolbar']},'fullscreen_type':type(getattr(mw,'fullscreen',None)).__name__,'fullscreen_value':str(getattr(mw,'fullscreen',None)),'before_hidden':mw.toolbarWeb.isHidden(),'height':mw.toolbarWeb.height()}
+                report['checks']['native_toolbar_restored']=not report['toolbar_diagnostic']['before_hidden']
+                (OUT/'toolbar-diagnostic.json').write_text(json.dumps(report['toolbar_diagnostic'],indent=2))
+            QTimer.singleShot(500,inspect_toolbar)
             (OUT/'cdp.json').write_text(json.dumps(dict(previous,port=port,ready=True)))
             QTimer.singleShot(500,poll);return
         c=mw.col;basic=c.models.by_name('Basic')

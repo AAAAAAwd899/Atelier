@@ -643,7 +643,7 @@ class Atelier:
             return
         web = getattr(mw, "toolbarWeb", None)
         if web is not None and web.isHidden():
-            web.show()
+            web.setVisible(True)
 
     def apply_chrome(self) -> None:
         if not getattr(mw, "toolbarWeb", None):
