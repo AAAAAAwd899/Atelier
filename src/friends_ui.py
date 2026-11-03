@@ -131,11 +131,11 @@ class FriendsController:
             return
         profile = copy.deepcopy(self.owner.profile)
         def local(col):
-            from .companion_journey import status
+            from .companion_journey import status, focus_names
             cat = fresh_catalog(col)
             return {'journey': status(col, profile), 'decks': [
                 {'id': k, 'name': v['name']} for k, v in list(cat.items())[:10000]],
-                'focus': [s['name'] for s in profile.get('studies', []) if s.get('active')][:24]}
+                'focus': focus_names(profile)}
         def done(result):
             if self.valid():
                 result.update(self.client.public_state(), home=self.home, sharing=sharing_settings(self.owner.profile.get('sharing')),
@@ -387,5 +387,9 @@ def open_friends(owner, mw, tab='shared'):
         from aqt.utils import showInfo
         showInfo('Open an Anki profile first.'); return
     owner.ensure_store()
+    existing = getattr(owner, 'friends', None)
+    if existing is not None and not existing.valid():
+        if not existing.stopped: existing.shutdown()
+        owner.friends = None
     if not getattr(owner, 'friends', None): owner.friends = FriendsController(owner, mw)
     owner.friends.open(tab)

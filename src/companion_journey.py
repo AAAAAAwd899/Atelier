@@ -4,6 +4,14 @@ from .core import ValidationError
 from .social_models import KEEPSAKES,journey_settings
 from .study_progress import read_progress
 
+def focus_names(profile):
+ """Describe the same selected study focus as the Study desk, without writes."""
+ if not profile.get('focus_enabled'):return []
+ selected=profile.get('selected_study','all')
+ return [s['name'] for s in profile.get('studies',[])
+         if s.get('active') and (selected=='all' or s.get('id')==selected)][:24]
+
+
 def status(col,profile):
  saved=journey_settings(profile.get('journey'));stats=read_progress(col,profile,'all',30)
  rewards=[dict(k,collected=k['id'] in saved['earned'],eligible=stats['reviews']>=k['reviews'] and stats['days_studied']>=k['days']) for k in KEEPSAKES]

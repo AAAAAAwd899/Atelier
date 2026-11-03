@@ -107,3 +107,11 @@ def test_close_during_auth_response_does_not_resurrect_a_session():
  http=Opener([response]);c=client.FriendsClient(CFG,opener=http)
  with pytest.raises(client.FriendsError,match='closed'):c.verify_code('a@example.com','123456')
  assert c.session is None
+
+
+@pytest.mark.parametrize('enabled,selected,expected',[(False,'all',[]),(True,'biology',['Biology']),(True,'chemistry',['Chemistry']),(True,'all',['Biology','Chemistry']),(True,'inactive',[]),(True,'missing',[])])
+def test_greenhouse_tracks_only_the_current_study_focus(enabled,selected,expected):
+ profile={'focus_enabled':enabled,'selected_study':selected,'studies':[{'id':'biology','name':'Biology','active':True},{'id':'chemistry','name':'Chemistry','active':True},{'id':'inactive','name':'Old exam','active':False}]}
+ before=copy.deepcopy(profile)
+ assert journey.focus_names(profile)==expected
+ assert profile==before

@@ -1,4 +1,4 @@
-/* Atelier 1.0.15 — isolated study desk. No framework or external requests. */
+/* Atelier 1.0.16 — isolated study desk. No framework or external requests. */
 (() => {
   'use strict';
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -487,7 +487,7 @@
       return `<article class="deck-card tone-${tone(n)} ${folder?'folder-card':'stack-card'}" data-node="${n.id}" data-drop="${n.filtered?'':n.id}" draggable="${!n.filtered}" aria-label="${esc(n.name)} ${folder?'folder':'deck'}">
         <div class="card-head"><button type="button" class="card-art" data-action="navigate" data-id="${n.id}" aria-label="Open ${esc(n.name)}">${deckArt(n)}</button><div class="card-controls">${ib('favorite',`${favorite(n)?'Unpin':'Pin'} ${n.name}`,'star',`data-id="${n.id}" aria-pressed="${favorite(n)}"`,favorite(n)?'starred':'')}${ib('organize','Organize '+n.name,'more',`data-id="${n.id}"`)}</div></div>
         <div class="card-type">${n.filtered?'FILTERED DECK':folder?'FOLDER':'DECK'}</div><button type="button" class="card-title" data-action="navigate" data-id="${n.id}" title="${esc(path)}">${esc(n.name)}</button>
-        <p class="card-description">${folder?nested.length+(nested.length===1?' item':' items')+' · nothing combined':n.filtered?'Managed by Anki':'Individual lecture deck'}</p>
+        <p class="card-description">${folder?nested.length+(nested.length===1?' item':' items'):n.filtered?'Managed by Anki':'Individual lecture deck'}</p>
         ${examButton(n)}
         ${state.query||state.page==='recent'||state.page==='favorites'?`<p class="card-path" title="${esc(path)}">${esc(n.parent==='0'?'All folders':nicePath(state.map.get(n.parent)?.path||''))}</p>`:''}
         ${peekRows(n)}

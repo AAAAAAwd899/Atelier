@@ -1,6 +1,6 @@
-# Atelier 1.0.15
+# Atelier 1.0.16
 
-Version 1.0.15 adds a local companion journey with distinct authored keepsakes and a Friends & shared folders window that also works with Atelier visuals off. Native offline export is available without an account. The invite-only online service/client is **prepared and unconfigured**, with versioned attached folders and optional automatic publishing; no host, accounts, email service or online sharing is active. Read the [changelog](CHANGELOG-1.0.15.md), [installation guide](INSTALL-1.0.15.md), [audit](AUDIT-1.0.15.md) and [hosting requirements](services/friends/HOSTING-REQUIREMENTS.md).
+Version 1.0.16 refines progression and Friends recovery, while retaining the companion journey with distinct authored keepsakes and a Friends & shared folders window that also works with Atelier visuals off. Native offline export is available without an account. The invite-only online service/client is **prepared and unconfigured**, with versioned attached folders and optional automatic publishing; no host, accounts, email service or online sharing is active. Read the [changelog](CHANGELOG-1.0.16.md), [installation guide](INSTALL-1.0.16.md), [audit](AUDIT-1.0.16.md) and [hosting requirements](services/friends/HOSTING-REQUIREMENTS.md).
 
 The seventeen reactive worlds, authored icon choices, full course/lecture tree, custom ordering and all exam/card/occlusion/widget/remote features remain cumulative. The name and private install identity stay Atelier / `daedalus_atelier`. Public GitHub source/support is distinct from a public binary release, website deployment or AnkiWeb upload.
 
@@ -17,7 +17,7 @@ This is a **saved, undoable native ordering change**—not an independent mock o
 
 ## Install
 
-Use the paired `Atelier-1.0.15.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
+Use the paired `Atelier-1.0.16.ankiaddon` in **Tools → Add-ons → Install from file**, then restart. Do not delete an existing Atelier installation before updating. Keep standalone Sprout and Workshop disabled; their engines are bundled. Back up your collection, Atelier's `user_files`, and the complete profile-local `exam_sprout` and `workshop` folders.
 
 ## Compatibility
 
