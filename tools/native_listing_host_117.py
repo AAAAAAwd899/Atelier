@@ -64,12 +64,12 @@ def start(attempt=0):
         if not mw.col or not a:
             if attempt<60:QTimer.singleShot(500,lambda:start(attempt+1));return
             raise RuntimeError('Native listing host failed to start')
-        import aqt.update
+        from aqt import update as anki_update
         mw._qa_update_calls=[]
         class ControlledUpdate:
             def with_progress(self):return self
             def run_in_background(self):mw._qa_update_calls.append('native-check')
-        aqt.update.get_latest_release_op=lambda **kwargs:ControlledUpdate()
+        anki_update.get_latest_release_op=lambda **kwargs:ControlledUpdate()
         if previous:
             import importlib
             foreign_config=importlib.import_module('1011095603.core.config');ng=foreign_config.get_config();ng.setdefault('restaurant_level',{}).update(enabled=True,notifications_enabled=False);ng.setdefault('onigiriWidgetLayout',{}).setdefault('grid',{})['restaurant_level']={'pos':4,'row':2,'col':2};foreign_config.write_config(ng)
