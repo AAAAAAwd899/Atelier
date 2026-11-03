@@ -54,7 +54,7 @@ function mount(container, options) {
  function paint(){
    if(disposed)return;
    const gs=groups(state.masks),values=[...new Set([...gs,state.group])].sort((a,b)=>a-b);
-   q('.mask-count').textContent=`${state.masks.length} masks · ${gs.length} cards`;
+   q('.mask-count').textContent=`${state.masks.length} ${state.masks.length===1?'mask':'masks'} · ${gs.length} ${gs.length===1?'card':'cards'}`;
    for(const b of container.querySelectorAll('[data-mask-action]')){
      const a=b.dataset.maskAction;
      if(['separate','same'].includes(a))b.setAttribute('aria-pressed',String(a===state.mode));

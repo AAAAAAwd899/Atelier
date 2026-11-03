@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parent
 @lru_cache(maxsize=1)
 def historical_text():
     out={}
-    for name in ('release-102-baseline.json','release-102-onboarding-baseline.json','pypdf-590-baseline.json','release-112-presentation-baseline.json','release-114-navigation-baseline.json'):
+    for name in ('release-102-baseline.json','release-102-onboarding-baseline.json','pypdf-590-baseline.json','release-112-presentation-baseline.json','release-114-navigation-baseline.json','release-115-mask-caption-baseline.json'):
         out.update(json.loads((ROOT/'tests/data'/name).read_text(encoding='utf8')))
     return out
 

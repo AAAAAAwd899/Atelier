@@ -2,7 +2,7 @@
 
 Classification: D local/database add-on with optional H assistance; E/F service source remains unconfigured and inactive. No AnkiWeb upload, hosted activation, website or public binary publication is authorized by this audit.
 
-Compared with accepted 1.0.15, only focus projection, Friends context recovery, concise folder summaries and release version markers change. All Sprout/Workshop files, CSS and artwork remain byte-identical. The cumulative manifest is patch-116-changes.json; exact changed-file hashes are in the Build/Files artifacts.
+Compared with accepted 1.0.15, only focus projection, Friends context recovery, concise folder summaries and release version markers change. All Sprout/Workshop Python engines, CSS and artwork remain byte-identical. Mask Studio has a strictly bounded singular/plural caption correction; its original code is retained and all other bytes are checked. The cumulative manifest is patch-116-changes.json; exact changed-file hashes are in the Build/Files artifacts.
 
 Current execution results, visual judgments, screenshots, platform limits and remaining external gates are completed in verification/publish-audit-116 and the final handoff report before packaging. Full-source CI, native update, lifecycle/focus recovery and current installer-extracted tasks are required.
 

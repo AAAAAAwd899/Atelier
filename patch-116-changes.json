@@ -89,6 +89,7 @@
     "workshop/vendor/pypdf/xmp.py": "0fb1996e355223d8ad669d289f16eb7e0ad9cd3314e8005cdb4c03defd876fea",
     "workshop/web/app.css": "813f8813360de07d36cf6899838a9b30c70f7ca6c2f82a31b756d8301272fa34",
     "workshop/web/app.js": "80c2ff9ac85c3e94169f675ab466196e5a8563f9bdab76e93951f7adbbd6dafe",
+    "workshop/web/mask-editor.js": "40bcb0a6e01d4b2cf58cd755323caa664798af88664236427ad2a0ae741a3832",
     "worlds.py": "59b328bc51c8c24ccd1c30351b4e1ebe2106d72037033034231bc9e3c4f92773"
   },
   "added": {

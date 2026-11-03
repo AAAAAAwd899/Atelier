@@ -26,7 +26,11 @@ def main():
     assert {n:h for n,h in actual.items() if n.startswith('workshop/vendor/pypdf/')}==parser['files']
     assert {n:h for n,h in actual.items() if n in baseline and h!=baseline[n]}==patch['changed']
     assert {n:h for n,h in actual.items() if n not in baseline}==patch['added']
-    allowed_workshop_presentation={'workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
+    caption_base=json.loads((ROOT/'tests/data/release-115-mask-caption-baseline.json').read_text())['workshop/web/mask-editor.js']
+    caption_old="q('.mask-count').textContent=`${state.masks.length} masks · ${gs.length} cards`;"
+    caption_new="q('.mask-count').textContent=`${state.masks.length} ${state.masks.length===1?'mask':'masks'} · ${gs.length} ${gs.length===1?'card':'cards'}`;"
+    assert (SRC/'workshop/web/mask-editor.js').read_text(encoding='utf8')==caption_base.replace(caption_old,caption_new)
+    allowed_workshop_presentation={'workshop/web/mask-editor.js','workshop/web/app.js','workshop/web/app.css','sprout/web/app.js','sprout/web/pip.css','sprout/web/pip.js'}
     assert all(
         actual[n]==h
         for n,h in baseline.items()
