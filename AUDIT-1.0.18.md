@@ -1,0 +1,11 @@
+# Atelier 1.0.18 verification handoff
+
+The previous 1.0.17 hosted run passed every suite except the strict 1024px navigation height bound. On wider Linux system fonts, decorative action icons and a divider forced a third header row. This repair omits only those decorative marks at compact widths while preserving every action and text label, including Anki updates. The existing height limit remains unchanged. The navigation test now also checks Anki updates visibility and wider text metrics, and runs as an early hosted preflight.
+
+All 1.0.17 art, 36 folder icons, native toolbar restoration, Onigiri header/body adaptation, saved work, masks, remotes, card/exam engines, native widgets and original appearance remain protected. Production changes are the compact CSS rule and version markers only. The final Build JSON and Evidence ZIP contain the actual current counts, runtime digest, hosted run outcome, native scope and package hashes; no test success is inferred from a pending run.
+
+Native QA uses installed Windows Anki 26.09.3 in disposable hard-offscreen profiles. Sync and application-update boundaries are controlled; no account sync or installer download occurs. Native grading, rewards, Undo, editor/window navigation, actual AddonManager update and persistence are exercised. This is not physical-display/GPU, macOS/Linux native, hardware-controller or universal add-on certification. The pre-existing Onigiri injector NotFoundError/insertBefore warning is disclosed; third-party code/preferences and the owner collection are untouched.
+
+The owner approved normal source pushes to AAAAAAwd899/Atelier main on November 3. AnkiWeb upload, numeric-ID migration, binary publication and Friends hosting remain separate unperformed actions. Friends service tests are prepared-service evidence, not a live two-account deployment. Public listing screenshot readback is recorded separately.
+
+Shared Daedalus standards and dashboard were consulted; an Atelier-specific shared project report was not found. Local audit, manual-action records and current receipts preserve the actual gates. Current 1.0.18 and tested Windows 1.0.17 rollback are protected; obsolete generated QA stages are reclaimed with scoped receipts after evidence is saved. No Git objects, owner data or unique art are pruned.

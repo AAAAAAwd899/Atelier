@@ -17,10 +17,18 @@ def run():
         for width,height in [(1440,900),(1024,600),(390,720)]:
             p=browser.new_page(viewport={'width':width,'height':height});p.set_default_timeout(9000);p.on('pageerror',lambda e:errors.append(str(e)))
             p.set_content(sort_doc());p.locator('.unified-topbar').wait_for()
-            for selector in ['.decks-top','.add-cards-top','.browse-top','.stats-top','.sync-top','.addon-tools-top']:
+            for selector in ['.decks-top','.add-cards-top','.browse-top','.stats-top','.sync-top','.updates-top','.addon-tools-top']:
                 check(f'{width} visible {selector}',p.locator('.anki-commandbar '+selector).is_visible())
             check(f'{width} header fits viewport',p.locator('.unified-topbar').evaluate('e=>e.scrollWidth<=e.clientWidth+1'))
+            geometry=p.locator('.unified-topbar').evaluate('e=>({height:e.getBoundingClientRect().height,width:e.clientWidth,actions:[...e.querySelectorAll(".anki-commandbar button")].map(b=>({text:b.textContent.trim(),x:b.offsetLeft,y:b.offsetTop,width:b.getBoundingClientRect().width,font:getComputedStyle(b).font}))})')
+            (OUT/f'header-{width}.json').write_text(json.dumps(geometry,indent=2)+'\n')
+            p.screenshot(path=str(SH/f'header-{width}.png'),animations='disabled')
             check(f'{width} header leaves room for the library',p.locator('.unified-topbar').bounding_box()['height']<(170 if width<600 else 140))
+            if width==1024:
+                p.locator('.anki-commandbar').evaluate("e=>e.style.letterSpacing='.6px'")
+                check('1024 wider text metrics retain compact height',p.locator('.unified-topbar').bounding_box()['height']<140)
+                check('1024 wider text metrics retain complete labels',p.locator('.anki-commandbar button').evaluate_all('xs=>xs.every(e=>e.scrollWidth<=e.clientWidth+1)'))
+                p.locator('.anki-commandbar').evaluate("e=>e.style.letterSpacing=''")
             p.locator('.decks-top').click();p.locator('[data-view=outline]').click()
             p.locator('.outline-row[data-node="90"] [data-action=expand]').click()
             check(f'{width} outline shows children without leaving the folder',p.locator('.outline-row[data-node="99"]').count()==1)

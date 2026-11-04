@@ -1,0 +1,74 @@
+{
+  "runtime_sha256": "83055267f5d92f67a76887045135c721ef110a3fdefef3717c39bea425da7a32",
+  "installer_sha256": "9c4784ff38afe8ad732dd32444a5dbffe7abdbce4a60b22014e29edb77ad51db",
+  "capture": "Actual Anki 26.09.3 Qt offscreen webviews, synthetic example collections; outer native chrome excluded; separate native toolbar frame. No owner profile accessed.",
+  "public_readback": "See matching final Build JSON and Evidence ZIP after approved source push",
+  "images": [
+    {
+      "file": "screenshots/01-study-desk.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "3923916a1757d9a817a12963116253ef8624f104e9280baa4eb30e9c74a309bf"
+    },
+    {
+      "file": "screenshots/02-library.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "2c9ecc0a2e47770b9a74b31a45dde13f0984a6c6a9e53fee221284c4eccba8a2"
+    },
+    {
+      "file": "screenshots/03-card-studio.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "836dfa195a9725a6586c730007c30acd63faf86fc0d85a0e02d17fd1dd810e9f"
+    },
+    {
+      "file": "screenshots/04-image-occlusion.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "bbc84a422c5d33f608e4f435741c5dd6c2e938bae996f1c9d1840f085ac730c1"
+    },
+    {
+      "file": "screenshots/05-combine-folders.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "c94ab5de4fbc455f49a4b0dbbea59e751ca54d10db382af70a21d18aa022a52d"
+    },
+    {
+      "file": "screenshots/06-companion-journey.png",
+      "width": 1080,
+      "height": 790,
+      "sha256": "ce40744f816aa4866935eadb9c1b74df751ec2a4b7fb661a001ef6824ac9a26d"
+    },
+    {
+      "file": "screenshots/07-exam-studio.png",
+      "width": 1400,
+      "height": 966,
+      "sha256": "26964c4c43aed8bbc5c8317bde25b25dcecd52d2123991e91bd68c381a7f5269"
+    },
+    {
+      "file": "screenshots/08-folder-icons.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "403cf01fe8306ad7e701fddf380218c2c3a968632a8404969f22359d2a283da9"
+    },
+    {
+      "file": "screenshots/09-card-creation-guide.png",
+      "width": 1360,
+      "height": 919,
+      "sha256": "d2066a83927b14320438687dd34516f200f94d59020fc7b1a095ae2981cadad3"
+    },
+    {
+      "file": "screenshots/10-onigiri-rewards.png",
+      "width": 1440,
+      "height": 842,
+      "sha256": "8d78869d41f6d9d6f462de7f5ff4bb84504244a0de85f10b2523f817da74d023"
+    },
+    {
+      "file": "screenshots/11-native-reviewer-toolbar.png",
+      "width": 1280,
+      "height": 37,
+      "sha256": "b6bd853f9b07eb35768b4ad022543da0637af4a7f8fea34361539ee71c915851"
+    }
+  ]
+}

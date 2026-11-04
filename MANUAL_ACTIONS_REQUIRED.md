@@ -1,3 +1,8 @@
+# Current 1.0.18 handoff
+
+- The owner approved source updates to AAAAAAwd899/Atelier main. The 1.0.18 compact-header correction preserves every action and the existing height bound; use its matching Build JSON/Evidence for the final hosted verification and public image readback. Historical 1.0.17 source receipts below describe the earlier handoff.
+- AnkiWeb eligibility/upload, numeric listing identity and manual-to-numeric migration remain unverified. No AnkiWeb upload, public binary release, website deployment or Friends hosting is authorized by the source push.
+
 # Current 1.0.17 handoff
 
 - On November 3 the owner approved the exact repository/main destination. Finished source and listing assets were pushed normally to https://github.com/AAAAAAwd899/Atelier on main; the earlier rejected push was not bypassed. All 11 public screenshot URLs were read back with matching SHA-256. Hosted verification must pass before claiming GitHub verification is resolved.

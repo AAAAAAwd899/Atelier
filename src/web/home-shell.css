@@ -580,3 +580,6 @@ select option:disabled:not(:checked),select optgroup:disabled{color:var(--muted)
  select option:checked{background-color:Highlight;color:HighlightText;}
  select option:disabled,select optgroup:disabled{color:GrayText;}
 }
+
+/* Compact action labels keep every native route within the laptop header across system fonts. */
+@media(max-width:1120px){.unified-topbar.workspace-topbar .anki-commandbar :is([data-command],.decks-top,.addon-tools-top)>svg{display:none}.unified-topbar.workspace-topbar .anki-commandbar .commandbar-divider{display:none}}
