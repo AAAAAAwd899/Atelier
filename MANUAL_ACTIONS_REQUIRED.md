@@ -1,7 +1,7 @@
 # Current 1.0.17 handoff
 
-- Exact approval is needed to push the finished local source and listing assets to https://github.com/AAAAAAwd899/Atelier on main. Automatic approval review rejected the attempted push for lack of recognized exact-destination authorization. No retry or connector workaround was used. Current source is local.
-- Before AnkiWeb posting, publish the approved 1.0.17 screenshot assets and verify every URL. Upload eligibility, numeric listing identity and actual AnkiWeb installation/update acceptance remain unverified.
+- On November 3 the owner approved the exact repository/main destination. Finished source and listing assets were pushed normally to https://github.com/AAAAAAwd899/Atelier on main; the earlier rejected push was not bypassed. All 11 public screenshot URLs were read back with matching SHA-256. Hosted verification must pass before claiming GitHub verification is resolved.
+- The approved 1.0.17 screenshot assets are published and verified. AnkiWeb upload eligibility, numeric listing identity and actual AnkiWeb installation/update acceptance remain unverified.
 - The downloadable installer has actual local update and native task evidence. The owner installed copy was last observed at 1.0.16; install the new 1.0.17 file and restart to receive the toolbar repair. No owner collection or installed add-on was changed by QA.
 
 # Atelier owner decisions and external actions

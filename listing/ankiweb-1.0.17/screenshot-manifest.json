@@ -2,7 +2,7 @@
   "runtime_sha256": "78d81fe2d62fa3af63f147298c1d9ac764f932c2bef5d90fa2aac0ed3bf95f16",
   "installer_sha256": "5667dffa335855a9b82847939b15001c3e5adafcf8c1809a9a9bd9ece1b02f25",
   "capture": "Actual Anki 26.09.3 Qt offscreen webviews, synthetic example collections; native outer chrome excluded. Separate native toolbar frame included. No owner profile accessed.",
-  "public_1_0_17_urls_verified": false,
+  "public_1_0_17_urls_verified": true,
   "images": [
     {
       "file": "screenshots/01-study-desk.png",

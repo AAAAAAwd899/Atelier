@@ -57,6 +57,6 @@
       "kind": "actual Anki 26.09.3 Qt offscreen webview, synthetic example data"
     }
   ],
-  "public_screenshot_urls_verified": false,
-  "github_push_pending_exact_approval": true
+  "public_screenshot_urls_verified": true,
+  "github_push_pending_exact_approval": false
 }
